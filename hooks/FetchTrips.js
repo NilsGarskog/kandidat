@@ -22,13 +22,8 @@ export default function useFetchTrips() {
                     const name = doc.data().Name;
                     tripNames[id] = name;
                 });
-                if (true) {
-                    console.log(tripNames)
-                    setTrips(tripNames)
-                    //console.log(tripNames)
-                } else {
-                    setTrips({})
-                }
+                console.log(tripNames)
+                setTrips(tripNames)
 
             } catch (err) {
                 setError('Failed to load trips')

@@ -35,7 +35,6 @@ export default function UserDashboard() {
   }
 
   return (
-    console.log(trips),
     <div className='w-full max-w-[65ch] mx-auto flex flex-col gap-3 sm:gap-5
     text-xs sm:text-sm'>
       <div className="flex items-stretch">
