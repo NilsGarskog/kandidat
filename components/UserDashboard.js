@@ -1,52 +1,51 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../context/authContext'
 import TripCard from './TripCard'
-import { doc, setDoc, deleteField } from 'firebase/firestore'
+import { doc, setDoc, deleteField, deleteDoc } from 'firebase/firestore'
 import { db } from '../firebase'
-import useFetchTodos from '../hooks/FetchTodos'
+import useFetchTrips from '../hooks/FetchTrips'
 
 export default function UserDashboard() {
   const { userInfo, currentUser } = useAuth()
-  const [todo, setTodo] = useState('')
+  const [trip, setTrip] = useState('')
 
-  const { todos, setTodos, loading, error } = useFetchTodos()
+  const { trips, setTrips, loading, error } = useFetchTrips()
 
   async function handleAddTrip() {
-    if (!todo) { return }
-    const newKey = Object.keys(todos).length === 0 ? 1 : Math.max(...Object.keys(todos)) + 1
-    setTodos({ ...todos, [newKey]: todo })
-    const userRef = doc(db, 'users', currentUser.uid)
-    await setDoc(userRef, {
-      'todos': {
-        [newKey]: todo
-      }
-    }, { merge: true })
-    setTodo('')
+    if (!trip) { return }
+    const newKey = Object.keys(trips).length === 0 ? 1 : Math.max(...Object.keys(trips)) + 1
+    setTrips({ ...trips, [newKey]: trip })
+    const userRef = doc(db, 'users', currentUser.uid, 'Trips', newKey.toString())
+    console.log(newKey)
+    // await setDoc(userRef, {
+    //   'trips': {
+    //     [newKey]: trip
+    //   }
+    // }, { merge: true })
+    await setDoc(userRef, { Name: trip })
+    setTrip('')
 
   }
 
-  function handleDelete(todoKey) {
+  function handleDelete(tripKey) {
     return async () => {
-      const tempObj = { ...todos }
-      delete tempObj[todoKey]
+      const tempObj = { ...trips }
+      delete tempObj[tripKey]
 
-      setTodos(tempObj)
-      const userRef = doc(db, 'users', currentUser.uid)
-      await setDoc(userRef, {
-        'todos': {
-          [todoKey]: deleteField()
-        }
-      }, { merge: true })
+      setTrips(tempObj)
+      const userRef = doc(db, 'users', currentUser.uid, 'Trips', tripKey)
+      await deleteDoc(userRef)
 
     }
   }
 
   return (
+    console.log(trips),
     <div className='w-full max-w-[65ch] mx-auto flex flex-col gap-3 sm:gap-5
     text-xs sm:text-sm'>
       <div className="flex items-stretch">
-        <input type="text" placeholder='Enter todo' value={todo}
-          onChange={(e) => setTodo(e.target.value)} className="outline-none p-3 
+        <input type="text" placeholder='Enter trip' value={trip}
+          onChange={(e) => setTrip(e.target.value)} className="outline-none p-3 
       text-base sm:text-lg text-slate-900 flex-1"/>
         <button onClick={handleAddTrip} className='w-fit px-4 sm:px-6 py-2 sm:py-3 
       bg-black text-white font-medium text-base duration-300 
@@ -62,17 +61,17 @@ export default function UserDashboard() {
 
       {(!loading) && (
         <>
-          {Object.keys(todos).map((todo, i) => {
+          {Object.keys(trips).map((trip, i) => {
             return (
-              <TripCard key={i} todoKey={todo} handleDelete={handleDelete}>
-                {todos[todo]}
+              <TripCard key={i} tripKey={trip} handleDelete={handleDelete}>
+                {trips[trip]}
               </TripCard>
             )
           })}
         </>
       )}
       {/*!addTodo && <button onClick={() => setAddTodo(true)} className='text-cyan-300 border border-solid border-cyan-300 py-2 text-center uppercase 
-       text-lg duration-300 hover:opacity-30'>ADD TODO</button>*/}
+       text-lg duration-300 hover:opacity-30'>ADD TRIP</button>*/}
     </div>
   )
 }
