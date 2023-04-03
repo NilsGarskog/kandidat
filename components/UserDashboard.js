@@ -17,11 +17,6 @@ export default function UserDashboard() {
     setTrips({ ...trips, [newKey]: trip })
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', newKey.toString())
     console.log(newKey)
-    // await setDoc(userRef, {
-    //   'trips': {
-    //     [newKey]: trip
-    //   }
-    // }, { merge: true })
     await setDoc(userRef, { Name: trip })
     setTrip('')
 

@@ -4,19 +4,16 @@ import Link from 'next/link';
 export default function TripCard(props) {
   const { children, tripKey, handleDelete } = props;
   return (
-    // <a href="/MyTrip">
-    <div className='p-2 relative border sm:p-3 flex items-stretch border-white border-solid'>
-      <link href="/MyTrip" rel="stylesheet" />
-
-      <div className='flex-1 flex'>
-        <> {children}</>
-        {/*  {children} */}
-      </div>
-
-      <div className='flex items-center'>
-        <i onClick={handleDelete(tripKey)} className="fa-solid fa-trash-can px-2 duration-300 hover:scale-125 cursor-pointer"></i>
+    <div className=' border sm:p-3 grid grid-cols-12 border-white border-solid '>
+      <a href={`/MyTrip/${children}`} className='col-span-11'>
+        <div className=' '>
+          <> {children}</>
+          {/*  {children} */}
+        </div>
+      </a >
+      <div className=' items-center'>
+        <i onClick={handleDelete(tripKey)} className=" fa-solid fa-trash-can  duration-300 hover:scale-125 cursor-pointer z-10 absolute "></i>
       </div>
     </div>
-    // </a>
   )
 }
