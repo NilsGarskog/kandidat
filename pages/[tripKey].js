@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router';
 import useFetchTripData from '../components/DBfunctions'
+import dayjs from 'dayjs'
 
 function getData() {
     const router = useRouter()
@@ -23,8 +24,9 @@ export default function Trip() {
                 <div className='flex pr-10'>
                     <i onClick={() => router.push('/')} className="fa-solid fa-square-caret-left bg-clip-content hover:opacity-40 cursor-pointer text-3xl sm:text-6xl"></i>
                 </div>
-                <div className='flex'>
+                <div className='flex flex-col'>
                     <h1 className='text-2xl select-none sm:text-5xl font-latoBold uppercase'>{tripData.Name}</h1>
+                    <h1 className='text-1xl select-none sm:text-4xl font-latoBold uppercase'>{dayjs(tripData.arrDate).format('D-MMM-YYYY')} → {dayjs(tripData.depDate).format('D-MMM-YYYY')}</h1>
                 </div>
             </div>
         )
