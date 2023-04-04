@@ -16,7 +16,6 @@ export default function Trip() {
     const router = useRouter()
 
     const allData = getData()
-    console.log(allData)
     if (allData.loading === false) {
         const tripData = allData.tripData
         return (
