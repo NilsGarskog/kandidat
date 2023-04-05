@@ -9,8 +9,8 @@ export default function Header() {
   if (!currentUser) {
     return (
       <>
-        <div className='fixed top-0 w-full left-0 bg-inherit flex items-center justify-between p-4 border-b border-solid border-white'>
-          <h1 className='text-3xl select-none sm:text-6xl font-latoBold'> TRAVEL PLANNER </h1>
+        <div className='sticky top-0 w-full left-0 bg-inherit flex items-center justify-between p-2 border-b border-solid border-white'>
+          <h1 className='text-1xl select-none sm:text-3xl font-latoBold'> TRAVEL PLANNER </h1>
         </div>
       </>
     )
