@@ -1,14 +1,19 @@
 import Layout from '@/components/Layout'
 import { AuthProvider } from '@/context/authContext'
 import '@/styles/globals.css'
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, children }) {
   return (
-    <AuthProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </AuthProvider>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <AuthProvider>
+        <Layout>
+          <Component {...pageProps} />
+          {children}
+        </Layout>
+      </AuthProvider>
+    </LocalizationProvider>
   )
 }
 
