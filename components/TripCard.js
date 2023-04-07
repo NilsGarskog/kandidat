@@ -16,7 +16,7 @@ export default function TripCard(props) {
         <a href={`/${tripKey}`} className='col-span-11'>
           <div className='flex flex-col'>
             <div className="flex text-4xl">
-              {tripData.Name}
+              {children}
             </div>
             <div className="flex text-2xl">
               {dayjs(tripData.arrDate).format('D MMM YYYY')} → {dayjs(tripData.depDate).format('D MMM YYYY')}
