@@ -3,11 +3,16 @@ import Link from 'next/link';
 import dayjs from 'dayjs'
 import { useRouter } from 'next/router';
 import useFetchTripData from '../components/DBfunctions'
+import Popup from 'reactjs-popup';
+import { useState } from 'react';
 
 
 export default function TripCard(props) {
   const { children, tripKey, handleDelete } = props;
   const allData = useFetchTripData(tripKey)
+  const [open, setOpen] = useState(false);
+  const contentStyle = { borderRadius: '20px', width: "30%" };
+  const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
 
   if (allData.loading === false) {
     const tripData = allData.tripData
@@ -24,7 +29,18 @@ export default function TripCard(props) {
           </div>
         </a >
         <div className=' '>
-          <i onClick={handleDelete(tripKey)} className=" fa-solid fa-trash-can duration-300 hover:scale-125 cursor-pointer text-3xl "></i>
+          <Popup position="relative"
+            open={open}
+            modal
+            {...{ contentStyle, overlayStyle }}
+            trigger={<i className=" fa-solid fa-trash-can duration-300 hover:scale-125 cursor-pointer text-3xl "></i>} >
+            {close => (
+              <div className='flex p-1 flex-col items-center font-medium text-base rounded-lg w-full'>
+                <h1 className="text-xl p-2">Are you sure you want to delete the trip to {children} ?</h1>
+                <button className='border w-1/2 bg-black text-white rounded-xl p-4' onClick={() => { handleDelete(tripKey); close() }}>CONFIRM</button>
+              </div>
+            )}
+          </Popup>
         </div>
       </div>
     )
