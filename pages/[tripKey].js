@@ -27,6 +27,11 @@ export default function Trip() {
                     <h1 className='text-2xl select-none sm:text-5xl font-bold uppercase'>{tripData.Name}</h1>
                     <h1 className='text-1xl select-none sm:text-4xl font-bold uppercase'>{dayjs(tripData.arrDate).format('D-MMM-YYYY')} → {dayjs(tripData.depDate).format('D-MMM-YYYY')}</h1>
                 </div>
+                < div className="search">
+                    <span></span>
+                    <input type="text" className='text-black' placeholder="Search location..." />
+                    <button></button>
+                </div>
             </div>
         )
 
