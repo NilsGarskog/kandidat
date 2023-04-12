@@ -3,6 +3,9 @@ import { AuthProvider } from '@/context/authContext'
 import '@/styles/globals.css'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import toast, { Toaster } from 'react-hot-toast';
+import '@/styles/Login.css'
+import  { ScrollToTop } from '@/components/ScrollToTop';
 
 function MyApp({ Component, pageProps, children }) {
   return (
@@ -11,6 +14,8 @@ function MyApp({ Component, pageProps, children }) {
         <Layout>
           <Component {...pageProps} />
           {children}
+          <Toaster/>
+          <ScrollToTop />
         </Layout>
       </AuthProvider>
     </LocalizationProvider>
