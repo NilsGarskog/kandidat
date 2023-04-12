@@ -20,7 +20,7 @@ export default function Login() {
   const [error, setError] = useState(null)
   const [isLoggingIn, setIsLogginIn] = useState(true)
 
-   const { login, signUp, currentUser, forgotPassword } = useAuth()
+  const { login, signUp, currentUser, forgotPassword } = useAuth()
   async function submitHandler() {
     if (!email || !password) {
       setError('Please enter email and password')
@@ -49,20 +49,20 @@ export default function Login() {
 
 
   }
-  async  function submitForgottenPassword(){
+  async function submitForgottenPassword() {
     try {
       await forgotPassword(email)
       toast.success('Email was successfully sent, check your inbox!')
     }
-      catch(error){
-        
-        toast.error("No existing account with that email address")
-      }
+    catch (error) {
+
+      toast.error("No existing account with that email address")
     }
+  }
 
   return (
-   <div className='flex sm:flex-row flex-col p-10 h-[300vh] '>
-      
+    <div className='flex sm:flex-row flex-col p-10 h-[300vh] '>
+
       <div className=' relative z-30'>
         <h1 className='font-bold sm:text-xl sm:w-1/2  break-word '>Welcome to Travel Planner!<br></br> Finding the best way fit all of the activities and places you want to visit has never been easier.<br></br>  To get started, please sign in or register.</h1>
       </div>
@@ -84,18 +84,18 @@ export default function Login() {
           {close => (
             <div className='flex flex-col items-center space-y-4 font-medium text-base rounded-lg w-full'>
               <i onClick={close} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "></i>
-              
+
               <h1 className='text-3xl pb-10'>Forgot password</h1>
               <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Adress..." required className=' border border-black outline-none duration-300  border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]'></input>
-              <button className='border w-1/2 bg-green-300 'disabled={!email} onClick={() => { submitForgottenPassword(), close(); }}>Submit</button>
+              <button className='border w-1/2 bg-green-300 ' disabled={!email} onClick={() => { submitForgottenPassword(), close(); }}>Submit</button>
             </div>
           )}
         </Popup>
-          
-        <h2 className="duration-300 hover:scale-110 cursor-pointer " onClick={() => setIsLogginIn(!isLoggingIn)}>{!isLoggingIn ? 'Login' : 'Register'}</h2>
-    </div>
 
-{/* <div className="animationsclass">
+        <h2 className="duration-300 hover:scale-110 cursor-pointer " onClick={() => setIsLogginIn(!isLoggingIn)}>{!isLoggingIn ? 'Login' : 'Register'}</h2>
+      </div>
+
+      {/* <div className="animationsclass">
       <Parallax pages={4} style={{ top: '0', left: '0' }} className="animation">
         <ParallaxLayer offset={0} speed={0.25}>
           <div className="animation_layer parallax" id="artback"></div>
@@ -126,6 +126,16 @@ export default function Login() {
         </ParallaxLayer>
     </Parallax>
       </div> */}
+      <div >
+        <Parallax pages={2} style={{ top: '0', left: '0' }} className="animation">
+          <ParallaxLayer offset={0} speed={0.4}>
+            <div className="animation_layer parallax" id="back"></div>
+          </ParallaxLayer>
+          <ParallaxLayer offset={0} speed={0.1}>
+            <div className="animation_layer parallax" id="front"></div>
+          </ParallaxLayer>
+        </Parallax>
+      </div>
     </div>
   )
 }

@@ -23,6 +23,14 @@
   position: absolute;
 }
 
+#front {
+  background-image: url(/images/BelowStart.png);
+}
+
+#back {
+  background-image: url(/images/aboweStart.png);
+}
+
 /* #artback {
     background-image: url(./images/background.png);
   }
