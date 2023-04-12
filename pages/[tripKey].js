@@ -24,8 +24,8 @@ export default function Trip() {
                     <i onClick={() => router.push('/')} className="fa-solid fa-square-caret-left bg-clip-content hover:opacity-40 cursor-pointer text-3xl sm:text-6xl"></i>
                 </div>
                 <div className='flex flex-col'>
-                    <h1 className='text-2xl select-none sm:text-5xl font-latoBold uppercase'>{tripData.Name}</h1>
-                    <h1 className='text-1xl select-none sm:text-4xl font-latoBold uppercase'>{dayjs(tripData.arrDate).format('D-MMM-YYYY')} → {dayjs(tripData.depDate).format('D-MMM-YYYY')}</h1>
+                    <h1 className='text-2xl select-none sm:text-5xl font-bold uppercase'>{tripData.Name}</h1>
+                    <h1 className='text-1xl select-none sm:text-4xl font-bold uppercase'>{dayjs(tripData.arrDate).format('D-MMM-YYYY')} → {dayjs(tripData.depDate).format('D-MMM-YYYY')}</h1>
                 </div>
             </div>
         )
