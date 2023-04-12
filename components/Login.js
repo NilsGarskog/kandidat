@@ -4,7 +4,6 @@ import Popup from 'reactjs-popup';
 import toast from 'react-hot-toast';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
-
 function validateEmailAddress(input) {
   var regex = /[^\s@]+@[^\s@]+\.[^\s@]+/;
   if (regex.test(input)) {
@@ -14,7 +13,6 @@ function validateEmailAddress(input) {
   }
 }
 
-
 export default function Login() {
 
   const [email, setEmail] = useState('')
@@ -22,8 +20,7 @@ export default function Login() {
   const [error, setError] = useState(null)
   const [isLoggingIn, setIsLogginIn] = useState(true)
 
-  const { login, signUp, currentUser, forgotPassword } = useAuth()
-
+   const { login, signUp, currentUser, forgotPassword } = useAuth()
   async function submitHandler() {
     if (!email || !password) {
       setError('Please enter email and password')
@@ -52,7 +49,7 @@ export default function Login() {
 
 
   }
- async  function submitForgottenPassword(){
+  async  function submitForgottenPassword(){
     try {
       await forgotPassword(email)
       toast.success('Email was successfully sent, check your inbox!')
@@ -64,7 +61,7 @@ export default function Login() {
     }
 
   return (
-    <div className='flex sm:flex-row flex-col p-10 h-[300vh] '>
+   <div className='flex sm:flex-row flex-col p-10 h-[300vh] '>
       
       <div className=' relative z-30'>
         <h1 className='font-bold sm:text-xl sm:w-1/2  break-word '>Welcome to Travel Planner!<br></br> Finding the best way fit all of the activities and places you want to visit has never been easier.<br></br>  To get started, please sign in or register.</h1>
@@ -79,7 +76,7 @@ export default function Login() {
           <h2 className='relative z-20'>
             SUBMIT
           </h2></button>
-          <Popup trigger={<h2 className="duration-300 hover:scale-110 cursor-pointer">{!isLoggingIn ? '' : 'Forgot Password?'}</h2>}
+        <Popup trigger={<h2 className="duration-300 hover:scale-110 cursor-pointer">{!isLoggingIn ? '' : 'Forgot Password?'}</h2>}
           position="relative"
           modal
           closeOnDocumentClick={false}
@@ -96,11 +93,9 @@ export default function Login() {
         </Popup>
           
         <h2 className="duration-300 hover:scale-110 cursor-pointer " onClick={() => setIsLogginIn(!isLoggingIn)}>{!isLoggingIn ? 'Login' : 'Register'}</h2>
-      </div>
+    </div>
 
-     
-          
-      {/* <div className="animationsclass">
+{/* <div className="animationsclass">
       <Parallax pages={4} style={{ top: '0', left: '0' }} className="animation">
         <ParallaxLayer offset={0} speed={0.25}>
           <div className="animation_layer parallax" id="artback"></div>
@@ -132,6 +127,5 @@ export default function Login() {
     </Parallax>
       </div> */}
     </div>
-    
   )
 }
