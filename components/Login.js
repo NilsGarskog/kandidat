@@ -4,6 +4,7 @@ import Popup from 'reactjs-popup';
 import toast from 'react-hot-toast';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
+
 function validateEmailAddress(input) {
   var regex = /[^\s@]+@[^\s@]+\.[^\s@]+/;
   if (regex.test(input)) {
@@ -61,7 +62,7 @@ export default function Login() {
   }
 
   return (
-    <div className='flex sm:flex-row flex-col p-10 h-[300vh] '>
+    <div className='flex sm:flex-row flex-col p-10 '>
 
       <div className=' relative z-30'>
         <h1 className='font-bold sm:text-xl sm:w-1/2  break-word '>Welcome to Travel Planner!<br></br> Finding the best way fit all of the activities and places you want to visit has never been easier.<br></br>  To get started, please sign in or register.</h1>
@@ -126,16 +127,18 @@ export default function Login() {
         </ParallaxLayer>
     </Parallax>
       </div> */}
+      
       <div >
         <Parallax pages={2} style={{ top: '0', left: '0' }} className="animation">
-          <ParallaxLayer offset={0} speed={0.4}>
+          <ParallaxLayer offset={0} speed={0.1}>
             <div className="animation_layer parallax" id="back"></div>
           </ParallaxLayer>
-          <ParallaxLayer offset={0} speed={0.1}>
+          <ParallaxLayer offset={0} speed={0.5}>
             <div className="animation_layer parallax" id="front"></div>
           </ParallaxLayer>
         </Parallax>
       </div>
+
     </div>
   )
 }

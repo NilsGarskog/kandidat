@@ -20,15 +20,15 @@
 }
 
 .animation_layer.parallax {
-  position: absolute;
+  position: fixed;
 }
 
 #front {
-  background-image: url(/images/BelowStart.png);
+  background-image: url(./images/BelowStart.png);
 }
 
 #back {
-  background-image: url(/images/aboweStart.png);
+  background-image: url(./images/aboweStart.png);
 }
 
 /* #artback {
