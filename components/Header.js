@@ -22,7 +22,7 @@ export default function Header() {
   return (
     <>
       {openModal && <Modal setOpenModal={setOpenModal} />}
-      <div className='w-full left-0 bg-inherit flex items-center justify-between p-4 z-30 border-b border-solid border-white'>
+      <div className='w-full left-0 bg-inherit flex items-center justify-between p-4 border-b border-solid border-white'>
         <h1 onClick={() => router.push('/')} className='text-3xl select-none  duration-300 hover:opacity-40 cursor-pointer sm:text-6xl font-latoBold'> TRAVEL PLANNER </h1>
         <i onClick={() => setOpenModal(true)} className="fa-solid fa-user text-xl  duration-300 hover:opacity-40 cursor-pointer sm:text-3xl"></i>
       </div>
