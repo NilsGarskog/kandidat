@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/authContext'
+import Popup from 'reactjs-popup';
+import toast from 'react-hot-toast';
+import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 function validateEmailAddress(input) {
   var regex = /[^\s@]+@[^\s@]+\.[^\s@]+/;
@@ -17,7 +20,7 @@ export default function Login() {
   const [error, setError] = useState(null)
   const [isLoggingIn, setIsLogginIn] = useState(true)
 
-  const { login, signUp, currentUser } = useAuth()
+   const { login, signUp, currentUser, forgotPassword } = useAuth()
   async function submitHandler() {
     if (!email || !password) {
       setError('Please enter email and password')
@@ -46,13 +49,24 @@ export default function Login() {
 
 
   }
+  async  function submitForgottenPassword(){
+    try {
+      await forgotPassword(email)
+      toast.success('Email was successfully sent, check your inbox!')
+    }
+      catch(error){
+        
+        toast.error("No existing account with that email address")
+      }
+    }
 
   return (
-    <div className='flex sm:flex-row flex-col p-10'>
-      <div className=''>
+   <div className='flex sm:flex-row flex-col p-10 h-[300vh] '>
+      
+      <div className=' relative z-30'>
         <h1 className='font-bold sm:text-xl sm:w-1/2  break-word '>Welcome to Travel Planner!<br></br> Finding the best way fit all of the activities and places you want to visit has never been easier.<br></br>  To get started, please sign in or register.</h1>
       </div>
-      <div className='flex-1 text-xs sm:text-sm flex flex-col justify-center items-center gap-2 sm:gap-4'>
+      <div className='flex-1 text-xs sm:text-sm relative z-30 flex flex-col  items-center gap-2 sm:gap-4'>
         <h1 className='font-extrabold text-2xl sm:text-4xl select-none uppercase'>{isLoggingIn ? 'Login' : 'Register'}</h1>
         {error && <div className='w-full select-none max-w-[40ch] border-rose-400 text-rose-400 py-2 border border-solid text-center'>{error}</div>}
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Adress..." className='outline-none duration-300 border-b-2 border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]'></input>
@@ -62,8 +76,56 @@ export default function Login() {
           <h2 className='relative z-20'>
             SUBMIT
           </h2></button>
-        <h2 className="duration-300 hover:scale-110 cursor-pointer" onClick={() => setIsLogginIn(!isLoggingIn)}>{!isLoggingIn ? 'Login' : 'Register'}</h2>
-      </div>
+        <Popup trigger={<h2 className="duration-300 hover:scale-110 cursor-pointer">{!isLoggingIn ? '' : 'Forgot Password?'}</h2>}
+          position="relative"
+          modal
+          closeOnDocumentClick={false}
+        >
+          {close => (
+            <div className='flex flex-col items-center space-y-4 font-medium text-base rounded-lg w-full'>
+              <i onClick={close} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "></i>
+              
+              <h1 className='text-3xl pb-10'>Forgot password</h1>
+              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Adress..." required className=' border border-black outline-none duration-300  border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]'></input>
+              <button className='border w-1/2 bg-green-300 'disabled={!email} onClick={() => { submitForgottenPassword(), close(); }}>Submit</button>
+            </div>
+          )}
+        </Popup>
+          
+        <h2 className="duration-300 hover:scale-110 cursor-pointer " onClick={() => setIsLogginIn(!isLoggingIn)}>{!isLoggingIn ? 'Login' : 'Register'}</h2>
+    </div>
+
+{/* <div className="animationsclass">
+      <Parallax pages={4} style={{ top: '0', left: '0' }} className="animation">
+        <ParallaxLayer offset={0} speed={0.25}>
+          <div className="animation_layer parallax" id="artback"></div>
+        </ParallaxLayer>
+        <ParallaxLayer offset={0} speed={0.3}>
+          <div className="animation_layer parallax" id="mountain"></div>
+        </ParallaxLayer>
+        <ParallaxLayer offset={0} speed={-0.1}>
+          <div className="animation_layer parallax" id="logoland"></div>
+        </ParallaxLayer>
+        <ParallaxLayer offset={0} speed={0.3}>
+          <div className="animation_layer parallax" id="jungle1"></div>
+        </ParallaxLayer>
+        <ParallaxLayer offset={0} speed={0.35}>
+          <div className="animation_layer parallax" id="jungle2"></div>
+        </ParallaxLayer>
+        <ParallaxLayer offset={0} speed={0.5}>
+          <div className="animation_layer parallax" id="jungle3"></div>
+        </ParallaxLayer>
+        <ParallaxLayer offset={0} speed={0.45}>
+          <div className="animation_layer parallax" id="jungle4"></div>
+        </ParallaxLayer>
+        <ParallaxLayer offset={0} speed={0.40}>
+          <div className="animation_layer parallax" id="manonmountain"></div>
+        </ParallaxLayer>
+        <ParallaxLayer offset={0} speed={0.35}>
+          <div className="animation_layer parallax" id="jungle5"></div>
+        </ParallaxLayer>
+    </Parallax>
+      </div> */}
     </div>
   )
 }
