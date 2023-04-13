@@ -103,6 +103,7 @@ export default function Modal(props) {
             setFirstName(profileInfo.FirstName || '')
             setLastName(profileInfo.LastName || '')
             setProfileImageUrl(profileInfo.profileImageUrl || '')
+          
           }
           setIsLoading(false)
         }
