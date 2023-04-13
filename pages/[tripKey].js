@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router';
 import useFetchTripData from '../components/DBfunctions'
 import dayjs from 'dayjs'
+import Calendar from '@/components/Calendar';
 
 function getData() {
     const router = useRouter()
@@ -14,11 +15,12 @@ function getData() {
 
 export default function Trip() {
     const router = useRouter()
-
+    const [showCalendar, setShowCalendar] = useState(false)
     const allData = getData()
     if (allData.loading === false) {
         const tripData = allData.tripData
         return (
+            <div>
             <div className='flex flex-row items-center'>
                 <div className='flex pr-10'>
                     <i onClick={() => router.push('/')} className="fa-solid fa-square-caret-left bg-clip-content hover:opacity-40 cursor-pointer text-3xl sm:text-6xl"></i>
@@ -32,6 +34,12 @@ export default function Trip() {
                     <input type="text" className='text-black' placeholder="Search location..." />
                     <button></button>
                 </div>
+               
+            </div>
+            <i onClick =  {() => {showCalendar? setShowCalendar(false) : setShowCalendar(true) }} className="cursor-pointer duration-300 opacity-50 hover:opacity-100 mt-12 text-6xl fa-solid fa-calendar"></i>
+            <div>
+                {showCalendar && <Calendar/>}
+            </div>
             </div>
         )
 
