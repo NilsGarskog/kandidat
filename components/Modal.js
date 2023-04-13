@@ -9,6 +9,7 @@ import {ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import {v4} from 'uuid'
 import useFetchTrips from '../hooks/FetchTrips'
 
+
 export default function Modal(props) {
     const {userInfo, currentUser} = useAuth()
     const { setOpenModal } = props
@@ -103,7 +104,6 @@ export default function Modal(props) {
             setFirstName(profileInfo.FirstName || '')
             setLastName(profileInfo.LastName || '')
             setProfileImageUrl(profileInfo.profileImageUrl || '')
-          
           }
           setIsLoading(false)
         }
@@ -200,6 +200,8 @@ export default function Modal(props) {
     
            
         </Popup>
+
+      
      
         <h2 onClick={() => {
             logout()
