@@ -201,7 +201,7 @@ export default function Modal(props) {
            
         </Popup>
 
-       <Map></Map>
+      
      
         <h2 onClick={() => {
             logout()
