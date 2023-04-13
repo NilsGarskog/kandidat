@@ -3,6 +3,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useAuth } from '../context/authContext'
 import UserDashboard from '../components/UserDashboard'
+import Algoritmen from '@/components/Algoritmen'
+
+
 export default function Home() {
   const { currentUser } = useAuth()
 
@@ -16,6 +19,8 @@ export default function Home() {
       </Head>
       {!currentUser && <Login />}
       {currentUser && <UserDashboard />}
+      <Algoritmen />
+
 
     </>
   )
