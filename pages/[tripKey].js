@@ -1,24 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-import useFetchTripData from '../components/DBfunctions'
+import useFetchTripData from '../hooks/DBfunctions'
+import useFetchAct from '../hooks/FetchActivities'
 import dayjs from 'dayjs'
 import Calendar from '@/components/Calendar';
+import CreateActivity from '../components/CreateActivity'
+import Algoritmen from '@/Algorithms/Algoritmen';
 
-function getData() {
-    const router = useRouter()
-    const { tripKey } = router.query
-    const data = useFetchTripData(tripKey)
-
-    return data
-}
 
 
 export default function Trip() {
     const router = useRouter()
     const [showCalendar, setShowCalendar] = useState(false)
-    const allData = getData()
-    if (allData.loading === false) {
+    const { tripKey } = router.query
+    const allData = useFetchTripData(tripKey)
+    const actData = useFetchAct(tripKey)
+    if (allData.loading === false && actData.loading === false) {
         const tripData = allData.tripData
+        const actArr = actData.actArr
+        Algoritmen(tripData.arrDate, tripData.depDate, actArr)
         return (
             <div>
             <div className='flex flex-row items-center'>
@@ -40,14 +40,19 @@ export default function Trip() {
             <div>
                 {showCalendar && <Calendar/>}
             </div>
+                <CreateActivity tripKey={tripKey}></CreateActivity>
             </div>
+
         )
 
     }
     else {
         return (
-            <div className='flex-1 grid place-items-center '><i className="fa-solid fa-spinner animate-spin text-6xl"></i></div>
+            <div className='flex-1 grid place-items-center '><i className="fa-solid fa-spinner animate-spin text-6xl"></i>
+
+            </div>
         )
     }
 
 }
+

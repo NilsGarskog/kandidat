@@ -38,7 +38,6 @@ export default function UserDashboard() {
     const newKey = Object.keys(trips).length === 0 ? 1 : Math.max(...Object.keys(trips)) + 1
     setTrips({ ...trips, [newKey]: trip })
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', newKey.toString())
-    console.log(newKey)
     await setDoc(userRef, { Name: trip, arrDate: arrDate.format('YYYY-MM-DD'), depDate: depDate.format('YYYY-MM-DD') })
     handleButton()
 
