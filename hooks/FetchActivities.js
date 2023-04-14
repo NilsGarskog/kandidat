@@ -3,40 +3,39 @@ import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
 import { useAuth } from '../context/authContext'
 import { db } from '../firebase'
 
-export default function useFetchTrips() {
+export default function useFetchAct(tripKey) {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
-    const [trips, setTrips] = useState(null)
+    const [actArr, setActArr] = useState([])
 
     const { currentUser } = useAuth()
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchAct() {
 
             try {
-                const tripNames = {};
-                const collectionRef = collection(db, 'users/' + currentUser.uid + '/Trips');
+                const collectionRef = collection(db, 'users/' + currentUser.uid + '/Trips/' + tripKey + '/Activities');
                 const snapshot = await getDocs(collectionRef);
+                let tempArr = []
                 snapshot.forEach((doc) => {
-                    const id = doc.id;
-                    const name = doc.data().Name;
-                    tripNames[id] = name;
+                    tempArr.push(doc.data())
                 });
-                setTrips(tripNames)
+                setActArr(tempArr)
 
             } catch (err) {
-                setError('Failed to load trips')
+                setError('Failed to load activities')
+                console.log(err)
 
             } finally {
                 setLoading(false)
             }
         }
-        fetchData()
+        fetchAct()
     }, [])
 
 
 
-    return { loading, error, trips, setTrips }
+    return { loading, error, actArr }
 
 
 }

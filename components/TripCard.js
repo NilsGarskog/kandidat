@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link';
 import dayjs from 'dayjs'
 import { useRouter } from 'next/router';
-import useFetchTripData from '../components/DBfunctions'
+import useFetchTripData from '../hooks/DBfunctions'
 import Popup from 'reactjs-popup';
 import { useState } from 'react';
 

@@ -1,25 +1,22 @@
-import React, { useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-import useFetchTripData from '../components/DBfunctions'
+import useFetchTripData from '../hooks/DBfunctions'
+import useFetchAct from '../hooks/FetchActivities'
 import dayjs from 'dayjs'
 import CreateActivity from '../components/CreateActivity'
+import Algoritmen from '@/Algorithms/Algoritmen';
 
-
-function getData() {
-    const router = useRouter()
-    const { tripKey } = router.query
-    const data = useFetchTripData(tripKey)
-
-    return data
-}
 
 
 export default function Trip() {
     const router = useRouter()
     const { tripKey } = router.query
-    const allData = getData()
-    if (allData.loading === false) {
+    const allData = useFetchTripData(tripKey)
+    const actData = useFetchAct(tripKey)
+    if (allData.loading === false && actData.loading === false) {
         const tripData = allData.tripData
+        const actArr = actData.actArr
+        Algoritmen(tripData.arrDate, tripData.depDate, actArr)
         return (
             <div className='flex flex-row items-center'>
                 <div className='flex pr-10'>
@@ -29,18 +26,20 @@ export default function Trip() {
                     <h1 className='text-2xl select-none sm:text-5xl font-bold uppercase'>{tripData.Name}</h1>
                     <h1 className='text-1xl select-none sm:text-4xl font-bold uppercase'>{dayjs(tripData.arrDate).format('D-MMM-YYYY')} → {dayjs(tripData.depDate).format('D-MMM-YYYY')}</h1>
                 </div>
-                <CreateActivity tripKey = {tripKey}></CreateActivity>
-                </div>
+                <CreateActivity tripKey={tripKey}></CreateActivity>
+
+            </div>
+
         )
 
     }
     else {
         return (
             <div className='flex-1 grid place-items-center '><i className="fa-solid fa-spinner animate-spin text-6xl"></i>
-            
+
             </div>
         )
     }
-   
+
 }
 

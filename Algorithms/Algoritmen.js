@@ -1,35 +1,51 @@
 
 import dayjs from "dayjs"
 
+
+
 const genericLunchId = 10
 const genericDinnerId = 20
 const genericActId = 30
 
-function fetchDate() {
-    const arrDate = dayjs("2023-04-19")
-    const depDate = dayjs("2023-04-22")
+
+function fetchDate(arrDateRaw, depDateRaw) {
+    const arrDate = dayjs(arrDateRaw)
+    const depDate = dayjs(depDateRaw)
     return [depDate.diff(arrDate, 'day') + 1, arrDate.format('d')]
 }
 
-function fetchAct() {
-    const act = [{ id: 1, type: 0, time: 0 }, { id: 2, type: 0, time: 0 }, { id: 3, type: 0, time: 0 }, { id: 50, type: 0, time: 1 }]
-    const lunch = [{ id: 4, type: 1, time: 0 }, { id: 5, type: 1, time: 0 }, { id: 6, type: 1, time: 0 }]
-    const dinner = [{ id: 7, type: 2, time: 0 }, { id: 8, type: 2, time: 0 }, { id: 9, type: 2, time: 0 }]
+
+
+function fetchAct(actArr) {
+    const act = []
+    const lunch = []
+    const dinner = []
+    actArr.forEach((obj) => {
+        if (obj.type === 0) {
+            act.push(obj)
+        }
+        else if (obj.type === 1) {
+            lunch.push(obj)
+        }
+        else if (obj.type === 2) {
+            dinner.push(obj)
+        }
+    })
     return { act, lunch, dinner }
 
 }
 
-function randomiseActOrder() {
-    const { act, lunch, dinner } = fetchAct()
+function randomiseActOrder(actArr) {
+    const { act, lunch, dinner } = fetchAct(actArr)
     const randomAct = act.sort(() => Math.random() - 0.5)
     const randomLunch = lunch.sort(() => Math.random() - 0.5)
     const randomDinner = dinner.sort(() => Math.random() - 0.5)
     return { randomAct, randomLunch, randomDinner }
 }
 
-function createInitialOut() {
-    const weekDays = ['sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    const [daysBetween, firstDayNumber] = fetchDate()
+function createInitialOut(arrDate, depDate) {
+    let [daysBetween, firstDayNumber] = fetchDate(arrDate, depDate)
+    const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     const outPut = []
     let currentDayNumber = parseInt(firstDayNumber)
     for (let i = 0; i < daysBetween; i++) {
@@ -52,9 +68,9 @@ function anyShort(arr) {
     return false
 }
 
-export default function Algoritmen() {
-    const outPut = createInitialOut()
-    const { randomAct, randomLunch, randomDinner } = randomiseActOrder()
+export default function Algoritmen(arrDate, depDate, actArr) {
+    const outPut = createInitialOut(arrDate, depDate)
+    const { randomAct, randomLunch, randomDinner } = randomiseActOrder(actArr)
 
     outPut.forEach(day => {
         if (randomLunch.length != 0) {
