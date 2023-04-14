@@ -3,9 +3,9 @@ import dayjs from "dayjs"
 
 
 
-const genericLunchId = 10
-const genericDinnerId = 20
-const genericActId = 30
+const genericLunchId = 1
+const genericDinnerId = 2
+const genericActId = 3
 
 
 function fetchDate(arrDateRaw, depDateRaw) {
@@ -118,7 +118,7 @@ export default function Algoritmen(arrDate, depDate, actArr) {
     })
 
     return (
-        console.log(outPut)
+        outPut
 
     )
 }
