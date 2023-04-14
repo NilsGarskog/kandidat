@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState }  from 'react'
 import { useRouter } from 'next/router';
 import useFetchTripData from '../components/DBfunctions'
 import dayjs from 'dayjs'
+import CreateActivity from '../components/CreateActivity'
+
 
 function getData() {
     const router = useRouter()
@@ -14,7 +16,7 @@ function getData() {
 
 export default function Trip() {
     const router = useRouter()
-
+    const { tripKey } = router.query
     const allData = getData()
     if (allData.loading === false) {
         const tripData = allData.tripData
@@ -27,14 +29,18 @@ export default function Trip() {
                     <h1 className='text-2xl select-none sm:text-5xl font-bold uppercase'>{tripData.Name}</h1>
                     <h1 className='text-1xl select-none sm:text-4xl font-bold uppercase'>{dayjs(tripData.arrDate).format('D-MMM-YYYY')} → {dayjs(tripData.depDate).format('D-MMM-YYYY')}</h1>
                 </div>
-            </div>
+                <CreateActivity tripKey = {tripKey}></CreateActivity>
+                </div>
         )
 
     }
     else {
         return (
-            <div className='flex-1 grid place-items-center '><i className="fa-solid fa-spinner animate-spin text-6xl"></i></div>
+            <div className='flex-1 grid place-items-center '><i className="fa-solid fa-spinner animate-spin text-6xl"></i>
+            
+            </div>
         )
     }
-
+   
 }
+
