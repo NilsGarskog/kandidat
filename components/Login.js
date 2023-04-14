@@ -3,6 +3,7 @@ import { useAuth } from '../context/authContext'
 import Popup from 'reactjs-popup';
 import toast from 'react-hot-toast';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
+import  { ScrollToTop } from '@/components/ScrollToTop';
 
 function validateEmailAddress(input) {
   var regex = /[^\s@]+@[^\s@]+\.[^\s@]+/;
@@ -17,6 +18,7 @@ export default function Login() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [passwordCheck, setPasswordCheck] = useState('')
   const [error, setError] = useState(null)
   const [isLoggingIn, setIsLogginIn] = useState(true)
 
@@ -45,8 +47,12 @@ export default function Login() {
       setError('Password must be at least 6 characters')
       return
     }
+    else if (password !== passwordCheck){
+      setError('Passwords do not match')
+      return
+    }
     await signUp(email, password)
-
+      
 
   }
   async  function submitForgottenPassword(){
@@ -71,6 +77,8 @@ export default function Login() {
         {error && <div className='w-full select-none max-w-[40ch] border-rose-400 text-rose-400 py-2 border border-solid text-center'>{error}</div>}
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Adress..." className='outline-none duration-300 border-b-2 border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]'></input>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className='outline-none duration-300 border-b-2 border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]'></input>
+        {!isLoggingIn && 
+        <input type="password" value={passwordCheck} onChange={(e) => setPasswordCheck(e.target.value)} placeholder="Confirm password" className='outline-none duration-300 border-b-2 border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]'></input>}
         <button onClick={submitHandler} className="w-full max-w-[40ch] border border-white border-solid uppercase py-2 duration-300 relative after:absolute after:top-0 after:right-full 
       after:bg-white after:z-10 after:w-full after:h-full overflow-hidden hover:after:translate-x-full after:duration-300 hover:text-slate-900">
           <h2 className='relative z-20'>
@@ -94,7 +102,7 @@ export default function Login() {
           
         <h2 className="duration-300 hover:scale-110 cursor-pointer " onClick={() => setIsLogginIn(!isLoggingIn)}>{!isLoggingIn ? 'Login' : 'Register'}</h2>
     </div>
-
+    <ScrollToTop />
 {/* <div className="animationsclass">
       <Parallax pages={4} style={{ top: '0', left: '0' }} className="animation">
         <ParallaxLayer offset={0} speed={0.25}>
