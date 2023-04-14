@@ -8,6 +8,7 @@ import {db, storage } from '../firebase'
 import {ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import {v4} from 'uuid'
 import useFetchTrips from '../hooks/FetchTrips'
+import Map from './Map';
 
 export default function Modal(props) {
     const {userInfo, currentUser} = useAuth()
@@ -199,6 +200,8 @@ export default function Modal(props) {
     
            
         </Popup>
+
+      
      
         <h2 onClick={() => {
             logout()

@@ -8,6 +8,9 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs'
+import Map from './Map'
+import APItest from './APItest'
+import Autocomplete from './Autocomplete'
 
 
 export default function UserDashboard() {
@@ -17,6 +20,13 @@ export default function UserDashboard() {
   const [depDate, setDepDate] = useState(null)
   const [open, setOpen] = useState(false);
   const [err, setErr] = useState("");
+  const [showMap, setShowMap] = useState(false);
+
+  const handleTriggerClick = () => {
+   
+      setShowMap(true)
+     
+  }
 
   const contentStyle = { borderRadius: '20px' };
   const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
@@ -28,7 +38,6 @@ export default function UserDashboard() {
     const newKey = Object.keys(trips).length === 0 ? 1 : Math.max(...Object.keys(trips)) + 1
     setTrips({ ...trips, [newKey]: trip })
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', newKey.toString())
-    console.log(newKey)
     await setDoc(userRef, { Name: trip, arrDate: arrDate.format('YYYY-MM-DD'), depDate: depDate.format('YYYY-MM-DD') })
     handleButton()
 
@@ -118,6 +127,11 @@ export default function UserDashboard() {
       )}
       {/*!addTodo && <button onClick={() => setAddTodo(true)} className='text-cyan-300 border border-solid border-cyan-300 py-2 text-center uppercase 
        text-lg duration-300 hover:opacity-30'>ADD TRIP</button>*/}
+       <button onClick={handleTriggerClick}>Let's test the API functionality!</button>
+       {showMap && <Autocomplete/>}
+      
+  
     </div>
   )
+    
 }
