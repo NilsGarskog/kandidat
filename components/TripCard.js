@@ -4,37 +4,45 @@ import dayjs from 'dayjs'
 import { useRouter } from 'next/router';
 import useFetchTripData from '../hooks/DBfunctions'
 import Popup from 'reactjs-popup';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 export default function TripCard(props) {
   const { children, tripKey, handleDelete } = props;
   const allData = useFetchTripData(tripKey)
   const [open, setOpen] = useState(false);
+  const [flag, setFlag] = useState('');
   const contentStyle = { borderRadius: '20px', width: "30%" };
   const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
 
   if (allData.loading === false) {
     const tripData = allData.tripData
     return (
-      <div className='duration-300 hover:bg-slate-100 drop-shadow-2xl flex bg-white text-black rounded-lg items-center p-1'>
+
+
+<div>
+  
+    <div className='sm:max-w-sm max-w-xs duration-300 hover:bg-gray-100 shadow-xl bg-white text-black rounded-xl items-center'>
+    <Link href={`/${tripKey}`} className='flex items-center p-3 pt-4 pb-4'>
         <div className='ml-3 h-20 w-20 border border-2 rounded-full overflow-hidden'>
-        <img className='w-full h-full object-cover' src='../img/placeholder-image.png' ></img>
+                <img className='w-full h-full object-cover' src='../img/placeholder-image.png' />
         </div>
-      <div className='sm:p-3 grid grid-cols-12 '>
-        <a href={`/${tripKey}`} className='col-span-11'>
-          <div className='flex flex-col'>
-            <div className="flex text-4xl">
-              {children}
-            </div>
-            <div className="flex text-2xl">
-              {dayjs(tripData.arrDate).format('D MMM YYYY')} → {dayjs(tripData.depDate).format('D MMM YYYY')}
-            </div>
+        <div className='flex flex-col ml-4'>
+          <div className='uppercase text-2xl font-semibold'>
+          {children}
           </div>
-        </a >
-     
+          <div className='font-light text-xs'>
+          {dayjs(tripData.arrDate).format('D MMM YYYY')}  →  {dayjs(tripData.depDate).format('D MMM YYYY')}
+          </div>
         </div>
-      </div>
+        </Link>
+    </div>
+  
+</div>
+
+
+
+    
     )
   }
   else {
