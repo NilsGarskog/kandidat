@@ -17,7 +17,11 @@ export default function TripCard(props) {
   if (allData.loading === false) {
     const tripData = allData.tripData
     return (
-      <div className='border rounded-lg border-2 sm:p-3 grid grid-cols-12 border-white border-solid items-center '>
+      <div className='duration-300 hover:bg-slate-100 drop-shadow-2xl flex bg-white text-black rounded-lg items-center p-1'>
+        <div className='ml-3 h-20 w-20 border border-2 rounded-full overflow-hidden'>
+        <img className='w-full h-full object-cover' src='../img/placeholder-image.png' ></img>
+        </div>
+      <div className='sm:p-3 grid grid-cols-12 '>
         <a href={`/${tripKey}`} className='col-span-11'>
           <div className='flex flex-col'>
             <div className="flex text-4xl">
@@ -28,19 +32,7 @@ export default function TripCard(props) {
             </div>
           </div>
         </a >
-        <div className=' '>
-          <Popup position="relative"
-            open={open}
-            modal
-            {...{ contentStyle, overlayStyle }}
-            trigger={<i className=" fa-solid fa-trash-can duration-300 hover:scale-125 cursor-pointer text-3xl "></i>} >
-            {close => (
-              <div className='flex p-1 flex-col items-center font-medium text-base rounded-lg w-full'>
-                <h1 className="text-xl p-2">Are you sure you want to delete the trip to {children} ?</h1>
-                <button className='border w-1/2 bg-black text-white rounded-xl p-4' onClick={() => { handleDelete(tripKey); close() }}>CONFIRM</button>
-              </div>
-            )}
-          </Popup>
+     
         </div>
       </div>
     )
