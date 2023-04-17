@@ -20,13 +20,7 @@ export default function UserDashboard() {
   const [depDate, setDepDate] = useState(null)
   const [open, setOpen] = useState(false);
   const [err, setErr] = useState("");
-  const [showMap, setShowMap] = useState(false);
 
-  const handleTriggerClick = () => {
-   
-      setShowMap(true)
-     
-  }
 
   const contentStyle = { borderRadius: '20px' };
   const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
@@ -34,7 +28,7 @@ export default function UserDashboard() {
   const { trips, setTrips, loading, error } = useFetchTrips()
 
   async function handleAddTrip() {
-    if (!trip || arrDate === null || depDate === null) { return setErr('Please enter both dates') }
+    if (!trip || arrDate === null || depDate === null) { return setErr('Please fill in the required fields') }
     const newKey = Object.keys(trips).length === 0 ? 1 : Math.max(...Object.keys(trips)) + 1
     setTrips({ ...trips, [newKey]: trip })
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', newKey.toString())
@@ -54,7 +48,7 @@ export default function UserDashboard() {
   }
 
   function handleButton() {
-    if (open === false && trip !== '') {
+    if (open === false) {
       setOpen(true);
       setErr('')
     } else {
@@ -66,48 +60,8 @@ export default function UserDashboard() {
   }
 
   return (
-    <div className='w-full max-w-[65ch] mx-auto flex flex-col gap-3 sm:gap-5
+    <div className='w-full max-w-[65ch] items-center mx-auto flex flex-col gap-3 sm:gap-5
     text-xs sm:text-sm'>
-      <div className="flex items-stretch">
-        <input type="text" placeholder='Enter trip' value={trip}
-          onChange={(e) => setTrip(e.target.value)} className="outline-none p-3 
-      text-base sm:text-lg text-slate-900 flex-1"/>
-        <button onClick={() => handleButton()} id="addButton" className='w-fit px-4 sm:px-6 py-2 sm:py-3 
-      bg-black text-white font-medium text-base duration-300 
-      hover:opacity-40'>
-          ADD
-        </button>
-        <Popup open={open}
-          position="relative"
-          modal
-          closeOnDocumentClick={false}
-          {...{ contentStyle, overlayStyle }}
-
-        >
-
-          <div className='flex flex-col items-center font-medium text-base rounded-lg w-full'>
-            <i onClick={() => handleButton()} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "></i>
-            {/* <button onClick={close} className='absolute top-0 right-0 p-2'>CLOSE</button> */}
-
-            <div className='flex text-red-600'>
-              <h1>{err}</h1>
-            </div>
-            <div className='flex flex-col sm:flex-row space-x-20 pb-8 pt-8  '>
-              <div className="flex flex-col items-center ">
-                <h1>Choose arrival</h1>
-                <DatePicker value={arrDate} onChange={(newValue) => setArrDate(newValue)} />
-              </div>
-              <div className="flex flex-col items-center">
-                <h1>Choose departure</h1>
-                <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} />
-              </div>
-            </div>
-            <button className='border w-1/2 bg-black text-white rounded-xl p-4' onClick={() => { handleAddTrip() }}>Create trip</button>
-          </div>
-        </Popup>
-
-
-      </div>
 
       {(loading) && (<div className='flex-1 grid place-items-center '>
         <i className="fa-solid fa-spinner animate-spin text-6xl"></i>
@@ -125,13 +79,44 @@ export default function UserDashboard() {
           })}
         </>
       )}
-      {/*!addTodo && <button onClick={() => setAddTodo(true)} className='text-cyan-300 border border-solid border-cyan-300 py-2 text-center uppercase 
-       text-lg duration-300 hover:opacity-30'>ADD TRIP</button>*/}
-       <button onClick={handleTriggerClick}>Let's test the API functionality!</button>
-       {showMap && <Autocomplete/>}
-      
-  
+      <img onClick={() => handleButton()} className="h-20 w-20 cursor-pointer" src='../icons/plus-sign.svg' />
+
+
+      <Popup open={open}
+        position="relative"
+        modal
+        closeOnDocumentClick={false}
+        {...{ contentStyle, overlayStyle }}
+
+      >
+
+        <div className='flex flex-col font-medium text-base items-center rounded-lg w-full'>
+          <i onClick={() => handleButton()} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-2 right-4 "></i>
+          {/* <button onClick={close} className='absolute top-0 right-0 p-2'>CLOSE</button> */}
+          <div className="flex flex-col items-stretch p-3 items-center">
+            <h1 className="text-2xl pb-2">DESTINATION</h1>
+            <input type="text" placeholder='Enter trip' value={trip}
+              onChange={(e) => setTrip(e.target.value)} className="outline-none p-3 
+      text-base sm:text-lg text-slate-900 flex-1"/>
+          </div>
+          <div className='flex h-2 pb-4 text-red-600'>
+            <h1 >{err}</h1>
+          </div>
+          <div className='flex flex-col sm:flex-row space-x-20 p-3'>
+            <div className="flex flex-col ">
+              <h1 className="text-xl pb-1">ARRIVAL</h1>
+              <DatePicker value={arrDate} onChange={(newValue) => setArrDate(newValue)} />
+            </div>
+            <div className="flex flex-col ">
+              <h1 className="text-xl pb-1">DEPARTURE</h1>
+              <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} />
+            </div>
+          </div>
+          <button className='border w-1/2 bg-black text-white rounded-xl p-3 m-4' onClick={() => { handleAddTrip() }}>Create trip</button>
+        </div>
+      </Popup>
+
     </div>
   )
-    
+
 }
