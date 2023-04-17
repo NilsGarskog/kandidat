@@ -4,6 +4,7 @@ import Popup from "reactjs-popup";
 import toast from "react-hot-toast";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import LoginFirstpage from "./LoginFirstPage";
 
 function validateEmailAddress(input) {
   var regex = /[^\s@]+@[^\s@]+\.[^\s@]+/;
@@ -201,6 +202,7 @@ export default function Login() {
         </ParallaxLayer>
     </Parallax>
       </div> */}
+      <LoginFirstpage />
     </div>
   );
 }
