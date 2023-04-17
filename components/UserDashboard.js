@@ -60,11 +60,11 @@ export default function UserDashboard() {
   }
 
   return (
-    <div className='w-full max-w-[65ch] items-center mx-auto flex flex-col gap-3 sm:gap-5
+    <div className='w-full max-w-[65ch] mx-auto items-center justify-self-center flex flex-col gap-3 sm:gap-5
     text-xs sm:text-sm'>
 
       {(loading) && (<div className='flex-1 grid place-items-center '>
-        <i className="fa-solid fa-spinner animate-spin text-6xl"></i>
+        <i className="fa-solid fa-spinner animate-spin text-6xl text-black"></i>
       </div>)}
 
 
@@ -72,15 +72,16 @@ export default function UserDashboard() {
         <>
           {Object.keys(trips).map((trip, i) => {
             return (
+              // <div className="w-full">
               <TripCard key={i} tripKey={trip} handleDelete={handleDelete}>
                 {trips[trip]}
               </TripCard>
+              // {/* </div> */}
             )
           })}
         </>
       )}
-      <img onClick={() => handleButton()} className="h-20 w-20 cursor-pointer" src='../icons/plus-sign.svg' />
-
+      <button onClick={() => handleButton()} className="rounded-full shadow-xl h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
 
       <Popup open={open}
         position="relative"
