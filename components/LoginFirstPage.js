@@ -1,55 +1,61 @@
-//import { Parallax, Background } from "react-parallax";
-//import { Parallax, ParallaxLayer } from "@react-spring/parallax";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function LoginFirstPage() {
-  useEffect(() => {
-    if (document) {
-      let title = document.getElementById("parallaxTitle");
-      window.addEventListener(
-        "scroll",
-        () => {
-          let value = window.scrollY;
+  const [isVisible, setIsVisible] = useState(true);
 
-          title.style.marginTop = value * 1 + "px";
-        },
-        []
-      );
-      if (window.scrollY > 300) {
-        title.style.display = "none";
-      }
-    }
+  useEffect(() => {
+    window.addEventListener(
+      "scroll",
+      () => {
+        const parallaxTitle = document.getElementById("parallaxTitle");
+        if (parallaxTitle) {
+          parallaxTitle.style.marginTop = window.scrollY * 1 + "px";
+          /* if (window.scrollY > 600) {
+            isVisible && setIsVisible(false);
+          } else {
+            setIsVisible(true);
+          } */
+        }
+      },
+      []
+    );
   });
 
   return (
-    <section className="parallax">
-      <img src="../img/StartPageKandidat.jpg" id="bakgrund"></img>
-      <h2 id="parallaxTitle">Planner</h2>
-      <img
-        src="../img/StartPageKandidatforegroundriktig.png"
-        id="foreground"
-      ></img>
-    </section>
-  );
-}
+    <div className="h-screen relative">
+      <section className="parallax h-3/4 ">
+        <img
+          src="../img/StartPageMindre.png"
+          id="bakgrund"
+          className="max-w-full h-auto object-cover"
+        ></img>
+        {isVisible && (
+          <h2
+            id="parallaxTitle"
+            className="text-black z-0  absolute text-4xl sm:text-6xl font-bold mr-[20%] sm:mr-[50%]"
+          >
+            Planner
+          </h2>
+        )}
+        <img
+          src="../img/StartPageBottomMindre.png"
+          id="foreground"
+          className="max-w-full h-auto object-cover"
+        ></img>
+      </section>
+      <div className="flex flex-1 flex-row z-999 bg-white items-center justify-center gap-4 justify-between absolute h-1/4 w-full">
+        <h2 className="text-black text-2xl sm:text-4xl font-bold text-left px-4 sm:px-8">
+          The social and <br></br>interactive travel <br></br>planner for you
+          and your friends
+        </h2>
 
-{
-  /* <div>
-    <Parallax
-      offset={0}
-      className="loginBilden"
-      bgImage="../img/StartPageKandidat.jpg"
-      strength={800}
-    >
-      <div className="content">
-        <span className="img-text">Travel Planner</span>
+        <button className="border bg-white text-black text-2xl sm:text-4xl font-bold py-4 px-6 rounded-full shadow-md hover:shadow-lg ">
+          Get Started!
+        </button>
+        <button className="border bg-white text-black font-bold text-2xl sm:text-4xl py-4 px-6 rounded-full shadow-md hover:shadow-lg ">
+          Login
+        </button>
       </div>
-    </Parallax>
-    <Parallax
-      offset={0}
-      className="loginBilden"
-      bgImage="../img/StartPageforeground.jpg"
-      strength={-800}
-    ></Parallax>
-  </div> */
+    </div>
+  );
 }
