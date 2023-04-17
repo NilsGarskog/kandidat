@@ -60,8 +60,13 @@ export default function UserDashboard() {
   }
 
   return (
-    <div className='w-full max-w-[65ch] mx-auto items-center justify-self-center flex flex-col gap-3 sm:gap-5
+    <div className='w-full text-black max-w-[65ch] mx-auto items-center flex flex-col gap-3 sm:gap-5
     text-xs sm:text-sm'>
+      <div className='flex flex-col items-center text-center'>
+        <h1 className="text-5xl pb-10 pt-0">Welcome you little ass</h1>
+        <h1 className="text-xl">Here are your current trips. <br></br>
+          Want to add another one? Just click the plus icon. </h1>
+      </div>
 
       {(loading) && (<div className='flex-1 grid place-items-center '>
         <i className="fa-solid fa-spinner animate-spin text-6xl text-black"></i>
@@ -81,7 +86,7 @@ export default function UserDashboard() {
           })}
         </>
       )}
-      <button onClick={() => handleButton()} className="rounded-full shadow-xl h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
+      <button onClick={() => handleButton()} className="rounded-full bg-buttonGreen shadow-xl h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
 
       <Popup open={open}
         position="relative"
@@ -113,7 +118,7 @@ export default function UserDashboard() {
               <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} />
             </div>
           </div>
-          <button className='border w-1/2 bg-black text-white rounded-xl p-3 m-4' onClick={() => { handleAddTrip() }}>Create trip</button>
+          <button className='border w-1/2 bg-buttonGreen text-black rounded-xl p-3 m-4' onClick={() => { handleAddTrip() }}>Create trip</button>
         </div>
       </Popup>
 
