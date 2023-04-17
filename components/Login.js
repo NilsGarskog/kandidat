@@ -21,7 +21,6 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [isLoggingIn, setIsLogginIn] = useState(true);
   const [passwordShow, setPasswordShow] = useState(false);
-  const [confPasswordShow, setConfPasswordShow] = useState(false);
 
   const { login, signUp, currentUser, forgotPassword } = useAuth();
   async function submitHandler() {
@@ -61,9 +60,6 @@ export default function Login() {
   const togglePassword = () => {
     setPasswordShow(!passwordShow);
   };
-  const toggleConfPassword = () => {
-    setConfPasswordShow(!confPasswordShow);
-  };
 
   return (
     <div className="flex sm:flex-row flex-col p-10 h-[300vh] ">
@@ -98,6 +94,15 @@ export default function Login() {
           placeholder="Password"
           className="outline-none duration-300 border-b-2 border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
         ></input>
+        {!isLoggingIn && (
+          <input
+            type={passwordShow ? "text" : "password"}
+            value={passwordCheck}
+            onChange={(e) => setPasswordCheck(e.target.value)}
+            placeholder="Confirm password"
+            className="outline-none duration-300 border-b-2 border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+          ></input>
+        )}
         {!passwordShow && (
           <i
             onClick={togglePassword}
@@ -110,31 +115,7 @@ export default function Login() {
             className=" fa-solid fa-eye-slash text-xl sm:text-2xl"
           ></i>
         )}
-        {!isLoggingIn && (
-          <input
-            type={confPasswordShow ? "text" : "password"}
-            value={passwordCheck}
-            onChange={(e) => setPasswordCheck(e.target.value)}
-            placeholder="Confirm password"
-            className="outline-none duration-300 border-b-2 border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-          ></input>
-        )}
-        {!isLoggingIn && (
-          <div>
-            {!confPasswordShow && (
-              <i
-                onClick={toggleConfPassword}
-                className=" fa-solid fa-eye text-xl sm:text-2xl"
-              ></i>
-            )}
-            {confPasswordShow && (
-              <i
-                onClick={toggleConfPassword}
-                className=" fa-solid fa-eye-slash text-xl sm:text-2xl "
-              ></i>
-            )}
-          </div>
-        )}
+
         <button
           onClick={submitHandler}
           className="w-full max-w-[40ch] border border-white border-solid uppercase py-2 duration-300 relative after:absolute after:top-0 after:right-full 
