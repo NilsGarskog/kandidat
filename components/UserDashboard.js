@@ -28,12 +28,13 @@ export default function UserDashboard() {
   const { trips, setTrips, loading, error } = useFetchTrips()
 
   async function handleAddTrip() {
+    setOpen(false);
     if (!trip || arrDate === null || depDate === null) { return setErr('Please fill in the required fields') }
     const newKey = Object.keys(trips).length === 0 ? 1 : Math.max(...Object.keys(trips)) + 1
     setTrips({ ...trips, [newKey]: trip })
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', newKey.toString())
     await setDoc(userRef, { Name: trip, arrDate: arrDate.format('YYYY-MM-DD'), depDate: depDate.format('YYYY-MM-DD') })
-    handleButton()
+    handleButton(false)
 
   }
 
@@ -47,12 +48,14 @@ export default function UserDashboard() {
     setTrips(tempObj)
   }
 
-  function handleButton() {
+  function handleButton(exit) {
     if (open === false) {
       setOpen(true);
       setErr('')
     } else {
-      setOpen(false);
+      if (exit === true) {
+        setOpen(false);
+      }
       setTrip('')
       setArrDate(null)
       setDepDate(null)
@@ -60,11 +63,11 @@ export default function UserDashboard() {
   }
 
   return (
-    <div className='w-full text-black max-w-[65ch] mx-auto items-center flex flex-col gap-3 sm:gap-5
-    text-xs sm:text-sm'>
+    <div className='w-full text-black max-w-[90ch] mx-auto items-center flex flex-col flex-wrap sm:gap-5
+    text-xs sm:text-sm overflow-hidden'>
       <div className='flex flex-col items-center text-center'>
-        <h1 className="text-5xl pb-10 pt-0">Welcome you little ass</h1>
-        <h1 className="text-xl">Here are your current trips. <br></br>
+        <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-0">Welcome, you little ass</h1>
+        <h1 className="text-lg sm:text-xl">Here are your current trips. <br></br>
           Want to add another one? Just click the plus icon. </h1>
       </div>
 
@@ -74,20 +77,29 @@ export default function UserDashboard() {
 
 
       {(!loading) && (
-        <>
-          {Object.keys(trips).map((trip, i) => {
-            return (
-              // <div className="w-full">
-              <TripCard key={i} tripKey={trip} handleDelete={handleDelete}>
-                {trips[trip]}
-              </TripCard>
-              // {/* </div> */}
-            )
-          })}
-        </>
-      )}
-      <button onClick={() => handleButton()} className="rounded-full bg-buttonGreen shadow-xl h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
 
+
+        <div className='flex pb-20 pt-5 max-h-[60ch] sm:max-h-[65ch] overflow-y-auto pl-3 pr-3 flex-wrap gap-5 w-full sm:justify-between justify-center justify-self-center'>
+
+          <>
+            {Object.keys(trips).map((trip, i) => {
+              return (
+                <TripCard key={i} tripKey={trip} handleDelete={handleDelete}>
+                  {trips[trip]}
+                </TripCard>
+
+              )
+            })}
+          </>
+
+          {/* <div className='absolute mt- border w-full h-[55ch] bg-gradient-to-t from-white z-40'>
+          </div> */}
+        </div>
+
+      )}
+      <div className=" w-full flex justify-center -mt-16 sm:-mt-28 z-10 bg-gradient-to-t from-white h-[10ch] items-start ">
+        <button onClick={() => handleButton()} className=" rounded-full bg-buttonGreen shadow-lg h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
+      </div>
       <Popup open={open}
         position="relative"
         modal
@@ -97,7 +109,7 @@ export default function UserDashboard() {
       >
 
         <div className='flex flex-col font-medium text-base items-center rounded-lg w-full'>
-          <i onClick={() => handleButton()} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-2 right-4 "></i>
+          <i onClick={() => handleButton(true)} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-2 right-4 "></i>
           {/* <button onClick={close} className='absolute top-0 right-0 p-2'>CLOSE</button> */}
           <div className="flex flex-col items-stretch p-3 items-center">
             <h1 className="text-2xl pb-2">DESTINATION</h1>
