@@ -4,7 +4,7 @@ import { db } from '../firebase'
 import { useAuth } from '../context/authContext'
 import {v4} from 'uuid'
 import Popup from 'reactjs-popup';
-import Example from '@/hooks/ActivityPopUp'
+
 import fetchAct from '@/Algorithms/Algoritmen'
 import ActivityCard from './ActivityCard'
 import { Checkbox } from '@mui/material'
