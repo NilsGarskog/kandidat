@@ -1,20 +1,4 @@
 body {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-  background-color: #37814f;
-}
-.parallax {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  user-select: none;
-}
-.parallax img {
-  position: absolute;
-
-  left: 0;
-  width: 100%;
-  pointer-events: none;
 }

@@ -1,33 +1,32 @@
-import { useEffect, useState } from 'react'
-import { BiArrowFromBottom } from 'react-icons/bi'
-import classNames from 'classnames';
-
+import { useEffect, useState } from "react";
+import { BiArrowFromBottom } from "react-icons/bi";
+import classNames from "classnames";
 
 export const ScrollToTop = () => {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
     if (window.pageYOffset > 300) {
-      setIsVisible(true)
+      setIsVisible(true);
     } else {
-      setIsVisible(false)
+      setIsVisible(false);
     }
-  }
+  };
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
-    })
-  }
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility)
+    window.addEventListener("scroll", toggleVisibility);
 
     return () => {
-      window.removeEventListener('scroll', toggleVisibility)
-    }
-  }, [])
+      window.removeEventListener("scroll", toggleVisibility);
+    };
+  }, []);
 
   return (
     <div className="fixed bottom-2 right-2">
@@ -35,14 +34,12 @@ export const ScrollToTop = () => {
         type="button"
         onClick={scrollToTop}
         className={classNames(
-          isVisible ? 'opacity-100' : 'opacity-0',
-          'bg-pink-600 hover:bg-pink-700 z-40 focus:ring-pink-500  cursor-pointer inline-flex items-center rounded-full p-3 text-white shadow-sm transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2',
+          isVisible ? "opacity-100" : "opacity-0",
+          "bg-black hover:opacity-50 duration-300 z-40 focus:ring-black  cursor-pointer inline-flex items-center rounded-full p-3 text-white shadow-sm transition-opacity focus:outline-none focus:ring-2 focus:ring-offset-2"
         )}
       >
-       
-          
         <BiArrowFromBottom className="h-6 w-6" aria-hidden="true" />
       </button>
     </div>
-  )
-}
+  );
+};
