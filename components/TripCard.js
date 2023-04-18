@@ -25,7 +25,7 @@ export default function TripCard(props) {
     <div className='sm:max-w-sm max-w-xs duration-300 hover:bg-gray-100 shadow-xl bg-white text-black rounded-xl items-center'>
     <Link href={`/${tripKey}`} className='flex items-center p-3 pt-4 pb-4'>
         <div className='ml-3 h-20 w-20 border border-2 rounded-full overflow-hidden'>
-                <img className='w-full h-full object-cover' src='../img/placeholder-image.png' />
+                <img className='w-full h-full object-cover' src={tripData.tripImageUrl && tripData.tripImageUrl[0] ? tripData.tripImageUrl[0] : '../img/placeholder-image.png'} />
         </div>
         <div className='flex flex-col ml-4'>
           <div className='uppercase text-2xl font-semibold'>
