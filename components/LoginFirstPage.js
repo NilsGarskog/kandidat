@@ -3,26 +3,45 @@ import useWindowSize from "@/hooks/useWindowSize";
 
 export default function LoginFirstPage() {
   const size = useWindowSize();
+  const [stateBig, setStateBig] = useState(0);
+  const [stateSmall, setStateSmall] = useState(0);
 
   useEffect(() => {
-    const parallaxTitleBig = document.getElementById("parallaxTitleBig");
-    const parallaxTitleSmall = document.getElementById("parallaxTitleSmall");
-    if (parallaxTitleSmall) {
+    console.log(stateBig);
+    const paraBig = () => {
+      const parallaxTitleBig = document.getElementById("parallaxTitleBig");
+      setStateBig(5 + window.scrollY * 0.05);
+      if (parallaxTitleBig) {
+        parallaxTitleBig.style.marginTop = stateBig + "%";
+        console.log(stateBig);
+      }
+    };
+
+    window.addEventListener("scroll", paraBig);
+    paraBig();
+
+    const paraSmall = () => {
+      const parallaxTitleSmall = document.getElementById("parallaxTitleSmall");
+    };
+
+    return () => window.removeEventListener("scroll", paraBig);
+
+    /* if (parallaxTitleSmall) {
       parallaxTitleSmall.style.marginTop = 30 + "%";
     }
     window.addEventListener("scroll", () => {
       if (parallaxTitleSmall) {
-        parallaxTitleSmall.style.marginTop = 30 + window.scrollY * 0.1 + "%";
+        parallaxTitleSmall.style.marginTop = 30 + window.scrollY * 0.2 + "%";
       }
-    });
-    if (parallaxTitleBig) {
+    }); */
+    /* if (parallaxTitleBig) {
       parallaxTitleBig.style.marginTop = 5 + "%";
     }
     window.addEventListener("scroll", () => {
       if (parallaxTitleBig) {
         parallaxTitleBig.style.marginTop = 5 + window.scrollY * 0.05 + "%";
       }
-    });
+    }); */
   }, []);
 
   return (
