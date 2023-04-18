@@ -36,7 +36,6 @@ export default function UserDashboard() {
     try {
       const response = await fetch(`https://api.unsplash.com/search/photos?query=${trip}&client_id=${unsplashKey}`);
       const data = await response.json();
-      console.log(data)
       const imageUrl = []
       for (let i = 0; i < 10; i++) {
         if (data.results[i]) {
