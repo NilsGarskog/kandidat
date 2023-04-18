@@ -52,22 +52,8 @@ catch {
   async function handleAddTrip() {
      if (!trip || arrDate === null || depDate === null) { return setErr('Please fill in the required fields') }
 
-    /* try { 
-      // Get image URL from Unsplash API
-      const response = await fetch(`https://api.unsplash.com/search/photos?query=${trip}&client_id=${unsplashKey}`);
-      const data = await response.json();
-      const imageUrl = []
-      for(let i = 0; i < 10; i++){
-      imageUrl.push(data.results[i].urls.regular);
-      }
-      console.log(imageUrl)
-      setTripImageUrl('Funkar detta?')
-      setTripImageUrl(imageUrl);
-      console.log(tripImageUrl)
-       */
-    
+  
     const url = await getUrl()
-    console.log(url)
     const newKey = Object.keys(trips).length === 0 ? 1 : Math.max(...Object.keys(trips)) + 1
     setTrips({ ...trips, [newKey]: trip })
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', newKey.toString())
@@ -78,12 +64,7 @@ catch {
 
 
      }
-    /* catch {
-  setTripImageUrl([])
-    
-    }  */
-  
-    
+
   
 
   async function handleDelete(tripKey) {
