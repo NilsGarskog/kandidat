@@ -19,7 +19,8 @@ export default function CreateActivity(props){
     let [activityLength, setActivityLength] = useState('')
     let [activityType, setActivityType] = useState('')
     const { userInfo, currentUser } = useAuth()
-    const [open, setOpen] = useState(false);
+    const [actOpen, setActOpen] = useState(false);
+    const [foodOpen, setFoodOpen] = useState(false);
     const [err, setErr] = useState("");
     const showAct = 'showAct'
     const showLunch = 'showLunch'
@@ -36,7 +37,7 @@ export default function CreateActivity(props){
             
         <div className='flex items-center box-content h-32 w-60  text-base p-6 bg-slate-300 rounded-lg  '>
         <div> 
-            <i onClick={() => handleButton()} className="fa-solid fa-circle-plus fa-2xl duration-300 
+            <i onClick={() => handleActButton()} className="fa-solid fa-circle-plus fa-2xl duration-300 
       hover:opacity-40 cursor-pointer"></i>
             <ActivityCard actData = {props.actData} type = {showAct}></ActivityCard>
         </div>
@@ -44,7 +45,7 @@ export default function CreateActivity(props){
       
         </div>
             
-            <Popup open={open}
+            <Popup open={actOpen}
             contentStyle={{
                 width: '400px',
                 height: '350px',
@@ -58,7 +59,7 @@ export default function CreateActivity(props){
             closeOnDocumentClick={false}>
   
             <div className='flex flex-col items-center font-medium text-base text-black rounded-lg w-full'>
-              <i onClick={() => handleButton()} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "></i>
+              <i onClick={() => handleActButton()} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "></i>
               {/* <button onClick={close} className='absolute top-0 right-0 p-2'>CLOSE</button> */}
             
               <div className='flex text-red-600'>
@@ -79,11 +80,11 @@ export default function CreateActivity(props){
               </div>
             <div>
               <label>
-              <input type='radio' label='Short' name='activitlength' value={checkedActShort} onChange={(e) => {setCheckedActShort(!checkedActShort), activityType = 0}}/>
+              <input type='radio' label='Short' name='activitlength' value={checkedActShort} onChange={(e) => {setCheckedActShort(!checkedActShort)}}/>
               Short
               </label>
               <label>
-              <input type='radio' label='Long' name='activitlength' value={checkedActShort} onChange={(e) => {setCheckedActShort(!checkedActShort), activityType = 0}}/>
+              <input type='radio' label='Long' name='activitlength' value={checkedActShort} onChange={(e) => {setCheckedActShort(!checkedActShort)}}/>
               Long
               </label>
             </div>
@@ -116,7 +117,7 @@ export default function CreateActivity(props){
                     
                 <div className='flex items-center box-content h-32 w-60  text-base p-6 bg-slate-300 rounded-lg  '>
                 <div> 
-                    <i onClick={() => handleButton()} className="fa-solid fa-circle-plus fa-2xl duration-300 
+                    <i onClick={() => handleFoodButton()} className="fa-solid fa-circle-plus fa-2xl duration-300 
               hover:opacity-40 cursor-pointer"></i>
                     <ActivityCard actData = {props.actData} type = {showFood}></ActivityCard>
                 </div>
@@ -124,7 +125,7 @@ export default function CreateActivity(props){
               
                 </div>
                     
-                    <Popup open={open}
+                    <Popup open={foodOpen}
                     contentStyle={{
                         width: '400px',
                         height: '350px',
@@ -138,7 +139,7 @@ export default function CreateActivity(props){
                     closeOnDocumentClick={false}>
           
                     <div className='flex flex-col items-center font-medium text-base text-black rounded-lg w-full'>
-                      <i onClick={() => handleButton()} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "></i>
+                      <i onClick={() => handleFoodButton()} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "></i>
                       {/* <button onClick={close} className='absolute top-0 right-0 p-2'>CLOSE</button> */}
                     
                       <div className='flex text-red-600'>
@@ -159,11 +160,11 @@ export default function CreateActivity(props){
                             <div className="relative w-full lg:max-w-sm">
                             <div>
                               <label>
-                              <input type='radio' label='Lunch' name='foodType' value={checkedLunch} onChange={(e) => {setCheckedLunch(!checkedLunch),activityLength =0}}/>
+                              <input type='radio' label='Lunch' name='foodType' value={checkedLunch} onChange={(e) => {setCheckedLunch(!checkedLunch)}}/>
                               Lunch
                               </label>
                               <label>
-                              <input type='radio' label='Dinner' name='foodType' value={checkedLunch} onChange={(e) => {setCheckedLunch(!checkedLunch), activityLength =0}}/>
+                              <input type='radio' label='Dinner' name='foodType' value={checkedLunch} onChange={(e) => {setCheckedLunch(!checkedLunch)}}/>
                               Dinner
                               </label>
                             </div>
@@ -174,7 +175,7 @@ export default function CreateActivity(props){
                     </div>
                     </div>
                     
-                    <button onClick={() => addActivity()} id="addButton" className="duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md w-[90px] h-[40px] border uppercase text-xl font-semibold">
+                    <button onClick={() => addFood()} id="addButton" className="duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md w-[90px] h-[40px] border uppercase text-xl font-semibold">
                 ADD
                 </button>
                     </div>
@@ -199,29 +200,73 @@ export default function CreateActivity(props){
             activityLength = 1
         }
     }
-    function handleButton() {
-        console.log('I createactivity', props.tripKey)
-        if (open === false) {
-          setOpen(true);
+    function handleActButton() {
+        if (actOpen === false) {
+          setActOpen(true);
           setErr('')
     
         } else {
-          setOpen(false);
+          setActOpen(false);
+          setActivity('') 
+        }
+      }
+      function handleFoodButton() {
+        if (foodOpen === false) {
+          setFoodOpen(true);
+          setErr('')
+    
+        } else {
+          setFoodOpen(false);
           setActivity('') 
         }
       }
     function addActivity(){            
         translateStringToNum()
-        handleAddActivity(props, activity, activityLength, activityType, currentUser, checkedActShort, checkedLunch)
-        handleButton()
+        handleAddActivity(props, activity, activityLength, currentUser, checkedActShort)
+        handleActButton()
         setActivity('')        
         
     }
+    function addFood(){            
+      translateStringToNum()
+      handleAddFood(props, activity,  activityType, currentUser,  checkedLunch)
+      handleFoodButton()
+      setActivity('')        
+      
+  }
    
 }
+async function handleAddFood(props, activity,  activityType, currentUser,  checkedLunch) {
+  const newKey = v4()
+  
+  if(checkedLunch){
+    activityType = 1
+  }
+  else if(!checkedLunch){
+    activityType = 2
+  }
+  
+  const userRef = doc(db, 'users', currentUser.uid, 'Trips', props.tripKey, 'Activities', newKey.toString())
 
+const data = {
+  id: newKey,
+  activityName: activity,
+  time: 0,
+  type: activityType
 
-async function handleAddActivity(props, activity, activityLength, activityType, currentUser, checkedActShort, checkedLunch) {
+}
+setDoc(userRef, data)
+.then((docRef) => {
+console.log('Document written with ID: ');
+})
+.catch((error) => {
+console.error('Error adding document: ', error);
+});
+ 
+
+}
+
+async function handleAddActivity(props, activity, activityLength, currentUser, checkedActShort, checkedLunch) {
     const newKey = v4()
     if(checkedActShort){
       activityLength = 0
@@ -229,12 +274,7 @@ async function handleAddActivity(props, activity, activityLength, activityType, 
     else if (!checkedActShort){
       activityLength = 1
     }
-    if(checkedLunch){
-      activityType = 1
-    }
-    else if(!checkedLunch){
-      activityType = 2
-    }
+    
     console.log('aktivitetslängd ', activityLength)
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', props.tripKey, 'Activities', newKey.toString())
 
@@ -242,7 +282,7 @@ const data = {
     id: newKey,
     activityName: activity,
     time: activityLength,
-    type: activityType
+    type: 0
 
 }
 setDoc(userRef, data)
