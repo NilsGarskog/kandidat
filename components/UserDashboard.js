@@ -60,7 +60,7 @@ catch {
  
     await setDoc(userRef, { Name: trip, arrDate: arrDate.format('YYYY-MM-DD'), depDate: depDate.format('YYYY-MM-DD'), tripImageUrl: url })
     
-    handleButton()
+    handleButton(false)
 
 
      }
@@ -77,12 +77,14 @@ catch {
     setTrips(tempObj)
   }
 
-  function handleButton() {
+  function handleButton(exit) {
     if (open === false) {
       setOpen(true);
       setErr('')
     } else {
-      setOpen(false);
+      if (exit === true) {
+        setOpen(false);
+      }
       setTrip('')
       setArrDate(null)
       setDepDate(null)
@@ -90,8 +92,13 @@ catch {
   }
 
   return (
-    <div className='w-full max-w-[65ch] mx-auto items-center justify-self-center flex flex-col gap-3 sm:gap-5
-    text-xs sm:text-sm'>
+    <div className='w-full text-black max-w-[90ch] mx-auto items-center flex flex-col flex-wrap sm:gap-5
+    text-xs sm:text-sm overflow-hidden'>
+      <div className='flex flex-col items-center text-center'>
+        <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-0">Welcome, you little ass</h1>
+        <h1 className="text-lg sm:text-xl">Here are your current trips. <br></br>
+          Want to add another one? Just click the plus icon. </h1>
+      </div>
 
       {(loading) && (<div className='flex-1 grid place-items-center '>
         <i className="fa-solid fa-spinner animate-spin text-6xl text-black"></i>
@@ -99,20 +106,29 @@ catch {
 
 
       {(!loading) && (
-        <>
-          {Object.keys(trips).map((trip, i) => {
-            return (
-              // <div className="w-full">
-              <TripCard key={i} tripKey={trip} handleDelete={handleDelete}>
-                {trips[trip]}
-              </TripCard>
-              // {/* </div> */}
-            )
-          })}
-        </>
-      )}
-      <button onClick={() => handleButton()} className="duration-300 hover:bg-slate-100 rounded-full shadow-xl h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
 
+
+        <div className='flex pb-20 pt-5 max-h-[60ch] sm:max-h-[65ch] overflow-y-auto pl-3 pr-3 flex-wrap gap-5 w-full sm:justify-between justify-center justify-self-center'>
+
+          <>
+            {Object.keys(trips).map((trip, i) => {
+              return (
+                <TripCard key={i} tripKey={trip} handleDelete={handleDelete}>
+                  {trips[trip]}
+                </TripCard>
+
+              )
+            })}
+          </>
+
+          {/* <div className='absolute mt- border w-full h-[55ch] bg-gradient-to-t from-white z-40'>
+          </div> */}
+        </div>
+
+      )}
+      <div className=" w-full flex justify-center -mt-16 sm:-mt-28 z-10 bg-gradient-to-t from-white h-[10ch] items-start ">
+        <button onClick={() => handleButton()} className=" rounded-full bg-buttonGreen shadow-lg h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
+      </div>
       <Popup open={open}
         position="relative"
         modal
@@ -122,7 +138,7 @@ catch {
       >
 
         <div className='flex flex-col font-medium text-base items-center rounded-lg w-full'>
-          <i onClick={() => handleButton()} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-2 right-4 "></i>
+          <i onClick={() => handleButton(true)} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-2 right-4 "></i>
           {/* <button onClick={close} className='absolute top-0 right-0 p-2'>CLOSE</button> */}
           <div className="flex flex-col items-stretch p-3 items-center">
             <h1 className="text-2xl pb-2">DESTINATION</h1>
@@ -143,7 +159,7 @@ catch {
               <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} />
             </div>
           </div>
-          <button className='border w-1/2 bg-black text-white rounded-xl p-3 m-4' onClick={() => { handleAddTrip() }}>Create trip</button>
+          <button className='border w-1/2 bg-buttonGreen text-black rounded-xl p-3 m-4' onClick={() => { handleAddTrip() }}>Create trip</button>
         </div>
       </Popup>
 
