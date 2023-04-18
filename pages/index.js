@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useAuth } from '../context/authContext'
 import UserDashboard from '../components/UserDashboard'
+import 'react-tooltip/dist/react-tooltip.css'
 
 
 export default function Home() {
