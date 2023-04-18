@@ -39,7 +39,7 @@ export default function TripCard(props) {
             <Popup position="relative"
               modal
               {...{ contentStyle, overlayStyle }}
-              trigger={<i className="fa-solid fa-trash-can duration-300 pl-10 hover:scale-125 cursor-pointer text-3xl"></i>} >
+              trigger={<img src='../icons/bin.png' className="h-8 duration-300 pl-10 opacity-50 hover:opacity-90 cursor-pointer"/>} >
               {close => (
                 <div className='flex p-1 flex-col items-center font-medium text-base rounded-lg w-full'>
                   <h1 className="text-xl p-2">Are you sure you want to delete the trip to {children} ?</h1>
