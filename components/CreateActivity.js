@@ -142,8 +142,7 @@ export default function CreateActivity(props){
                       </div>
                       <div className="search">
                             <span></span>
-                            <input type="text" className='rounded-lg bg-gray-200 pl-2 p-1 italic text-slate-500 w-[21ch] items-center' placeholder="Name of activity" value={activity} onChange={(e) => {setActivity(e.target.value),
-                            console.log({activity})}}/>
+                            <input type="text" className='rounded-lg bg-gray-200 pl-2 p-1 italic text-slate-500 w-[21ch] items-center' placeholder="Name of activity" value={activity} onChange={(e) => {setActivity(e.target.value)}}/>
                         <div className='flex flex-start text-xl select-none'>
                       <p className='p-2 pl-4 pt-4 font-light'>This place is suitable for</p>
                       </div>
@@ -265,7 +264,7 @@ async function handleAddActivity(props, activity, activityLength, currentUser, c
       activityLength = 1
     }
     
-    console.log('aktivitetslängd ', activityLength)
+    
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', props.tripKey, 'Activities', newKey.toString())
 
 const data = {
