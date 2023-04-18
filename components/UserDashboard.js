@@ -20,23 +20,52 @@ export default function UserDashboard() {
   const [depDate, setDepDate] = useState(null)
   const [open, setOpen] = useState(false);
   const [err, setErr] = useState("");
+  const [tripImageUrl, setTripImageUrl] = useState([]);
+
 
 
   const contentStyle = { borderRadius: '20px' };
   const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
 
-  const { trips, setTrips, loading, error } = useFetchTrips()
+  const {trips, setTrips, loading, error} = useFetchTrips()
 
+  const unsplashKey = 'r43nNRBOIfWqh_6e_Z_aw8DKgGsZpG4UAgk1VvnXKQ8'
+
+
+async function getUrl(){
+  try{
+  const response = await fetch(`https://api.unsplash.com/search/photos?query=${trip}&client_id=${unsplashKey}`);
+  const data = await response.json();
+  const imageUrl = []
+  for(let i = 0; i < 10; i++){
+    if(data.results[i]){
+  imageUrl.push(data.results[i].urls.regular)
+    }
+  }
+  return(imageUrl)
+}
+catch {
+  return([])
+}
+}
+  
   async function handleAddTrip() {
-    setOpen(false);
-    if (!trip || arrDate === null || depDate === null) { return setErr('Please fill in the required fields') }
+     if (!trip || arrDate === null || depDate === null) { return setErr('Please fill in the required fields') }
+
+  
+    const url = await getUrl()
     const newKey = Object.keys(trips).length === 0 ? 1 : Math.max(...Object.keys(trips)) + 1
     setTrips({ ...trips, [newKey]: trip })
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', newKey.toString())
-    await setDoc(userRef, { Name: trip, arrDate: arrDate.format('YYYY-MM-DD'), depDate: depDate.format('YYYY-MM-DD') })
+ 
+    await setDoc(userRef, { Name: trip, arrDate: arrDate.format('YYYY-MM-DD'), depDate: depDate.format('YYYY-MM-DD'), tripImageUrl: url })
+    
     handleButton(false)
 
-  }
+
+     }
+
+  
 
   async function handleDelete(tripKey) {
 

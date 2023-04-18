@@ -18,8 +18,6 @@ export default function TripCard(props) {
   if (allData.loading === false) {
     const tripData = allData.tripData
     return (
-
-
       <div className="flex flex-row items-center">
 
         <div className='sm:max-w-sm max-w-xs duration-300 hover:bg-gray-100 shadow-xl bg-white text-black rounded-xl items-center'>
