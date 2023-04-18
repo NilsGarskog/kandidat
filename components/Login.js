@@ -105,13 +105,13 @@ export default function Login() {
         {!passwordShow && (
           <i
             onClick={togglePassword}
-            className=" fa-solid fa-eye text-xl sm:text-2xl"
+            className=" fa-solid fa-eye text-xl flex-nowrap sm:text-2xl"
           ></i>
         )}
         {passwordShow && (
           <i
             onClick={togglePassword}
-            className=" fa-solid fa-eye-slash text-xl sm:text-2xl"
+            className=" fa-solid fa-eye-slash text-xl flex-nowrap sm:text-2xl"
           ></i>
         )}
 
