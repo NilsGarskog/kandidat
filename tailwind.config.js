@@ -22,6 +22,10 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     },
     extend: {
+      colors: {
+        buttonGreen: "#A2B59F",
+        buttonRed: "#E2D2D2"
+      },
       fontFamily: {
         latoRegular: "Lato-Regular",
         latoBold: "Lato-Bold",
