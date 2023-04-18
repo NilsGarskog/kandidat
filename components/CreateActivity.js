@@ -39,7 +39,7 @@ export default function CreateActivity(props){
         <div> 
             <i onClick={() => handleActButton()} className="fa-solid fa-circle-plus fa-2xl duration-300 
       hover:opacity-40 cursor-pointer"></i>
-            <ActivityCard actData = {props.actData} type = {showAct}></ActivityCard>
+            <ActivityCard actData = {props.actData} type = 'showAct'></ActivityCard>
         </div>
       
       
@@ -88,17 +88,7 @@ export default function CreateActivity(props){
               Long
               </label>
             </div>
-           {/* <select className='rounded-lg bg-gray-200 pl-2 p-1 italic text-slate-500 w-[21ch]' value={activityType} onChange={(e) => {setActivityType(e.target.value), console.log('Dropdown aktivitet', {activityType})}}>
-                <option>Activity</option>
-                <option>Lunch</option>
-                <option>Dinner</option>
-            </select>
-            
-            <select className='rounded-lg bg-gray-200 pl-2 p-1 italic text-slate-500 w-[21ch]' value={activityLength} onChange={(e) => {setActivityLength(e.target.value), console.log('Dropdown aktivitet', {activityType})}}>
-                <option>Short </option>
-                <option>Long </option>
-        
-                    </select>*/}
+         
             
               </div>
             </div>
@@ -119,7 +109,7 @@ export default function CreateActivity(props){
                 <div> 
                     <i onClick={() => handleFoodButton()} className="fa-solid fa-circle-plus fa-2xl duration-300 
               hover:opacity-40 cursor-pointer"></i>
-                    <ActivityCard actData = {props.actData} type = {showFood}></ActivityCard>
+                    <ActivityCard actData = {props.actData} type = 'showFood'></ActivityCard>
                 </div>
               
               
