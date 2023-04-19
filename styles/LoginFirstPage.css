@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.forgot-password a {
+  color: #167bff;
+}
+
+#parallaxTitleSmall {
+  font-family: "Karantina", cursive;
+}
+
+#parallaxTitleBig {
+  font-family: "Karantina", normal;
+}
