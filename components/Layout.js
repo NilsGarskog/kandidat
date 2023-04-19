@@ -7,8 +7,10 @@ export default function Layout(props) {
   return (
     <div className="">
       <Header />
-      <main className=" ">{children}</main>
-      <Footer />
+      <main className='flex-1 flex-col p-4'>
+        {children}
+      </main>
+      {/* <Footer /> */}
     </div>
   );
 }

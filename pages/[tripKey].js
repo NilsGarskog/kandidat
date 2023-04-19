@@ -7,6 +7,7 @@ import Calendar from '@/components/Calendar';
 import CreateActivity from '../components/CreateActivity'
 
 
+
 export default function Trip() {
     const router = useRouter()
     const [showCalendar, setShowCalendar] = useState(false)
@@ -21,7 +22,7 @@ export default function Trip() {
             <div>
                 <div className='flex flex-row items-center'>
                     <div className='flex pr-10'>
-                        <i onClick={() => router.push('/')} className="fa-solid fa-square-caret-left bg-clip-content hover:opacity-40 cursor-pointer text-3xl sm:text-6xl"></i>
+                        <i onClick={() => router.push('/')} className="text-black fa-solid fa-square-caret-left bg-clip-content hover:opacity-40 cursor-pointer text-3xl sm:text-6xl"></i>
                     </div>
                     <div className='flex flex-col'>
                         <h1 className='text-2xl select-none sm:text-5xl font-bold uppercase'>{tripData.Name}</h1>
@@ -29,11 +30,11 @@ export default function Trip() {
                     </div>
 
                 </div>
-                <i className="cursor-pointer duration-300 opacity-50 hover:opacity-100 mt-12 text-6xl fa-solid fa-calendar"></i>
-                <div>
-                    <Calendar data={algoData} />
+
+              <div className='flex items-center'>
+                <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='activity'></CreateActivity>
+                <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='restaurant'></CreateActivity>
                 </div>
-                <CreateActivity tripKey={tripKey}></CreateActivity>
             </div>
 
         )

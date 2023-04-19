@@ -9,24 +9,15 @@ export default function Header() {
   const router = useRouter();
 
   if (!currentUser) {
-    return <></>;
+    return
   }
 
   return (
     <>
       {openModal && <Modal setOpenModal={setOpenModal} />}
-      <div className="w-full left-0 bg-inherit flex items-center justify-between p-4 border-b border-solid border-white">
-        <h1
-          onClick={() => router.push("/")}
-          className="text-3xl select-none  duration-300 hover:opacity-40 cursor-pointer sm:text-6xl font-medium"
-        >
-          {" "}
-          TRAVEL PLANNER{" "}
-        </h1>
-        <i
-          onClick={() => setOpenModal(true)}
-          className="fa-solid fa-user text-xl  duration-300 hover:opacity-40 cursor-pointer sm:text-3xl"
-        ></i>
+      <div className='w-full pr-5 pl-5 pt-3 left-0 bg-inherit flex items-center justify-between p-1'>
+        <h1 onClick={() => router.push('/')} className='text-2xl select-none text-black  duration-300 hover:opacity-40 cursor-pointer sm:text-4xl font-medium'> PLANNER </h1>
+        <i onClick={() => setOpenModal(true)} className="fa-solid fa-user text-xl text-black duration-300 hover:opacity-40 cursor-pointer sm:text-3xl"></i>
       </div>
     </>
   );
