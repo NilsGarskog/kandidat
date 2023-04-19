@@ -25,12 +25,7 @@ export default function Trip() {
         return (
             <div>
                 <TripHeader tripData={tripData}>
-                    </TripHeader>
-
-              <div className='flex items-center'>
-                <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='activity'></CreateActivity>
-                <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='restaurant'></CreateActivity>
-                </div>
+                </TripHeader>
                 {page === "activities" &&
                     <div className='flex items-center'>
                         <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='activity'></CreateActivity>
@@ -47,6 +42,7 @@ export default function Trip() {
                         <Settings data={tripData}></Settings>
                     </div>
                 }
+                <div className="min-h-[20ch]"></div>
                 <div className="fixed bottom-10 left-0 right-0 z-10">
                     <TripNavBar page={page} setPage={setPage}></TripNavBar>
                 </div>
