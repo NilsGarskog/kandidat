@@ -11,6 +11,7 @@ export default function Layout(props) {
         {children}
       </main>
       {/* <Footer /> */}
+
     </div>
   );
 }
