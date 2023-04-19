@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import Modal from './Modal'
-import { useAuth } from '../context/authContext'
-import { useRouter } from 'next/router';
-
+import React, { useEffect, useState } from "react";
+import Modal from "./Modal";
+import { useAuth } from "../context/authContext";
+import { useRouter } from "next/router";
 
 export default function Header() {
-  const [openModal, setOpenModal] = useState(false)
-  const { currentUser } = useAuth()
-  const router = useRouter()
+  const [openModal, setOpenModal] = useState(false);
+  const { currentUser } = useAuth();
+  const router = useRouter();
 
   if (!currentUser) {
     return
@@ -21,5 +20,5 @@ export default function Header() {
         <i onClick={() => setOpenModal(true)} className="fa-solid fa-user text-xl text-black duration-300 hover:opacity-40 cursor-pointer sm:text-3xl"></i>
       </div>
     </>
-  )
+  );
 }

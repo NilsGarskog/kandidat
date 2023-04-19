@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { useAuth } from '../context/authContext'
-import Popup from 'reactjs-popup';
-import toast from 'react-hot-toast';
-import { Parallax, ParallaxLayer } from '@react-spring/parallax'
-import { ScrollToTop } from '@/components/ScrollToTop';
+import React, { useState } from "react";
+import { useAuth } from "../context/authContext";
+import Popup from "reactjs-popup";
+import toast from "react-hot-toast";
+import { ScrollToTop } from "@/components/ScrollToTop";
+
 
 function validateEmailAddress(input) {
   var regex = /[^\s@]+@[^\s@]+\.[^\s@]+/;
@@ -15,29 +15,27 @@ function validateEmailAddress(input) {
 }
 
 export default function Login() {
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordCheck, setPasswordCheck] = useState('')
-  const [error, setError] = useState(null)
-  const [isLoggingIn, setIsLogginIn] = useState(true)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+  const [error, setError] = useState(null);
+  const [isLoggingIn, setIsLogginIn] = useState(true);
+  const [passwordShow, setPasswordShow] = useState(false);
 
   const { login, signUp, currentUser, forgotPassword } = useAuth()
   async function submitHandler() {
     if (!email || !password) {
-      setError('Please enter email and password')
-      return
+      setError("Please enter email and password");
+      return;
     }
 
     if (isLoggingIn) {
       try {
-        await login(email, password)
-
+        await login(email, password);
       } catch (err) {
-        setError('Incorrect email or password')
-
+        setError("Incorrect email or password");
       }
-      return
+      return;
     }
     if (validateEmailAddress(email) === -1) {
       setError('Invalid Email')
@@ -99,7 +97,6 @@ export default function Login() {
             </div>
           )}
         </Popup>
-
         <h2 className="duration-300 hover:scale-110 cursor-pointer " onClick={() => setIsLogginIn(!isLoggingIn)}>{!isLoggingIn ? 'Login' : 'Register'}</h2>
       </div>
       <ScrollToTop />
@@ -135,5 +132,5 @@ export default function Login() {
     </Parallax>
       </div> */}
     </div>
-  )
+  );
 }
