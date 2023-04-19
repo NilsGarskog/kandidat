@@ -164,7 +164,7 @@ export default function LoginFirstPage() {
             }}
             trigger={
               <button className="border bg-white text-black text-2xl sm:text-4xl ml-[25%] font-bold py-4 px-6 rounded-full shadow-md hover:shadow-lg">
-                Get Started!
+                Register
               </button>
             }
             position="relative"
@@ -317,6 +317,8 @@ export default function LoginFirstPage() {
                       borderRadius: "0.7em",
                       boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
                     }}
+                    overlayStyle={{ background: 'rgba(0,0,0,0)' }}
+
                     trigger={
                       <h2 className="forgot-password duration-300 hover:scale-110 text-right cursor-pointer">
                         <a href="#">Forgot password?</a>
@@ -331,10 +333,10 @@ export default function LoginFirstPage() {
                         <div className="inline-block">
                           <i
                             onClick={close}
-                            className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "
+                            className="text-3xl fa-solid fa-arrow-left cursor-pointer absolute top-1.5 left-3 "
                           ></i>
 
-                          <h1 className="text-3xl pb-10">Forgot password?</h1>
+                          <h1 className="text-3xl text-center pb-10">Forgot password?</h1>
                           <div className="mt-14">
                             <h2 className="text-2xl text-black">
                               Email adress
@@ -365,8 +367,8 @@ export default function LoginFirstPage() {
               </div>
             )}
           </Popup>
-        </div>
-      </section>
+        </div >
+      </section >
     </>
   );
 }
