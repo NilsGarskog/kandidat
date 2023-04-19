@@ -29,7 +29,8 @@ export default function UserDashboard() {
 
   const { trips, setTrips, loading, error } = useFetchTrips()
 
-  const unsplashKey = 'r43nNRBOIfWqh_6e_Z_aw8DKgGsZpG4UAgk1VvnXKQ8'
+  const unsplashKey = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
+
 
 
   async function getUrl() {
@@ -40,7 +41,7 @@ export default function UserDashboard() {
       for (let i = 0; i < 10; i++) {
         if (data.results[i]) {
           console.log(data.results[i])
-          imageUrl.push({url: data.results[i].urls.regular, name: data.results[i].user.first_name + ' ' + data.results[i].user.last_name, portfolioUrl: data.results[i].user.links.html})
+          imageUrl.push({url: data.results[i].urls.regular, name: data.results[i].user.last_name  ? data.results[i].user.first_name + ' ' + data.results[i].user.last_name : data.results[i].user.first_name, portfolioUrl: data.results[i].user.links.html})
         }
       }
       return (imageUrl)
@@ -97,8 +98,8 @@ export default function UserDashboard() {
     <div className='w-full text-black max-w-[90ch] mx-auto items-center flex flex-col flex-wrap sm:gap-5
     text-xs sm:text-sm overflow-hidden'>
       <div className='flex flex-col items-center text-center'>
-        <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-0">Welcome, you little ass</h1>
-        <h1 className="text-lg sm:text-xl">Here are your current trips. <br></br>
+        <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-0"><span className='font-bold'>Welcome,</span> <span className='font-light'>Samuel!</span></h1>
+        <h1 className="text-lg sm:text-xl font-regular">Here are your current trips. <br></br>
           Want to add another one? Just click the plus icon. </h1>
       </div>
 
@@ -129,7 +130,7 @@ export default function UserDashboard() {
 
       )}
       <div className="  w-full flex justify-center -mt-16 sm:-mt-28 z-10 bg-gradient-to-t from-white h-[10ch] items-start ">
-        <button onClick={() => handleButton()} className=" rounded-full bg-buttonGreen shadow-lg h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
+        <button onClick={() => handleButton()} className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
       </div>
       <Popup open={open}
         position="relative"
@@ -161,7 +162,7 @@ export default function UserDashboard() {
               <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} />
             </div>
           </div>
-          <button className='border w-1/2 bg-buttonGreen text-black rounded-xl p-3 m-4' onClick={() => { handleAddTrip() }}>Create trip</button>
+          <button className='border w-1/2 bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3 m-4' onClick={() => { handleAddTrip() }}>Create trip</button>
         </div>
       </Popup>
 

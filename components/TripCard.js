@@ -18,6 +18,7 @@ export default function TripCard(props) {
   const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
   const uniqueClassName = `trip-image-${tripKey}`;
 
+
   if (allData.loading === false) {
     const tripData = allData.tripData
     return (
@@ -29,11 +30,12 @@ export default function TripCard(props) {
              
              
               <div className= {`${uniqueClassName} ml-3 h-20 w-20 border border-2 rounded-full overflow-hidden`} >
-              <img className='w-full h-full object-cover' src={tripData.tripImageUrl && tripData.tripImageUrl[0].url ? tripData.tripImageUrl[0].url : '../img/placeholder-image.png'}/>
+              <img className='w-full h-full object-cover' src={tripData.tripImageUrl?.[0]?.url || '../img/placeholder-image.png'}/>
               </div>
           
               <div className='flex flex-col ml-4'>
-                <div className='uppercase text-2xl font-semibold'>
+                <div className={`uppercase font-semibold text-2xl w-[10ch]`}> 
+                
                   {children}
                 </div>
                 <div className='font-light text-xs'>
@@ -56,12 +58,12 @@ export default function TripCard(props) {
           </div>
 
         </div>
-     
 
+        {allData.loading === false && allData.tripData && allData.tripData.tripImageUrl && allData.tripData.tripImageUrl[0] && <Tooltip anchorSelect={`.${uniqueClassName}`} place='top' clickable>
+  Photo by <Link href={allData.tripData.tripImageUrl[0].portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{allData.tripData.tripImageUrl[0].name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link>
+</Tooltip>}
 
-<Tooltip anchorSelect={`.${uniqueClassName}`} place='top'  clickable> 
-  Photo by <Link href={tripData.tripImageUrl[0].portfolioUrl}><u>{tripData.tripImageUrl[0].name} </u></Link> on <Link href='https://unsplash.com/'><u>Unsplash</u></Link>
-</Tooltip>
+        
 
       </div>
 
