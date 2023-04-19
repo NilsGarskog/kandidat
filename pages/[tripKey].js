@@ -22,7 +22,7 @@ export default function Trip() {
             <div>
                 <div className='flex flex-row items-center'>
                     <div className='flex pr-10'>
-                        <i onClick={() => router.push('/')} className="fa-solid fa-square-caret-left bg-clip-content hover:opacity-40 cursor-pointer text-3xl sm:text-6xl"></i>
+                        <i onClick={() => router.push('/')} className="text-black fa-solid fa-square-caret-left bg-clip-content hover:opacity-40 cursor-pointer text-3xl sm:text-6xl"></i>
                     </div>
                     <div className='flex flex-col'>
                         <h1 className='text-2xl select-none sm:text-5xl font-bold uppercase'>{tripData.Name}</h1>
@@ -30,6 +30,7 @@ export default function Trip() {
                     </div>
 
                 </div>
+
               <div className='flex items-center'>
                 <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='activity'></CreateActivity>
                 <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='restaurant'></CreateActivity>
