@@ -41,7 +41,8 @@ export default function UserDashboard() {
       for (let i = 0; i < 10; i++) {
         if (data.results[i]) {
           console.log(data.results[i])
-          imageUrl.push({ url: data.results[i].urls.regular, name: data.results[i].user.last_name ? data.results[i].user.first_name + ' ' + data.results[i].user.last_name : data.results[i].user.first_name, portfolioUrl: data.results[i].user.links.html })
+          imageUrl.push({urlFull: data.results[i].urls.full, urlThumb: data.results[i].urls.thumb,  name: data.results[i].user.last_name  ? data.results[i].user.first_name + ' ' + data.results[i].user.last_name : data.results[i].user.first_name, portfolioUrl: data.results[i].user.links.html})
+
         }
       }
       return (imageUrl)
@@ -85,7 +86,7 @@ export default function UserDashboard() {
   return (
     <div className='w-full text-black max-w-[90ch] mx-auto items-center flex flex-col flex-wrap sm:gap-5
     text-xs sm:text-sm overflow-hidden'>
-      <div className='flex flex-col items-center text-center'>
+      <div className='flex flex-col items-center text-center select-none'>
         <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-0"><span className='font-bold'>Welcome,</span> <span className='font-light'>Samuel!</span></h1>
         <h1 className="text-lg sm:text-xl font-regular">Here are your current trips. <br></br>
           Want to add another one? Just click the plus icon. </h1>
