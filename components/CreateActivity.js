@@ -22,10 +22,7 @@ export default function CreateActivity(props) {
   const [actOpen, setActOpen] = useState(false);
   const [foodOpen, setFoodOpen] = useState(false);
   const [err, setErr] = useState("");
-  const showAct = 'showAct'
-  const showLunch = 'showLunch'
-  const showDinner = 'showDinner'
-  const showFood = 'showFood'
+  
   const [checkedActShort, setCheckedActShort] = useState(null)
   const [checkedLunch, setCheckedLunch] = useState(null)
   const[actDescription, setActDescription] = useState('')
@@ -69,33 +66,33 @@ export default function CreateActivity(props) {
 
             <div className='select-none'>
               <div className='flex flex-start text-xl'>
-                <p className='p-2 pl-4 pt-4 font-light'>Activity Name</p>
+                <p className='p-2 pl-4 pt-4 font-light uppercase'>Activity Name</p>
               </div>
               <div className="search">
                 <span></span>
-                <input type="text" className='rounded-lg bg-gray-200 pl-4 p-1 italic text-slate-500 w-[30ch] items-center ' placeholder="Enter name..." value={activity} onChange={(e) => { setActivity(e.target.value) }} />
+                <input type="text" className='rounded-lg bg-gray-200 pl-4 p-1 ml-3 italic text-slate-500 w-[30ch] items-center ' placeholder="Enter name..." value={activity} onChange={(e) => { setActivity(e.target.value) }} />
                 </div>
                 <div className="relative w-full lg:max-w-sm">
                 <div className='flex flex-start text-xl'>
-                    <p className='p-2 pl-4 pt-4 font-light'>Length of activity</p>
+                    <p className='p-2 pl-4 pt-4 font-light uppercase'>Length of activity</p>
                  </div>
-                  <div className='flex items-center'>
+                  <div className='flex items-center font-light uppercase'>
                     <label className ='flex items-center ml-4'>
-                      <input type='radio' label='Short' name='activitlength' className=' cursor-pointer' value={checkedActShort} onChange={(e) => { setCheckedActShort(true) }} />
+                      <input type='radio' label='Short' name='activitlength' className=' checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:bg-black focus:outline-none focus:ring-1 focus:ring-black cursor-pointer' value={checkedActShort} onChange={(e) => { setCheckedActShort(true) }} />
                       <div className='ml-2'>Short</div>
                     </label>
                     <label className ='flex items-center'>
-                      <input type='radio' label='Long' name='activitlength' className='ml-3 cursor-pointer' value={checkedActShort} onChange={(e) => { setCheckedActShort(false) }} />
+                      <input type='radio' label='Long' name='activitlength' className='checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:bg-black focus:outline-none focus:ring-1 focus:ring-black ml-3 cursor-pointer' value={checkedActShort} onChange={(e) => { setCheckedActShort(false) }} />
                       <div className = 'ml-2'>Long</div>
                     </label>
                   </div>
                  </div>
                 <div>
                   <span className='flex items-center p-2 pl-4 pt-4 font-light'>
-                  <p className='flex flex-start text-xl '>Add description </p>
+                  <p className='flex flex-start text-xl uppercase '>Add description </p>
                   <p className='pl-2'>(optional)</p>
                   </span>
-                    <input type='textarea' placeHolder='Enter description' className='flex items-center rounded-lg bg-gray-200 p-1 pl-4 italic text-slate-500 w-[30ch] h-[5ch] ' value={actDescription} onChange={(e) => { setActDescription(e.target.value) }}></input>
+                    <input type='text' placeHolder='Enter description...' className='flex items-center rounded-lg bg-gray-200 p-1 pl-4 ml-3 italic text-slate-500 w-[30ch] h-[5ch] ' value={actDescription} onChange={(e) => { setActDescription(e.target.value) }}></input>
                   </div>
               
             </div>
@@ -145,33 +142,33 @@ export default function CreateActivity(props) {
 
             <div className='select-none'>
               <div className='flex flex-start text-xl'>
-                <p className='p-2 pl-4 pt-4 font-light'>Restaurant Name</p>
+                <p className='p-2 pl-4 pt-4 font-light uppercase'>Restaurant Name</p>
               </div>
               <div className="search">
                 <span></span>
-                <input type="text" className='rounded-lg bg-gray-200 pl-4 p-1 italic text-slate-500 w-[30ch] items-center ' placeholder="Enter name..." value={activity} onChange={(e) => { setActivity(e.target.value) }} />
+                <input type="text" className='rounded-lg bg-gray-200 pl-4 p-1 ml-3 italic text-slate-500 w-[30ch] items-center ' placeholder="Enter name..." value={activity} onChange={(e) => { setActivity(e.target.value) }} />
                 </div>
                 <div className="relative w-full lg:max-w-sm">
                 <div className='flex flex-start text-xl'>
-                    <p className='p-2 pl-4 pt-4 font-light'>Suitable for</p>
+                    <p className='p-2 pl-4 pt-4 font-light uppercase'>Suitable for</p>
                  </div>
-                  <div className='flex items-center'>
+                  <div className='flex items-center font-light uppercase '>
                     <label className ='flex items-center ml-4'>
-                      <input type='radio' label='Short' name='activitlength' className=' cursor-pointer' value={checkedLunch} onChange={(e) => { setCheckedLunch(true) }} />
+                      <input type='radio' label='Short' name='activitlength' className='checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:bg-black focus:outline-none focus:ring-1 focus:ring-black cursor-pointer' value={checkedLunch} onChange={(e) => { setCheckedLunch(true) }} />
                       <div className='ml-2'>Lunch</div>
                     </label>
                     <label className ='flex items-center'>
-                      <input type='radio' label='Long' name='activitlength' className='ml-3 cursor-pointer' value={checkedLunch} onChange={(e) => { setCheckedLunch(false) }} />
+                      <input type='radio' label='Long' name='activitlength' className=' checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:bg-black focus:outline-none focus:ring-1 focus:ring-black ml-3 cursor-pointer' value={checkedLunch} onChange={(e) => { setCheckedLunch(false) }} />
                       <div className = 'ml-2'>Dinner</div>
                     </label>
                   </div>
                  </div>
                 <div>
                   <span className='flex items-center p-2 pl-4 pt-4 font-light'>
-                  <p className='flex flex-start text-xl '>Add description </p>
+                  <p className='flex flex-start text-xl uppercase '>Add description </p>
                   <p className='pl-2'>(optional)</p>
                   </span>
-                    <input type='textarea' placeHolder='Enter description' className='flex items-center rounded-lg bg-gray-200 p-1 pl-4 italic text-slate-500 w-[30ch] h-[5ch] ' value={actDescription} onChange={(e) => { setActDescription(e.target.value) }}></input>
+                    <input type='text' placeHolder='Enter description...' className='flex items-center rounded-lg bg-gray-200 p-1 pl-4 ml-3 italic text-slate-500 w-[30ch] h-[5ch] ' value={actDescription} onChange={(e) => { setActDescription(e.target.value) }}></input>
                   </div>
               
             </div>
@@ -228,16 +225,19 @@ export default function CreateActivity(props) {
       setError('Please enter activity name')
       console.log('felmeddelande',error)
     }
-    else if(checkedActShort == null){
-      setError('Please choose a length for your activity')
-    }
+    
     else{
+      if(checkedActShort == null){
+        setError('Please choose a length for your activity')
+      }
+      else{
     setError('')
     translateStringToNum()
     handleAddActivity(props, activity, activityLength, currentUser, checkedActShort, actDescription)
     handleActButton()
     setActivity('')
     setCheckedActShort(null)
+      }
     }
 
 
@@ -247,16 +247,20 @@ export default function CreateActivity(props) {
       setError('Please enter restaurant name')
       console.log('felmeddelande',error)
     }
-    else if(checkedLunch == null){
-      setError('Please choose a type of restaurant')
-    }
+    
     else{
+      if(checkedLunch == null){
+        setError('Please choose a type of restaurant')
+      }
+      else{
       setError('')
     translateStringToNum()
     handleAddFood(props, activity, activityType, currentUser, checkedLunch, actDescription)
     handleFoodButton()
     setActivity('')
     setActDescription('')
+    setCheckedLunch(null)
+      }
     }
 
   }
