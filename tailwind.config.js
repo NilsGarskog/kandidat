@@ -29,10 +29,7 @@ module.exports = {
       fontFamily: {
         latoRegular: "Lato-Regular",
         latoBold: "Lato-Bold",
-      },
-      colors: {
-        buttonGreen: "#A2B59F",
-      },
+      }
     },
   },
   plugins: [require("@tailwindcss/forms"),

@@ -42,6 +42,7 @@ export default function UserDashboard() {
         if (data.results[i]) {
           console.log(data.results[i])
           imageUrl.push({urlFull: data.results[i].urls.full, urlThumb: data.results[i].urls.thumb,  name: data.results[i].user.last_name  ? data.results[i].user.first_name + ' ' + data.results[i].user.last_name : data.results[i].user.first_name, portfolioUrl: data.results[i].user.links.html})
+
         }
       }
       return (imageUrl)
@@ -66,18 +67,6 @@ export default function UserDashboard() {
     handleButton(false)
 
 
-  }
-
-
-
-  async function handleDelete(tripKey) {
-
-    const userRef = doc(db, 'users', currentUser.uid, 'Trips', tripKey)
-    await deleteDoc(userRef)
-
-    const tempObj = { ...trips }
-    delete tempObj[tripKey]
-    setTrips(tempObj)
   }
 
   function handleButton(exit) {
@@ -116,16 +105,13 @@ export default function UserDashboard() {
           <>
             {Object.keys(trips).map((trip, i) => {
               return (
-                <TripCard key={i} tripKey={trip} handleDelete={handleDelete}>
+                <TripCard key={i} tripKey={trip}>
                   {trips[trip]}
                 </TripCard>
 
               )
             })}
           </>
-
-          {/* <div className='absolute mt- border w-full h-[55ch] bg-gradient-to-t from-white z-40'>
-          </div> */}
         </div>
 
       )}
