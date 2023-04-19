@@ -64,7 +64,7 @@ export default function LoginFirstPage() {
   const [stateBig, setStateBig] = useState(0);
   const [stateSmall, setStateSmall] = useState(0);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const paraBig = () => {
       const parallaxTitleBig = document.getElementById("parallaxTitleBig");
       setStateBig(5 + window.scrollY * 0.05);
@@ -82,7 +82,7 @@ export default function LoginFirstPage() {
 
     return () => window.removeEventListener("scroll", paraBig);
 
-    /* if (parallaxTitleSmall) {
+     if (parallaxTitleSmall) {
       parallaxTitleSmall.style.marginTop = 30 + "%";
     }
     window.addEventListener("scroll", () => {
@@ -90,15 +90,15 @@ export default function LoginFirstPage() {
         parallaxTitleSmall.style.marginTop = 30 + window.scrollY * 0.2 + "%";
       }
     }); */
-    /* if (parallaxTitleBig) {
+  /* if (parallaxTitleBig) {
       parallaxTitleBig.style.marginTop = 5 + "%";
     }
     window.addEventListener("scroll", () => {
       if (parallaxTitleBig) {
         parallaxTitleBig.style.marginTop = 5 + window.scrollY * 0.05 + "%";
       }
-    }); */
-  }, []);
+    }); 
+  }, []); */
 
   return (
     <>
@@ -113,7 +113,7 @@ export default function LoginFirstPage() {
           <h2
             id="parallaxTitleSmall"
             className="text-black z-0 absolute text-6xl text-center  sm:text-5xl 
-          font-bold "
+          font-bold font-family: "
           >
             Planner
           </h2>
@@ -135,7 +135,7 @@ export default function LoginFirstPage() {
 
           <h2
             id="parallaxTitleBig"
-            className="text-black z-0 absolute text-3xl max-h-10 sm:text-5xl 
+            className="text-black z-0 uppercase mt-[6%] absolute text-4xl  sm:text-8xl 
           font-bold mr-[55%]"
           >
             Planner
@@ -156,6 +156,12 @@ export default function LoginFirstPage() {
             and your friends
           </h2>
           <Popup
+            contentStyle={{
+              width: "400px",
+              height: "500px",
+              borderRadius: "0.7em",
+              boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+            }}
             trigger={
               <button className="border bg-white text-black text-2xl sm:text-4xl ml-[25%] font-bold py-4 px-6 rounded-full shadow-md hover:shadow-lg">
                 Get Started!
@@ -179,32 +185,33 @@ export default function LoginFirstPage() {
                       {error}
                     </div>
                   )}
-                  <h2 className="text-2xl text-black">Email adress</h2>
-                  <input
-                    type="text"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter email"
-                    required
-                    className="mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                  ></input>
-                  <h2 className="text-2xl text-black">Password</h2>
-                  <input
-                    type={passwordShow ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter password"
-                    className="mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                  ></input>
-                  <h2 className="text-2xl text-black">Confirm password</h2>
-                  <input
-                    type={passwordShow ? "text" : "password"}
-                    value={passwordCheck}
-                    onChange={(e) => setPasswordCheck(e.target.value)}
-                    placeholder="Confirm password"
-                    className="mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                  ></input>
-                  {/*  {!passwordShow && (
+                  <div className="mt-4">
+                    <h2 className="text-2xl text-black">Email adress</h2>
+                    <input
+                      type="text"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter email"
+                      required
+                      className="mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                    ></input>
+                    <h2 className="text-2xl text-black">Password</h2>
+                    <input
+                      type={passwordShow ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Enter password"
+                      className="mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                    ></input>
+                    <h2 className="text-2xl text-black">Confirm password</h2>
+                    <input
+                      type={passwordShow ? "text" : "password"}
+                      value={passwordCheck}
+                      onChange={(e) => setPasswordCheck(e.target.value)}
+                      placeholder="Confirm password"
+                      className="mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                    ></input>
+                    {/*  {!passwordShow && (
                   <i
                     onClick={togglePassword}
                     className=" fa-solid fa-eye text-xl sm:text-2xl"
@@ -216,21 +223,28 @@ export default function LoginFirstPage() {
                     className=" fa-solid fa-eye-slash text-xl sm:text-2xl"
                   ></i>
                 )} */}
-                  <button
-                    className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
-                    onClick={() => {
-                      setIsLogginIn(!isLoggingIn);
-                      submitHandler();
-                    }}
-                  >
-                    Submit
-                  </button>
+                    <button
+                      className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
+                      onClick={() => {
+                        setIsLogginIn(!isLoggingIn);
+                        submitHandler();
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
           </Popup>
 
           <Popup
+            contentStyle={{
+              width: "400px",
+              height: "400px",
+              borderRadius: "0.7em",
+              boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+            }}
             trigger={
               <button className="border bg-white text-black font-bold text-2xl sm:text-4xl py-4 px-6 rounded-full shadow-md hover:shadow-lg mr-[5%]">
                 Login
@@ -254,25 +268,26 @@ export default function LoginFirstPage() {
                       {error}
                     </div>
                   )}
-                  <h2 className="text-2xl text-black">Email adress</h2>
-                  <input
-                    type="text"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter email"
-                    required
-                    className=" mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                  ></input>
-                  <h2 className="text-2xl text-black">Password</h2>
-                  <div className="flex flex-row gap-4 ">
+                  <div className="mt-4">
+                    <h2 className="text-2xl text-black">Email adress</h2>
                     <input
-                      type={passwordShow ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Enter password"
-                      className="outline-none  duration-300  flex-wrap border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      type="text"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter email"
+                      required
+                      className=" mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
                     ></input>
-                    {/*  {!passwordShow && (
+                    <h2 className="text-2xl text-black">Password</h2>
+                    <div className="flex flex-row gap-4 ">
+                      <input
+                        type={passwordShow ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter password"
+                        className="outline-none  duration-300  flex-wrap border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+                      {/*  {!passwordShow && (
                       <i
                         onClick={togglePassword}
                         className=" fa-solid fa-eye text-xl flex-nowrap m-auto sm:text-2xl"
@@ -284,17 +299,24 @@ export default function LoginFirstPage() {
                         className=" fa-solid fa-eye-slash text-xl flex-nowrap m-auto sm:text-2xl"
                       ></i>
                     )} */}
+                    </div>
+                    <button
+                      onClick={() => {
+                        setIsLogginIn(isLoggingIn);
+                        submitHandler();
+                      }}
+                      className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2"
+                    >
+                      <h2 className="relative z-20">SUBMIT</h2>
+                    </button>
                   </div>
-                  <button
-                    onClick={() => {
-                      setIsLogginIn(isLoggingIn);
-                      submitHandler();
-                    }}
-                    className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm  text-center mr-2 mb-2"
-                  >
-                    <h2 className="relative z-20">SUBMIT</h2>
-                  </button>
                   <Popup
+                    contentStyle={{
+                      width: "400px",
+                      height: "400px",
+                      borderRadius: "0.7em",
+                      boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+                    }}
                     trigger={
                       <h2 className="forgot-password duration-300 hover:scale-110 text-right cursor-pointer">
                         <a href="#">Forgot password?</a>
@@ -305,7 +327,7 @@ export default function LoginFirstPage() {
                     closeOnDocumentClick={false}
                   >
                     {(close) => (
-                      <div className="flex flex-col items-center space-y-4 font-medium text-base rounded-lg w-full">
+                      <div className="flex flex-col items-center space-y-4 font-medium text-base rounded-lg h-full w-full">
                         <div className="inline-block">
                           <i
                             onClick={close}
@@ -313,24 +335,28 @@ export default function LoginFirstPage() {
                           ></i>
 
                           <h1 className="text-3xl pb-10">Forgot password?</h1>
-                          <h2 className="text-2xl text-black">Email adress</h2>
-                          <input
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter email"
-                            required
-                            className=" border border-black outline-none duration-300  border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                          ></input>
-                          <button
-                            className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm  text-center mr-2 mb-2"
-                            disabled={!email}
-                            onClick={() => {
-                              submitForgottenPassword(), close();
-                            }}
-                          >
-                            Submit
-                          </button>
+                          <div className="mt-14">
+                            <h2 className="text-2xl text-black">
+                              Email adress
+                            </h2>
+                            <input
+                              type="text"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                              placeholder="Enter email"
+                              required
+                              className=" border border-black outline-none duration-300  border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                            ></input>
+                            <button
+                              className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen  opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2"
+                              disabled={!email}
+                              onClick={() => {
+                                submitForgottenPassword(), close();
+                              }}
+                            >
+                              Submit
+                            </button>
+                          </div>
                         </div>
                       </div>
                     )}
