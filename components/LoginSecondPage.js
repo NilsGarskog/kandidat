@@ -2,8 +2,8 @@ import React from "react";
 
 export default function LoginSecondPage() {
   return (
-    <div className="wrapper flex flex-row relative z-999 ">
-      <section className="flex bg-white flex-wrap ">
+    <div className="wrapper flex flex-row relative z-999 mt-4">
+      <section className=" bg-white flex flex-wrap justify-center">
         <div className="ml-[5%] flex-1 p-6 z-999 m-auto">
           <h2 className="text-black text-2xl sm:text-4xl font-bold text-left uppercase select-none">
             Trip planning
@@ -20,7 +20,7 @@ export default function LoginSecondPage() {
             Scroll down to learn more.
           </h2>
         </div>
-        <div className="bg-white flex-1 p-6">
+        <div className="bg-white flex-1 p-6 flex justify-center">
           <img src="../img/plantrip.jpg" className="tripPlan w-3/4"></img>
         </div>
       </section>

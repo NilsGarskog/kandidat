@@ -7,10 +7,8 @@ export default function Layout(props) {
   return (
     <div className="">
       <Header />
-      <main className=''>
-        {children}
-      </main>
-      {/* <Footer /> */}
+      <main className="">{children}</main>
+      <Footer />
     </div>
   );
 }

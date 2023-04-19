@@ -3,7 +3,7 @@ import React from "react";
 export default function LoginFourthPage() {
   return (
     <div className="wrapper flex flex-row relative z-999">
-      <section className="flex bg-white flex-wrap ">
+      <section className="flex bg-white flex-wrap justify-center">
         <div className="ml-[5%] flex-1 p-6 m-auto">
           <h2 className="text-black text-2xl sm:text-4xl font-bold text-left uppercase select-none">
             Generate
@@ -22,7 +22,7 @@ export default function LoginFourthPage() {
             <br></br>itinerary for the entire trip.
           </h2>
         </div>
-        <div className="bg-white flex-1 p-6">
+        <div className="bg-white flex-1 flex justify-center p-6">
           <img src="../img/plantrip.jpg" className="tripPlan w-3/4"></img>
         </div>
       </section>

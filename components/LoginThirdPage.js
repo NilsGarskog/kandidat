@@ -3,8 +3,8 @@ import React from "react";
 export default function LoginThirdPage() {
   return (
     <div className="wrapper flex flex-row relative z-999">
-      <section className="flex bg-white flex-wrap ">
-        <div className="bg-white flex-1 p-6 ml-[5%]">
+      <section className="flex bg-white  justify-center flex-wrap ">
+        <div className="bg-white flex-1 flex justify-center p-6 ">
           <img src="../img/plantrip.jpg" className="tripPlan w-3/4"></img>
         </div>
         <div className="ml-[5%] flex-1 p-6 m-auto">

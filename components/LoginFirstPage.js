@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import useWindowSize from "@/hooks/useWindowSize";
 import { useAuth } from "../context/authContext";
 import Popup from "reactjs-popup";
 import toast from "react-hot-toast";
@@ -20,6 +19,17 @@ export default function LoginFirstPage() {
   const [error, setError] = useState(null);
   const [isLoggingIn, setIsLogginIn] = useState(true);
   const [passwordShow, setPasswordShow] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState("");
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 700 ? true : false);
+    };
+    handleResize(); // Call once to set the initial state
+    window.addEventListener("resize", handleResize);
+    //console.log(isSmallScreen);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const { login, signUp, currentUser, forgotPassword } = useAuth();
   async function submitHandler() {
@@ -60,7 +70,6 @@ export default function LoginFirstPage() {
     setPasswordShow(!passwordShow);
   };
 
-  const size = useWindowSize();
   const [stateBig, setStateBig] = useState(0);
   const [stateSmall, setStateSmall] = useState(0);
 
@@ -102,12 +111,12 @@ export default function LoginFirstPage() {
 
   return (
     <>
-      {size.width < 600 && (
-        <section className=" relative flex justify-center align-items h-[100vh]">
+      {isSmallScreen === true && (
+        <section className=" relative flex justify-center align-items h-auto w-screen">
           <img
             src="../img/MobileKandidatSmall.jpg"
             id="bakgrund"
-            className="max-w-full absolute h-auto object-cover"
+            className="w-full  h-auto object-cover"
           ></img>
 
           <h2
@@ -118,14 +127,14 @@ export default function LoginFirstPage() {
             Planner
           </h2>
 
-          <img
+          {/* <img
             src="../img/MobileKandidatSmallForeground.png"
             id="foreground"
             className="max-w-full absolute h-auto object-cover"
-          ></img>
+          ></img> */}
         </section>
       )}
-      {size.width > 600 && (
+      {isSmallScreen !== true && (
         <section className=" relative flex justify-center align-items">
           <img
             src="../img/StartPageKandidatSmall.jpg"
@@ -179,39 +188,40 @@ export default function LoginFirstPage() {
                     className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "
                   ></i>
 
-                  <h1 className="text-3xl text-center pb-10">Sign up</h1>
+                  <h1 className="text-3xl mt-6 text-center pb-10">Sign up</h1>
                   {error && (
                     <div className="w-full select-none mb-3 max-w-[40ch] border-rose-400 text-rose-400 py-2 border border-solid text-center">
                       {error}
                     </div>
                   )}
-                  <div className="mt-4">
-                    <h2 className="text-2xl text-black">Email adress</h2>
-                    <input
-                      type="text"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter email"
-                      required
-                      className="mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                    ></input>
-                    <h2 className="text-2xl text-black">Password</h2>
-                    <input
-                      type={passwordShow ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Enter password"
-                      className="mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                    ></input>
-                    <h2 className="text-2xl text-black">Confirm password</h2>
-                    <input
-                      type={passwordShow ? "text" : "password"}
-                      value={passwordCheck}
-                      onChange={(e) => setPasswordCheck(e.target.value)}
-                      placeholder="Confirm password"
-                      className="mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                    ></input>
-                    {/*  {!passwordShow && (
+                  {email && password && passwordCheck && (
+                    <div className="mt-4">
+                      <h2 className="text-2xl text-black">Email adress</h2>
+                      <input
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter email"
+                        required
+                        className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+                      <h2 className="text-2xl text-black">Password</h2>
+                      <input
+                        type={passwordShow ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter password"
+                        className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+                      <h2 className="text-2xl text-black">Confirm password</h2>
+                      <input
+                        type={passwordShow ? "text" : "password"}
+                        value={passwordCheck}
+                        onChange={(e) => setPasswordCheck(e.target.value)}
+                        placeholder="Confirm password"
+                        className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+                      {/*  {!passwordShow && (
                   <i
                     onClick={togglePassword}
                     className=" fa-solid fa-eye text-xl sm:text-2xl"
@@ -223,16 +233,68 @@ export default function LoginFirstPage() {
                     className=" fa-solid fa-eye-slash text-xl sm:text-2xl"
                   ></i>
                 )} */}
-                    <button
-                      className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
-                      onClick={() => {
-                        setIsLogginIn(!isLoggingIn);
-                        submitHandler();
-                      }}
-                    >
-                      Submit
-                    </button>
-                  </div>
+                      <button
+                        className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
+                        onClick={() => {
+                          setIsLogginIn(!isLoggingIn);
+                          submitHandler();
+                        }}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  )}
+                  {(!email || !password || !passwordCheck) && (
+                    <div className="mt-4">
+                      <h2 className="text-2xl text-black">Email adress</h2>
+                      <input
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter email"
+                        required
+                        className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+                      <h2 className="text-2xl text-black">Password</h2>
+                      <input
+                        type={passwordShow ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter password"
+                        className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+                      <h2 className="text-2xl text-black">Confirm password</h2>
+                      <input
+                        type={passwordShow ? "text" : "password"}
+                        value={passwordCheck}
+                        onChange={(e) => setPasswordCheck(e.target.value)}
+                        placeholder="Confirm password"
+                        className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+                      {/*  {!passwordShow && (
+                  <i
+                    onClick={togglePassword}
+                    className=" fa-solid fa-eye text-xl sm:text-2xl"
+                  ></i>
+                )}
+                {passwordShow && (
+                  <i
+                    onClick={togglePassword}
+                    className=" fa-solid fa-eye-slash text-xl sm:text-2xl"
+                  ></i>
+                )} */}
+                      <button
+                        className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-40  font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
+                        disabled={!email || !password || !passwordCheck}
+                        onClick={() => {
+                          setIsLogginIn(!isLoggingIn);
+                          submitHandler();
+                        }}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -241,7 +303,7 @@ export default function LoginFirstPage() {
           <Popup
             contentStyle={{
               width: "400px",
-              height: "400px",
+              height: "420px",
               borderRadius: "0.7em",
               boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
             }}
@@ -262,32 +324,33 @@ export default function LoginFirstPage() {
                     className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "
                   ></i>
 
-                  <h1 className="text-3xl text-center pb-10">Sign in</h1>
+                  <h1 className="text-3xl mt-6 text-center pb-10">Sign in</h1>
                   {error && (
                     <div className="w-full select-none mb-3 max-w-[40ch] border-rose-400 text-rose-400 py-2 border border-solid text-center">
                       {error}
                     </div>
                   )}
-                  <div className="mt-4">
-                    <h2 className="text-2xl text-black">Email adress</h2>
-                    <input
-                      type="text"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter email"
-                      required
-                      className=" mb-4 border border-black outline-none duration-300  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                    ></input>
-                    <h2 className="text-2xl text-black">Password</h2>
-                    <div className="flex flex-row gap-4 ">
+                  {(!email || !password) && (
+                    <div className="mt-4">
+                      <h2 className="text-2xl text-black">Email adress</h2>
                       <input
-                        type={passwordShow ? "text" : "password"}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Enter password"
-                        className="outline-none  duration-300  flex-wrap border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter email"
+                        required
+                        className=" mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
                       ></input>
-                      {/*  {!passwordShow && (
+                      <h2 className="text-2xl text-black">Password</h2>
+                      <div className="flex flex-row gap-4 ">
+                        <input
+                          type={passwordShow ? "text" : "password"}
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          placeholder="Enter password"
+                          className="outline-none    flex-wrap border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                        ></input>
+                        {/*  {!passwordShow && (
                       <i
                         onClick={togglePassword}
                         className=" fa-solid fa-eye text-xl flex-nowrap m-auto sm:text-2xl"
@@ -299,26 +362,72 @@ export default function LoginFirstPage() {
                         className=" fa-solid fa-eye-slash text-xl flex-nowrap m-auto sm:text-2xl"
                       ></i>
                     )} */}
+                      </div>
+                      <button
+                        disabled={!email || !password}
+                        onClick={() => {
+                          setIsLogginIn(isLoggingIn);
+                          submitHandler();
+                        }}
+                        className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen opacity-40  font-medium rounded-lg text-sm  text-center mr-2 mb-2"
+                      >
+                        <h2 className="relative z-20">SUBMIT</h2>
+                      </button>
                     </div>
-                    <button
-                      onClick={() => {
-                        setIsLogginIn(isLoggingIn);
-                        submitHandler();
-                      }}
-                      className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2"
-                    >
-                      <h2 className="relative z-20">SUBMIT</h2>
-                    </button>
-                  </div>
+                  )}
+                  {email && password && (
+                    <div className="mt-4">
+                      <h2 className="text-2xl text-black">Email adress</h2>
+                      <input
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter email"
+                        required
+                        className=" mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+                      <h2 className="text-2xl text-black">Password</h2>
+                      <div className="flex flex-row gap-4 ">
+                        <input
+                          type={passwordShow ? "text" : "password"}
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          placeholder="Enter password"
+                          className="outline-none    flex-wrap border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                        ></input>
+                        {/*  {!passwordShow && (
+                      <i
+                        onClick={togglePassword}
+                        className=" fa-solid fa-eye text-xl flex-nowrap m-auto sm:text-2xl"
+                      ></i>
+                    )}
+                    {passwordShow && (
+                      <i
+                        onClick={togglePassword}
+                        className=" fa-solid fa-eye-slash text-xl flex-nowrap m-auto sm:text-2xl"
+                      ></i>
+                    )} */}
+                      </div>
+                      <button
+                        onClick={() => {
+                          setIsLogginIn(isLoggingIn);
+                          submitHandler();
+                        }}
+                        className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2"
+                      >
+                        <h2 className="relative z-20">SUBMIT</h2>
+                      </button>
+                    </div>
+                  )}
+
                   <Popup
                     contentStyle={{
                       width: "400px",
-                      height: "400px",
+                      height: "420px",
                       borderRadius: "0.7em",
                       boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
                     }}
-                    overlayStyle={{ background: 'rgba(0,0,0,0)' }}
-
+                    overlayStyle={{ background: "rgba(0,0,0,0)" }}
                     trigger={
                       <h2 className="forgot-password duration-300 hover:scale-110 text-right cursor-pointer">
                         <a href="#">Forgot password?</a>
@@ -336,7 +445,9 @@ export default function LoginFirstPage() {
                             className="text-3xl fa-solid fa-arrow-left cursor-pointer absolute top-1.5 left-3 "
                           ></i>
 
-                          <h1 className="text-3xl text-center pb-10">Forgot password?</h1>
+                          <h1 className="text-3xl mt-6 text-center pb-10">
+                            Forgot password?
+                          </h1>
                           <div className="mt-14">
                             <h2 className="text-2xl text-black">
                               Email adress
@@ -347,17 +458,30 @@ export default function LoginFirstPage() {
                               onChange={(e) => setEmail(e.target.value)}
                               placeholder="Enter email"
                               required
-                              className=" border border-black outline-none duration-300  border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                              className=" border border-black border-solid outline-none  border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
                             ></input>
-                            <button
-                              className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen  opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2"
-                              disabled={!email}
-                              onClick={() => {
-                                submitForgottenPassword(), close();
-                              }}
-                            >
-                              Submit
-                            </button>
+                            {!email && (
+                              <button
+                                className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen  opacity-40 font-medium rounded-lg text-sm  text-center mr-2 mb-2"
+                                disabled={!email}
+                                onClick={() => {
+                                  submitForgottenPassword(), close();
+                                }}
+                              >
+                                Submit
+                              </button>
+                            )}
+
+                            {email && (
+                              <button
+                                className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen  opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2"
+                                onClick={() => {
+                                  submitForgottenPassword(), close();
+                                }}
+                              >
+                                Submit
+                              </button>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -367,8 +491,8 @@ export default function LoginFirstPage() {
               </div>
             )}
           </Popup>
-        </div >
-      </section >
+        </div>
+      </section>
     </>
   );
 }
