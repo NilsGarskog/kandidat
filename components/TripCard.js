@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import useFetchTripData from '../hooks/DBfunctions'
 import Popup from 'reactjs-popup';
 import { useState, useEffect } from 'react';
+import { Tooltip } from 'react-tooltip'
+
 
 
 export default function TripCard(props) {
@@ -14,6 +16,8 @@ export default function TripCard(props) {
   const [flag, setFlag] = useState('');
   const contentStyle = { borderRadius: '20px', width: "30%" };
   const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
+  const uniqueClassName = `trip-image-${tripKey}`;
+
 
   if (allData.loading === false) {
     const tripData = allData.tripData
@@ -23,11 +27,15 @@ export default function TripCard(props) {
         <div className='sm:max-w-sm max-w-xs duration-300 hover:bg-gray-100 shadow-xl bg-white text-black rounded-xl items-center'>
           <div className='flex items-center p-7 pt-4 pb-4'>
             <Link href={`/${tripKey}`} className=' flex items-center'>
-              <div className='ml-3 h-20 w-20 border border-2 rounded-full overflow-hidden'>
-                <img className='w-full h-full object-cover' src={tripData.tripImageUrl && tripData.tripImageUrl[0] ? tripData.tripImageUrl[0] : '../img/placeholder-image.png'} />
+             
+             
+              <div className= {`${uniqueClassName} ml-3 h-20 w-20 border border-2 rounded-full overflow-hidden`} >
+              <img className='w-full h-full object-cover' src={tripData.tripImageUrl?.[0]?.url || '../img/placeholder-image.png'}/>
               </div>
+          
               <div className='flex flex-col ml-4'>
-                <div className='uppercase text-2xl font-semibold'>
+                <div className={`uppercase font-semibold text-2xl w-[10ch]`}> 
+                
                   {children}
                 </div>
                 <div className='font-light text-xs'>
@@ -50,6 +58,12 @@ export default function TripCard(props) {
           </div>
 
         </div>
+
+        {allData.loading === false && allData.tripData && allData.tripData.tripImageUrl && allData.tripData.tripImageUrl[0] && <Tooltip anchorSelect={`.${uniqueClassName}`} place='top' clickable>
+  Photo by <Link href={allData.tripData.tripImageUrl[0].portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{allData.tripData.tripImageUrl[0].name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link>
+</Tooltip>}
+
+        
 
       </div>
 
