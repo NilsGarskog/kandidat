@@ -126,11 +126,11 @@ export default function LoginFirstPage() {
         </section>
       )}
       {size.width > 600 && (
-        <section className=" relative flex justify-center align-items h-[100vh]">
+        <section className=" relative flex justify-center align-items">
           <img
             src="../img/StartPageKandidatSmall.jpg"
             id="bakgrund"
-            className="max-w-full absolute h-auto object-cover"
+            className="max-w-full relative mb-7 h-auto object-cover"
           ></img>
 
           <h2
@@ -141,11 +141,11 @@ export default function LoginFirstPage() {
             Planner
           </h2>
 
-          <img
+          {/* <img
             src="../img/StartPageforegroundSmall.png"
             id="foreground"
             className="max-w-full absolute h-auto object-cover"
-          ></img>
+          ></img> */}
         </section>
       )}
 
