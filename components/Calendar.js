@@ -7,10 +7,19 @@ export default function Calendar(props) {
     const { data } = props
     const itineary = Algoritmen(data.arrDate, data.depDate, data.actArr)
     const [currentView, setCurrentView] = useState(0);
-    const daysToRender = itineary.slice(currentView * 3, (currentView * 3) + 3);
+    const daysPerView = 3
+    const daysToRender = itineary.slice(currentView * daysPerView, (currentView * daysPerView) + daysPerView);
+    const isNextEnabled = (currentView + 1) * daysPerView < itineary.length;
+    const isPrevEnabled = currentView > 0;
   
     return (
-      <div className="w-full h-[70ch] flex flex-wrap justify-center gap-10 mt-10 select-none">
+        <div className='flex flex-col w-full'>
+            <div className='flex  mt-0 justify-evenly'>
+                <button className='h-20 mr-20 px-0' onClick={() => setCurrentView(currentView - 1)} disabled={!isPrevEnabled}><img className = {`-mb-10 mr-24 px-0 h-10 ${!isPrevEnabled? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`} src='../icons/arrow-left.png'/></button>
+                <button className='h-20 ml-20 px-0' onClick={() => setCurrentView(currentView + 1)} disabled={!isNextEnabled}><img className = {`-mb-10 ml-24 h-10 px-0 ${!isNextEnabled? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`} src='../icons/arrow-right.png'/></button>
+            </div>
+      <div className="w-full h-[70ch] flex flex-wrap justify-center gap-10 -mt-12 select-none">
+          
         {daysToRender.map((item, index) => (
           <Day
             key={item.day}
@@ -19,7 +28,8 @@ export default function Calendar(props) {
             actArr={data.actArr}
           />
         ))}
-        <button onClick={() => setCurrentView(currentView + 1)}>Next</button>
+      
+      </div>
       </div>
     )
   }
