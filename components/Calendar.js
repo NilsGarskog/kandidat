@@ -14,10 +14,22 @@ export default function Calendar(props) {
   
     return (
         <div className='flex flex-col w-full'>
-            <div className='flex  mt-0 justify-evenly'>
-                <button className='h-20 mr-20 px-0' onClick={() => setCurrentView(currentView - 1)} disabled={!isPrevEnabled}><img className = {`-mb-10 mr-24 px-0 h-10 ${!isPrevEnabled? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`} src='../icons/arrow-left.png'/></button>
-                <button className='h-20 ml-20 px-0' onClick={() => setCurrentView(currentView + 1)} disabled={!isNextEnabled}><img className = {`-mb-10 ml-24 h-10 px-0 ${!isNextEnabled? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`} src='../icons/arrow-right.png'/></button>
-            </div>
+           {itineary.length > daysPerView+1 && <div className='flex  mt-0 justify-evenly'>
+           <button className='h-20 mr-20 px-0' onClick={() => setCurrentView(currentView - 1)} disabled={!isPrevEnabled}>
+    <img className={`-mb-10 mr-24 px-0 h-10 ${!isPrevEnabled ? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`}
+        src='../icons/arrow-left.png'
+        style={{ backfaceVisibility: 'hidden' }}
+    />
+</button>
+
+<button className='h-20 ml-20 px-0' onClick={() => setCurrentView(currentView + 1)} disabled={!isNextEnabled}>
+    <img className={`-mb-10 ml-24 h-10 px-0 ${!isNextEnabled ? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`}
+        src='../icons/arrow-right.png'
+        style={{ backfaceVisibility: 'hidden' }}
+    />
+</button>
+
+            </div> }
       <div className="w-full h-[70ch] flex flex-wrap justify-center gap-10 -mt-12 select-none">
           
         {daysToRender.map((item, index) => (
