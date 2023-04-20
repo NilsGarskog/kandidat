@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Algoritmen from '@/Algorithms/Algoritmen';
 import { removeDuplicates, getActName } from 'utils/calUtils.js';
 import Day from './Day';
@@ -7,10 +7,21 @@ export default function Calendar(props) {
     const { data } = props
     const itineary = Algoritmen(data.arrDate, data.depDate, data.actArr)
     const [currentView, setCurrentView] = useState(0);
-    const daysPerView = 3
-    const daysToRender = itineary.slice(currentView * daysPerView, (currentView * daysPerView) + daysPerView);
-    const isNextEnabled = (currentView + 1) * daysPerView < itineary.length;
-    const isPrevEnabled = currentView > 0;
+    const [daysPerView, setDaysPerView] = useState(3);
+
+  const isMobile = window.innerWidth < 640; // adjust breakpoint as needed
+
+  useEffect(() => {
+    if (isMobile) {
+      setDaysPerView(1); // adjust number of days per view for mobile
+    } else {
+      setDaysPerView(3); // set back to default for larger screens
+    }
+  }, [isMobile]);
+
+  const daysToRender = itineary.slice(currentView * daysPerView, (currentView * daysPerView) + daysPerView);
+  const isNextEnabled = (currentView + 1) * daysPerView < itineary.length;
+  const isPrevEnabled = currentView > 0;
   
     return (
         <div className='flex flex-col w-full'>
