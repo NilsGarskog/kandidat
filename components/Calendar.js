@@ -18,7 +18,6 @@ function getActName(id, actArr) {
     let type = null;
     actArr.forEach(act => {
         if (act.id === id) {
-            // console.log(act.activityName)
             name = act.activityName
             length = act.time
             type = act.type
@@ -32,25 +31,16 @@ export default function Calendar(props) {
     const { data } = props
     const itineary = Algoritmen(data.arrDate, data.depDate, data.actArr)
 
+    const [currentView, setCurrentView] = useState(0);
 
-    // const itineary = [{ day: 'mon', act: [32, 32, 67, 55, null, 33] },
-    // { day: 'tue', act: [null, 27, 1, 3, 555, 330] },
-    // { day: 'wed', act: [44, 44, 99, 39, 39, 2] }
-    // ]
-
-    // id 1, 2, 3 reserverat för generiska aktiviteter ('lunch', 'dinner', 'activity')
-
-    const [activityHeights, setActivityHeights] = useState({})
-
+    const daysToRender = itineary.slice(currentView * 3, (currentView * 3) + 3);
 
 
     return (
-        <div className='w-mw flex flex-wrap place-content-center gap-10 mt-10 select-none'>
+        <div className='w-full h-[70ch] flex flex-wrap justify-center  gap-10 mt-10 select-none'>
 
-            {itineary.map((item, index) => {
+            {daysToRender.map((item, index) => {
                 let newActivityList = []
-                let prevActivity = null
-                let prevActivityIndex = null
                 let newArray = removeDuplicates(item.act)
 
                 newArray.forEach((activity, index) => {
@@ -74,29 +64,14 @@ export default function Calendar(props) {
                         actType = 0
                     }
 
-                    // if (prevActivity === activity) {
-
-
-
-                    //     const theDiv = document.getElementById(`${activity}`)
-                    //     if (theDiv) {
-                    //         theDiv.style.height = '11ch'
-
-
-
-                    //     }
-
-                    // }
-                    // else 
                     {
                         newActivityList.push(
-                            <div id={activity} className={`font-medium flex items-center justify-center rounded-xl w-[15ch] ${actLength == 0 ? 'h-[5ch]' : 'h-[11ch]'} text-lg mt-3 text-slate-900 text-center ${actType == 1 || actType == 2 ? 'bg-blue-300' : 'bg-yellow-300'}`} key={index}>
+                            <div id={activity} className={`font-medium flex items-center justify-center rounded-xl w-[15ch] ${actLength == 0 ? 'h-[5ch]' : 'h-[11ch]'} text-lg mt-3 text-slate-900 text-center ${actType == 1 || actType == 2 ? 'bg-calBlue' : 'bg-calYellow'}`} key={index}>
                                 {actName}
                             </div>
                         )
 
-                        prevActivity = activity
-                        prevActivityIndex = newActivityList.length - 1
+                    
 
 
 
@@ -114,6 +89,8 @@ export default function Calendar(props) {
                     </div>
                 )
             })}
+            <button onClick={() => setCurrentView(currentView + 1)}>Next</button>
+
         </div>
     )
 }

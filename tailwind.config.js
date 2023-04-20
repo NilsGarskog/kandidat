@@ -24,7 +24,10 @@ module.exports = {
     extend: {
       colors: {
         buttonGreen: "#A2B59F",
-        buttonRed: "#E2D2D2"
+        buttonRed: "#E2D2D2",
+        calYellow: "#FFF2CC",
+        calBlue: "#93C6E7",
+        calPurple: "#BA94D1"
       },
       fontFamily: {
         latoRegular: "Lato-Regular",
