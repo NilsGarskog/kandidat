@@ -15,6 +15,7 @@ import Settings from '../components/TripPageComponents/Settings'
 export default function Trip() {
     const router = useRouter()
     let [page, setPage] = useState("activities")
+    let [ItCreated, setItCreated] = useState(false)
     const { tripKey } = router.query
     const allData = useFetchTripData(tripKey)
     const actData = useFetchAct(tripKey)
@@ -24,21 +25,39 @@ export default function Trip() {
         const algoData = { arrDate: tripData.arrDate, depDate: tripData.depDate, actArr: actArr }
         return (
             <div>
-                <TripHeader tripData={tripData}>
-                </TripHeader>
+
                 {page === "activities" &&
-                    <div className='flex items-center'>
-                        <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='activity'></CreateActivity>
-                        <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='restaurant'></CreateActivity>
+                    <div>
+                        <TripHeader tripData={tripData}>
+                        </TripHeader>
+
+                        <div className='flex items-center'>
+                            <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='activity'></CreateActivity>
+                            <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='restaurant'></CreateActivity>
+                        </div>
                     </div>
                 }
-                {page === "calender" &&
+                {(page === "calender" && ItCreated === false) &&
+                    <div className='flex items-center flex-col p-3'>
+                        <div className='flex flex-col items-center w-2/3 '>
+                            <h1 className="text-3xl text-bold p-2 font-bold">Welcome to the itinerary page!</h1>
+                            <p className="text-xl p-1" > Here, you can generate your itinerary based on the activities you have planned so far. If you are satisfied with your plans, simply click the 'Generate Itinerary' button below to create the first draft of your itinerary.
+                                However, if you would like to add more activities or change your plans, don't worry! You can always come back to this page later and regenerate the itinerary.</p>
+                        </div>
+                        <button className='mt-5 border w-1/3 bg-buttonGreen uppercase opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' onClick={() => setItCreated(true)}>Generate Itinerary</button>
+                    </div>
+                }
+                {(page === "calender" && ItCreated === true) &&
                     <div className='flex items-center'>
                         <Calendar data={algoData}></Calendar>
                     </div>
                 }
                 {page === "settings" &&
-                    <div className='flex items-center'>
+                    <div className='flex items-center flex-col'>
+                        <div className='flex flex-col items-center w-2/3'>
+                            <h1 className="text-3xl text-bold p-2 font-bold">Settings</h1>
+                            <p className="text-xl p-1" > Here you can edit the specifications of your trip. <br></br>Do not forget to save when you are done!</p>
+                        </div>
                         <Settings data={tripData}></Settings>
                     </div>
                 }
