@@ -20,15 +20,19 @@ export default function Settings(props) {
     const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
 
     async function handleUpdate() {
-        setSaveLoading(true)
-        const userRef = doc(db, 'users', currentUser.uid, 'Trips', tripKey)
-        await setDoc(userRef, {
-            Name: NewName,
-            arrDate: dayjs(NewArrDate).format('YYYY-MM-DD'),
-            depDate: dayjs(NewDepDate).format('YYYY-MM-DD'),
-        }, { merge: true })
-        setSaveLoading(false)
-        router.reload();
+        if (NewName != "" && NewArrDate != null && NewDepDate != null) {
+            setSaveLoading(true)
+            const userRef = doc(db, 'users', currentUser.uid, 'Trips', tripKey)
+            await setDoc(userRef, {
+                Name: NewName,
+                arrDate: dayjs(NewArrDate).format('YYYY-MM-DD'),
+                depDate: dayjs(NewDepDate).format('YYYY-MM-DD'),
+            }, { merge: true })
+            setSaveLoading(false)
+            router.reload();
+        } else {
+            setErr("Please fill in all the fields")
+        }
     }
 
     async function handleDelete(tripKey) {
@@ -51,10 +55,10 @@ export default function Settings(props) {
 
 
 
+
     return (
         <div className="flex  w-full justify-center ">
-            <div className='pl-20 mt-10 flex flex-col space-y-4'>
-                <p className="text-xl">Here you can edit the specifications of your trip. <br></br>Do not forget to save when you are done!</p>
+            <div className='pl-20 flex flex-col space-y-4'>
                 <div className='flex h-2 pb-4 text-red-600'>
                     <h1 >{err}</h1>
                 </div>
