@@ -16,7 +16,7 @@ export default function TripHeader(props) {
     <div
       className='w-full h-[40ch] relative bg-center bg-cover flex justify-center items-center'
       style={{
-        backgroundImage: `url(${urlArray[imageIndex].urlFull || "../img/placeholder-image.png"})`,
+        backgroundImage: `url(${urlArray && urlArray[imageIndex] ? urlArray[imageIndex].urlFull : "../img/placeholder-image.png"})`,
         backgroundColor: "rgba(0, 0, 0, 0.4)",
 
       }}
@@ -24,7 +24,7 @@ export default function TripHeader(props) {
       <div className='absolute inset-0' style={{ zIndex: -1 }}>
         <div
           className='w-full h-full bg-center opacity-40'
-          style={{ backgroundImage: `url(${urlArray[imageIndex].urlFull || "../img/placeholder-image.png"})` }}
+          style={{ backgroundImage: `url(${urlArray && urlArray[imageIndex] ? urlArray[imageIndex].urlFull : "../img/placeholder-image.png"})`}}
         ></div>
       </div>
      
@@ -41,9 +41,9 @@ export default function TripHeader(props) {
      </div>
       
       </div>
-      <div className='text-xs text-white absolute bottom-0 left-0 bg-black bg-opacity-50 p-2 mb-2 ml-2'>
+      {urlArray && urlArray[imageIndex] && <div className='text-xs text-white absolute bottom-0 left-0 bg-black bg-opacity-50 p-2 mb-2 ml-2'>
       Photo by <Link href={urlArray[imageIndex].portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{urlArray[imageIndex].name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link>
-      </div>
+      </div>}
      
    
      
