@@ -41,7 +41,7 @@ export default function UserDashboard() {
       for (let i = 0; i < 10; i++) {
         if (data.results[i]) {
           console.log(data.results[i])
-          imageUrl.push({urlFull: data.results[i].urls.full, urlThumb: data.results[i].urls.thumb,  name: data.results[i].user.last_name  ? data.results[i].user.first_name + ' ' + data.results[i].user.last_name : data.results[i].user.first_name, portfolioUrl: data.results[i].user.links.html})
+          imageUrl.push({ urlFull: data.results[i].urls.full, urlThumb: data.results[i].urls.thumb, name: data.results[i].user.last_name ? data.results[i].user.first_name + ' ' + data.results[i].user.last_name : data.results[i].user.first_name, portfolioUrl: data.results[i].user.links.html })
 
         }
       }
@@ -100,7 +100,7 @@ export default function UserDashboard() {
       {(!loading) && (
 
 
-        <div className=' flex pb-20 pt-5 h-[60ch] sm:h-[65ch] overflow-y-auto pl-3 pr-3 flex-wrap gap-5 w-full items-start content-start sm:justify-between justify-center justify-self-center'>
+        <div className=' flex pb-20 pt-5 h-[60ch] pr-3 sm:h-[65ch] overflow-y-auto pl-3 flex-wrap gap-5 w-full items-start content-start sm:justify-between justify-center justify-self-center'>
 
           <>
             {Object.keys(trips).map((trip, i) => {
