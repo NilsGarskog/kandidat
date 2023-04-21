@@ -37,11 +37,17 @@ export default function LoginFirstPage() {
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [error, setError] = useState(null);
-  const [isLoggingIn, setIsLogginIn] = useState(true);
+  let [isLoggingIn, setIsLogginIn] = useState(null);
   const [passwordShow, setPasswordShow] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState("");
   const [isMediumScreen, setIsMediumScreen] = useState("");
 
+  function resetFields() {
+    setEmail("");
+    setError("");
+    setPassword("");
+    setPasswordCheck("");
+  }
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 640 ? true : false);
@@ -81,7 +87,11 @@ export default function LoginFirstPage() {
       setError("Passwords do not match");
       return;
     }
-    await signUp(email, password);
+    try {
+      await signUp(email, password);
+    } catch (e) {
+      console.log(e.message);
+    }
   }
   async function submitForgottenPassword() {
     try {
@@ -214,6 +224,10 @@ export default function LoginFirstPage() {
                   Register
                 </button>
               }
+              onOpen={() => {
+                setIsLogginIn((isLoggingIn = false));
+                console.log("Login:", isLoggingIn);
+              }}
               position="relative"
               modal
               closeOnDocumentClick={false}
@@ -222,7 +236,10 @@ export default function LoginFirstPage() {
                 <div className="flex flex-col items-center space-y-4 font-medium text-base rounded-lg w-full">
                   <div className="inline-block">
                     <i
-                      onClick={close}
+                      onClick={() => {
+                        close();
+                        resetFields();
+                      }}
                       className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "
                     ></i>
 
@@ -232,88 +249,46 @@ export default function LoginFirstPage() {
                         {error}
                       </div>
                     )}
-                    {email && password && passwordCheck && (
-                      <div className="mt-4">
-                        <h2 className="text-2xl text-black">Email adress</h2>
-                        <input
-                          type="text"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Enter email"
-                          required
-                          className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                        ></input>
-                        <h2 className="text-2xl text-black">Password</h2>
-                        <input
-                          type={passwordShow ? "text" : "password"}
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          placeholder="Enter password"
-                          className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                        ></input>
-                        <h2 className="text-2xl text-black">
-                          Confirm password
-                        </h2>
-                        <input
-                          type={passwordShow ? "text" : "password"}
-                          value={passwordCheck}
-                          onChange={(e) => setPasswordCheck(e.target.value)}
-                          placeholder="Confirm password"
-                          className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                        ></input>
-                        {/*  {!passwordShow && (
-                  <i
-                    onClick={togglePassword}
-                    className=" fa-solid fa-eye text-xl sm:text-2xl"
-                  ></i>
-                )}
-                {passwordShow && (
-                  <i
-                    onClick={togglePassword}
-                    className=" fa-solid fa-eye-slash text-xl sm:text-2xl"
-                  ></i>
-                )} */}
+
+                    <div className="mt-4">
+                      <h2 className="text-2xl text-black">Email adress</h2>
+                      <input
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter email"
+                        required
+                        className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+                      <h2 className="text-2xl text-black">Password</h2>
+                      <input
+                        type={"password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter password"
+                        className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+                      <h2 className="text-2xl text-black">Confirm password</h2>
+                      <input
+                        type={"password"}
+                        value={passwordCheck}
+                        onChange={(e) => setPasswordCheck(e.target.value)}
+                        placeholder="Confirm password"
+                        className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+
+                      {email && password && passwordCheck && (
                         <button
-                          className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
+                          className="w-full  mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
                           onClick={() => {
-                            setIsLogginIn(!isLoggingIn);
                             submitHandler();
                           }}
                         >
                           Submit
                         </button>
-                      </div>
-                    )}
-                    {(!email || !password || !passwordCheck) && (
-                      <div className="mt-4">
-                        <h2 className="text-2xl text-black">Email adress</h2>
-                        <input
-                          type="text"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Enter email"
-                          required
-                          className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                        ></input>
-                        <h2 className="text-2xl text-black">Password</h2>
-                        <input
-                          type={passwordShow ? "text" : "password"}
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          placeholder="Enter password"
-                          className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                        ></input>
-                        <h2 className="text-2xl text-black">
-                          Confirm password
-                        </h2>
-                        <input
-                          type={passwordShow ? "text" : "password"}
-                          value={passwordCheck}
-                          onChange={(e) => setPasswordCheck(e.target.value)}
-                          placeholder="Confirm password"
-                          className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                        ></input>
-                        {/*  {!passwordShow && (
+                      )}
+
+                      {/*  {!passwordShow && (
                   <i
                     onClick={togglePassword}
                     className=" fa-solid fa-eye text-xl sm:text-2xl"
@@ -325,18 +300,15 @@ export default function LoginFirstPage() {
                     className=" fa-solid fa-eye-slash text-xl sm:text-2xl"
                   ></i>
                 )} */}
+                      {(!email || !password || !passwordCheck) && (
                         <button
-                          className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-40  font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
+                          className="w-full  mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-40  font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
                           disabled={!email || !password || !passwordCheck}
-                          onClick={() => {
-                            setIsLogginIn(!isLoggingIn);
-                            submitHandler();
-                          }}
                         >
                           Submit
                         </button>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </div>
               )}
@@ -354,15 +326,22 @@ export default function LoginFirstPage() {
                   Login
                 </button>
               }
+              onOpen={() => {
+                setIsLogginIn((isLoggingIn = true));
+                console.log("Login:", isLoggingIn);
+              }}
               position="relative"
               modal
               closeOnDocumentClick={false}
             >
               {(close) => (
                 <div className="flex flex-col items-center space-y-4 font-medium text-base rounded-lg w-full">
-                  <div className="inline-block">
+                  <div className="inline-block ">
                     <i
-                      onClick={close}
+                      onClick={() => {
+                        close();
+                        resetFields();
+                      }}
                       className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "
                     ></i>
 
@@ -372,27 +351,27 @@ export default function LoginFirstPage() {
                         {error}
                       </div>
                     )}
-                    {(!email || !password) && (
-                      <div className="mt-4">
-                        <h2 className="text-2xl text-black">Email adress</h2>
+
+                    <div className="mt-4">
+                      <h2 className="text-2xl text-black">Email adress</h2>
+                      <input
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter email"
+                        required
+                        className=" mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                      ></input>
+                      <h2 className="text-2xl text-black">Password</h2>
+                      <div className="flex flex-row gap-4 ">
                         <input
-                          type="text"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Enter email"
-                          required
-                          className=" mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                          type={"password"}
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          placeholder="Enter password"
+                          className="outline-none    flex-wrap border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
                         ></input>
-                        <h2 className="text-2xl text-black">Password</h2>
-                        <div className="flex flex-row gap-4 ">
-                          <input
-                            type={passwordShow ? "text" : "password"}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter password"
-                            className="outline-none    flex-wrap border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                          ></input>
-                          {/*  {!passwordShow && (
+                        {/*  {!passwordShow && (
                       <i
                         onClick={togglePassword}
                         className=" fa-solid fa-eye text-xl flex-nowrap m-auto sm:text-2xl"
@@ -404,52 +383,8 @@ export default function LoginFirstPage() {
                         className=" fa-solid fa-eye-slash text-xl flex-nowrap m-auto sm:text-2xl"
                       ></i>
                     )} */}
-                        </div>
-                        <button
-                          disabled={!email || !password}
-                          onClick={() => {
-                            setIsLogginIn(isLoggingIn);
-                            submitHandler();
-                          }}
-                          className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen opacity-40  font-medium rounded-lg text-sm  text-center mr-2 mb-2"
-                        >
-                          <h2 className="relative z-20">SUBMIT</h2>
-                        </button>
                       </div>
-                    )}
-                    {email && password && (
-                      <div className="mt-4">
-                        <h2 className="text-2xl text-black">Email adress</h2>
-                        <input
-                          type="text"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Enter email"
-                          required
-                          className=" mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                        ></input>
-                        <h2 className="text-2xl text-black">Password</h2>
-                        <div className="flex flex-row gap-4 ">
-                          <input
-                            type={passwordShow ? "text" : "password"}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter password"
-                            className="outline-none    flex-wrap border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
-                          ></input>
-                          {/*  {!passwordShow && (
-                      <i
-                        onClick={togglePassword}
-                        className=" fa-solid fa-eye text-xl flex-nowrap m-auto sm:text-2xl"
-                      ></i>
-                    )}
-                    {passwordShow && (
-                      <i
-                        onClick={togglePassword}
-                        className=" fa-solid fa-eye-slash text-xl flex-nowrap m-auto sm:text-2xl"
-                      ></i>
-                    )} */}
-                        </div>
+                      {email && password && (
                         <button
                           onClick={() => {
                             setIsLogginIn(isLoggingIn);
@@ -459,8 +394,16 @@ export default function LoginFirstPage() {
                         >
                           <h2 className="relative z-20">SUBMIT</h2>
                         </button>
-                      </div>
-                    )}
+                      )}
+                      {(!email || !password) && (
+                        <button
+                          disabled={!email || !password}
+                          className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen opacity-40  font-medium rounded-lg text-sm  text-center mr-2 mb-2"
+                        >
+                          <h2 className="relative z-20">SUBMIT</h2>
+                        </button>
+                      )}
+                    </div>
 
                     <Popup
                       contentStyle={{
