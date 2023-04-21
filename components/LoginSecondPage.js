@@ -7,7 +7,7 @@ export default function LoginSecondPage() {
   const MediumScreen = isMediumScreen;
 
   return (
-    <div className="wrapper flex flex-row relative z-999 mt-4">
+    <div className="wrapper flex flex-row z-999 mt-4">
       <section className=" bg-white flex flex-wrap justify-center">
         <div className="md:ml-[5%] flex-1 sm:p-6 p-4 z-999 m-auto">
           <h2 className="text-black text-xl lg:text-6xl font-bold text-center sm:text-left uppercase select-none">
@@ -24,7 +24,7 @@ export default function LoginSecondPage() {
             </h2>
           )}
           {smallScreen === true && (
-            <h2 className="text-black text-xl lg:text-2xl text-center sm:text-left mb-4 sm:mr-0 mr-4 select-none">
+            <h2 className="text-black text-xl lg:text-2xl text-center sm:text-left mb-4 sm:mr-0  px-4  select-none">
               Travel planner offers you and your friends a range of features to
               make your trip planning more smooth, easy and interactive.
             </h2>
@@ -34,9 +34,19 @@ export default function LoginSecondPage() {
             Scroll down to learn more.
           </h2>
         </div>
-        <div className="bg-white sm:flex-1 p-0 sm:p-6 flex justify-center ">
-          <img src="../img/plantrip.jpg" className=" w-3/4"></img>
-        </div>
+        {smallScreen !== true && (
+          <div className="bg-white sm:flex-1 p-0 sm:p-6 flex justify-center ">
+            <img
+              src="../img/plantrip.jpg"
+              className="2xl:w-3/4 w-full h-auto "
+            ></img>
+          </div>
+        )}
+        {smallScreen === true && (
+          <div className="bg-white sm:flex-1 p-0 sm:p-6 flex justify-center ">
+            <img src="../img/plantrip.jpg" className=" w-3/4 "></img>
+          </div>
+        )}
       </section>
     </div>
   );

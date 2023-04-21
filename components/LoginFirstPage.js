@@ -57,8 +57,6 @@ export default function LoginFirstPage() {
     };
     handleResize(); // Call once to set the initial state
     window.addEventListener("resize", handleResize);
-    console.log("small:", isSmallScreen);
-    console.log("medium:", isMediumScreen);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -87,20 +85,24 @@ export default function LoginFirstPage() {
       setError("Passwords do not match");
       return;
     }
-    try {
-      await signUp(email, password);
-    } catch (e) {
-      console.log(e.message);
+
+    if (!isLoggingIn) {
+      let register;
+      try {
+        register = await signUp(email, password);
+      } catch (e) {
+        if (e.code == "auth/email-already-in-use") {
+          setError(
+            "Email already in use. Please use a different email or log in."
+          );
+        } else {
+          setError(e.message);
+        }
+        return;
+      }
     }
   }
-  async function submitForgottenPassword() {
-    try {
-      await forgotPassword(email);
-      toast.success("Email was successfully sent, check your inbox!");
-    } catch (error) {
-      toast.error("No existing account with that email address");
-    }
-  }
+
   const togglePassword = () => {
     setPasswordShow(!passwordShow);
   };
@@ -108,7 +110,7 @@ export default function LoginFirstPage() {
   const [stateBig, setStateBig] = useState(0);
   const [stateSmall, setStateSmall] = useState(0);
 
-  /* useEffect(() => {
+  useEffect(() => {
     const paraBig = () => {
       const parallaxTitleBig = document.getElementById("parallaxTitleBig");
       setStateBig(5 + window.scrollY * 0.05);
@@ -126,23 +128,23 @@ export default function LoginFirstPage() {
 
     return () => window.removeEventListener("scroll", paraBig);
 
-     if (parallaxTitleSmall) {
+    /* if (parallaxTitleSmall) {
       parallaxTitleSmall.style.marginTop = 30 + "%";
     }
     window.addEventListener("scroll", () => {
       if (parallaxTitleSmall) {
         parallaxTitleSmall.style.marginTop = 30 + window.scrollY * 0.2 + "%";
       }
-    }); */
-  /* if (parallaxTitleBig) {
+    }); 
+   if (parallaxTitleBig) {
       parallaxTitleBig.style.marginTop = 5 + "%";
     }
     window.addEventListener("scroll", () => {
       if (parallaxTitleBig) {
         parallaxTitleBig.style.marginTop = 5 + window.scrollY * 0.05 + "%";
       }
-    }); 
-  }, []); */
+    });  */
+  }, []);
 
   return (
     <>
@@ -162,11 +164,11 @@ export default function LoginFirstPage() {
             Planner
           </h2>
 
-          {/* <img
+          <img
             src="../img/MobileKandidatSmallForeground.png"
             id="foreground"
             className="max-w-full absolute h-auto object-cover"
-          ></img> */}
+          ></img>
         </section>
       )}
       {isSmallScreen !== true && (
@@ -185,11 +187,11 @@ export default function LoginFirstPage() {
             Planner
           </h2>
 
-          {/* <img
+          <img
             src="../img/StartPageforegroundSmall.png"
             id="foreground"
             className="max-w-full absolute h-auto object-cover"
-          ></img> */}
+          ></img>
         </section>
       )}
 
@@ -226,7 +228,6 @@ export default function LoginFirstPage() {
               }
               onOpen={() => {
                 setIsLogginIn((isLoggingIn = false));
-                console.log("Login:", isLoggingIn);
               }}
               position="relative"
               modal
@@ -328,7 +329,6 @@ export default function LoginFirstPage() {
               }
               onOpen={() => {
                 setIsLogginIn((isLoggingIn = true));
-                console.log("Login:", isLoggingIn);
               }}
               position="relative"
               modal

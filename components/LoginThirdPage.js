@@ -6,11 +6,14 @@ export default function LoginThirdPage() {
   const smallScreen = isSmallScreen;
   const MediumScreen = isMediumScreen;
   return (
-    <div className="wrapper flex flex-row relative z-999">
+    <div className="wrapper flex flex-row  z-999">
       <section className=" bg-white flex flex-wrap justify-center">
         {smallScreen !== true && (
           <div className="bg-white sm:flex-1 p-4  sm:p-6 flex justify-center ">
-            <img src="../img/plantrip.jpg" className=" w-3/4"></img>
+            <img
+              src="../img/plantrip.jpg"
+              className=" 2xl:w-3/4 w-full h-auto"
+            ></img>
           </div>
         )}
 
@@ -38,12 +41,12 @@ export default function LoginThirdPage() {
           )}
           {smallScreen === true && (
             <>
-              <h2 className="text-black text-xl lg:text-2xl text-center sm:text-left mb-4 sm:mr-0 mr-4 select-none">
+              <h2 className="text-black text-xl lg:text-2xl text-center sm:text-left mb-4 sm:mr-0 px-4 select-none">
                 Travel planner let your friend group add activites, restaurants,
                 etc to a shared planning space where you can all see each others
                 suggestions.
               </h2>
-              <h2 className="text-black text-xl lg:text-2xl text-center sm:p-5 sm:text-left mb-4 sm:mb-0 select-none">
+              <h2 className="text-black text-xl lg:text-2xl text-center sm:p-5 sm:text-left mb-4 sm:mb-0 px-4  select-none">
                 Upvote your friends suggestions to hightlight what you want to
                 explore at the destination.
               </h2>
