@@ -40,7 +40,7 @@ export default function UserDashboard() {
       const imageUrl = []
       for (let i = 0; i < 10; i++) {
         if (data.results[i]) {
-          console.log(data.results[i])
+         
           imageUrl.push({ urlFull: data.results[i].urls.full, urlThumb: data.results[i].urls.thumb, name: data.results[i].user.last_name ? data.results[i].user.first_name + ' ' + data.results[i].user.last_name : data.results[i].user.first_name, portfolioUrl: data.results[i].user.links.html })
 
         }

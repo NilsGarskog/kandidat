@@ -12,10 +12,7 @@ export default function TripHeader(props) {
   const urlArray = tripData.tripImageUrl
   const router = useRouter()
   const { tripKey } = router.query
-  console.log(tripData)
-  console.log(tripData.tripImageUrl)
-  console.log(tripData.preferredImageIndex)
-  console.log(urlArray)
+ 
 
   const [imageIndex, setImageIndex] = useState(tripData.preferredImageIndex)
 
