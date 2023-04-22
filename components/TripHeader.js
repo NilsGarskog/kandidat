@@ -51,7 +51,7 @@ export default function TripHeader(props) {
       </div>
       <div className='flex flex-col absolute bottom-0 right-0 p-2 mb-2 mr-2'>
        <div className='flex gap-3 '>
-      <button onClick={() => {if(imageIndex !== 0) {handleEditHeaderImage(imageIndex)}}} ><img className={`h-10 ${imageIndex==0? 'opacity-50 cursor-default':'opacity-80 hover:opacity-100' }`}src='../icons/arrow-left.png'></img></button>
+      <button onClick={() => {if(imageIndex !== 0) {handleEditHeaderImage(imageIndex-1)}}} ><img className={`h-10 ${imageIndex==0? 'opacity-50 cursor-default':'opacity-80 hover:opacity-100' }`}src='../icons/arrow-left.png'></img></button>
       <button onClick={() => {if(imageIndex !== urlArray.length -1) {handleEditHeaderImage(imageIndex+1)}}} ><img className={`h-10 ${imageIndex==urlArray.length -1? 'opacity-50 cursor-default':'opacity-80 hover:opacity-100' }`} src='../icons/arrow-right.png'></img></button>
      </div>
       
