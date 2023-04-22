@@ -28,7 +28,7 @@ export default function TripCard(props) {
 
 
               <div className={`${uniqueClassName} ml-3 h-20 w-20  rounded-full overflow-hidden`} >
-                <img className='w-full h-full object-cover' src={tripData.tripImageUrl?.[0]?.urlThumb || '../img/placeholder-image.png'} />
+                <img className='w-full h-full object-cover' src={tripData.tripImageUrl?.[tripData.preferredImageIndex]?.urlThumb || '../img/placeholder-image.png'} />
               </div>
 
               <div className='flex flex-col ml-4'>

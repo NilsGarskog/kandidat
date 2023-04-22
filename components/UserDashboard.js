@@ -62,7 +62,7 @@ export default function UserDashboard() {
     setTrips({ ...trips, [newKey]: trip })
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', newKey.toString())
 
-    await setDoc(userRef, { Name: trip, arrDate: arrDate.format('YYYY-MM-DD'), depDate: depDate.format('YYYY-MM-DD'), tripImageUrl: url })
+    await setDoc(userRef, { Name: trip, arrDate: arrDate.format('YYYY-MM-DD'), depDate: depDate.format('YYYY-MM-DD'), tripImageUrl: url, preferredImageIndex: 0 })
 
     handleButton(false)
 
