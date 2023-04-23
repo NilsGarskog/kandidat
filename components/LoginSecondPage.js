@@ -1,5 +1,5 @@
 import React from "react";
-import { useScreenSizes } from "./LoginFirstPage";
+import { useScreenSizes } from "./LoginLayout";
 
 export default function LoginSecondPage() {
   const { isSmallScreen, isMediumScreen } = useScreenSizes();
@@ -7,7 +7,7 @@ export default function LoginSecondPage() {
   const MediumScreen = isMediumScreen;
 
   return (
-    <div className="wrapper flex flex-row z-999 mt-4">
+    <div className="wrapper flex flex-row z-80 min-h-[20vh]">
       <section className=" bg-white flex flex-wrap justify-center">
         <div className="md:ml-[5%] flex-1 sm:p-6 p-4 z-999 m-auto">
           <h2 className="text-black text-xl lg:text-6xl font-bold text-center sm:text-left uppercase select-none">

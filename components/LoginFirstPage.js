@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext";
 import Popup from "reactjs-popup";
 import toast from "react-hot-toast";
+import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+import LoginSecondpage from "./LoginSecondPage";
 
 function validateEmailAddress(input) {
   var regex = /[^\s@]+@[^\s@]+\.[^\s@]+/;
@@ -11,26 +13,6 @@ function validateEmailAddress(input) {
     return -1;
   }
 }
-
-export const useScreenSizes = () => {
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [isMediumScreen, setIsMediumScreen] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 640);
-      setIsMediumScreen(window.innerWidth >= 640 && window.innerWidth <= 1024);
-    };
-
-    handleResize(); // Call once to set the initial state
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  return { isSmallScreen, isMediumScreen };
-};
 
 export default function LoginFirstPage() {
   const [email, setEmail] = useState("");
@@ -110,7 +92,7 @@ export default function LoginFirstPage() {
   const [stateBig, setStateBig] = useState(0);
   const [stateSmall, setStateSmall] = useState(0);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const paraBig = () => {
       const parallaxTitleBig = document.getElementById("parallaxTitleBig");
       setStateBig(5 + window.scrollY * 0.05);
@@ -128,7 +110,7 @@ export default function LoginFirstPage() {
 
     return () => window.removeEventListener("scroll", paraBig);
 
-    /* if (parallaxTitleSmall) {
+     if (parallaxTitleSmall) {
       parallaxTitleSmall.style.marginTop = 30 + "%";
     }
     window.addEventListener("scroll", () => {
@@ -143,12 +125,12 @@ export default function LoginFirstPage() {
       if (parallaxTitleBig) {
         parallaxTitleBig.style.marginTop = 5 + window.scrollY * 0.05 + "%";
       }
-    });  */
-  }, []);
+    });  
+  }, []); */
 
   return (
     <>
-      {isSmallScreen === true && (
+      {/* {isSmallScreen === true && (
         <section className=" relative flex justify-center align-items h-auto w-screen">
           <img
             src="../img/MobileKandidatSmall.jpg"
@@ -172,7 +154,34 @@ export default function LoginFirstPage() {
         </section>
       )}
       {isSmallScreen !== true && (
-        <section className=" relative flex justify-center align-items">
+        <Parallax
+          pages={2}
+          style={{ top: "0", left: "0" }}
+          className="animation"
+        >
+          <ParallaxLayer offset={0} speed={0.1}>
+            <div className="animation_layer parallax" id="background"></div>
+          </ParallaxLayer>
+          <ParallaxLayer offset={0} speed={-0.7}>
+            <div className="animation_layer parallax" id="title">
+              <h2
+                id="parallaxTitleBig"
+                className="text-black z-0 uppercase mt-[8%] lg:mt-[6%] absolute text-4xl  lg:text-8xl 
+          font-bold mr-[55%]"
+              >
+                Planner
+              </h2>
+            </div>
+          </ParallaxLayer>
+          <ParallaxLayer offset={0} speed={0.1}>
+            <div className="animation_layer parallax" id="foreground"></div>
+          </ParallaxLayer>
+          <ParallaxLayer offset={1} speed={0.1}>
+            <LoginSecondpage />
+          </ParallaxLayer>
+        </Parallax>
+
+         <section className=" relative flex justify-center align-items">
           <img
             src="../img/StartPageKandidatSmall.jpg"
             id="bakgrund"
@@ -192,11 +201,11 @@ export default function LoginFirstPage() {
             id="foreground"
             className="max-w-full absolute h-auto object-cover"
           ></img>
-        </section>
-      )}
+        </section> 
+      )} */}
 
       <section className=" relative ">
-        <div className="Wrapper bg-white  flex flex-col lg:flex-row z-999 items-center ">
+        <div className="Wrapper bg-white flex flex-col lg:flex-row sm:h-[6vh] xl:h-[11vh] z-1000 items-center ">
           {!isSmallScreen && !isMediumScreen ? (
             <h2 className="text-black text-4xl sm:text-4xl  font-bold  text-left px-4 sm:px-8 select-none">
               The social and <br></br>interactive travel <br></br>planner for
@@ -290,17 +299,17 @@ export default function LoginFirstPage() {
                       )}
 
                       {/*  {!passwordShow && (
-                  <i
-                    onClick={togglePassword}
-                    className=" fa-solid fa-eye text-xl sm:text-2xl"
-                  ></i>
-                )}
-                {passwordShow && (
-                  <i
-                    onClick={togglePassword}
-                    className=" fa-solid fa-eye-slash text-xl sm:text-2xl"
-                  ></i>
-                )} */}
+                        <i
+                          onClick={togglePassword}
+                          className=" fa-solid fa-eye text-xl sm:text-2xl"
+                        ></i>
+                      )}
+                      {passwordShow && (
+                        <i
+                          onClick={togglePassword}
+                          className=" fa-solid fa-eye-slash text-xl sm:text-2xl"
+                        ></i>
+                      )} */}
                       {(!email || !password || !passwordCheck) && (
                         <button
                           className="w-full  mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-40  font-medium rounded-lg text-sm  text-center mr-2 mb-2 "

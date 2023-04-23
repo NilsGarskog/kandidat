@@ -1,5 +1,5 @@
 import React from "react";
-import { useScreenSizes } from "./LoginFirstPage";
+import { useScreenSizes } from "./LoginLayout";
 
 export default function LoginFourthPage() {
   const { isSmallScreen, isMediumScreen } = useScreenSizes();
