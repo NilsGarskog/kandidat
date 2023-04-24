@@ -346,7 +346,6 @@ async function handleAddActivity() {
 
   }
   setActInfo([...actInfo, data])
-  console.log('är actinfo en array', actInfo)
   setDoc(userRef, data)
     .then((docRef) => {
       console.log('Document written with ID: ');

@@ -7,7 +7,7 @@ const activityData = useFetchAct(props.tripKey)
 const activities = activityData.actArr
 
 function print(){
-    console.log('vad är act Info', child)
+    
 }
     
         
