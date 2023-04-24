@@ -19,6 +19,7 @@
     "@react-spring/web": "^9.7.2",
     "bootstrap": "^5.2.3",
     "dayjs": "^1.11.7",
+    "dotenv": "^16.0.3",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "firebase": "^9.19.1",
@@ -34,8 +35,10 @@
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.8.0",
     "react-parallax": "^3.5.1",
+    "react-tooltip": "^5.11.1",
     "reactjs-popup": "^2.0.5",
     "styled-components": "^5.3.9",
+    "tailwindcss-image-rendering": "^1.0.2",
     "uuid": "^9.0.0",
     "yup": "^1.0.2"
   },

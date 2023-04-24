@@ -2,18 +2,21 @@ import React from 'react'
 import Link from 'next/link';
 import dayjs from 'dayjs'
 import { useRouter } from 'next/router';
-import useFetchTripData from '../hooks/DBfunctions'
-import Popup from 'reactjs-popup';
+import useFetchTripData from '../hooks/FetchTripData'
 import { useState, useEffect } from 'react';
+import { Tooltip } from 'react-tooltip'
+
 
 
 export default function TripCard(props) {
-  const { children, tripKey, handleDelete } = props;
+  const { children, tripKey } = props;
   const allData = useFetchTripData(tripKey)
-  const [open, setOpen] = useState(false);
+  const preferredImageIndex = 0
   const [flag, setFlag] = useState('');
   const contentStyle = { borderRadius: '20px', width: "30%" };
   const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
+  const uniqueClassName = `trip-image-${tripKey}`;
+
 
   if (allData.loading === false) {
     const tripData = allData.tripData
@@ -21,13 +24,17 @@ export default function TripCard(props) {
       <div className="flex flex-row items-center">
 
         <div className='sm:max-w-sm max-w-xs duration-300 hover:bg-gray-100 shadow-xl bg-white text-black rounded-xl items-center'>
-          <div className='flex items-center p-7 pt-4 pb-4'>
+          <div className='flex items-center pr-40 pl-3 pt-4 pb-4'>
             <Link href={`/${tripKey}`} className=' flex items-center'>
-              <div className='ml-3 h-20 w-20 border border-2 rounded-full overflow-hidden'>
-                <img className='w-full h-full object-cover' src={tripData.tripImageUrl && tripData.tripImageUrl[0] ? tripData.tripImageUrl[0] : '../img/placeholder-image.png'} />
+
+
+              <div className={`${uniqueClassName} ml-3 h-20 w-20  rounded-full overflow-hidden`} >
+                <img className='w-full h-full object-cover' src={tripData.tripImageUrl?.[tripData.preferredImageIndex]?.urlThumb || '../img/placeholder-image.png'} />
               </div>
+
               <div className='flex flex-col ml-4'>
-                <div className='uppercase text-2xl font-semibold'>
+                <div className={`uppercase font-semibold text-2xl w-[10ch]`}>
+
                   {children}
                 </div>
                 <div className='font-light text-xs'>
@@ -36,20 +43,16 @@ export default function TripCard(props) {
 
               </div>
             </Link>
-            <Popup position="relative"
-              modal
-              {...{ contentStyle, overlayStyle }}
-              trigger={<img src='../icons/bin.png' className="h-8 duration-300 pl-10 opacity-50 hover:opacity-90 cursor-pointer"/>} >
-              {close => (
-                <div className='flex p-1 flex-col items-center font-medium text-base rounded-lg w-full'>
-                  <h1 className="text-xl p-2">Are you sure you want to delete the trip to {children} ?</h1>
-                  <button className='border w-1/2 bg-buttonRed text-black rounded-xl p-4' onClick={() => { handleDelete(tripKey); close() }}>CONFIRM</button>
-                </div>
-              )}
-            </Popup>
           </div>
 
         </div>
+
+        {allData.loading === false && allData.tripData && allData.tripData.tripImageUrl && allData.tripData.tripImageUrl[tripData.preferredImageIndex] && <Tooltip anchorSelect={`.${uniqueClassName}`} place='top' clickable>
+          Photo by <Link href={allData.tripData.tripImageUrl[tripData.preferredImageIndex].portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{allData.tripData.tripImageUrl[tripData.preferredImageIndex].name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link>
+        </Tooltip>}
+
+
+
 
       </div>
 
@@ -64,3 +67,4 @@ export default function TripCard(props) {
     )
   }
 }
+

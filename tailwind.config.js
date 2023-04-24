@@ -24,16 +24,17 @@ module.exports = {
     extend: {
       colors: {
         buttonGreen: "#A2B59F",
-        buttonRed: "#E2D2D2"
+        buttonRed: "#E2D2D2",
+        calYellow: "#FFF2CC",
+        calBlue: "#93C6E7",
+        calPurple: "#BA94D1"
       },
       fontFamily: {
         latoRegular: "Lato-Regular",
         latoBold: "Lato-Bold",
-      },
-      colors: {
-        buttonGreen: "#A2B59F",
-      },
+      }
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [require("@tailwindcss/forms"),
+            require('tailwindcss-image-rendering')],
 };
