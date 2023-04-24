@@ -45,16 +45,15 @@ export default function CreateActivity(props) {
 <div className=' flex pb-20 pt-5 h-[60ch] pr-3 sm:h-[65ch] overflow-y-auto pl-3 flex-wrap gap-5 w-full items-start content-start sm:justify-between justify-center justify-self-center'>
 
 <>
-<ActivityCard tripKey={props.tripKey} showType = 'showAct' >{}</ActivityCard>  
+
   {Object.keys(actInfo).map((act, i) => {
     return (
       <ActivityCard  key={i}  tripKey={props.tripKey} >
         {actInfo[act]}
-      </ActivityCard>         
-      
-
+      </ActivityCard>       
     )
   })}
+  <ActivityCard tripKey={props.tripKey} showType = 'showAct' >{}</ActivityCard>  
 </>
 </div>
             
@@ -133,17 +132,15 @@ export default function CreateActivity(props) {
           <div>
             <i onClick={() => handleFoodButton()} className="text-black fa-solid fa-circle-plus fa-2xl duration-300 
               hover:opacity-40 cursor-pointer"></i>
-              <ActivityCard tripKey={props.tripKey} showType = 'showFood' >{}</ActivityCard>
+              
             {Object.keys(foodInfo).map((food, i) => {
     return (
       <ActivityCard  key={i} foodInfo = {food} tripKey={props.tripKey}  >
         {foodInfo[food]}
-      </ActivityCard>
-            
-      
-
+      </ActivityCard>         
     )
   })}
+  <ActivityCard tripKey={props.tripKey} showType = 'showFood' >{}</ActivityCard>
           </div>
 
 
