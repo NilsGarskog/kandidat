@@ -40,7 +40,7 @@ export default function UserDashboard() {
       const imageUrl = []
       for (let i = 0; i < 10; i++) {
         if (data.results[i]) {
-         
+          console.log(data.results[i])
           imageUrl.push({ urlFull: data.results[i].urls.full, urlThumb: data.results[i].urls.thumb, name: data.results[i].user.last_name ? data.results[i].user.first_name + ' ' + data.results[i].user.last_name : data.results[i].user.first_name, portfolioUrl: data.results[i].user.links.html })
 
         }
@@ -62,7 +62,7 @@ export default function UserDashboard() {
     setTrips({ ...trips, [newKey]: trip })
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', newKey.toString())
 
-    await setDoc(userRef, { Name: trip, arrDate: arrDate.format('YYYY-MM-DD'), depDate: depDate.format('YYYY-MM-DD'), tripImageUrl: url, preferredImageIndex: 0 })
+    await setDoc(userRef, { Name: trip, arrDate: arrDate.format('YYYY-MM-DD'), depDate: depDate.format('YYYY-MM-DD'), tripImageUrl: url })
 
     handleButton(false)
 

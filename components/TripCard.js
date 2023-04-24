@@ -11,7 +11,6 @@ import { Tooltip } from 'react-tooltip'
 export default function TripCard(props) {
   const { children, tripKey } = props;
   const allData = useFetchTripData(tripKey)
-  const preferredImageIndex = 0
   const [flag, setFlag] = useState('');
   const contentStyle = { borderRadius: '20px', width: "30%" };
   const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
@@ -29,7 +28,7 @@ export default function TripCard(props) {
 
 
               <div className={`${uniqueClassName} ml-3 h-20 w-20  rounded-full overflow-hidden`} >
-                <img className='w-full h-full object-cover' src={tripData.tripImageUrl?.[tripData.preferredImageIndex]?.urlThumb || '../img/placeholder-image.png'} />
+                <img className='w-full h-full object-cover' src={tripData.tripImageUrl?.[0]?.urlThumb || '../img/placeholder-image.png'} />
               </div>
 
               <div className='flex flex-col ml-4'>
@@ -47,8 +46,8 @@ export default function TripCard(props) {
 
         </div>
 
-        {allData.loading === false && allData.tripData && allData.tripData.tripImageUrl && allData.tripData.tripImageUrl[tripData.preferredImageIndex] && <Tooltip anchorSelect={`.${uniqueClassName}`} place='top' clickable>
-          Photo by <Link href={allData.tripData.tripImageUrl[tripData.preferredImageIndex].portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{allData.tripData.tripImageUrl[tripData.preferredImageIndex].name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link>
+        {allData.loading === false && allData.tripData && allData.tripData.tripImageUrl && allData.tripData.tripImageUrl[0] && <Tooltip anchorSelect={`.${uniqueClassName}`} place='top' clickable>
+          Photo by <Link href={allData.tripData.tripImageUrl[0].portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{allData.tripData.tripImageUrl[0].name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link>
         </Tooltip>}
 
 
