@@ -50,7 +50,7 @@ export default function LoginLayout() {
     <div className="">
       {isSmallScreen !== true && (
         <Parallax
-          pages={2.85}
+          pages={3.05}
           style={{ top: "0", left: "0" }}
           className="animation"
           ref={ref}
@@ -70,7 +70,7 @@ export default function LoginLayout() {
             <div className="animation_layer parallax" id="title">
               <h2
                 id="parallaxTitleBig"
-                className="text-black z-0 uppercase mt-[8%] text-white lg:mt-[12%] 2xl:ml-[10%] absolute text-4xl  lg:text-8xl 
+                className="text-black z-0 uppercase  text-white lg:mt-[8%] 2xl:ml-[10%] absolute text-4xl  lg:text-8xl 
           font-bold ml-[4%]"
               >
                 Planner
@@ -93,7 +93,7 @@ export default function LoginLayout() {
             <LoginFirstpage />
           </ParallaxLayer>
           <ParallaxLayer
-            offset={isMediumScreen ? 1.3 : 1}
+            offset={isMediumScreen ? 1.3 : 1.1}
             factor={isMediumScreen ? 0.4 : 0.4}
             speed={0.1}
             style={{ height: "auto" }}
@@ -101,7 +101,7 @@ export default function LoginLayout() {
             <LoginSecondpage />
           </ParallaxLayer>
           <ParallaxLayer
-            offset={isMediumScreen ? 1.3 : 1.5}
+            offset={isMediumScreen ? 1.3 : 1.6}
             factor={isMediumScreen ? 0.4 : 0.4}
             speed={0.1}
             style={{ height: "auto" }}
@@ -109,7 +109,7 @@ export default function LoginLayout() {
             <LoginThirdpage />
           </ParallaxLayer>
           <ParallaxLayer
-            offset={isMediumScreen ? 1.65 : 1.95}
+            offset={isMediumScreen ? 1.65 : 2.0}
             factor={isMediumScreen ? 0.4 : 0.4}
             speed={0.1}
             style={{ height: "auto" }}
@@ -117,7 +117,7 @@ export default function LoginLayout() {
             <LoginFourthpage />
           </ParallaxLayer>
           <ParallaxLayer
-            offset={isMediumScreen ? 1.97 : 2.3}
+            offset={isMediumScreen ? 1.97 : 2.5}
             factor={isMediumScreen ? 0.4 : 0.4}
             speed={0.1}
             style={{ height: "auto" }}
