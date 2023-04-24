@@ -8,6 +8,7 @@ import Popup from 'reactjs-popup';
 import fetchAct from '@/Algorithms/Algoritmen'
 import ActivityCard from './ActivityCard'
 import { Checkbox } from '@mui/material'
+import useFetchAct from '@/hooks/FetchActivities'
 
 
 
@@ -18,10 +19,13 @@ export default function CreateActivity(props) {
   let [activity, setActivity] = useState('')
   let [activityLength, setActivityLength] = useState('')
   let [activityType, setActivityType] = useState('')
+  const [actInfo, setActInfo] = useState([])
+  const [foodInfo, setFoodInfo] = useState([])
   const { userInfo, currentUser } = useAuth()
   const [actOpen, setActOpen] = useState(false);
   const [foodOpen, setFoodOpen] = useState(false);
   const [err, setErr] = useState("");
+
 
   const [checkedActShort, setCheckedActShort] = useState(null)
   const [checkedLunch, setCheckedLunch] = useState(null)
@@ -37,7 +41,23 @@ export default function CreateActivity(props) {
           <div>
             <i onClick={() => handleActButton()} className="text-black fa-solid fa-circle-plus fa-2xl duration-300 
       hover:opacity-40 cursor-pointer"></i>
-            <ActivityCard actData={props.actData} type='showAct'></ActivityCard>
+
+<div className=' flex pb-20 pt-5 h-[60ch] pr-3 sm:h-[65ch] overflow-y-auto pl-3 flex-wrap gap-5 w-full items-start content-start sm:justify-between justify-center justify-self-center'>
+
+<>
+<ActivityCard tripKey={props.tripKey} showType = 'showAct' >{}</ActivityCard>  
+  {Object.keys(actInfo).map((act, i) => {
+    return (
+      <ActivityCard  key={i}  tripKey={props.tripKey} >
+        {actInfo[act]}
+      </ActivityCard>         
+      
+
+    )
+  })}
+</>
+</div>
+            
           </div>
 
 
@@ -113,7 +133,17 @@ export default function CreateActivity(props) {
           <div>
             <i onClick={() => handleFoodButton()} className="text-black fa-solid fa-circle-plus fa-2xl duration-300 
               hover:opacity-40 cursor-pointer"></i>
-            <ActivityCard actData={props.actData} type='showFood'></ActivityCard>
+              <ActivityCard tripKey={props.tripKey} showType = 'showFood' >{}</ActivityCard>
+            {Object.keys(foodInfo).map((food, i) => {
+    return (
+      <ActivityCard  key={i} foodInfo = {food} tripKey={props.tripKey}  >
+        {foodInfo[food]}
+      </ActivityCard>
+            
+      
+
+    )
+  })}
           </div>
 
 
@@ -221,6 +251,7 @@ export default function CreateActivity(props) {
     }
   }
   async function addActivity() {
+   
     if (!activity) {
       setError('Please enter activity name')
     }
@@ -232,7 +263,7 @@ export default function CreateActivity(props) {
       else {
         setError('')
         translateStringToNum()
-        handleAddActivity(props, activity, activityLength, currentUser, checkedActShort, actDescription)
+        handleAddActivity()
         handleActButton()
         setActivity('')
         setCheckedActShort(null)
@@ -253,7 +284,7 @@ export default function CreateActivity(props) {
       else {
         setError('')
         translateStringToNum()
-        handleAddFood(props, activity, activityType, currentUser, checkedLunch, actDescription)
+        handleAddFood()
         handleFoodButton()
         setActivity('')
         setActDescription('')
@@ -263,8 +294,8 @@ export default function CreateActivity(props) {
 
   }
 
-}
-async function handleAddFood(props, activity, activityType, currentUser, checkedLunch, actDescription) {
+
+async function handleAddFood() {
   const newKey = v4()
 
   if (checkedLunch) {
@@ -285,6 +316,7 @@ async function handleAddFood(props, activity, activityType, currentUser, checked
 
 
   }
+  setFoodInfo([...foodInfo, data])
   setDoc(userRef, data)
     .then((docRef) => {
       console.log('Document written with ID: ');
@@ -296,7 +328,7 @@ async function handleAddFood(props, activity, activityType, currentUser, checked
 
 }
 
-async function handleAddActivity(props, activity, activityLength, currentUser, checkedActShort, actDescription) {
+async function handleAddActivity() {
   const newKey = v4()
   if (checkedActShort) {
     activityLength = 0
@@ -316,6 +348,8 @@ async function handleAddActivity(props, activity, activityLength, currentUser, c
     description: actDescription
 
   }
+  setActInfo([...actInfo, data])
+  console.log('är actinfo en array', actInfo)
   setDoc(userRef, data)
     .then((docRef) => {
       console.log('Document written with ID: ');
@@ -327,3 +361,4 @@ async function handleAddActivity(props, activity, activityLength, currentUser, c
 
 }
 
+}

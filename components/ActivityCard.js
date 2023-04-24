@@ -1,7 +1,66 @@
+import useFetchAct from '@/hooks/FetchActivities'
 import React from 'react'
 
-export default function ActivityCard(actArr) {
-    const { act, lunch, dinner } = sortAct(actArr)
+export default function ActivityCard(props) {
+const child = props.children
+const activityData = useFetchAct(props.tripKey)
+const activities = activityData.actArr
+
+function print(){
+    console.log('vad är act Info', child)
+}
+    
+        
+             if (child==null) {
+                
+                return (
+                    <>
+                    {(props.showType == 'showAct') && ( <>
+                        {activities.map((x) => (
+                        <div key={String(x)}>
+                            {(x.type == 0) && (
+                            <div className="text-black">
+                                Name: {x.activityName}
+                            </div>
+                            )}
+                           
+                        </div>
+                    ))}</>)}
+                    {(props.showType == 'showFood') && ( <>
+                        {activities.map((x) => (
+                        <div key={String(x)}>
+                            {(!x.type == 0) && (
+                            <div className="text-black">
+                                Name: {x.activityName}
+                            </div>
+                            )}
+                           
+                        </div>
+                    ))}</>)}
+                    
+                      {print()}
+                      
+                    </>
+                )
+             }
+            else {
+                return (
+                    <>
+                    {child.activityName}
+                    {print()}
+                    </>
+                )
+            }
+            
+            
+          
+            
+      
+}
+
+
+
+    {/*    const { act, lunch, dinner } = sortAct(actArr)
 
 
 
@@ -65,3 +124,4 @@ function sortAct(actArr) {
     return { act, lunch, dinner }
 }
 
+*/}
