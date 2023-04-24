@@ -42,8 +42,6 @@ export default function TripHeader(props) {
         Photo by <Link href={urlArray[imageIndex].portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{urlArray[imageIndex].name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link>
       </div>}
 
-
-
     </div>
   )
 }
