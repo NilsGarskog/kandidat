@@ -68,20 +68,15 @@ export default function LoginFirstPage() {
       return;
     }
 
-    if (!isLoggingIn) {
-      let register;
-      try {
-        register = await signUp(email, password);
-      } catch (e) {
-        if (e.code == "auth/email-already-in-use") {
-          setError(
-            "Email already in use. Please use a different email or log in."
-          );
-        } else {
-          setError(e.message);
-        }
-        return;
+    try {
+      await signUp(email, password);
+    } catch (error) {
+      if (error.code == "auth/email-already-in-use") {
+        setError("Email already in use.");
+      } else {
+        setError(error.message);
       }
+      return;
     }
   }
 
@@ -205,7 +200,7 @@ export default function LoginFirstPage() {
       )} */}
 
       <section className=" relative ">
-        <div className="Wrapper bg-white flex flex-col lg:flex-row sm:h-[6vh] xl:h-[11vh] z-1000 items-center ">
+        <div className="Wrapper bg-white flex flex-col lg:flex-row   z-1000 items-center ">
           {!isSmallScreen && !isMediumScreen ? (
             <h2 className="text-black text-4xl sm:text-4xl  font-bold  text-left px-4 sm:px-8 select-none">
               The social and <br></br>interactive travel <br></br>planner for

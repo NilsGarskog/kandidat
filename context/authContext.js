@@ -21,8 +21,7 @@ export function AuthProvider({ children }) {
   const userInfo = useRef();
 
   function signUp(email, password) {
-    createUserWithEmailAndPassword(auth, email, password);
-    return;
+    return createUserWithEmailAndPassword(auth, email, password);
   }
   function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
