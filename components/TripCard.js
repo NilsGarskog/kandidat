@@ -53,6 +53,7 @@ export default function TripCard(props) {
 
 
 
+
       </div>
 
 
