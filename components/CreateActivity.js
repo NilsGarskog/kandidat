@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
-import {
-  doc,
-  setDoc,
-  collection,
-  addDoc,
-  deleteField,
-  deleteDoc,
-} from "firebase/firestore";
-import { db } from "../firebase";
-import { useAuth } from "../context/authContext";
-import { v4 } from "uuid";
-import Popup from "reactjs-popup";
 
-import fetchAct from "@/Algorithms/Algoritmen";
-import ActivityCard from "./ActivityCard";
-import { Checkbox } from "@mui/material";
-import useFetchAct from "@/hooks/FetchActivities";
+import React, { useEffect, useState } from 'react'
+import { doc, setDoc, collection, addDoc, deleteField, deleteDoc } from 'firebase/firestore'
+import { db } from '../firebase'
+import { useAuth } from '../context/authContext'
+import { v4 } from 'uuid'
+import Popup from 'reactjs-popup';
+
+import fetchAct from '@/Algorithms/Algoritmen'
+import ActivityContainer from './ActivityContainer'
+import { Checkbox } from '@mui/material'
+import useFetchAct from '@/hooks/FetchActivities'
+import { getUrl } from '@/utils/urlUtil'
+
+
+
 
 export default function CreateActivity(props) {
   const { tripKey } = props.tripKey;
@@ -37,29 +35,34 @@ export default function CreateActivity(props) {
 
   if (props.type === "activity") {
     return (
-      <div>
-        <div>
-          <div>
-            <i
-              onClick={() => handleActButton()}
-              className="text-black fa-solid fa-circle-plus fa-2xl duration-300 
-      hover:opacity-40 cursor-pointer"
-            ></i>
 
-            <div className=" flex pb-20 pt-5 h-[60ch] pr-3 sm:h-[65ch] overflow-y-auto pl-3 flex-wrap gap-5 w-full items-start content-start sm:justify-between justify-center justify-self-center">
-              <>
-                {Object.keys(actInfo).map((act, i) => {
-                  return (
-                    <ActivityCard key={i} tripKey={props.tripKey}>
-                      {actInfo[act]}
-                    </ActivityCard>
-                  );
-                })}
-                <ActivityCard tripKey={props.tripKey} showType="showAct">
-                  {}
-                </ActivityCard>
-              </>
+
+      <div >
+
+        <div className=''>
+          <div >
+            <div className='flex items-center mb-4'>
+          <h1 className='text-4xl pl-2'>ACTIVITIES</h1>
+            <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img>
             </div>
+
+
+<div className='flex flex-col h-[24ch] overflow-y-scroll'>
+  <div className='flex flex-col-reverse'>
+  {Object.keys(actInfo).map((act, i) => {
+    return (
+      <ActivityContainer key={i}  tripKey={props.tripKey} >
+        {actInfo[act]}
+      </ActivityContainer>       
+    )
+  })}
+</div>
+
+  <ActivityContainer tripKey={props.tripKey} showType = 'showAct' >{}</ActivityContainer>  
+  </div>
+
+            
+
           </div>
         </div>
 
@@ -171,26 +174,33 @@ export default function CreateActivity(props) {
     );
   } else {
     return (
-      <div>
-        <div>
-          <div>
-            <i
-              onClick={() => handleFoodButton()}
-              className="text-black fa-solid fa-circle-plus fa-2xl duration-300 
-              hover:opacity-40 cursor-pointer"
-            ></i>
 
+
+      <div className='flex justify-center'>
+
+        <div >
+          <div>
+
+          <div className='flex items-center mb-4'>
+          <h1 className='text-4xl pl-2'>FOOD</h1>
+            <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img>
+            </div>
+            <div className='flex flex-col h-[24ch] overflow-y-scroll'>
+            <div className='flex flex-col-reverse '>
             {Object.keys(foodInfo).map((food, i) => {
-              return (
-                <ActivityCard key={i} foodInfo={food} tripKey={props.tripKey}>
-                  {foodInfo[food]}
-                </ActivityCard>
-              );
-            })}
-            <ActivityCard tripKey={props.tripKey} showType="showFood">
-              {}
-            </ActivityCard>
+            return (
+      
+      <ActivityContainer  key={i} foodInfo = {food} tripKey={props.tripKey}  >
+        {foodInfo[food]}
+      </ActivityContainer>         
+    )
+  })}
+  </div>
+  <ActivityContainer tripKey={props.tripKey} showType = 'showFood' >{}</ActivityContainer>
           </div>
+          </div>
+
+
         </div>
 
         <Popup
@@ -371,11 +381,43 @@ export default function CreateActivity(props) {
   async function handleAddFood() {
     const newKey = v4();
 
-    if (checkedLunch) {
-      activityType = 1;
-    } else if (!checkedLunch) {
-      activityType = 2;
-    }
+
+async function handleAddFood() {
+  const newKey = v4()
+
+  if (checkedLunch) {
+    activityType = 1
+  }
+  else if (!checkedLunch) {
+    activityType = 2
+  }
+
+  const userRef = doc(db, 'users', currentUser.uid, 'Trips', props.tripKey, 'Activities', newKey.toString())
+  const actUrl = await getUrl(activity, process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY)
+  console.log(actUrl)
+
+  const data = {
+    id: newKey,
+    activityName: activity,
+    time: 0,
+    type: activityType,
+    description: actDescription,
+    actImage: actUrl 
+
+
+  }
+  setFoodInfo([...foodInfo, data])
+  await setDoc(userRef, data)
+    .then((docRef) => {
+      console.log('Document written with ID: ');
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error);
+    });
+
+
+}
+
 
     const userRef = doc(
       db,
@@ -412,30 +454,26 @@ export default function CreateActivity(props) {
       activityLength = 1;
     }
 
-    const userRef = doc(
-      db,
-      "users",
-      currentUser.uid,
-      "Trips",
-      props.tripKey,
-      "Activities",
-      newKey.toString()
-    );
 
-    const data = {
-      id: newKey,
-      activityName: activity,
-      time: activityLength,
-      type: 0,
-      description: actDescription,
-    };
-    setActInfo([...actInfo, data]);
-    setDoc(userRef, data)
-      .then((docRef) => {
-        console.log("Document written with ID: ");
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
+  const userRef = doc(db, 'users', currentUser.uid, 'Trips', props.tripKey, 'Activities', newKey.toString())
+  const actUrl = await getUrl(activity, process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY)
+  const data = {
+    id: newKey,
+    activityName: activity,
+    time: activityLength,
+    type: 0,
+    description: actDescription,
+    actImage: actUrl
   }
+  setActInfo([...actInfo, data])
+  await setDoc(userRef, data)
+    .then((docRef) => {
+      console.log('Document written with ID: ');
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error);
+    });
+
+
+
 }

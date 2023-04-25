@@ -121,6 +121,7 @@ export default function Modal(props) {
       }
       setIsLoading(false);
     }
+
     fetchProfileInfo();
   }, [currentUser.uid]);
 
@@ -174,6 +175,7 @@ export default function Modal(props) {
                     onClick={() => {
                       close();
                       setSelectedImage(null);
+
                     }}
                     className="p-2 sm:pr-4 pr-0 sm:pt-4 pt-1 sm:text-5xl text-xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 duration-300 opacity-50 hover:opacity-100 "
                   ></i>

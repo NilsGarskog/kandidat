@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useAuth } from "../context/authContext";
-import TripCard from "./TripCard";
-import { doc, setDoc, deleteField, deleteDoc } from "firebase/firestore";
-import { db } from "../firebase";
-import useFetchTrips from "../hooks/FetchTrips";
-import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index.css";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import dayjs from "dayjs";
-import Map from "./Map";
-import APItest from "./APItest";
-import Autocomplete from "./Autocomplete";
+
+import React, { useEffect, useState } from 'react'
+import { useAuth } from '../context/authContext'
+import TripCard from './TripCard'
+import { doc, setDoc, deleteField, deleteDoc } from 'firebase/firestore'
+import { db } from '../firebase'
+import useFetchTrips from '../hooks/FetchTrips'
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs'
+import Map from './Map'
+import APItest from './APItest'
+import Autocomplete from './Autocomplete'
+import { getUrl } from '@/utils/urlUtil'
+
+
 
 export default function UserDashboard() {
   const { userInfo, currentUser } = useAuth();
@@ -28,38 +32,24 @@ export default function UserDashboard() {
 
   const unsplashKey = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
 
-  async function getUrl() {
-    try {
-      const response = await fetch(
-        `https://api.unsplash.com/search/photos?query=${trip}&client_id=${unsplashKey}`
-      );
-      const data = await response.json();
-      const imageUrl = [];
-      for (let i = 0; i < 10; i++) {
-        if (data.results[i]) {
-          imageUrl.push({
-            urlFull: data.results[i].urls.full,
-            urlThumb: data.results[i].urls.thumb,
-            name: data.results[i].user.last_name
-              ? data.results[i].user.first_name +
-                " " +
-                data.results[i].user.last_name
-              : data.results[i].user.first_name,
-            portfolioUrl: data.results[i].user.links.html,
-          });
-        }
-      }
-      return imageUrl;
-    } catch {
-      return [];
-    }
-  }
+
 
   async function handleAddTrip() {
     setOpen(false);
-    if (!trip || arrDate === null || depDate === null) {
-      return setErr("Please fill in the required fields");
-    }
+    if (!trip || arrDate === null || depDate === null) { return setErr('Please fill in the required fields') }
+
+
+    const url = await getUrl(trip,unsplashKey)
+    const newKey = Object.keys(trips).length === 0 ? 1 : Math.max(...Object.keys(trips)) + 1
+    setTrips({ ...trips, [newKey]: trip })
+    const userRef = doc(db, 'users', currentUser.uid, 'Trips', newKey.toString())
+
+    await setDoc(userRef, { Name: trip, arrDate: arrDate.format('YYYY-MM-DD'), depDate: depDate.format('YYYY-MM-DD'), tripImageUrl: url, preferredImageIndex: 0, itCreated: false, itineary: null })
+
+    handleButton(false)
+
+    
+
 
     const url = await getUrl();
     const newKey =
@@ -99,19 +89,14 @@ export default function UserDashboard() {
   }
 
   return (
-    <div
-      className="w-full text-black max-w-[90ch] mx-auto items-center flex flex-col flex-wrap sm:gap-5
-    text-xs sm:text-sm overflow-hidden"
-    >
-      <div className="flex flex-col items-center text-center select-none">
-        <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-0">
-          <span className="font-bold">Welcome,</span>{" "}
-          <span className="font-light">Samuel!</span>
-        </h1>
-        <h1 className="text-lg sm:text-xl font-regular">
-          Here are your current trips. <br></br>
-          Want to add another one? Just click the plus icon.{" "}
-        </h1>
+
+    <div className='w-full text-black max-w-[90ch] mx-auto items-center flex flex-col flex-wrap sm:gap-5
+    text-xs sm:text-sm overflow-hidden'>
+      <div className='flex flex-col items-center text-center select-none'>
+        <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-10 sm:pt-0"><span className='font-bold'>Welcome,</span> <span className='font-light'>Traveller!</span></h1>
+        <h1 className="text-md sm:text-xl font-regular">Here are your current trips. <br></br>
+          Want to add another one? Just click the plus icon. </h1>
+
       </div>
 
       {loading && (
