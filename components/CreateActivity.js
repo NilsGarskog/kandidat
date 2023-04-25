@@ -6,9 +6,10 @@ import { v4 } from 'uuid'
 import Popup from 'reactjs-popup';
 
 import fetchAct from '@/Algorithms/Algoritmen'
-import ActivityCard from './ActivityCard'
+import ActivityContainer from './ActivityContainer'
 import { Checkbox } from '@mui/material'
 import useFetchAct from '@/hooks/FetchActivities'
+import { getUrl } from '@/utils/urlUtil'
 
 
 
@@ -37,25 +38,28 @@ export default function CreateActivity(props) {
 
       <div >
 
-        <div >
-          <div>
-            <i onClick={() => handleActButton()} className="text-black fa-solid fa-circle-plus fa-2xl duration-300 
-      hover:opacity-40 cursor-pointer"></i>
+        <div className=''>
+          <div >
+            <div className='flex items-center mb-4'>
+          <h1 className='text-4xl pl-2'>ACTIVITIES</h1>
+            <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img>
+            </div>
 
-<div className=' flex pb-20 pt-5 h-[60ch] pr-3 sm:h-[65ch] overflow-y-auto pl-3 flex-wrap gap-5 w-full items-start content-start sm:justify-between justify-center justify-self-center'>
 
-<>
-
+<div className='flex flex-col h-[24ch] overflow-y-scroll'>
+  <div className='flex flex-col-reverse'>
   {Object.keys(actInfo).map((act, i) => {
     return (
-      <ActivityCard  key={i}  tripKey={props.tripKey} >
+      <ActivityContainer key={i}  tripKey={props.tripKey} >
         {actInfo[act]}
-      </ActivityCard>       
+      </ActivityContainer>       
     )
   })}
-  <ActivityCard tripKey={props.tripKey} showType = 'showAct' >{}</ActivityCard>  
-</>
 </div>
+
+  <ActivityContainer tripKey={props.tripKey} showType = 'showAct' >{}</ActivityContainer>  
+  </div>
+
             
           </div>
 
@@ -126,23 +130,29 @@ export default function CreateActivity(props) {
   else {
     return (
 
-      <div >
+      <div className='flex justify-center'>
 
         <div >
           <div>
-            <i onClick={() => handleFoodButton()} className="text-black fa-solid fa-circle-plus fa-2xl duration-300 
-              hover:opacity-40 cursor-pointer"></i>
-              
+
+          <div className='flex items-center mb-4'>
+          <h1 className='text-4xl pl-2'>FOOD</h1>
+            <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img>
+            </div>
+            <div className='flex flex-col h-[24ch] overflow-y-scroll'>
+            <div className='flex flex-col-reverse '>
             {Object.keys(foodInfo).map((food, i) => {
-    return (
-      <ActivityCard  key={i} foodInfo = {food} tripKey={props.tripKey}  >
+            return (
+      
+      <ActivityContainer  key={i} foodInfo = {food} tripKey={props.tripKey}  >
         {foodInfo[food]}
-      </ActivityCard>         
+      </ActivityContainer>         
     )
   })}
-  <ActivityCard tripKey={props.tripKey} showType = 'showFood' >{}</ActivityCard>
+  </div>
+  <ActivityContainer tripKey={props.tripKey} showType = 'showFood' >{}</ActivityContainer>
           </div>
-
+          </div>
 
         </div>
 
@@ -303,18 +313,21 @@ async function handleAddFood() {
   }
 
   const userRef = doc(db, 'users', currentUser.uid, 'Trips', props.tripKey, 'Activities', newKey.toString())
+  const actUrl = await getUrl(activity, process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY)
+  console.log(actUrl)
 
   const data = {
     id: newKey,
     activityName: activity,
     time: 0,
     type: activityType,
-    description: actDescription
+    description: actDescription,
+    actImage: actUrl 
 
 
   }
   setFoodInfo([...foodInfo, data])
-  setDoc(userRef, data)
+  await setDoc(userRef, data)
     .then((docRef) => {
       console.log('Document written with ID: ');
     })
@@ -336,17 +349,17 @@ async function handleAddActivity() {
 
 
   const userRef = doc(db, 'users', currentUser.uid, 'Trips', props.tripKey, 'Activities', newKey.toString())
-
+  const actUrl = await getUrl(activity, process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY)
   const data = {
     id: newKey,
     activityName: activity,
     time: activityLength,
     type: 0,
-    description: actDescription
-
+    description: actDescription,
+    actImage: actUrl
   }
   setActInfo([...actInfo, data])
-  setDoc(userRef, data)
+  await setDoc(userRef, data)
     .then((docRef) => {
       console.log('Document written with ID: ');
     })
