@@ -16,11 +16,11 @@ console.log(activities)
                     <>
                  
                     {(props.showType === 'showAct') && ( <>
-                    <div className='flex flex-col overflow-y-scroll sm:flex-col'>
+                    <div className='flex w-[40ch] flex-row sm:flex-nowrap sm:overflow-y-scroll overflow-x-scroll sm:overflow-x-hidden sm:flex-col'>
                         {activities.map((x) => (
                         <div key={String(x)}>
                             {(x.type == 0) && (
-                            <div className=" p-2 text-black">
+                            <div className=" px-2 text-black">
                               <ActivityCard children={x}/>
                             </div>
                             )}
@@ -31,11 +31,11 @@ console.log(activities)
                     </>)}
                  
                     {(props.showType === 'showFood') && ( <>
-                        <div className='flex flex-col overflow-scroll sm:flex-col'>
+                        <div className='flex w-[40ch] flex-row sm:flex-nowrap sm:overflow-y-scroll overflow-x-scroll sm:overflow-x-hidden sm:flex-col'>
                         {activities.map((x) => (
                         <div key={String(x)}>
                             {(!x.type == 0) && (
-                            <div className="p-2 text-black">
+                            <div className="px-2 text-black">
                              <ActivityCard children={x}/>
                             </div>
                             )}

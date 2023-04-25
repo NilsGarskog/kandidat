@@ -24,14 +24,14 @@ export default function Trip() {
         const actArr = actData.actArr
         const algoData = { arrDate: tripData.arrDate, depDate: tripData.depDate, actArr: actArr }
         return (
-            <div>
+            <div className='overflow-x-hidden'>
 
                 {page === "activities" &&
                     <div>
                         <TripHeader tripData={tripData}>
                         </TripHeader>
 
-                        <div className='flex flex-col sm:flex-row  items-center justify-evenly mt-10'>
+                        <div className='ml-20 sm:ml-0 flex flex-col sm:flex-row  items-center justify-evenly mt-10'>
                             <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='activity'></CreateActivity>
                             <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='restaurant'></CreateActivity>
                         </div>

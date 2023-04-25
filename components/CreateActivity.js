@@ -31,23 +31,25 @@ export default function CreateActivity(props) {
   const [checkedActShort, setCheckedActShort] = useState(null)
   const [checkedLunch, setCheckedLunch] = useState(null)
   const [actDescription, setActDescription] = useState('')
+  const isMobile = window.innerWidth < 640; // adjust breakpoint as needed
 
   if (props.type === 'activity') {
 
     return (
 
-      <div >
+      <div>
 
         <div >
-          <div >
-            <div className='flex sm:justify-start justify-between items-center mb-4'>
-          <h1 className='text-4xl pl-2'>ACTIVITIES</h1>
-            <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img>
+          <div className='flex sm:items-start flex-col'>
+            <div className='flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4'>
+          <h1 className='text-4xl pl-4'>ACTIVITIES</h1>
+            {!isMobile && <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img>}
             </div>
 
 
-<div className='flex flex-col h-[24ch]'>
-  <div className='flex flex-col-reverse'>
+<div className='flex sm:flex-col sm:h-[24ch]'>
+  <div className='flex sm:flex-col-reverse'>
+  {isMobile && <img className="z-10 rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img>}
   {Object.keys(actInfo).map((act, i) => {
     return (
       <ActivityContainer key={i}  tripKey={props.tripKey} >
@@ -130,17 +132,17 @@ export default function CreateActivity(props) {
   else {
     return (
 
-      <div className='flex justify-center'>
+      <div >
 
         <div >
-          <div>
-
-          <div className='sm:mt-0 mt-10 flex sm:justify-start justify-between items-center mb-4'>
-          <h1 className='text-4xl pl-2'>FOOD</h1>
-            <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img>
+        <div className='flex sm:items-start flex-col'>
+            <div className='flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4'>
+           <h1 className='text-4xl pl-4'>FOOD</h1>
+            {!isMobile && <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img>}
             </div>
-            <div className='flex flex-col h-[24ch]'>
-            <div className='flex flex-col-reverse '>
+            <div className=' flex sm:flex-col sm:h-[24ch]'>
+            <div className=' flex sm:flex-col-reverse '>
+            {isMobile && <img className="z-10 rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img>}
             {Object.keys(foodInfo).map((food, i) => {
             return (
       
