@@ -94,7 +94,7 @@ export default function Modal(props) {
 
 
     useEffect(() => {
-        async function fetchProfileInfo() {
+      async function fetchProfileInfo() {
             setIsLoading(true)
             const userRef = doc(db, 'users', currentUser.uid)
             const docSnap = await getDoc(userRef)

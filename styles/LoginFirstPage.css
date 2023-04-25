@@ -4,13 +4,53 @@ body {
 }
 
 .forgot-password a {
-  color: #167bff;
+  color: #a2b59f;
 }
 
 #parallaxTitleSmall {
   font-family: "Karantina", cursive;
+  z-index: 0;
 }
 
 #parallaxTitleBig {
   font-family: "Karantina", normal;
+  z-index: 0;
+}
+.animation,
+.animation_layer {
+  height: 100vh;
+}
+
+.animation {
+  display: block;
+  position: relative;
+  z-index: 10;
+}
+
+.animation_layer {
+  background-position: bottom center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  position: relative;
+  max-width: 100%;
+}
+
+.animation_layer.parallax {
+  position: fixed;
+}
+
+#background {
+  background-image: url(./images/StartPageKandidatSmall.jpg);
+}
+
+#foreground {
+  background-image: url(./images/StartPageforegroundSmall.png);
+}
+#backgroundSmall {
+  background-image: url(./images/MobileKandidatSmall.jpg);
+}
+
+#foregroundSmall {
+  background-image: url(./images/MobileKandidatSmallForeground.png);
 }
