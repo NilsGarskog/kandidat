@@ -1,6 +1,20 @@
 
+import { useRouter } from 'next/router';
 import dayjs from "dayjs"
+import { doc, setDoc, deleteField, deleteDoc, updateDoc } from 'firebase/firestore'
+import { useAuth } from '../context/authContext'
+import { db } from '../firebase'
 
+
+async function saveItineary(IT) {
+    const router = useRouter()
+    const { userInfo, currentUser } = useAuth()
+    const { tripKey } = router.query
+
+
+    const userRef = doc(db, 'users', currentUser.uid, 'Trips', tripKey)
+    await updateDoc(userRef, { itCreated: true, itineary: IT })
+}
 
 
 const genericLunchId = 1
@@ -116,6 +130,7 @@ export default function Algoritmen(arrDate, depDate, actArr) {
 
         }
     })
+    saveItineary(outPut);
 
     return (
         outPut
