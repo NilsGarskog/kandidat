@@ -16,7 +16,7 @@ console.log(activities)
                     <>
                  
                     {(props.showType === 'showAct') && ( <>
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col overflow-y-scroll sm:flex-col'>
                         {activities.map((x) => (
                         <div key={String(x)}>
                             {(x.type == 0) && (
@@ -31,7 +31,7 @@ console.log(activities)
                     </>)}
                  
                     {(props.showType === 'showFood') && ( <>
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col overflow-scroll sm:flex-col'>
                         {activities.map((x) => (
                         <div key={String(x)}>
                             {(!x.type == 0) && (

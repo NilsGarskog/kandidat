@@ -31,7 +31,7 @@ export default function Trip() {
                         <TripHeader tripData={tripData}>
                         </TripHeader>
 
-                        <div className='flex justify-evenly mt-10'>
+                        <div className='flex flex-col sm:flex-row  items-center justify-evenly mt-10'>
                             <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='activity'></CreateActivity>
                             <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='restaurant'></CreateActivity>
                         </div>
