@@ -49,6 +49,10 @@ export default function Calendar(props) {
         </button>
 
       </div>}
+      {itineary.length < daysPerView + 1 &&
+        <div className="h-20"></div>
+      }
+
       <div className="w-full h-[70ch] flex flex-wrap justify-center gap-10 -mt-12 select-none">
 
         {daysToRender.map((item, index) => (

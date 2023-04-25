@@ -62,7 +62,7 @@ export default function Trip() {
                 {(page === "calender" && (ItCreated === true || openIt === true)) &&
                     <div className='flex items-center flex-col'>
                         <Calendar data={algoData} itCreated={ItCreated} regen={regen}></Calendar>
-                        <i onClick={() => regenerate(regen, setRegen)} className="fa-solid fa-arrows-rotate text-6xl -mt-40"></i>
+                        <i onClick={() => regenerate(regen, setRegen)} className="fa-solid duration-300 hover:rotate-90 fa-arrows-rotate text-6xl -mt-40 cursor-pointer"></i>
                     </div>
                 }
                 {page === "settings" &&
