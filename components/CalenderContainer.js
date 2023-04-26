@@ -15,11 +15,9 @@ export default function ActivityContainer(props) {
     let [regen, setRegen] = useState(false)
     let algoData = props.data
     const activityData = useFetchAct(algoData.tripKey)
-    // const allData = useFetchTripData(algoData.tripKey)
     const activities = activityData.actArr
 
     if (activityData.loading === false) {
-        // const tripData = allData.tripData
         algoData.actArr = activities
         return (
             <div className='flex items-center flex-col'>
