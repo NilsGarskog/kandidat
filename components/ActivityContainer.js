@@ -6,7 +6,7 @@ export default function ActivityContainer(props) {
 const child = props.children
 const activityData = useFetchAct(props.tripKey)
 const activities = activityData.actArr
-console.log(activities)
+
 
 
         

@@ -3,7 +3,7 @@ import React from 'react'
 export default function ActivityCard(props) {
     const children = props.children
     const actData = {name: children.activityName, img: children.actImage[0], description: children.description}
-    console.log(actData)
+
   return (
  
     <div className='sm:max-w-sm max-w-[10ch] sm:duration-300 sm:hover:bg-gray-100 sm:shadow-xl sm:bg-white text-black sm:rounded-xl sm:items-center'>
