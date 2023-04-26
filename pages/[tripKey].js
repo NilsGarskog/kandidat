@@ -18,6 +18,7 @@ export default function Trip() {
     const allData = useFetchTripData(tripKey)
     const actData = useFetchAct(tripKey)
     let [openIt, setOpenIt] = useState(false)
+    const isMobile = window.innerWidth < 640;
 
     if (allData.loading === false && actData.loading === false) {
         const tripData = allData.tripData
@@ -41,16 +42,16 @@ export default function Trip() {
                 }
                 {(page === "calender" && ItCreated === false && openIt === false) &&
                     <div className='flex items-center flex-col p-3'>
-                        <div className='flex flex-col items-center w-2/3 '>
-                            <h1 className="text-3xl text-bold p-2 font-bold">Welcome to the itinerary page!</h1>
-                            <p className="text-xl p-1" > Here, you can generate your itinerary based on the activities you have planned so far. If you are satisfied with your plans, simply click the 'Generate Itinerary' button below to create the first draft of your itinerary.
-                                However, if you would like to add more activities or change your plans, don't worry! You can always come back to this page later and regenerate the itinerary.</p>
+                        <div className='flex flex-col items-center w-5/6 sm:w-2/3 select-none cursor-default'>
+                            <h1 className="text-center text-5xl sm:text-7xl text-bold p-2 font-bold uppercase mt-10 sm:mt-28">Your itineary</h1>
+                            <p className="text-md sm:text-lg text-center p-1 mt-4 sm:mt-0" > Here, you can generate your itinerary based on the activities you have planned so far.<br/>  {isMobile && <br/>}                       
+                            If you would like to add more activities, you can always come back to this page later {!isMobile && <br/>}and regenerate the itinerary.</p>
                         </div>
-                        <button className='mt-5 border w-1/3 bg-buttonGreen uppercase opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' onClick={() => setOpenIt(true)}>Generate Itinerary</button>
+                        <button className='mt-5 border w-auto bg-buttonGreen uppercase opacity-100 hover:opacity-80 duration-300 text-black text-2xl sm:text-2xl font-semibold rounded-xl px-10 py-3' onClick={() => setOpenIt(true)}>GENERATE!</button>
                     </div>
                 }
                 {(page === "calender" && (ItCreated === true || openIt === true)) &&
-                    <div>
+                    <div> 
                         <CalendarContainer data={algoData}></CalendarContainer>
                     </div>
                 }

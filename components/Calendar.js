@@ -30,41 +30,53 @@ export default function Calendar(props) {
   const daysToRender = itineary.slice(currentView * daysPerView, (currentView * daysPerView) + daysPerView);
   const isNextEnabled = (currentView + 1) * daysPerView < itineary.length;
   const isPrevEnabled = currentView > 0;
-
+console.log(itineary.length)
   return (
-    <div className='flex flex-col w-full'>
+    <div className='flex flex-col'>
+       {!isMobile && <div>
+            <h1 className='uppercase text-center text-7xl -mb-10 mt-8 font-bold'>
+                YOUR Itinerary
+            </h1>
+        </div>}
+    <div className={`flex w-full mt-8 sm:mt-20`}>
+        
       {itineary.length > daysPerView + 1 && <div className='flex  mt-0 justify-evenly'>
-        <button className='h-20 mr-20 px-0' onClick={() => setCurrentView(currentView - 1)} disabled={!isPrevEnabled}>
-          <img className={`-mb-10 mr-24 px-0 h-10 ${!isPrevEnabled ? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`}
+   
+        <button className='h-20 px-0' onClick={() => setCurrentView(currentView - 1)} disabled={!isPrevEnabled}>
+          <img className={`absolute left-0 sm:mt-32 mt-40 ml-6 sm:ml-40 h-12 sm:h-20 ${!isPrevEnabled ? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`}
             src='../icons/arrow-left.png'
             style={{ backfaceVisibility: 'hidden' }}
           />
         </button>
+        </div>
+        }
+        
 
-        <button className='h-20 ml-20 px-0' onClick={() => setCurrentView(currentView + 1)} disabled={!isNextEnabled}>
-          <img className={`-mb-10 ml-24 h-10 px-0 ${!isNextEnabled ? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`}
+      <div className="w-full h-[70ch] flex justify-center select-none">
+
+{daysToRender.map((item, index) => (
+  <Day
+    key={item.day}
+    day={item.day}
+    activities={item.act}
+    actArr={data.actArr}
+  />
+))}
+
+{itineary.length > daysPerView + 1 && <div className='flex  mt-0 justify-evenly'>
+        
+        <button className='h-20  px-0' onClick={() => setCurrentView(currentView + 1)} disabled={!isNextEnabled}>
+          <img className={`absolute right-0 sm:mt-32 mt-40 mr-6 sm:mr-40 h-12 sm:h-20 px-0 ${!isNextEnabled ? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`}
             src='../icons/arrow-right.png'
             style={{ backfaceVisibility: 'hidden' }}
           />
         </button>
-
-      </div>}
-      {itineary.length < daysPerView + 1 &&
-        <div className="h-20"></div>
-      }
-
-      <div className="w-full h-[70ch] flex flex-wrap justify-center gap-10 -mt-12 select-none">
-
-        {daysToRender.map((item, index) => (
-          <Day
-            key={item.day}
-            day={item.day}
-            activities={item.act}
-            actArr={data.actArr}
-          />
-        ))}
-
+        </div>
+}
       </div>
+   
+
+    </div>
     </div>
   )
 }
