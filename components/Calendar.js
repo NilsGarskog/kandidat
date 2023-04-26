@@ -30,11 +30,11 @@ export default function Calendar(props) {
   const daysToRender = itineary.slice(currentView * daysPerView, (currentView * daysPerView) + daysPerView);
   const isNextEnabled = (currentView + 1) * daysPerView < itineary.length;
   const isPrevEnabled = currentView > 0;
-console.log(itineary.length)
+
   return (
     <div className='flex flex-col'>
        {!isMobile && <div>
-            <h1 className='uppercase text-center text-7xl -mb-10 mt-8 font-bold'>
+            <h1 className='uppercase text-center text-7xl -mb-10 mt-4 font-bold'>
                 YOUR Itinerary
             </h1>
         </div>}
