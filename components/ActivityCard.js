@@ -1,4 +1,3 @@
-
 import React from 'react'
 
 export default function ActivityCard(props) {
@@ -10,7 +9,6 @@ export default function ActivityCard(props) {
     <div className='sm:max-w-sm max-w-xs duration-300 hover:bg-gray-100 shadow-xl bg-white text-black rounded-xl items-center'>
     <div className='flex items-center pr-40 pl-3 pt-4 pb-4'>
       <div className=' flex items-center'>
-
 
 
         <div className={`ml-3 h-20 w-20  rounded-full overflow-hidden`} >
