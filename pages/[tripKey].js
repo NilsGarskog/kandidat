@@ -61,7 +61,7 @@ export default function Trip() {
                         <Settings data={tripData}></Settings>
                     </div>
                 }
-                <div className="min-h-[20ch]"></div>
+                <div className="min-h-[10ch]"></div>
                 <div className="fixed bottom-10 left-0 right-0 z-10">
                     <TripNavBar page={page} setPage={setPage}></TripNavBar>
                 </div>

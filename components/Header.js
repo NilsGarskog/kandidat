@@ -16,7 +16,10 @@ export default function Header() {
     <>
       {openModal && <Modal setOpenModal={setOpenModal} />}
       <div className='w-full pr-5 pl-5 pt-3 left-0 bg-inherit flex items-center justify-between p-1'>
-        <h1 onClick={() => router.push('/')} className='text-2xl select-none text-black  duration-300 hover:opacity-40 cursor-pointer sm:text-4xl font-medium'> PLANNER </h1>
+        <div onClick={() => router.push('/')} className="flex items-center duration-300 hover:opacity-40 cursor-pointer">
+        <h1 className='text-2xl select-none text-black   sm:text-4xl font-medium'> PLANNER </h1>
+        <img className='h-12 pl-2' src='../img/logo.svg'/>
+        </div>
         <i onClick={() => setOpenModal(true)} className="fa-solid fa-user text-xl text-black duration-300 hover:opacity-40 cursor-pointer sm:text-3xl"></i>
       </div>
     </>

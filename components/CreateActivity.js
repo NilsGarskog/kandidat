@@ -37,37 +37,34 @@ export default function CreateActivity(props) {
 
     return (
 
-      <div>
+      <div >
 
-        <div >
-          <div className='flex sm:items-start flex-col'>
-            <div className='flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4'>
-          <h1 className='text-4xl pl-4'>ACTIVITIES</h1>
+        <div  >
+        <div className='static flex sm:items-start flex-col sm:mt-0 mt-0 mb-2'>
+            <div className=' flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4'>
+           <h1 className=' text-4xl pl-4'>ACTIVITIES</h1>
             {!isMobile && <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img>}
             </div>
-
-
-<div className='flex sm:flex-col sm:h-[24ch]'>
-  <div className='flex sm:flex-col-reverse'>
-  {isMobile && <img className="z-10 rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img>}
-  {Object.keys(actInfo).map((act, i) => {
-    return (
-      <ActivityContainer key={i}  tripKey={props.tripKey} >
+            <div className='sm:mt-0 mt-10 flex sm:flex-col sm:h-[24ch]'>
+            <div className=' flex sm:flex-col-reverse '>
+            {isMobile && <div className='flex bg-gradient-to-l from-white z-10'><img className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img></div>}
+            <div className='sm:h-[24ch] flex sm:flex-col sm:overflow-y-scroll overflow-x-scroll'>
+            {Object.keys(actInfo).map((act, i) => {
+            return (
+      
+      <ActivityContainer  key={i} actInfo = {act} tripKey={props.tripKey}  >
         {actInfo[act]}
-      </ActivityContainer>       
+      </ActivityContainer>         
     )
   })}
-</div>
-
-  <ActivityContainer tripKey={props.tripKey} showType = 'showAct' >{}</ActivityContainer>  
+  
+  <ActivityContainer tripKey={props.tripKey} showType = 'showAct' >{}</ActivityContainer>
   </div>
-
-            
+        </div>
+          </div>
           </div>
 
-
         </div>
-
         <Popup open={actOpen}
           contentStyle={{
             width: '400px',
@@ -132,17 +129,18 @@ export default function CreateActivity(props) {
   else {
     return (
 
-      <div >
+      <div>
 
         <div >
-        <div className='flex sm:items-start flex-col'>
+        <div className='static flex sm:items-start flex-col sm:mt-0 mt-0 mb-24 sm:mb-2'>
             <div className='flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4'>
-           <h1 className='text-4xl pl-4'>FOOD</h1>
+           <h1 className=' text-4xl pl-4'>FOOD</h1>
             {!isMobile && <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img>}
             </div>
-            <div className=' flex sm:flex-col sm:h-[24ch]'>
+            <div className='sm:mt-0 mt-10 flex sm:flex-col sm:h-[24ch]'>
             <div className=' flex sm:flex-col-reverse '>
-            {isMobile && <img className="z-10 rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img>}
+            {isMobile && <div className=' flex justify-items-center bg-white'><img className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img></div>}
+            <div className='sm:h-[24ch] flex sm:flex-col sm:overflow-y-scroll overflow-x-scroll'>
             {Object.keys(foodInfo).map((food, i) => {
             return (
       
@@ -151,8 +149,10 @@ export default function CreateActivity(props) {
       </ActivityContainer>         
     )
   })}
-  </div>
+  
   <ActivityContainer tripKey={props.tripKey} showType = 'showFood' >{}</ActivityContainer>
+  </div>
+        </div>
           </div>
           </div>
 

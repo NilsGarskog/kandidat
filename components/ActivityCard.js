@@ -15,7 +15,7 @@ export default function ActivityCard(props) {
           <img className='w-full h-full object-cover' src={actData.img?.urlThumb || '../img/placeholder-image.png'} />
         </div>
 
-        <div className='flex flex-col sm:text-left text-center ml-4'>
+        <div className='flex flex-wrap flex-col sm:text-left text-center mt-2 sm:mt-0 ml-4'>
           <div className={`uppercase font-light sm:font-semibold text-md sm:text-2xl w-[10ch] select-none cursor-default`}>
 
             {actData.name}
