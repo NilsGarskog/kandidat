@@ -34,7 +34,7 @@ export default function Calendar(props) {
   return (
     <div className='flex flex-col'>
        {!isMobile && <div>
-            <h1 className='uppercase text-center text-7xl -mb-10 mt-4 font-bold'>
+            <h1 className='uppercase text-center text-7xl -mb-10 mt-4 font-bold cursor-default select-none'>
                 YOUR Itinerary
             </h1>
         </div>}
@@ -52,7 +52,7 @@ export default function Calendar(props) {
         }
         
 
-      <div className="w-full h-[70ch] flex justify-center select-none">
+      <div className="w-full h-[70ch] flex justify-center select-none cursor-default">
 
 {daysToRender.map((item, index) => (
   <Day
