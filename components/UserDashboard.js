@@ -85,7 +85,7 @@ export default function UserDashboard() {
       {(!loading) && (
 
 
-        <div className=' flex pb-20 pt-5 h-[60ch] pr-3 sm:h-[65ch] overflow-y-auto pl-3 flex-wrap gap-5 w-full items-start content-start sm:justify-between justify-center justify-self-center'>
+        <div className=' flex pb-20 pt-5 h-[60ch] pr-3 sm:h-[65ch] overflow-y-auto pl-3 flex-wrap  gap-5 w-full items-start content-start sm:justify-between justify-center justify-self-center'>
 
           <>
             {Object.keys(trips).map((trip, i) => {
