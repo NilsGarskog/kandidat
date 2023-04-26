@@ -4,26 +4,16 @@ import useFetchTripData from '../hooks/FetchTripData'
 import useFetchAct from '../hooks/FetchActivities'
 import dayjs from 'dayjs'
 import Calendar from '@/components/Calendar';
+import CalendarContainer from '@/components/CalenderContainer';
 import CreateActivity from '../components/CreateActivity'
 import TripHeader from '@/components/TripHeader';
 import TripNavBar from '../components/TripPageComponents/TripNavBar'
 import Settings from '../components/TripPageComponents/Settings'
 
 
-async function regenerate(regen, setRegen) {
-    if (regen === true) {
-        await setRegen(false)
-    }
-    setRegen(true)
-}
-
-
-
-
 export default function Trip() {
     const router = useRouter()
     let [page, setPage] = useState("activities")
-    let [regen, setRegen] = useState(false)
     const { tripKey } = router.query
     const allData = useFetchTripData(tripKey)
     const actData = useFetchAct(tripKey)
@@ -60,9 +50,8 @@ export default function Trip() {
                     </div>
                 }
                 {(page === "calender" && (ItCreated === true || openIt === true)) &&
-                    <div className='flex items-center flex-col'>
-                        <Calendar data={algoData} itCreated={ItCreated} regen={regen}></Calendar>
-                        <i onClick={() => regenerate(regen, setRegen)} className="fa-solid duration-300 hover:rotate-90 fa-arrows-rotate text-6xl -mt-40 cursor-pointer"></i>
+                    <div>
+                        <CalendarContainer data={algoData}></CalendarContainer>
                     </div>
                 }
                 {page === "settings" &&
