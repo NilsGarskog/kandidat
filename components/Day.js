@@ -31,7 +31,7 @@ export default function Day(props) {
       newActivityList.push(
         <div
           id={activity}
-          className={`font-medium flex items-center justify-center rounded-xl w-[15ch] ${actLength == 0 ? 'h-[5ch]' : 'h-[11ch]'} text-lg mt-3 text-slate-900 text-center ${actType == 1 || actType == 2 ? 'bg-calBlue' : 'bg-calYellow'}`}
+          className={`font-medium flex items-center justify-center rounded-xl w-[15ch] ${actLength == 0 ? 'h-[5ch]' : 'h-[11ch]'} text-lg mt-3 text-slate-900 text-center ${actType == 1 || actType == 2 ? 'bg-calYellow' : 'bg-calBlue'}`}
           key={index}
         >
           {actName}
@@ -40,7 +40,7 @@ export default function Day(props) {
     })
   
     return (
-      <div className="flex flex-col align-center">
+      <div className="flex flex-col align-center px-6">
         <h3 className="uppercase text-xl text-center font-light">{day}</h3>
         {newActivityList}
       </div>
