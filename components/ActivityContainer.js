@@ -6,7 +6,7 @@ export default function ActivityContainer(props) {
 const child = props.children
 const activityData = useFetchAct(props.tripKey)
 const activities = activityData.actArr
-console.log(activities)
+
 
 
         
@@ -16,11 +16,11 @@ console.log(activities)
                     <>
                  
                     {(props.showType === 'showAct') && ( <>
-                    <div className='flex flex-col'>
+                    <div className='flex w-[40ch] flex-row sm:flex-nowrap sm:overflow-x-hidden sm:flex-col px-2 sm:p-2'>
                         {activities.map((x) => (
                         <div key={String(x)}>
                             {(x.type == 0) && (
-                            <div className=" p-2 text-black">
+                            <div className=" sm:p-2 text-black">
                               <ActivityCard children={x}/>
                             </div>
                             )}
@@ -31,11 +31,11 @@ console.log(activities)
                     </>)}
                  
                     {(props.showType === 'showFood') && ( <>
-                        <div className='flex flex-col'>
+                        <div className='flex w-[40ch] flex-row sm:flex-nowrap sm:overflow-x-hidden sm:flex-col px-2 sm:p-2'>
                         {activities.map((x) => (
                         <div key={String(x)}>
                             {(!x.type == 0) && (
-                            <div className="p-2 text-black">
+                            <div className="sm:p-2 text-black">
                              <ActivityCard children={x}/>
                             </div>
                             )}
@@ -53,7 +53,7 @@ console.log(activities)
             else {
                 return (
                     <>
-                    <div className='flex flex-col p-2'> 
+                    <div className='flex flex-col px-2 sm:p-2'> 
                     <ActivityCard children={child}/>
                     </div>
                     

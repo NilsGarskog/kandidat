@@ -35,7 +35,7 @@ export default function useFetchAct(tripKey) {
 
 
 
-    return { loading, error, actArr }
+    return { loading, error, setError, actArr, setActArr }
 
 
 }

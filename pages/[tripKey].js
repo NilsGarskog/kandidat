@@ -26,14 +26,14 @@ export default function Trip() {
 
         const algoData = { arrDate: tripData.arrDate, depDate: tripData.depDate, actArr: actArr, itineary: tripData.itineary, ItCreated: ItCreated, tripKey: tripKey }
         return (
-            <div>
+            <div className='overflow-x-hidden'>
 
                 {page === "activities" &&
                     <div>
                         <TripHeader tripData={tripData}>
                         </TripHeader>
 
-                        <div className='flex justify-evenly mt-10'>
+                        <div className='ml-20 sm:ml-0 flex flex-col sm:flex-row  items-center justify-evenly mt-10'>
                             <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='activity'></CreateActivity>
                             <CreateActivity tripKey={tripKey} actData={algoData.actArr} type='restaurant'></CreateActivity>
                         </div>
@@ -63,7 +63,7 @@ export default function Trip() {
                         <Settings data={tripData}></Settings>
                     </div>
                 }
-                <div className="min-h-[20ch]"></div>
+                <div className="min-h-[10ch]"></div>
                 <div className="fixed bottom-10 left-0 right-0 z-10">
                     <TripNavBar page={page} setPage={setPage}></TripNavBar>
                 </div>

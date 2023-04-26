@@ -68,6 +68,7 @@ export default function UserDashboard() {
   }
 
   return (
+    <div className='overflow-hidden'>
     <div className='w-full text-black max-w-[90ch] mx-auto items-center flex flex-col flex-wrap sm:gap-5
     text-xs sm:text-sm overflow-hidden'>
       <div className='flex flex-col items-center text-center select-none'>
@@ -136,6 +137,7 @@ export default function UserDashboard() {
         </div>
       </Popup>
 
+    </div>
     </div>
   )
 
