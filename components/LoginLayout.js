@@ -55,14 +55,20 @@ export default function LoginLayout() {
             id="bakgrund"
             className="max-w-full relative mb-7 h-auto object-cover"
           ></img>
-
-          <h2
+    
+          <div
             id="parallaxTitleBig"
-            className="text-black z-0 uppercase mt-[8%] lg:mt-[6%] absolute text-4xl  lg:text-8xl 
+            className="text-black z-0 uppercase mt-[8%] flex items-center lg:mt-[6%] absolute text-4xl  lg:text-8xl 
           font-bold mr-[55%]"
           >
+            <h2 className="ml-20">
             Planner
-          </h2>
+            </h2>
+            <img className='h-24 z-0'src='../img/logo.svg'/>
+           
+          </div>
+
+          
 
           <img
             src="../img/StartPageforegroundSmall.png"
