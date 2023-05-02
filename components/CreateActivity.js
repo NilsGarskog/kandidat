@@ -6,16 +6,20 @@ import { v4 } from 'uuid'
 import Popup from 'reactjs-popup';
 
 import fetchAct from '@/Algorithms/Algoritmen'
+import useFetchTripData from '@/hooks/FetchTripData'
 import ActivityContainer from './ActivityContainer'
 import { Checkbox } from '@mui/material'
 import useFetchAct from '@/hooks/FetchActivities'
 import { getUrl } from '@/utils/urlUtil'
+
+import {Loader} from '@googlemaps/js-api-loader'
 
 
 
 export default function CreateActivity(props) {
   const { tripKey } = props.tripKey
   const [activityData] = props.actData
+  const { loading, error_, tripData, setTripData } = useFetchTripData(props.tripKey)
   const [error, setError] = useState('')
   let [activity, setActivity] = useState('')
   let [activityLength, setActivityLength] = useState('')
@@ -25,13 +29,81 @@ export default function CreateActivity(props) {
   const { userInfo, currentUser } = useAuth()
   const [actOpen, setActOpen] = useState(false);
   const [foodOpen, setFoodOpen] = useState(false);
+  const [predictions, setPredictions] = useState([])
   const [err, setErr] = useState("");
-
-
+  console.log(tripData)
   const [checkedActShort, setCheckedActShort] = useState(null)
   const [checkedLunch, setCheckedLunch] = useState(null)
   const [actDescription, setActDescription] = useState('')
   const isMobile = window.innerWidth < 640; // adjust breakpoint as needed
+  const [coordinates, setCoordinates] = useState(null);
+  const [cityName, setCityName] = useState('')
+
+  const fetchPredictions = (query) => {
+    
+    const service = new window.google.maps.places.AutocompleteService();
+    service.getPlacePredictions(
+      {input: query, 
+      types: ['geocode'],
+      location: new window.google.maps.LatLng(coordinates),
+      radius: 10000,
+      },
+      (predictions, status) => {
+        if (status === 'OK') {
+          setPredictions(predictions)
+        }
+        else {
+          setPredictions([])
+        }
+      }
+    )
+  
+};
+
+
+const handleKeyDown = (event) => {
+
+     fetchPredictions(event.target.value)
+      
+      
+     
+  }
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+    
+  }
+
+  useEffect(() => {
+    // This code will run when tripData changes
+    if (tripData) {
+      setCityName('Tokyo');
+      
+      // more code that depends on tripData...
+    }
+  }, [tripData]);
+
+  useEffect(() => {
+    const loader = new Loader({
+      apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+      version: "weekly",
+      libraries: ["places"],
+    });
+
+    loader.load().then(() => {
+      const geocoder = new window.google.maps.Geocoder();
+      geocoder.geocode({ address: cityName }, (results, status) => {
+        if (status === "OK") {
+          const lat = results[0].geometry.location.lat();
+          const lng = results[0].geometry.location.lng();
+          setCoordinates({ lat, lng });
+        } else {
+          console.log(`Geocode was not successful for the following reason: ${status}`);
+        }
+      });
+    });
+  },[tripData, tripKey]);
+
 
   if (props.type === 'activity') {
 
@@ -92,7 +164,14 @@ export default function CreateActivity(props) {
               </div>
               <div className="search">
                 <span></span>
-                <input type="text" className='rounded-lg bg-gray-200 pl-4 p-1 ml-3 italic text-slate-500 w-[30ch] items-center ' placeholder="Enter name..." value={activity} onChange={(e) => { setActivity(e.target.value) }} />
+                <input type="text" className='rounded-lg bg-gray-200 pl-4 p-1 ml-3 italic text-slate-500 w-[30ch] items-center ' placeholder="Enter name..." value={activity} onChange={(e) => { setActivity(e.target.value), handleInputChange }} onKeyDown={handleKeyDown} />
+                <div className='bg-white'>
+        <ul>
+          {predictions.map((prediction) => (
+            <li key={prediction.place_id}>{prediction.description}</li>
+          ))}
+        </ul>
+        </div>
               </div>
               <div className="relative w-full lg:max-w-sm">
                 <div className='flex flex-start text-xl'>
@@ -316,7 +395,7 @@ async function handleAddFood() {
 
   const userRef = doc(db, 'users', currentUser.uid, 'Trips', props.tripKey, 'Activities', newKey.toString())
   const actUrl = await getUrl(activity, process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY)
-  console.log(actUrl)
+
 
   const data = {
     id: newKey,
