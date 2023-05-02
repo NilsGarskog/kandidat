@@ -3,9 +3,11 @@ import { removeDuplicates, getActName } from 'utils/calUtils.js';
 
 
 export default function Day(props) {
-    const {day, activities, actArr} = props
+    const {day, activities, actArr, disp} = props
     let newActivityList = []
     let newArray = removeDuplicates(activities)
+    const display = disp
+    console.log(display)
   
     newArray.forEach((activity, index) => {
       let actName = getActName(activity, actArr).name
@@ -31,7 +33,7 @@ export default function Day(props) {
       newActivityList.push(
         <div
           id={activity}
-          className={`font-medium flex items-center justify-center rounded-xl w-[15ch] ${actLength == 0 ? 'h-[5ch]' : 'h-[11ch]'} text-lg mt-3 text-slate-900 text-center ${actType == 1 || actType == 2 ? 'bg-calYellow' : 'bg-calBlue'}`}
+          className={`font-medium flex items-center justify-center rounded-xl w-[15ch] ${actLength == 0 ? 'h-[5ch]' : 'h-[11ch]'} ${disp == true ? 'text-lg' : 'text-sm'} mt-3 text-slate-900 text-center ${actType == 1 || actType == 2 ? 'bg-calYellow' : 'bg-calBlue'}`}
           key={index}
         >
           {actName}

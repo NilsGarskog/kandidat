@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import Algoritmen from '@/Algorithms/Algoritmen';
 import { removeDuplicates, getActName } from 'utils/calUtils.js';
 import Day from './Day';
+import {pdfMake, pdfFonts }from "pdfmake";
+import { htmlToPdfmake } from "pdfmake/build/pdfmake";
+
 
 export default function Calendar(props) {
   const data = props.data
@@ -16,6 +19,29 @@ export default function Calendar(props) {
 
   const [currentView, setCurrentView] = useState(0);
   const [daysPerView, setDaysPerView] = useState(3);
+  const dispNo = false
+  const dispYes = true
+
+
+  function downloadPdf()  {
+
+  pdfMake.vfs = pdfFonts.pdfMake.vfs;
+  pdfMake.fonts = {
+  Roboto: {
+    normal: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Regular.ttf",
+    bold: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Medium.ttf",
+    italics: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-Italic.ttf",
+    bolditalics: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf",
+  },
+};
+  const htmlContent = document.getElementById('pdf-content').innerHTML;
+  const content = htmlToPdfmake(htmlContent);
+  const docDefinition = {
+    content: content,
+  };
+    pdfMake.createPdf(docDefinition).download("sample.pdf");
+  };
+
 
   const isMobile = window.innerWidth < 640; // adjust breakpoint as needed
 
@@ -31,12 +57,15 @@ export default function Calendar(props) {
   const isNextEnabled = (currentView + 1) * daysPerView < itineary.length;
   const isPrevEnabled = currentView > 0;
 
+
+
   return (
     <div className='flex flex-col'>
        {!isMobile && <div>
             <h1 className='uppercase text-center text-7xl -mb-10 mt-4 font-bold cursor-default select-none'>
                 YOUR Itinerary
             </h1>
+            <button onClick={downloadPdf}>Export to PDF</button>
         </div>}
     <div className={`flex w-full mt-8 sm:mt-20`}>
         
@@ -60,6 +89,7 @@ export default function Calendar(props) {
     day={item.day}
     activities={item.act}
     actArr={data.actArr}
+    disp = {dispYes}
   />
 ))}
 
@@ -75,6 +105,20 @@ export default function Calendar(props) {
 }
       </div>
    
+
+    </div>
+    <div className='collapse hidden'>
+        <div id='pdf-content' className='text-sm'> 
+{itineary.map((item, index) => (
+  <Day
+    key={item.day}
+    day={item.day}
+    activities={item.act}
+    actArr={data.actArr}
+    disp = {dispNo}
+  />
+))}
+</div>
 
     </div>
     </div>
