@@ -9,32 +9,32 @@ export default function LoginThirdPage() {
     <div className="wrapper flex flex-row  z-999">
       <section className=" bg-white flex flex-wrap justify-center">
         {smallScreen !== true && (
-          <div className="bg-white sm:flex-1 p-4  sm:p-6 flex justify-center ">
+          <div className="bg-white sm:flex-1 p-4 sm:p-6  flex justify-center ">
             <img
-              src="../img/plantrip.jpg"
+              src="../img/startpage_act.png"
               className=" 2xl:w-3/4 w-full h-auto"
             ></img>
           </div>
         )}
 
-        <div className=" flex-1 sm:p-6 p-0 z-999 m-auto">
-          <h2 className="text-black text-xl lg:text-6xl font-bold sm:mt-0 mt-8 text-center sm:text-left uppercase select-none">
+        <div className=" flex-1 sm:p-6 p-0 z-999 m-auto cursor-default">
+          <h2 className="text-black text-xl sm:text-7xl font-light text-center sm:text-right sm:mr-14 uppercase select-none">
             Explore
           </h2>
-          <p className="text-black text-xl lg:text-4xl mb-6 text-center sm:text-left select-none">
+          <p className="text-black text-xl font-extralight italic lg:text-4xl mb-6 text-center sm:text-right sm:mr-14 select-none">
             a destination together
           </p>
           {smallScreen !== true && (
             <>
-              <h2 className="text-black text-xl lg:text-4xl text-left mb-4 select-none">
-                Travel planner let your friend group <br></br> add activites,
-                restaurants, etc to a <br></br>
-                shared planning space where you can <br></br> all see each
+              <h2 className="text-black text-xl sm:text-2xl text-right mb-4 sm:mr-14 sm:pl-6 select-none">
+                Travel planner let your friend group add activites,
+                restaurants, etc to a 
+                shared planning space where you can all see each
                 others suggestions.
               </h2>
-              <h2 className="text-black text-xl lg:text-4xl text-center sm:text-left mb-4 sm:mb-0 select-none">
-                Upvote your friends suggestions to <br></br> hightlight what you
-                want to explore at <br></br>
+              <h2 className="text-black text-xl sm:text-2xl text-center sm:text-right mb-4 sm:mr-14 sm:pl-6 sm:mb-0 select-none">
+                Upvote your friends suggestions to hightlight what you
+                want to explore at 
                 the destination.
               </h2>
             </>
