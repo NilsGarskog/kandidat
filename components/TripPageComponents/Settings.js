@@ -71,11 +71,11 @@ export default function Settings(props) {
                 <div className='flex flex-row'>
                     <div className="flex flex-col pb-3 pr-5 ">
                         <h1 className="text-xl pb-1">ARRIVAL</h1>
-                        <DatePicker value={NewArrDate} onChange={(newValue) => setNewArrDate(newValue)} />
+                        <DatePicker value={NewArrDate} onChange={(newValue) => setNewArrDate(newValue)} format='DD-MM-YYYY' />
                     </div>
                     <div className="flex flex-col ">
                         <h1 className="text-xl pb-1">DEPARTURE</h1>
-                        <DatePicker value={NewDepDate} onChange={(newValue) => setNewDepDate(newValue)} />
+                        <DatePicker value={NewDepDate} onChange={(newValue) => setNewDepDate(newValue)} format='DD-MM-YYYY'/>
                     </div>
                 </div>
                 <div className="flex flex-row justify-between">

@@ -126,11 +126,11 @@ export default function UserDashboard() {
           <div className='flex flex-col sm:flex-row space-x-20 p-3'>
             <div className="flex flex-col ">
               <h1 className="text-xl pb-1">ARRIVAL</h1>
-              <DatePicker value={arrDate} onChange={(newValue) => setArrDate(newValue)} />
+              <DatePicker value={arrDate} onChange={(newValue) => setArrDate(newValue)} format='DD-MM-YYYY' />
             </div>
             <div className="flex flex-col ">
               <h1 className="text-xl pb-1">DEPARTURE</h1>
-              <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} />
+              <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} format='DD-MM-YYYY'/>
             </div>
           </div>
           <button className='border w-1/2 bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3 m-4' onClick={() => { handleAddTrip() }}>Create trip</button>
