@@ -130,7 +130,9 @@ export default function UserDashboard() {
             </div>
             <div className="flex flex-col ">
               <h1 className="text-xl pb-1">DEPARTURE</h1>
+
               <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} format='DD-MM-YYYY' />
+
             </div>
           </div>
           <button className='border w-1/2 bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3 m-4' onClick={() => { handleAddTrip() }}>Create trip</button>

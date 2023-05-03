@@ -75,7 +75,9 @@ export default function Settings(props) {
                     </div>
                     <div className="flex flex-col ">
                         <h1 className="text-xl pb-1">DEPARTURE</h1>
+
                         <DatePicker value={NewDepDate} onChange={(newValue) => setNewDepDate(newValue)} format='DD-MM-YYYY' />
+
                     </div>
                 </div>
                 <div className="flex flex-row justify-between">
