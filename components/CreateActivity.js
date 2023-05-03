@@ -84,25 +84,31 @@ const handleKeyDown = (event) => {
   }, [tripData]);
 
   useEffect(() => {
-    const loader = new Loader({
-      apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-      version: "weekly",
-      libraries: ["places"],
-    });
-
-    loader.load().then(() => {
+    const loadGoogleMaps = async () => {
+      const loader = new Loader({
+        apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+        version: "weekly",
+        libraries: ["places"],
+      });
+  
+      await loader.load();
+      
       const geocoder = new window.google.maps.Geocoder();
-      geocoder.geocode({ address: cityName }, (results, status) => {
+      geocoder.geocode({ address: tripData.Name }, (results, status) => {
         if (status === "OK") {
           const lat = results[0].geometry.location.lat();
           const lng = results[0].geometry.location.lng();
           setCoordinates({ lat, lng });
+          console.log(coordinates)
         } else {
           console.log(`Geocode was not successful for the following reason: ${status}`);
         }
       });
-    });
-  },[tripData, tripKey]);
+    };
+    
+    loadGoogleMaps();
+  }, [tripData, tripKey]);
+  
 
 
   if (props.type === 'activity') {
