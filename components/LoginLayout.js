@@ -85,14 +85,15 @@ export default function LoginLayout() {
             id="bakgrund"
             className="w-full  h-auto object-cover"
           ></img>
-
-          <h2
-            id="parallaxTitleSmall"
-            className="text-black z-0 absolute mt-[16%] text-6xl text-center  sm:text-5xl 
-          font-bold font-family: "
-          >
+          <div id="parallaxTitleSmall"
+           className="text-black z-0 absolute mt-[16%] text-6xl text-center  sm:text-5xl 
+           font-bold flex items-center font-family: ">
+          <h2>
             Planner
           </h2>
+          <img className='h-20 z-0'src='../img/logo.svg'/>
+
+          </div>
 
           <img
             src="../img/MobileKandidatSmallForeground.png"
@@ -106,7 +107,7 @@ export default function LoginLayout() {
       <LoginSecondpage />
       <LoginThirdpage />
       <LoginFourthpage />
-      <LoginFifthpage />
+     {/*  <LoginFifthpage /> */}
       <ScrollToTop />
     </div>
   );

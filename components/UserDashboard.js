@@ -71,7 +71,7 @@ export default function UserDashboard() {
     <div className='overflow-hidden'>
     <div className='w-full text-black max-w-[90ch] mx-auto items-center flex flex-col flex-wrap sm:gap-5
     text-xs sm:text-sm overflow-hidden'>
-      <div className='flex flex-col items-center text-center select-none'>
+      <div className='flex flex-col items-center text-center select-none cursor-default'>
         <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-10 sm:pt-0"><span className='font-bold'>Welcome,</span> <span className='font-light'>Traveller!</span></h1>
         <h1 className="text-md sm:text-xl font-regular">Here are your current trips. <br></br>
           Want to add another one? Just click the plus icon. </h1>
@@ -130,7 +130,9 @@ export default function UserDashboard() {
             </div>
             <div className="flex flex-col ">
               <h1 className="text-xl pb-1">DEPARTURE</h1>
-              <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} format='DD-MM-YYYY'/>
+
+              <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} format='DD-MM-YYYY' />
+
             </div>
           </div>
           <button className='border w-1/2 bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3 m-4' onClick={() => { handleAddTrip() }}>Create trip</button>

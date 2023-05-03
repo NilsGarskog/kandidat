@@ -200,10 +200,10 @@ export default function LoginFirstPage() {
       )} */}
 
       <section className=" relative ">
-        <div className="Wrapper bg-white flex flex-col lg:flex-row   z-1000 items-center ">
+        <div className="Wrapper bg-white flex flex-col lg:flex-row z-1000 items-center ">
           {!isSmallScreen && !isMediumScreen ? (
-            <h2 className="text-black text-4xl sm:text-4xl  font-bold  text-left px-4 sm:px-8 select-none">
-              The social and <br></br>interactive travel <br></br>planner for
+            <h2 className="text-black text-4xl sm:text-2xl font-light sm:pl-16  sm:text-center text-left px-4 sm:px-8 select-none">
+              The social and interactive travel planner for
               you and your friends
             </h2>
           ) : null}
@@ -213,7 +213,7 @@ export default function LoginFirstPage() {
             </h2>
           ) : null}
           {isSmallScreen === true && (
-            <h2 className="text-black text-xl sm:text-4xl mt-4 sm:mt-0 font-bold  text-left px-4 sm:px-8 select-none">
+            <h2 className="text-black text-xl sm:text-4xl mt-4 sm:mt-0 font-light  text-center pt-4 px-4 sm:px-8 select-none">
               The social and interactive travel planner for you and your friends
             </h2>
           )}
@@ -226,7 +226,7 @@ export default function LoginFirstPage() {
                 boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
               }}
               trigger={
-                <button className="border bg-white text-black text-2xl sm:text-4xl font-bold   mr-10 py-4 px-6 sm:ml-[30%] gap-2 rounded-full shadow-md hover:shadow-lg">
+                <button className="sm:-ml-10 border bg-buttonGreen text-black text-lg sm:text-2xl font-bold sm:font-medium uppercase  sm:mr-6 sm:hover:opacity-70 duration-300 mr-10 py-4 px-6 sm:ml-[30%] gap-2 rounded-full shadow-md hover:shadow-lg">
                   Register
                 </button>
               }
@@ -327,7 +327,7 @@ export default function LoginFirstPage() {
                 boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
               }}
               trigger={
-                <button className="border bg-white text-black mr-[20%]  md:mr-[20vh] font-bold text-2xl sm:text-4xl py-4 px-6 rounded-full shadow-md hover:shadow-lg mr-[5%]">
+                <button className="border bg-buttonGreen text-black mr-[20%]  md:mr-[20vh] text-lg sm:text-2xl font-bold sm:font-medium uppercase  py-4 px-6 rounded-full duration-300 sm:hover:opacity-70 shadow-md hover:shadow-lg mr-[5%]">
                   Login
                 </button>
               }
