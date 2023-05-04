@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router';
 import ReactDom from 'react-dom'
 import { useAuth } from '../context/authContext'
 import Popup from 'reactjs-popup';
@@ -11,115 +12,116 @@ import useFetchTrips from '../hooks/FetchTrips'
 import Map from './Map';
 
 export default function Modal(props) {
-    const { userInfo, currentUser } = useAuth()
-    const { setOpenModal } = props
-    const [_document, set_document] = useState(null)
-    const { logout } = useAuth()
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [profileImageUrl, setProfileImageUrl] = useState('')
-    const [profileInfo, setProfileInfo] = useState(null)
-    const [isLoading, setIsLoading] = useState(false)
-    const [imageUpload, setImageUpload] = useState(null)
-    const [selectedImage, setSelectedImage] = useState(null)
-    const [uploadedImageUrl, setUploadedImageUrl] = useState('');
+  const router = useRouter()
+  const { userInfo, currentUser } = useAuth()
+  const { setOpenModal } = props
+  const [_document, set_document] = useState(null)
+  const { logout } = useAuth()
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [profileImageUrl, setProfileImageUrl] = useState('')
+  const [profileInfo, setProfileInfo] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [imageUpload, setImageUpload] = useState(null)
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [uploadedImageUrl, setUploadedImageUrl] = useState('');
 
 
-    const uploadImage = () => {
-        if (imageUpload == null) return;
+  const uploadImage = () => {
+    if (imageUpload == null) return;
 
-        const imageRef = ref(storage, `profileImages/${imageUpload.name + v4()}`)
-        uploadBytes(imageRef, imageUpload).then(() => {
-            getDownloadURL(imageRef).then(url =>
-                setUploadedImageUrl(url))
-            console.log(uploadedImageUrl)
-            alert('Image uploaded!')
+    const imageRef = ref(storage, `profileImages/${imageUpload.name + v4()}`)
+    uploadBytes(imageRef, imageUpload).then(() => {
+      getDownloadURL(imageRef).then(url =>
+        setUploadedImageUrl(url))
+      console.log(uploadedImageUrl)
+      alert('Image uploaded!')
+    })
+
+  };
+
+
+  async function handleAddProfileInfo() {
+    /*  if (!trip) { return }
+     setTrips({ ...trips, [newKey]: trip }) */
+    const userRef = doc(db, 'users', currentUser.uid)
+    /*  console.log(newKey) */
+    await setDoc(userRef, { ProfileInfo: { FirstName: firstName, LastName: lastName } }, { merge: true })
+
+    setProfileInfo({ FirstName: firstName, LastName: lastName })
+
+  }
+
+
+  async function handleAddProfileImage() {
+    if (imageUpload && selectedImage != null) {
+      const imageRef = ref(storage, `profileImages/${imageUpload.name + v4()}`)
+      uploadBytes(imageRef, imageUpload).then(() => {
+        getDownloadURL(imageRef).then(url => {
+          setUploadedImageUrl(url)
+          const userRef = doc(db, 'users', currentUser.uid)
+          setDoc(userRef, { ProfileInfo: { ...profileInfo, ProfileImageURL: url } }, { merge: true })
+          setProfileInfo({ ...profileInfo, ProfileImageURL: url })
+          setUploadedImageUrl(null)
+          alert('Image uploaded!')
         })
+      })
+    }
+  }
 
-    };
-
-
-    async function handleAddProfileInfo() {
-        /*  if (!trip) { return }
-         setTrips({ ...trips, [newKey]: trip }) */
-        const userRef = doc(db, 'users', currentUser.uid)
-        /*  console.log(newKey) */
-        await setDoc(userRef, { ProfileInfo: { FirstName: firstName, LastName: lastName } }, { merge: true })
-
-        setProfileInfo({ FirstName: firstName, LastName: lastName })
-
+  async function handleDeleteProfileImage() {
+    if (selectedImage == null) {
+      const userRef = doc(db, 'users', currentUser.uid)
+      const docSnap = await getDoc(userRef)
+      if (docSnap.exists()) {
+        const data = docSnap.data()
+        const profileInfo = data.ProfileInfo || {}
+        if (profileInfo.ProfileImageURL) {
+          const imageRef = ref(storage, profileInfo.ProfileImageURL);
+          await deleteObject(imageRef)
+          await setDoc(userRef, { ProfileInfo: { ProfileImageURL: deleteField() } }, { merge: true })
+          setProfileInfo({ ...profileInfo, ProfileImageURL: null })
+          alert('Profile image deleted!')
+        }
+      }
     }
 
 
-    async function handleAddProfileImage() {
-        if (imageUpload && selectedImage != null) {
-            const imageRef = ref(storage, `profileImages/${imageUpload.name + v4()}`)
-            uploadBytes(imageRef, imageUpload).then(() => {
-                getDownloadURL(imageRef).then(url => {
-                    setUploadedImageUrl(url)
-                    const userRef = doc(db, 'users', currentUser.uid)
-                    setDoc(userRef, { ProfileInfo: { ...profileInfo, ProfileImageURL: url } }, { merge: true })
-                    setProfileInfo({ ...profileInfo, ProfileImageURL: url })
-                    setUploadedImageUrl(null)
-                    alert('Image uploaded!')
-                })
-            })
-        }
+
+  }
+
+  useEffect(() => {
+    set_document(document)
+  }, [])
+
+
+  useEffect(() => {
+    async function fetchProfileInfo() {
+      setIsLoading(true)
+      const userRef = doc(db, 'users', currentUser.uid)
+      const docSnap = await getDoc(userRef)
+      if (docSnap.exists()) {
+        const data = docSnap.data()
+        const profileInfo = data.ProfileInfo || {}
+        setProfileInfo(profileInfo)
+        setFirstName(profileInfo.FirstName || '')
+        setLastName(profileInfo.LastName || '')
+        setProfileImageUrl(profileInfo.profileImageUrl || '')
+      }
+      setIsLoading(false)
     }
-
-    async function handleDeleteProfileImage() {
-        if (selectedImage == null) {
-            const userRef = doc(db, 'users', currentUser.uid)
-            const docSnap = await getDoc(userRef)
-            if (docSnap.exists()) {
-                const data = docSnap.data()
-                const profileInfo = data.ProfileInfo || {}
-                if (profileInfo.ProfileImageURL) {
-                    const imageRef = ref(storage, profileInfo.ProfileImageURL);
-                    await deleteObject(imageRef)
-                    await setDoc(userRef, { ProfileInfo: { ProfileImageURL: deleteField() } }, { merge: true })
-                    setProfileInfo({ ...profileInfo, ProfileImageURL: null })
-                    alert('Profile image deleted!')
-                }
-            }
-        }
+    fetchProfileInfo()
+  }, [currentUser.uid])
 
 
+  if (!_document) { return null }
 
-    }
-
-    useEffect(() => {
-        set_document(document)
-    }, [])
-
-
-    useEffect(() => {
-      async function fetchProfileInfo() {
-            setIsLoading(true)
-            const userRef = doc(db, 'users', currentUser.uid)
-            const docSnap = await getDoc(userRef)
-            if (docSnap.exists()) {
-                const data = docSnap.data()
-                const profileInfo = data.ProfileInfo || {}
-                setProfileInfo(profileInfo)
-                setFirstName(profileInfo.FirstName || '')
-                setLastName(profileInfo.LastName || '')
-                setProfileImageUrl(profileInfo.profileImageUrl || '')
-            }
-            setIsLoading(false)
-        }
-        fetchProfileInfo()
-    }, [currentUser.uid])
-
-
-    if (!_document) { return null }
-
-    return ReactDom.createPortal(
-        <div
-      className="fixed border border-2 border-black left-auto right-0 sm:w-[100vh] w-[100vh] inset-0 bg-white text-slate-900 text-lg sm:text-xl flex flex-col"
-      style={{ width: "80vw", maxWidth: "500px" }}
+  return ReactDom.createPortal(
+    <div
+      className="fixed left-auto right-0 sm:w-[100vh] w-[100vh] inset-0 bg-white text-slate-900 text-lg sm:text-xl flex flex-col"
+      style={{ width: "20vw", minWidth: "200px", height: "20vh", minHeight: "160px" }}
     >
-      <div className="flex items-center justify-between border-b border-solid border-slate-900 p-4">
+      <div className="flex items-center justify-between border-slate-900 p-4">
         <h1 className="font-extrabold text-2xl sm:text-5xl">MENU</h1>
         <i
           onClick={() => setOpenModal(false)}
@@ -262,6 +264,7 @@ export default function Modal(props) {
           onClick={() => {
             logout();
             setOpenModal(false);
+            router.push('/');
           }}
           className="select-none duration-300 hover:pl-2 cursor-pointer"
         >
