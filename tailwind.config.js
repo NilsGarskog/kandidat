@@ -5,6 +5,18 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    borderRadius: {
+      'none': '0',
+      'sm': '0.125rem',
+      DEFAULT: '0.25rem',
+      'md': '0.375rem',
+      'lg': '0.5rem',
+      'full': '9999px',
+      'xl': '0.85rem',
+      '2xl': '1rem',
+      '3xl': '1.25rem',
+      '4xl': '1.5rem'
+    },
     screens: {
       sm: "640px",
       // => @media (min-width: 640px) { ... }
