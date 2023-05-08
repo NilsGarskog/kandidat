@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useAuth } from "../context/authContext";
 import UserDashboard from "../components/UserDashboard";
 import 'react-tooltip/dist/react-tooltip.css'
+import Footer from "@/components/Footer";
 
 
 export default function Home() {
@@ -18,7 +19,7 @@ export default function Home() {
 
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {!currentUser && <LoginLayout />}
+      {!currentUser && <><LoginLayout /> <Footer/></>}
       {currentUser && <UserDashboard />}
     </>
   );
