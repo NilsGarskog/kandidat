@@ -7,6 +7,7 @@ import LoginFifthpage from "./LoginFifthPage";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { BiArrowFromBottom } from "react-icons/bi";
+import LoginBottom from "./LoginBottom";
 
 export const useScreenSizes = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -107,6 +108,7 @@ export default function LoginLayout() {
       <LoginSecondpage />
       <LoginThirdpage />
       <LoginFourthpage />
+      <LoginBottom />
      {/*  <LoginFifthpage /> */}
       <ScrollToTop />
     </div>
