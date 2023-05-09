@@ -33,6 +33,24 @@ export default function CreateActivity(props) {
   const [actDescription, setActDescription] = useState('')
   const isMobile = window.innerWidth < 640; // adjust breakpoint as needed
 
+  const contentStyle = {
+    width: '500px',
+    height: '500px',
+    borderRadius: '0.7em',
+    boxShadow: '0px 3px 7px rgba(0, 0, 0, 0.2)'
+
+
+  }
+  
+  const contentStyleMobile = {
+    width: '350px',
+    height: '470px',
+    borderRadius: '0.7em',
+    boxShadow: '0px 3px 7px rgba(0, 0, 0, 0.2)'
+
+
+  }
+
   if (props.type === 'activity') {
 
     return (
@@ -66,20 +84,13 @@ export default function CreateActivity(props) {
 
         </div>
         <Popup open={actOpen}
-          contentStyle={{
-            width: '400px',
-            height: '350px',
-            borderRadius: '0.7em',
-            boxShadow: '0px 3px 7px rgba(0, 0, 0, 0.2)'
-
-
-          }}
+          contentStyle={isMobile? contentStyleMobile : contentStyle}
           position="relative"
           modal
           closeOnDocumentClick={false}>
 
-          <div className='flex flex-col items-center font-medium text-base text-black rounded-lg w-full'>
-            <i onClick={() => handleActButton()} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "></i>
+          <div className='sm:pl-6 flex flex-col sm:items-start items-center font-medium text-base text-black rounded-lg w-full'>
+            <i onClick={() => handleActButton()} className="text-4xl sm:text-5xl fa-solid fa-xmark cursor-pointer absolute top-2 right-3 duration-300 opacity-50 hover:opacity-100 "></i>
             {/* <button onClick={close} className='absolute top-0 right-0 p-2'>CLOSE</button> */}
 
             <div className='flex text-red-600'>
@@ -87,19 +98,19 @@ export default function CreateActivity(props) {
             </div>
 
             <div className='select-none'>
-              <div className='flex flex-start text-xl'>
-                <p className='p-2 pl-4 pt-4 font-light uppercase'>Activity Name</p>
+              <div className='flex flex-start text-3xl sm:text-4xl'>
+                <p className='p-2 pt-10 font-light uppercase'>Activity</p>
               </div>
               <div className="search">
                 <span></span>
-                <input type="text" className='rounded-lg bg-gray-200 pl-4 p-1 ml-3 italic text-slate-500 w-[30ch] items-center ' placeholder="Enter name..." value={activity} onChange={(e) => { setActivity(e.target.value) }} />
+                <input type="text" className='rounded-lg bg-gray-200 pl-2 p-1 ml-2 italic text-slate-500 sm:w-[32ch] w-[27ch] items-center ' placeholder="Enter name..." value={activity} onChange={(e) => { setActivity(e.target.value) }} />
               </div>
               <div className="relative w-full lg:max-w-sm">
-                <div className='flex flex-start text-xl'>
-                  <p className='p-2 pl-4 pt-4 font-light uppercase'>Length of activity</p>
+                <div className='flex flex-start text-2xl sm:text-3xl'>
+                  <p className='p-2 pt-6 font-light uppercase'>Length of activity</p>
                 </div>
-                <div className='flex items-center font-light uppercase'>
-                  <label className='flex items-center ml-4'>
+                <div className='flex items-center font-light uppercase text-base'>
+                  <label className='flex items-center ml-3'>
                     <input type='radio' label='Short' name='activitlength' className=' checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:bg-black focus:outline-none focus:ring-1 focus:ring-black cursor-pointer' value={checkedActShort} onChange={(e) => { setCheckedActShort(true) }} />
                     <div className='ml-2'>Short</div>
                   </label>
@@ -110,19 +121,23 @@ export default function CreateActivity(props) {
                 </div>
               </div>
               <div>
-                <span className='flex items-center p-2 pl-4 pt-4 font-light'>
-                  <p className='flex flex-start text-xl uppercase '>Add description </p>
-                  <p className='pl-2'>(optional)</p>
-                </span>
-                <input type='text' placeHolder='Enter description...' className='flex items-center rounded-lg bg-gray-200 p-1 pl-4 ml-3 italic text-slate-500 w-[30ch] h-[5ch] ' value={actDescription} onChange={(e) => { setActDescription(e.target.value) }}></input>
+                <div className=' items-center p-2 pt-4 font-light'>
+                  <p className='flex flex-start text-2xl sm:text-3xl uppercase '>Add description </p>
+                  <p className='sm:text-xl'>(optional)</p>
+                </div>
+                <textarea type='text' placeHolder='Enter description...' className='resize-none text-start rounded-lg bg-gray-200 pl-3 p-1 pt-3 ml-2 italic text-slate-500 sm:w-[38ch] w-[27ch] h-[10ch] ' value={actDescription} onChange={(e) => { setActDescription(e.target.value) }}></textarea>
               </div>
 
             </div>
+            </div>
             <p className='text-rose-700'>{error}</p>
-            <button onClick={() => addActivity()} id="addButton" className="duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md w-[90px] h-[40px] border uppercase text-xl font-semibold mt-2">
+           <div className='flex justify-center sm:w-full sm:mx-0 sm:px-0'> 
+            <button onClick={() => addActivity()} id="addButton" className=" bg-buttonGreen duration-300 hover:opacity-50 rounded-lg drop-shadow-md w-[90px] h-[40px] uppercase text-xl sm:text-2xl sm:w-[110px]  font-semibold mt-2">
               ADD
             </button>
-          </div>
+            
+            </div>
+          
         </Popup>
       </div>)
   }
@@ -159,20 +174,13 @@ export default function CreateActivity(props) {
         </div>
 
         <Popup open={foodOpen}
-          contentStyle={{
-            width: '400px',
-            height: '350px',
-            borderRadius: '0.7em',
-            boxShadow: '0px 3px 7px rgba(0, 0, 0, 0.2)'
-
-
-          }}
+          contentStyle={isMobile? contentStyleMobile : contentStyle}
           position="relative"
           modal
           closeOnDocumentClick={false}>
 
-          <div className='flex flex-col items-center font-medium text-base text-black rounded-lg w-full'>
-            <i onClick={() => handleFoodButton()} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "></i>
+          <div className='sm:pl-6 flex flex-col sm:items-start items-center font-medium text-base text-black rounded-lg w-full'>
+            <i onClick={() => handleFoodButton()} className="text-3xl sm:text-5xl fa-solid fa-xmark cursor-pointer absolute top-2 right-3 duration-300 opacity-50 hover:opacity-100 "></i>
             {/* <button onClick={close} className='absolute top-0 right-0 p-2'>CLOSE</button> */}
 
             <div className='flex text-red-600'>
@@ -180,42 +188,44 @@ export default function CreateActivity(props) {
             </div>
 
             <div className='select-none'>
-              <div className='flex flex-start text-xl'>
-                <p className='p-2 pl-4 pt-4 font-light uppercase'>Restaurant Name</p>
+              <div className='flex flex-start text-3xl sm:text-4xl'>
+                <p className='p-2 pt-10 font-light uppercase'>Restaurant</p>
               </div>
               <div className="search">
                 <span></span>
-                <input type="text" className='rounded-lg bg-gray-200 pl-4 p-1 ml-3 italic text-slate-500 w-[30ch] items-center ' placeholder="Enter name..." value={activity} onChange={(e) => { setActivity(e.target.value) }} />
+                <input type="text" className='rounded-lg bg-gray-200 pl-2 p-1 ml-2 italic text-slate-500 sm:w-[32ch] w-[27ch] items-center ' placeholder="Enter name..." value={activity} onChange={(e) => { setActivity(e.target.value) }} />
               </div>
               <div className="relative w-full lg:max-w-sm">
-                <div className='flex flex-start text-xl'>
-                  <p className='p-2 pl-4 pt-4 font-light uppercase'>Suitable for</p>
+                <div className='flex flex-start text-2xl sm:text-3xl'>
+                  <p className='p-2 pt-6 font-light uppercase'>Suitable for</p>
                 </div>
-                <div className='flex items-center font-light uppercase '>
-                  <label className='flex items-center ml-4'>
-                    <input type='radio' label='Short' name='activitlength' className='checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:bg-black focus:outline-none focus:ring-1 focus:ring-black cursor-pointer' value={checkedLunch} onChange={(e) => { setCheckedLunch(true) }} />
+                <div className='flex items-center font-light uppercase text-base'>
+                  <label className='flex items-center ml-3'>
+                    <input type='radio' label='Short' name='activitlength' className=' checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:bg-black focus:outline-none focus:ring-1 focus:ring-black cursor-pointer' value={checkedLunch} onChange={(e) => { setCheckedLunch(true) }} />
                     <div className='ml-2'>Lunch</div>
                   </label>
                   <label className='flex items-center'>
-                    <input type='radio' label='Long' name='activitlength' className=' checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:bg-black focus:outline-none focus:ring-1 focus:ring-black ml-3 cursor-pointer' value={checkedLunch} onChange={(e) => { setCheckedLunch(false) }} />
+                    <input type='radio' label='Long' name='activitlength' className='checked:bg-black checked:hover:bg-black checked:active:bg-black checked:focus:bg-black focus:bg-black focus:outline-none focus:ring-1 focus:ring-black ml-3 cursor-pointer' value={checkedLunch} onChange={(e) => { setCheckedLunch(false) }} />
                     <div className='ml-2'>Dinner</div>
                   </label>
                 </div>
               </div>
               <div>
-                <span className='flex items-center p-2 pl-4 pt-4 font-light'>
-                  <p className='flex flex-start text-xl uppercase '>Add description </p>
-                  <p className='pl-2'>(optional)</p>
-                </span>
-                <input type='text' placeHolder='Enter description...' className='flex items-center rounded-lg bg-gray-200 p-1 pl-4 ml-3 italic text-slate-500 w-[30ch] h-[5ch] ' value={actDescription} onChange={(e) => { setActDescription(e.target.value) }}></input>
+                <div className=' items-center p-2 pt-4 font-light'>
+                  <p className='flex flex-start text-2xl sm:text-3xl uppercase '>Add description </p>
+                  <p className='sm:text-xl'>(optional)</p>
+                </div>
+                <textarea type='text' placeHolder='Enter description...' className='resize-none text-start rounded-lg bg-gray-200 pl-3 p-1 pt-3 ml-2 italic text-slate-500 sm:w-[38ch] w-[27ch] h-[10ch] ' value={actDescription} onChange={(e) => { setActDescription(e.target.value) }}></textarea>
               </div>
-
+              </div>
             </div>
             <p className='text-rose-700'>{error}</p>
-            <button onClick={() => addFood()} id="addButton" className="duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md w-[90px] h-[40px] border uppercase text-xl font-semibold mt-2">
+           <div className='flex justify-center sm:w-full sm:mx-0 sm:px-0'> 
+            <button onClick={() => addFood()} id="addButton" className=" bg-buttonGreen duration-300 hover:opacity-50 rounded-lg drop-shadow-md w-[90px] h-[40px] uppercase text-xl sm:text-2xl sm:w-[110px]  font-semibold mt-2">
               ADD
             </button>
-          </div>
+            
+            </div>
         </Popup>
       </div>)
 
