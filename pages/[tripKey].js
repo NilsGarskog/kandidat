@@ -57,9 +57,9 @@ export default function Trip() {
                 }
                 {page === "settings" &&
                     <div className='flex items-center flex-col'>
-                        <div className='flex flex-col items-center w-2/3'>
-                            <h1 className="text-3xl text-bold p-2 font-bold">Settings</h1>
-                            <p className="text-xl p-1" > Here you can edit the specifications of your trip. <br></br>Do not forget to save when you are done!</p>
+                        <div className='flex flex-col items-center w-4/5'>
+                            <h1 className="sm:text-7xl text-5xl text-bold p-2 sm:pt-20 pt-10 font-bold uppercase">Settings</h1>
+                            <p className="text-base text-center sm:text-xl p-1 pt-5" > Here you can edit the <br/> specifications of your trip.{/* <br/><br></br>Do not forget to save when <br/>you are done! */}</p>
                         </div>
                         <Settings data={tripData}></Settings>
                     </div>

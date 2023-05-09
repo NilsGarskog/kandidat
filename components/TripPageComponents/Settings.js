@@ -13,10 +13,24 @@ export default function Settings(props) {
     const { userInfo, currentUser } = useAuth()
     const router = useRouter()
     const { tripKey } = router.query
+    const isMobile = window.innerWidth < 640;
 
     let [saveLoading, setSaveLoading] = useState(false)
 
-    const contentStyle = { borderRadius: '20px' };
+
+    const contentStyle = {
+        width: "400px",
+        height: "200px",
+        borderRadius: "0.7em",
+        boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+      }
+      
+      const mobileContentStyle = {
+        width: "300px",
+        height: "200px",
+        borderRadius: '0.7em',
+        boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+      }
     const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
 
     async function handleUpdate() {
@@ -58,43 +72,46 @@ export default function Settings(props) {
 
     return (
         <div className="flex  w-full justify-center ">
-            <div className='pl-20 flex flex-col space-y-4'>
+            <div className=' flex flex-col space-y-4'>
                 <div className='flex h-2 pb-4 text-red-600'>
                     <h1 >{err}</h1>
                 </div>
-                <div>
-                    <h1 className="text-2xl pb-2">DESTINATION</h1>
+                <div className='flex flex-col justify-center'>
+                    <h1 className="text-2xl sm:text-3xl pb-2 sm:pt-5">DESTINATION</h1>
                     <input type="text" placeholder='Enter trip' value={NewName}
                         onChange={(e) => setNewName(e.target.value)} className="outline-none p-3 
-      text-base sm:text-lg text-slate-900 flex-1"/>
+      text-base sm:text-lg text-slate-900 flex-1 rounded"/>
                 </div>
                 <div className='flex flex-row'>
                     <div className="flex flex-col pb-3 pr-5 ">
-                        <h1 className="text-xl pb-1">ARRIVAL</h1>
-                        <DatePicker value={NewArrDate} onChange={(newValue) => setNewArrDate(newValue)} format='DD-MM-YYYY' />
+                        <h1 className="text-xl sm:text-2xl pb-1">ARRIVAL</h1>
+                        <DatePicker className='w-[15ch]' value={NewArrDate} onChange={(newValue) => setNewArrDate(newValue)} format='DD-MM-YYYY' />
                     </div>
                     <div className="flex flex-col ">
-                        <h1 className="text-xl pb-1">DEPARTURE</h1>
+                        <h1 className="text-xl sm:text-2xl pb-1">DEPARTURE</h1>
 
-                        <DatePicker value={NewDepDate} onChange={(newValue) => setNewDepDate(newValue)} format='DD-MM-YYYY' />
+                        <DatePicker  className='w-[15ch]'  value={NewDepDate} onChange={(newValue) => setNewDepDate(newValue)} format='DD-MM-YYYY' />
 
                     </div>
                 </div>
-                <div className="flex flex-row justify-between">
+                <div className="flex flex-row justify-evenly">
                     {saveLoading === false &&
-                        <button className='border w-1/3 bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' onClick={() => { handleUpdate() }}>SAVE CHANGES</button>
+                        <button className='text-lg font-bold sm:font-semibold border w-1/3 bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' onClick={() => { handleUpdate() }}>SAVE</button>
                     }
                     {saveLoading === true &&
                         <i className="fa-solid fa-spinner animate-spin text-6xl"></i>
                     }
                     <Popup position="relative"
                         modal
-                        {...{ contentStyle, overlayStyle }}
-                        trigger={<button className='border w-1/3 bg-buttonRed opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' >DELETE TRIP</button>} >
+                        contentStyle={isMobile? mobileContentStyle : contentStyle}
+                        overlayStyle={overlayStyle}
+                        trigger={<button className='text-lg font-bold sm:font-semibold border w-1/3 bg-buttonRed opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' >DELETE</button>} >
                         {close => (
-                            <div className='flex p-1 flex-col items-center font-medium text-base rounded-lg w-full'>
-                                <h1 className="text-xl p-2">Are you sure you want to delete the trip to {NewName} ?</h1>
-                                <button className='border w-1/2 bg-buttonRed text-black rounded-xl p-4' onClick={() => { handleDelete(tripKey); close() }}>CONFIRM</button>
+
+                            
+                            <div className='flex pt-5 flex-col items-center text-base  rounded-lg w-full'>
+                                <h1 className="text-center font-normal text-lg sm:px-5 p-2 mb-2 ">Are you sure you want to <b>delete</b> the trip to {NewName}?</h1>
+                                <button className='border font-bold w-1/2 bg-buttonRed text-black rounded-xl p-4' onClick={() => { handleDelete(tripKey); close() }}>CONFIRM</button>
                             </div>
                         )}
                     </Popup>

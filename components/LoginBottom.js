@@ -6,8 +6,6 @@ import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import LoginSecondpage from "./LoginSecondPage";
 import { useRef } from 'react';
 
-
-
 function validateEmailAddress(input) {
   var regex = /[^\s@]+@[^\s@]+\.[^\s@]+/;
   if (regex.test(input)) {
@@ -17,7 +15,7 @@ function validateEmailAddress(input) {
   }
 }
 
-export default function LoginFirstPage() {
+export default function LoginBottom() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
@@ -27,7 +25,7 @@ export default function LoginFirstPage() {
   const [isSmallScreen, setIsSmallScreen] = useState("");
   const [isMediumScreen, setIsMediumScreen] = useState("");
 
-const buttonRef = useRef(null);
+  const buttonRef = useRef(null);
 
   function handleKeyPress(event) {
     if (event.key === 'Enter') {
@@ -56,9 +54,6 @@ const buttonRef = useRef(null);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-
-
 
   const { login, signUp, currentUser, forgotPassword } = useAuth();
   async function submitHandler() {
@@ -104,138 +99,19 @@ const buttonRef = useRef(null);
 
   const [stateBig, setStateBig] = useState(0);
   const [stateSmall, setStateSmall] = useState(0);
-
-  /* useEffect(() => {
-    const paraBig = () => {
-      const parallaxTitleBig = document.getElementById("parallaxTitleBig");
-      setStateBig(5 + window.scrollY * 0.05);
-      if (parallaxTitleBig) {
-        parallaxTitleBig.style.marginTop = stateBig + "%";
-      }
-    };
-
-    window.addEventListener("scroll", paraBig);
-    paraBig();
-
-    const paraSmall = () => {
-      const parallaxTitleSmall = document.getElementById("parallaxTitleSmall");
-    };
-
-    return () => window.removeEventListener("scroll", paraBig);
-
-     if (parallaxTitleSmall) {
-      parallaxTitleSmall.style.marginTop = 30 + "%";
-    }
-    window.addEventListener("scroll", () => {
-      if (parallaxTitleSmall) {
-        parallaxTitleSmall.style.marginTop = 30 + window.scrollY * 0.2 + "%";
-      }
-    }); 
-   if (parallaxTitleBig) {
-      parallaxTitleBig.style.marginTop = 5 + "%";
-    }
-    window.addEventListener("scroll", () => {
-      if (parallaxTitleBig) {
-        parallaxTitleBig.style.marginTop = 5 + window.scrollY * 0.05 + "%";
-      }
-    });  
-  }, []); */
-
   return (
     <>
-      {/* {isSmallScreen === true && (
-        <section className=" relative flex justify-center align-items h-auto w-screen">
-          <img
-            src="../img/MobileKandidatSmall.jpg"
-            id="bakgrund"
-            className="w-full  h-auto object-cover"
-          ></img>
-
-          <h2
-            id="parallaxTitleSmall"
-            className="text-black z-0 absolute mt-[16%] text-6xl text-center  sm:text-5xl 
-          font-bold font-family: "
-          >
-            Planner
-          </h2>
-
-          <img
-            src="../img/MobileKandidatSmallForeground.png"
-            id="foreground"
-            className="max-w-full absolute h-auto object-cover"
-          ></img>
-        </section>
-      )}
-      {isSmallScreen !== true && (
-        <Parallax
-          pages={2}
-          style={{ top: "0", left: "0" }}
-          className="animation"
-        >
-          <ParallaxLayer offset={0} speed={0.1}>
-            <div className="animation_layer parallax" id="background"></div>
-          </ParallaxLayer>
-          <ParallaxLayer offset={0} speed={-0.7}>
-            <div className="animation_layer parallax" id="title">
-              <h2
-                id="parallaxTitleBig"
-                className="text-black z-0 uppercase mt-[8%] lg:mt-[6%] absolute text-4xl  lg:text-8xl 
-          font-bold mr-[55%]"
-              >
-                Planner
-              </h2>
-            </div>
-          </ParallaxLayer>
-          <ParallaxLayer offset={0} speed={0.1}>
-            <div className="animation_layer parallax" id="foreground"></div>
-          </ParallaxLayer>
-          <ParallaxLayer offset={1} speed={0.1}>
-            <LoginSecondpage />
-          </ParallaxLayer>
-        </Parallax>
-
-         <section className=" relative flex justify-center align-items">
-          <img
-            src="../img/StartPageKandidatSmall.jpg"
-            id="bakgrund"
-            className="max-w-full relative mb-7 h-auto object-cover"
-          ></img>
-
-          <h2
-            id="parallaxTitleBig"
-            className="text-black z-0 uppercase mt-[8%] lg:mt-[6%] absolute text-4xl  lg:text-8xl 
-          font-bold mr-[55%]"
-          >
-            Planner
-          </h2>
-
-          <img
-            src="../img/StartPageforegroundSmall.png"
-            id="foreground"
-            className="max-w-full absolute h-auto object-cover"
-          ></img>
-        </section> 
-      )} */}
+      
 
       <section className=" relative ">
-        <div className="Wrapper bg-white flex flex-col lg:flex-row z-1000 items-center ">
-          {!isSmallScreen && !isMediumScreen ? (
-            <h2 className="text-black text-4xl sm:text-2xl font-light sm:pl-16  sm:text-center text-left px-4 sm:px-8 select-none">
-              The social and interactive travel planner for
-              you and your friends
+        <div className="Wrapper bg-white flex flex-col flex-row z-1000 items-center ">
+          
+          
+            <h2 className="text-black text-2xl sm:text-4xl mt-4 sm:mt-0 font-light mb-4 text-center pt-4 px-4 sm:px-8 select-none">
+              Are you ready to go on a journey?
             </h2>
-          ) : null}
-          {isMediumScreen && !isSmallScreen ? (
-            <h2 className="text-black text-4xl sm:text-xl md:mb-4 font-bold text-left px-4 sm:px-8 select-none">
-              The social and interactive travel planner for you and your friends
-            </h2>
-          ) : null}
-          {isSmallScreen === true && (
-            <h2 className="text-black text-xl sm:text-4xl mt-4 sm:mt-0 font-light  text-center pt-4 px-4 sm:px-8 select-none">
-              The social and interactive travel planner for you and your friends
-            </h2>
-          )}
-          <div className="Wrapper bg-white mt-8 sm:mt-0 flex flex-1 space-between flex-row z-999 items-center md:justify-center">
+         
+          <div className="Wrapper bg-white mt-2 sm:mt-0 flex flex-1 space-between flex-row z-999 items-center md:justify-center">
             <Popup
               contentStyle={{
                 width: "400px",
@@ -274,7 +150,6 @@ const buttonRef = useRef(null);
                     )}
 
                     <div className="mt-4">
-                      
                       <h2 className="text-2xl text-black">Email adress</h2>
                       <input
                       onKeyDown={handleKeyPress}
@@ -299,13 +174,13 @@ const buttonRef = useRef(null);
                       {!passwordShow && (
                         <i
                           onClick={togglePassword}
-                          className=" fa-solid fa-eye text-xl absolute  sm:right-16 right-14 sm:text-2xl"
+                          className=" fa-solid fa-eye text-xl absolute  sm:right-16 right-14  sm:text-2xl"
                         ></i>
                       )}
                       {passwordShow && (
                         <i
                           onClick={togglePassword}
-                          className=" fa-solid fa-eye-slash text-xl absolute  sm:right-16 right-14 sm:text-2xl"
+                          className=" fa-solid fa-eye-slash text-xl absolute sm:right-16 right-14  sm:text-2xl"
                         ></i>
                       )}
                       </div>
@@ -322,7 +197,6 @@ const buttonRef = useRef(null);
                       {email && password && passwordCheck && (
                         <button
                         ref={buttonRef}
-                          
                           className="w-full  mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
                           onClick={() => {
                             submitHandler();
@@ -335,14 +209,12 @@ const buttonRef = useRef(null);
                          
                       {(!email || !password || !passwordCheck) && (
                         <button
-                        
                           className="w-full  mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-40  font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
                           disabled={!email || !password || !passwordCheck}
                         >
                           Submit
                         </button>
                       )}
-                      
                     </div>
                   </div>
                 </div>
@@ -416,7 +288,7 @@ const buttonRef = useRef(null);
                     {passwordShow && (
                       <i
                         onClick={togglePassword}
-                        className=" fa-solid fa-eye-slash text-xl absolute  sm:end-24  end-20 sm:mr-0 mr-1 sm:text-2xl"
+                        className=" fa-solid fa-eye-slash text-xl absolute  sm:end-24 end-20 sm:mr-0 mr-1  sm:text-2xl"
                       ></i>
                     )} 
                       </div>
@@ -434,6 +306,7 @@ const buttonRef = useRef(null);
                       )}
                       {(!email || !password) && (
                         <button
+                        
                           disabled={!email || !password}
                           className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen opacity-40  font-medium rounded-lg text-sm  text-center mr-2 mb-2"
                         >
