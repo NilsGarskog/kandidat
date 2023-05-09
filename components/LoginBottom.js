@@ -4,6 +4,7 @@ import Popup from "reactjs-popup";
 import toast from "react-hot-toast";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import LoginSecondpage from "./LoginSecondPage";
+import { useRef } from 'react';
 
 function validateEmailAddress(input) {
   var regex = /[^\s@]+@[^\s@]+\.[^\s@]+/;
@@ -14,7 +15,7 @@ function validateEmailAddress(input) {
   }
 }
 
-export default function LoginFirstPage() {
+export default function LoginBottom() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
@@ -23,6 +24,18 @@ export default function LoginFirstPage() {
   const [passwordShow, setPasswordShow] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState("");
   const [isMediumScreen, setIsMediumScreen] = useState("");
+
+  const buttonRef = useRef(null);
+
+  function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      if (buttonRef.current) {
+        console.log("Enter");
+    buttonRef.current.click();
+  }
+      
+    }
+  }
 
   function resetFields() {
     setEmail("");
@@ -139,6 +152,7 @@ export default function LoginFirstPage() {
                     <div className="mt-4">
                       <h2 className="text-2xl text-black">Email adress</h2>
                       <input
+                      onKeyDown={handleKeyPress}
                         type="text"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -149,6 +163,7 @@ export default function LoginFirstPage() {
                       <h2 className="text-2xl text-black">Password</h2>
                       <div className="flex flex-row gap-4 items-center ">
                       <input
+                      onKeyDown={handleKeyPress}
                         type={passwordShow ? "text":"password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -171,6 +186,7 @@ export default function LoginFirstPage() {
                       </div>
                       <h2 className="text-2xl mt-4 text-black">Confirm password</h2>
                       <input
+                      onKeyDown={handleKeyPress}
                         type={passwordShow ? "text":"password"}
                         value={passwordCheck}
                         onChange={(e) => setPasswordCheck(e.target.value)}
@@ -180,6 +196,7 @@ export default function LoginFirstPage() {
 
                       {email && password && passwordCheck && (
                         <button
+                        ref={buttonRef}
                           className="w-full  mt-4 uppercase py-2 duration-300 relative text-white  bg-buttonGreen  opacity-100 hover:opacity-80 font-medium rounded-lg text-sm  text-center mr-2 mb-2 "
                           onClick={() => {
                             submitHandler();
@@ -244,6 +261,7 @@ export default function LoginFirstPage() {
                     <div className="mt-4">
                       <h2 className="text-2xl text-black">Email adress</h2>
                       <input
+                      onKeyDown={handleKeyPress}
                         type="text"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -254,6 +272,7 @@ export default function LoginFirstPage() {
                       <h2 className="text-2xl text-black">Password</h2>
                       <div className="flex flex-row  items-center">
                         <input
+                        onKeyDown={handleKeyPress}
                           type={passwordShow ? "text":"password"}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
@@ -275,6 +294,7 @@ export default function LoginFirstPage() {
                       </div>
                       {email && password && (
                         <button
+                        ref={buttonRef}
                           onClick={() => {
                             setIsLogginIn(isLoggingIn);
                             submitHandler();
@@ -286,6 +306,7 @@ export default function LoginFirstPage() {
                       )}
                       {(!email || !password) && (
                         <button
+                        
                           disabled={!email || !password}
                           className="w-full max-w-[40ch] mt-4 uppercase py-2 duration-300 relative text-white bg-buttonGreen opacity-40  font-medium rounded-lg text-sm  text-center mr-2 mb-2"
                         >
