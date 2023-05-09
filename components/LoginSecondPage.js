@@ -18,14 +18,14 @@ export default function LoginSecondPage() {
           </p>
           {smallScreen !== true && (
             <h2 className="text-black text-xl sm:text-2xl  text-left mb-4 select-none pr-20">
-              Travel planner offers you and your friends a range of
+              TRAPLA offers you and your friends a range of
               features to make your trip planning more smooth, easy
              and interactive.
             </h2>
           )}
           {smallScreen === true && (
             <h2 className="text-black text-md lg:text-2xl text-center sm:text-left mb-0 sm:mr-0  px-8  select-none">
-              Travel planner offers you and your friends a range of features to
+             TRAPLA offers you and your friends a range of features to
               make your trip planning more smooth, easy and interactive.
             </h2>
           )}

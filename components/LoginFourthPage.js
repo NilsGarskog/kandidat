@@ -18,7 +18,7 @@ export default function LoginFourthPage() {
           {smallScreen !== true && (
             <>
               <h2 className="text-black text-xl sm:text-2xl  text-left mb-4 select-none sm:pr-20">
-                Travel planner will do the hard work for 
+                TRAPLA will do the hard work for 
                 you when it comes to the actual planning.
               </h2>
               <h2 className="text-black text-xl lg:text-2xl text-center sm:text-left mb-4 sm:mr-0 sm:pr-20 px-4 sm:pl-0 select-none">
@@ -32,7 +32,7 @@ export default function LoginFourthPage() {
           {smallScreen === true && (
             <>
               <h2 className="text-black text-md lg:text-2xl text-center sm:text-left mb-4 sm:mr-0 mr-4 px-8 select-none">
-                Travel planner will do the hard work for you when it comes to
+                TRAPLA will do the hard work for you when it comes to
                 the actual planning.
               </h2>
               <h2 className="text-black text-md lg:text-2xl text-center sm:text-left mb-2x sm:mb-0 px-8 select-none">
