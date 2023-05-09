@@ -4,8 +4,8 @@ import { useAuth } from '../context/authContext'
 import { db } from '../firebase'
 
 export default function useFetchProfileInfo() {
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
+    const [loadingPInfo, setLoading] = useState(true)
+    const [errorPInfo, setError] = useState(null)
     const [profileData, setProfileData] = useState(null)
 
     const { currentUser } = useAuth()
@@ -24,7 +24,7 @@ export default function useFetchProfileInfo() {
 
             } catch (err) {
                 setError('Failed to load profile data')
-                
+
 
             } finally {
                 setLoading(false)
@@ -35,6 +35,6 @@ export default function useFetchProfileInfo() {
 
 
 
-    return { loading, error, profileData, setProfileData }
+    return { loadingPInfo, errorPInfo, profileData, setProfileData }
 
 }
