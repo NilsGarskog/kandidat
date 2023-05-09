@@ -100,7 +100,9 @@ export default function ActivityCard(props) {
 
             <i
               onClick={() => {
-                toggleEdit();
+                if(isEditing){
+                  toggleEdit()
+                };
                 close();
                 
 
