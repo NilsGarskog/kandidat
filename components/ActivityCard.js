@@ -97,6 +97,7 @@ export default function ActivityCard(props) {
       >
         {(close) => (
           <>
+
             <i
               onClick={() => {
                 close();
@@ -155,6 +156,7 @@ export default function ActivityCard(props) {
                   DELETE
                 </button>
               </div>
+
 
             </div>
           </>
