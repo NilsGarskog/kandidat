@@ -107,11 +107,11 @@ export default function LoginBottom() {
         <div className="Wrapper bg-white flex flex-col flex-row z-1000 items-center ">
           
           
-            <h2 className="text-black text-4xl sm:text-4xl mt-4 sm:mt-0 font-light mb-4 text-center pt-4 px-4 sm:px-8 select-none">
+            <h2 className="text-black text-2xl sm:text-4xl mt-4 sm:mt-0 font-light mb-4 text-center pt-4 px-4 sm:px-8 select-none">
               Are you ready to go on a journey?
             </h2>
          
-          <div className="Wrapper bg-white mt-8 sm:mt-0 flex flex-1 space-between flex-row z-999 items-center md:justify-center">
+          <div className="Wrapper bg-white mt-2 sm:mt-0 flex flex-1 space-between flex-row z-999 items-center md:justify-center">
             <Popup
               contentStyle={{
                 width: "400px",
