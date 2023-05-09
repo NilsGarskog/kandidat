@@ -8,8 +8,22 @@ export default function Header() {
   const { currentUser } = useAuth();
   const router = useRouter();
 
+  function closeModalOnClickOutside(event) {
+    console.log(event.target.className)
+    if (event.target.className != "fa-solid fa-user text-xl text-black duration-300 hover:opacity-40 cursor-pointer sm:text-3xl") {
+      setOpenModal(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("click", closeModalOnClickOutside);
+    return () => {
+      document.removeEventListener("click", closeModalOnClickOutside);
+    };
+  }, []);
+
   if (!currentUser) {
-    return
+    return null;
   }
 
   return (
