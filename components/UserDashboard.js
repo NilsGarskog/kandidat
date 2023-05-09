@@ -4,6 +4,7 @@ import TripCard from './TripCard'
 import { doc, setDoc, deleteField, deleteDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 import useFetchTrips from '../hooks/FetchTrips'
+import useFetchProfileInfo from '../hooks/FetchProfileInfo'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -45,6 +46,7 @@ export default function UserDashboard() {
   }
 
   const { trips, setTrips, loading, error } = useFetchTrips()
+  const { loadingPInfo, errorPInfo, profileData, setProfileData } = useFetchProfileInfo()
 
 
 
@@ -81,16 +83,19 @@ export default function UserDashboard() {
       setDepDate(null)
     }
   }
-
+  console.log(profileData);
+  console.log(loadingPInfo)
   return (
     <div className='overflow-hidden'>
       <div className='w-full text-black max-w-[90ch] mx-auto items-center flex flex-col flex-wrap sm:gap-5
     text-xs sm:text-sm overflow-hidden'>
-        <div className='flex flex-col items-center text-center select-none cursor-default'>
-          <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-10 sm:pt-0"><span className='font-bold'>Welcome,</span> <span className='font-light'>Traveller!</span></h1>
-          <h1 className="text-md sm:text-xl font-regular">Here are your current trips. <br></br>
-            Want to add another one? Just click the plus icon. </h1>
-        </div>
+        {(!loadingPInfo) && (
+          <div className='flex flex-col items-center text-center select-none cursor-default'>
+            <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-10 sm:pt-0"><span className='font-bold'>Welcome,</span> <span className='font-light'> {profileData.ProfileInfo.FirstName ? profileData.ProfileInfo.FirstName + '!' : 'Traveller!'} </span></h1>
+            <h1 className="text-md sm:text-xl font-regular">Here are your current trips. <br></br>
+              Want to add another one? Just click the plus icon. </h1>
+          </div>
+        )}
 
         {(loading) && (<div className='flex-1 grid place-items-center '>
           <i className="fa-solid fa-spinner animate-spin text-6xl text-black"></i>
@@ -108,7 +113,6 @@ export default function UserDashboard() {
                   <TripCard key={i} tripKey={trip}>
                     {trips[trip]}
                   </TripCard>
-
                 )
               })}
             </>
