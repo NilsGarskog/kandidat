@@ -63,7 +63,7 @@ export default function LoginLayout() {
           font-bold mr-[55%]"
           >
             <h2 className="ml-20">
-            Planner
+            TRAPLA
             </h2>
             <img className='h-24 z-0'src='../img/logo.svg'/>
            
@@ -90,7 +90,7 @@ export default function LoginLayout() {
            className="text-black z-0 absolute mt-[16%] text-6xl text-center  sm:text-5xl 
            font-bold flex items-center font-family: ">
           <h2>
-            Planner
+            TRAPLA
           </h2>
           <img className='h-20 z-0'src='../img/logo.svg'/>
 
