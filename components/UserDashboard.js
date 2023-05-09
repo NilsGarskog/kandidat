@@ -22,16 +22,31 @@ export default function UserDashboard() {
   const [open, setOpen] = useState(false);
   const [err, setErr] = useState("");
   const [tripImageUrl, setTripImageUrl] = useState([]);
+  const isMobile = window.innerWidth < 640;
+  const unsplashKey = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
 
 
 
+  const contentStyle = { 
+  width: "600px",
+  height: "420px",
+  borderRadius: '1em',
+  boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+ };
 
-  const contentStyle = { borderRadius: '20px' };
+  
   const overlayStyle = { background: 'rgba(0,0,0,0.5)' };
+
+  const mobileContentStyle = {
+    width: "350px",
+    height: "470px",
+    borderRadius: '0.7em',
+    boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+  }
 
   const { trips, setTrips, loading, error } = useFetchTrips()
 
-  const unsplashKey = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
+
 
 
 
@@ -107,39 +122,44 @@ export default function UserDashboard() {
           position="relative"
           modal
           closeOnDocumentClick={false}
-          {...{ contentStyle, overlayStyle }}
+         contentStyle={isMobile ? mobileContentStyle : contentStyle}
+         overlayStyle={overlayStyle}
 
         >
 
           <div className='flex flex-col font-medium text-base items-center rounded-lg w-full'>
-            <i onClick={() => handleButton(true)} className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-2 right-4 "></i>
+            <i onClick={() => handleButton(true)} className="text-4xl sm:text-5xl  fa-solid fa-xmark cursor-pointer absolute top-2 right-4 duration-300 opacity-50 hover:opacity-100 "></i>
             {/* <button onClick={close} className='absolute top-0 right-0 p-2'>CLOSE</button> */}
-            <div className="flex flex-col items-stretch p-3 items-center">
-              <h1 className="text-2xl pb-2">DESTINATION</h1>
+            <div className="flex flex-col items-stretch p-3 sm:pl-8 pt-10 w-full justify-items-start items-center">
+              <h1 className="text-3xl sm:text-4xl pb-2">DESTINATION</h1>
               <input type="text" placeholder='Enter trip' value={trip}
                 onChange={(e) => setTrip(e.target.value)} className="outline-none p-3 
-      text-base sm:text-lg text-slate-900 flex-1"/>
+      text-base sm:text-lg text-slate-900 flex-1 w-[28ch] rounded-md"/>
             </div>
             <div className='flex h-2 pb-4 text-red-600'>
               <h1 >{err}</h1>
             </div>
-            <div className='flex flex-col sm:flex-row space-x-20 p-3'>
-              <div className="flex flex-col ">
-                <h1 className="text-xl pb-1">ARRIVAL</h1>
-                <DatePicker value={arrDate} onChange={(newValue) => setArrDate(newValue)} format='DD-MM-YYYY' />
+            <div className='flex flex-col sm:flex-row w-full p-3 sm:pl-8'>
+              <div className='justify-items-start w-full '>
+              <div className="flex flex-col sm:mt-0 -mt-4 mb-4">
+                <h1 className="text-2xl sm:text-3xl pb-1">ARRIVAL</h1>
+                <DatePicker  value={arrDate} onChange={(newValue) => setArrDate(newValue)} format='DD-MM-YYYY' className=' w-[20ch]'/>
               </div>
+              </div>
+              <div className='justify-items-start w-full '>
               <div className="flex flex-col ">
-                <h1 className="text-xl pb-1">DEPARTURE</h1>
+                <h1 className="text-2xl sm:text-3xl pb-1">DEPARTURE</h1>
 
-                <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} format='DD-MM-YYYY' />
+                <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} format='DD-MM-YYYY' className='w-[20ch]'/>
 
+              </div>
               </div>
             </div>
-            <button className='border w-1/2 bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3 m-4' onClick={() => { handleAddTrip() }}>Create trip</button>
+            <button className='border uppercase font-semibold w-1/2 sm:w-1/3 text-base sm:text-lg bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3 m-4 mt-4' onClick={() => { handleAddTrip() }}>Create trip</button>
           </div>
         </Popup>
 
-      </div>
+      </div> 
     </div>
   )
 

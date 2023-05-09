@@ -97,9 +97,14 @@ export default function ActivityCard(props) {
       >
         {(close) => (
           <>
+
             <i
               onClick={() => {
+                if(isEditing){
+                  toggleEdit()
+                };
                 close();
+                
 
 
 
@@ -107,7 +112,7 @@ export default function ActivityCard(props) {
               className="p-2 sm:pr-4 pr-2 sm:pt-4 pt-2 sm:text-5xl text-4xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 duration-300 opacity-50 hover:opacity-100 "
             ></i>
             <div className='flex flex-col sm:pl-10 pl-5 sm:pt-10 pt-5'>
-              <h1 className='uppercase font-light text-3xl sm:text-5xl sm:pb-10 pb-5'>
+              <h1 className='uppercase font-light text-3xl sm:text-5xl sm:pb-10 pb-5 cursor-default select-none'>
                 {actData.name}
               </h1>
               <div className='flex flex-col sm:flex-row'>
@@ -134,7 +139,7 @@ export default function ActivityCard(props) {
                     <img className='w-full h-full object-cover  items-center' src={actData.img?.urlFull || '../img/placeholder-image.png'} />
                   </div>
 
-                  <div className='sm:text-sm text-xs mt-2 max-w-[30ch] sm:max-w-[30ch] sm:text-center text-gray-700 italic'>
+                  <div className='sm:text-sm text-xs mt-2 max-w-[30ch] sm:max-w-[30ch] sm:text-center text-gray-700 italic cursor-default select-none'>
                     {actData.img && <>Photo by <Link className='focus:outline-none' href={actData.img.portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{actData.img.name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link></>}
 
                   </div>
@@ -155,6 +160,7 @@ export default function ActivityCard(props) {
                   DELETE
                 </button>
               </div>
+
 
             </div>
           </>

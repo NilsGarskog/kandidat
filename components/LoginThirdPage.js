@@ -27,7 +27,7 @@ export default function LoginThirdPage() {
           {smallScreen !== true && (
             <>
               <h2 className="text-black text-xl sm:text-2xl text-right mb-4 sm:mr-14 sm:pl-6 select-none">
-                Travel planner let your friend group add activites,
+                TRAPLA let your friend group add activites,
                 restaurants, etc to a 
                 shared planning space where you can all see each
                 others suggestions.
@@ -42,7 +42,7 @@ export default function LoginThirdPage() {
           {smallScreen === true && (
             <>
               <h2 className="text-black text-md lg:text-2xl text-center sm:text-left mb-2 sm:mr-0  px-8  select-none">
-                Travel planner let your friend group add activites, restaurants,
+                TRAPLA let your friend group add activites, restaurants,
                 etc to a shared planning space where you can all see each others
                 suggestions.
               </h2>

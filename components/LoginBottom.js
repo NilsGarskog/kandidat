@@ -108,7 +108,7 @@ export default function LoginBottom() {
           
           
             <h2 className="text-black text-4xl sm:text-4xl mt-4 sm:mt-0 font-light mb-4 text-center pt-4 px-4 sm:px-8 select-none">
-              Are you ready to go for a journey?
+              Are you ready to go on a journey?
             </h2>
          
           <div className="Wrapper bg-white mt-8 sm:mt-0 flex flex-1 space-between flex-row z-999 items-center md:justify-center">
