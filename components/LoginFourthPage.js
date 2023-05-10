@@ -6,7 +6,7 @@ export default function LoginFourthPage() {
   const smallScreen = isSmallScreen;
   const MediumScreen = isMediumScreen;
   return (
-    <div className="wrapper flex flex-row  z-999">
+    <div className="wrapper flex flex-row relative z-999">
       <section className=" bg-white flex flex-wrap justify-center">
         <div className="md:ml-[5%] flex-1 sm:p-6 p-4  z-999 m-auto">
           <h2 className="pt-8 sm:pt-0 text-black text-4xl sm:text-7xl font-light text-center sm:text-left uppercase select-none">

@@ -6,7 +6,7 @@ export default function LoginThirdPage() {
   const smallScreen = isSmallScreen;
   const MediumScreen = isMediumScreen;
   return (
-    <div className="wrapper flex flex-row  z-999">
+    <div className="wrapper flex flex-row relative z-999">
       <section className=" bg-white flex flex-wrap justify-center">
         {smallScreen !== true && (
           <div className="bg-white sm:flex-1 p-4 sm:p-6  flex justify-center ">
