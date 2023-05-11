@@ -11,7 +11,7 @@ async function saveItineary(IT) {
     const { userInfo, currentUser } = useAuth()
     const { tripKey } = router.query
 
-
+    console.log("algo")
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', tripKey)
     await updateDoc(userRef, { itCreated: true, itineary: IT })
 }
