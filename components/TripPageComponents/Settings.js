@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import { useRouter } from 'next/router';
 import { useAuth } from 'context/authContext.js'
 import Popup from 'reactjs-popup';
-import { doc, setDoc, deleteField, deleteDoc } from 'firebase/firestore'
+import { doc, setDoc, deleteField, deleteDoc, collection, getDocs } from 'firebase/firestore'
 import { db } from 'firebase.js'
 
 
@@ -54,9 +54,17 @@ export default function Settings(props) {
         const userRef = doc(db, 'users', currentUser.uid, 'Trips', tripKey)
         await deleteDoc(userRef)
 
+        const collectionRef = collection(db, 'users', currentUser.uid, 'Trips', tripKey, 'Activities');
+        const querySnapshot = await getDocs(collectionRef);
+
+        querySnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+                });
+
         router.push('/')
 
     }
+    
 
 
     let Name = props.data.Name
