@@ -7,8 +7,8 @@ export default function LoginSecondPage() {
   const MediumScreen = isMediumScreen;
 
   return (
-    <div className="cursor-default wrapper flex flex-row z-80 min-h-[20vh]">
-      <section className=" bg-white flex flex-wrap justify-center">
+    <div className="cursor-default wrapper relative flex flex-row z-50 min-h-[20vh] w-full">
+      <section className=" bg-white flex flex-wrap justify-center w-full">
         <div className="md:ml-[5%] flex-1 sm:p-6 sm:pl-0 p-4 z-999 m-auto">
           <h2 className="text-black text-4xl sm:text-7xl font-light text-center sm:text-left uppercase select-none pt-8 sm:pt-0">
             Trip planning

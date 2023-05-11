@@ -218,9 +218,9 @@ const buttonRef = useRef(null);
       )} */}
 
       <section className=" relative ">
-        <div className="Wrapper bg-white flex flex-col lg:flex-row z-1000 items-center ">
+        <div className="Wrapper bg-white flex flex-col lg:flex-row items-center ">
           {!isSmallScreen && !isMediumScreen ? (
-            <h2 className="text-black text-4xl sm:text-2xl font-light sm:pl-16  sm:text-center text-left px-4 sm:px-8 select-none">
+            <h2 className="text-black text-4xl sm:text-2xl font-light sm:pl-16 mt-10 sm:text-center text-left px-4 sm:px-8 select-none">
               The social and interactive travel planner for
               you and your friends
             </h2>
@@ -235,7 +235,7 @@ const buttonRef = useRef(null);
               The social and interactive travel planner for you and your friends
             </h2>
           )}
-          <div className="Wrapper bg-white mt-8 sm:mt-0 flex flex-1 space-between flex-row z-999 items-center md:justify-center">
+          <div className="Wrapper bg-white mt-8 sm:mt-10 mt-0 flex flex-1 space-between flex-row z-999 items-center md:justify-center">
             <Popup
               contentStyle={{
                 width: "400px",
