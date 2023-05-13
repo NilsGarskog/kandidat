@@ -8,6 +8,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";;
 import { BiArrowFromBottom } from "react-icons/bi";
 import LoginBottom from "./LoginBottom";
 import Parallax from '../components/Parallax';
+import EasterEgg from "./EasterEgg";
 
 export const useScreenSizes = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -112,6 +113,7 @@ export default function LoginLayout() {
       <LoginBottom />
      {/*  <LoginFifthpage /> */}
       <ScrollToTop />
+      <EasterEgg/>
     </div>
   );
 }
