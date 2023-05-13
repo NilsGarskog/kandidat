@@ -38,16 +38,15 @@ export default function Header() {
         <h1 className='text-2xl select-none text-black   sm:text-4xl font-medium'> TRAPLA </h1>
         <img className='h-12 pl-2' src='../img/logo.svg'/>
         </div>
-
-       {profileData?.ProfileInfo?.ProfileImageURL ?  <div className="sm:ml-4 ml-0 sm:mt-0 mt-2 sm:h-12 sm:w-12 h-40 w-40 rounded-full overflow-hidden cursor-pointer">
-                        <img onClick={() => {
-                        setOpenModal(true);
-     }}
-                          className="w-full h-full object-cover "
-                          src=
-                            {profileData.ProfileInfo.ProfileImageURL}
+<div onClick={() => setOpenModal(true)}>
+       {profileData?.ProfileInfo?.ProfileImageURL ? <div onClick={()=> {setOpenModal(true)}}> <div  className="sm:ml-4 ml-0 sm:mt-0 mt-2 sm:h-12 sm:w-12 h-12 w-12 rounded-full overflow-hidden cursor-pointer">
+                        <img 
+                          className="w-full h-full object-cover"
+                          src={profileData.ProfileInfo.ProfileImageURL}
                           
-                        ></img> </div>:  <i onClick={() => setOpenModal(true)} className="fa-solid fa-user text-xl text-black duration-300 hover:opacity-40 cursor-pointer sm:text-3xl"></i>}
+                          
+                        ></img> </div></div>:  <i  className="fa-solid fa-user text-xl text-black duration-300 hover:opacity-40 cursor-pointer sm:text-3xl"></i>}
+                        </div>
       </div>
     </>
   );

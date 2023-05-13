@@ -27,7 +27,19 @@ export default function Modal(props) {
   const [imageUpload, setImageUpload] = useState(null)
   const [selectedImage, setSelectedImage] = useState(null)
   const [uploadedImageUrl, setUploadedImageUrl] = useState('');
-
+  const isMobile = window.innerWidth < 640
+  const contentStyle= {
+    width: "600px",
+    height: "450px",
+    borderRadius: "0.7em",
+    boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)"
+  }
+const contentStyleMobile = {
+  width: "320px",
+  height: "470px",
+  borderRadius: "0.7em",
+  boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)"
+}
 
   const uploadImage = () => {
     if (imageUpload == null) return;
@@ -143,16 +155,7 @@ export default function Modal(props) {
               Edit profile
             </h2>
           }
-          contentStyle={{
-            width: "600px",
-            height: "450px",
-            borderRadius: "0.7em",
-            boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
-            "@media (min-width: 640px)": {
-              width: "400px",
-              height: "600px",
-            },
-          }}
+          contentStyle={isMobile ? contentStyleMobile : contentStyle}
           position="relative"
           modal
           closeOnDocumentClick={false}
@@ -160,7 +163,7 @@ export default function Modal(props) {
           {(close) => (
             <>
               <div className="select-none">
-                <div className="flex flex-start sm:text-xl sm:justify-start sm:items-start justify-center items-center text-s">
+                <div className="flex flex-start sm:text-xl sm:justify-start sm:items-start  items-center text-sm">
                   <p className="p-2 pl-4 pt-4 sm:font-light font ">
                     Here is your profile information.
                     <br />
@@ -172,10 +175,10 @@ export default function Modal(props) {
                       setSelectedImage(null);
 
                     }}
-                    className="p-2 sm:pr-4 pr-0 sm:pt-4 pt-1 sm:text-5xl text-xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 duration-300 opacity-50 hover:opacity-100 "
+                    className="p-2 sm:pr-4 pr-1 sm:pt-4 pt-2 sm:text-5xl text-4xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 duration-300 opacity-50 hover:opacity-100 "
                   ></i>
                 </div>
-                <div className="p-2 sm:pt-6 pt-0 pl-4 text-2xl font-light flex sm:flex-row flex-col sm:justify-start sm:items-start justify-center items-center gap-x-8 uppercase">
+                <div className="p-2 sm:pt-6 pt-0 sm:pl-4 pl-4 text-2xl font-light flex sm:flex-row flex-col sm:justify-start sm:items-start justify-center sm:items-center gap-x-8 gap-y-3 sm:gap-y-0 uppercase">
                   <div className="flex flex-col justify-items-center">
                     <h2>First name</h2>
                     <input
@@ -203,12 +206,12 @@ export default function Modal(props) {
                   </div>
                 </div>
                 <div className="flex place-content-between ">
-                  <div className="flex flex-col sm:justify-start sm:items-start justify-center items-center">
-                    <div className="sm:text-2xl text-s sm:mr-0 sm:font-light font uppercase sm:pl-4 pl-0 pt-4">
+                  <div className="flex flex-col sm:justify-start sm:items-start justify-center ">
+                    <div className="sm:text-2xl text-xl sm:mr-0 sm:font-light font uppercase sm:pl-4 pl-4 pt-4">
                       <h2>Profile picture</h2>
                     </div>
                     <div className="flex  sm:justify-start sm:items-start justify-center items-center ">
-                      <div className="sm:ml-4 ml-0 sm:mt-4 mt-2 sm:h-40 sm:w-40 h-40 w-40  border border-2 rounded-full overflow-hidden">
+                      <div className="sm:ml-4 ml-4 sm:mt-4 mt-2 sm:h-40 sm:w-40 h-32 w-32  border border-2 rounded-full overflow-hidden">
                         <img
                           className="w-full h-full  object-cover "
                           src={
@@ -218,19 +221,19 @@ export default function Modal(props) {
                           }
                         ></img>
                       </div>
-                      <div className=" font-normal  sm:pt-8 pt-0 sm:pl-6 pl-2 text-sm sm:ml-3 ml-0 flex flex-col gap-y-2 ">
+                      <div className=" font-normal  sm:pt-14 pt-0 sm:pl-6 pl-2 text-xs sm:text-sm sm:ml-3 ml-0 flex flex-col gap-y-2 ">
                         <button
                           onClick={() => setSelectedImage(null)}
-                          className="duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md flex place-content-between items-center px-3 sm:pr-4 pr-2 text-left w-[100px] h-[40px] sm:w-[150px] sm:h-[40px] border"
+                          className="bg-buttonRed duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md flex place-content-between items-center px-3 sm:pr-4 pr-2 text-left w-[100px] h-[40px] sm:w-[150px] sm:h-[40px] border"
                         >
                           <p>Remove</p>{" "}
                           <i className="fa-solid fa-trash-can scale-125"></i>
                         </button>
                         <label
-                          className="duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md text-center flex place-content-between items-center px-3 sm:pr-4 pr-2 text-left w-[100px] h-[40px] sm:w-[150px] sm:h-[40px] border cursor-pointer"
+                          className="bg-white duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md text-center flex place-content-between items-center px-3 sm:pr-4 pr-2 text-left w-[100px] h-[40px] sm:w-[150px] sm:h-[40px] border cursor-pointer"
                           htmlFor="inputTag"
                         >
-                          Upload new
+                          {isMobile? 'Upload' : 'Upload new'}
                           <i className="fa-solid fa-arrow-up-from-bracket scale-125"></i>
                           <input
                             className="hidden"
@@ -249,7 +252,7 @@ export default function Modal(props) {
                     </div>
                   </div>
 
-                  <div className="sm:pr-10 pr-0  flex place-items-end   sm:mt-0 mt-8 ">
+                  <div className={`${isMobile? 'absolute bottom-0 right-0 mb-4 mr-4' : 'sm:pr-10 pr-0  flex place-items-end   sm:mt-0 mt-8'} `} >
                     <button
                       onClick={() => {
                         handleAddProfileInfo();
@@ -257,7 +260,7 @@ export default function Modal(props) {
                         handleAddProfileImage();
                         handleDeleteProfileImage();
                       }}
-                      className="duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md w-[90px]  h-[40px]  border uppercase text-xl font-semibold"
+                      className={`bg-buttonGreen duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md w-[90px]  h-[40px]  border uppercase text-xl font-semibold`}
                     >
                       Save!
                     </button>
