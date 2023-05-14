@@ -11,6 +11,8 @@ import { v4 } from 'uuid'
 import useFetchTrips from '../hooks/FetchTrips'
 import Map from './Map';
 import Link from 'next/link';
+import {Route, Routes, useLocation} from 'react-router-dom';
+
 
 export default function Modal(props) {
   const router = useRouter()
@@ -22,7 +24,7 @@ export default function Modal(props) {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [profileImageUrl, setProfileImageUrl] = useState('')
-  const [profileInfo, setProfileInfo] = useState(null)
+  const [profileInfo, setProfileInfo] = useState({FirstName:'', LastName:'',ProfileImageURL:''})
   const [isLoading, setIsLoading] = useState(false)
   const [imageUpload, setImageUpload] = useState(null)
   const [selectedImage, setSelectedImage] = useState(null)
@@ -56,53 +58,67 @@ const contentStyleMobile = {
 
 
   async function handleAddProfileInfo() {
-    /*  if (!trip) { return }
-     setTrips({ ...trips, [newKey]: trip }) */
-    const userRef = doc(db, 'users', currentUser.uid)
-    /*  console.log(newKey) */
-    await setDoc(userRef, { ProfileInfo: { FirstName: firstName, LastName: lastName } }, { merge: true })
+    console.log(profileInfo)
+    if((firstName != profileInfo.FirstName || lastName != profileInfo.LastName) && profileImageUrl != profileInfo.ProfileImageURL){
+     
+          await handleAddProfileImage()
+        }
+        else if(firstName != profileInfo.FirstName || lastName != profileInfo.LastName){
+          const userRef = doc(db, 'users', currentUser.uid)
+          await setDoc(userRef, { ProfileInfo: { FirstName: firstName, LastName: lastName } }, { merge: true })
+        }
+        else if(profileImageUrl != profileInfo.ProfileImageURL){
+          await handleAddProfileImage()
+        }
 
-    setProfileInfo({ FirstName: firstName, LastName: lastName })
 
   }
 
 
   async function handleAddProfileImage() {
-    if (imageUpload && selectedImage != null) {
+    if (imageUpload && selectedImage != null && profileImageUrl != null) {
       const imageRef = ref(storage, `profileImages/${imageUpload.name + v4()}`)
-      uploadBytes(imageRef, imageUpload).then(() => {
+      await uploadBytes(imageRef, imageUpload).then(() => {
         getDownloadURL(imageRef).then(url => {
           setUploadedImageUrl(url)
           const userRef = doc(db, 'users', currentUser.uid)
-          setDoc(userRef, { ProfileInfo: { ...profileInfo, ProfileImageURL: url } }, { merge: true })
-          setProfileInfo({ ...profileInfo, ProfileImageURL: url })
+          setDoc(userRef, { ProfileInfo: { FirstName: firstName, LastName: lastName, ProfileImageURL: url } }, { merge: true })
+          setProfileInfo({ FirstName: firstName, LastName: lastName, ProfileImageURL: url })
           setUploadedImageUrl(null)
-    
+         
         })
       })
+    }
+    else if(profileImageUrl===null) {
+
+      await handleDeleteProfileImage()
     }
   }
 
   async function handleDeleteProfileImage() {
-    if (selectedImage == null) {
       const userRef = doc(db, 'users', currentUser.uid)
       const docSnap = await getDoc(userRef)
       if (docSnap.exists()) {
         const data = docSnap.data()
         const profileInfo = data.ProfileInfo || {}
-        if (profileInfo.ProfileImageURL) {
+        console.log(profileInfo)
+        if (profileInfo.ProfileImageURL && profileImageUrl==null) {
           const imageRef = ref(storage, profileInfo.ProfileImageURL);
           await deleteObject(imageRef)
           await setDoc(userRef, { ProfileInfo: { ProfileImageURL: deleteField() } }, { merge: true })
           setProfileInfo({ ...profileInfo, ProfileImageURL: null })
+
          
         }
-      }
+      
     }
 
 
 
+
+
   }
+
 
   useEffect(() => {
     set_document(document)
@@ -120,7 +136,8 @@ const contentStyleMobile = {
         setProfileInfo(profileInfo)
         setFirstName(profileInfo.FirstName || '')
         setLastName(profileInfo.LastName || '')
-        setProfileImageUrl(profileInfo.profileImageUrl || '')
+        setProfileImageUrl(profileInfo.ProfileImageURL || '')
+        setSelectedImage(profileInfo.ProfileImageURL || '')
       }
       setIsLoading(false)
     }
@@ -151,7 +168,7 @@ const contentStyleMobile = {
         }
         <Popup
           trigger={
-            <h2 className="select-none duration-300 hover:pl-2 cursor-pointer">
+            <h2 className="select-none duration-300 hover:pl-2 cursor-pointer" onClick={() => setOpenModal(false)}>
               Edit profile
             </h2>
           }
@@ -172,7 +189,9 @@ const contentStyleMobile = {
                   <i
                     onClick={() => {
                       close();
+                      setOpenModal(false)
                       setSelectedImage(null);
+
 
                     }}
                     className="p-2 sm:pr-4 pr-1 sm:pt-4 pt-2 sm:text-5xl text-4xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 duration-300 opacity-50 hover:opacity-100 "
@@ -215,15 +234,15 @@ const contentStyleMobile = {
                         <img
                           className="w-full h-full  object-cover "
                           src={
-                            selectedImage
-                              ? URL.createObjectURL(selectedImage)
+                            profileImageUrl
+                              ? profileImageUrl
                               : "../img/placeholder-image.png"
                           }
                         ></img>
                       </div>
                       <div className=" font-normal  sm:pt-14 pt-0 sm:pl-6 pl-2 text-xs sm:text-sm sm:ml-3 ml-0 flex flex-col gap-y-2 ">
                         <button
-                          onClick={() => setSelectedImage(null)}
+                          onClick={async() => await setProfileImageUrl(null)}
                           className="bg-buttonRed duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md flex place-content-between items-center px-3 sm:pr-4 pr-2 text-left w-[100px] h-[40px] sm:w-[150px] sm:h-[40px] border"
                         >
                           <p>Remove</p>{" "}
@@ -240,10 +259,10 @@ const contentStyleMobile = {
                             id="inputTag"
                             type="file"
                             accept="image/*"
-                            onChange={(e) => {
+                            onChange={async (e) => {
                               const file = e.target.files[0];
                               setImageUpload(e.target.files[0]);
-                              setSelectedImage(file);
+                              await setProfileImageUrl(URL.createObjectURL(e.target.files[0]));
                             }}
                             key={selectedImage?.name || "input"}
                           />
@@ -254,11 +273,15 @@ const contentStyleMobile = {
 
                   <div className={`${isMobile? 'absolute bottom-0 right-0 mb-4 mr-4' : 'sm:pr-10 pr-0  flex place-items-end   sm:mt-0 mt-8'} `} >
                     <button
-                      onClick={() => {
-                        handleAddProfileInfo();
+                      onClick={async () => {
+                        await handleAddProfileInfo();
                         close();
-                        handleAddProfileImage();
-                        handleDeleteProfileImage();
+                        setOpenModal(false)
+            
+                          router.push('/')
+                        
+                    
+                        
                       }}
                       className={`bg-buttonGreen duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md w-[90px]  h-[40px]  border uppercase text-xl font-semibold`}
                     >

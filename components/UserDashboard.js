@@ -91,7 +91,7 @@ export default function UserDashboard() {
     text-xs sm:text-sm overflow-hidden'>
         {(!loadingPInfo) && (
           <div className='flex flex-col items-center text-center select-none cursor-default'>
-            <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-10 sm:pt-0"><span className='font-bold'>Welcome,</span> <span className='font-light'> {profileData.ProfileInfo.FirstName ? profileData.ProfileInfo.FirstName + '!' : 'Traveller!'} </span></h1>
+            <h1 className="text-3xl sm:text-5xl pb-3 sm:pb-10 pt-10 sm:pt-0"><span className='font-bold'>Welcome,</span> <span className='font-light'> {profileData.ProfileInfo?.FirstName ? profileData.ProfileInfo.FirstName + '!' : 'Traveller!'} </span></h1>
             <h1 className="text-md sm:text-xl font-regular">Here are your current trips. <br></br>
               Want to add another one? Just click the plus icon. </h1>
           </div>
@@ -119,7 +119,7 @@ export default function UserDashboard() {
           </div>
 
         )}
-        <div className="  w-full flex justify-center -mt-16 sm:-mt-36 z-10 bg-gradient-to-t from-white h-[10ch] items-start ">
+        <div className="  w-full flex justify-center -mt-16 sm:-mt-36 z-10 bg-gradient-to-t from-white via-white via-30% h-[10ch] items-start ">
           <button onClick={() => handleButton()} className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
         </div>
         <Popup open={open}

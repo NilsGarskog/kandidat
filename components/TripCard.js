@@ -24,8 +24,9 @@ export default function TripCard(props) {
       <div className="flex flex-row items-center">
            
         <div className='sm:max-w-sm max-w-xs duration-300 hover:bg-gray-100 shadow-xl bg-white text-black rounded-xl items-center'>
-        <Link href={`/${tripKey}`} className=' flex items-center'>
+      
           <div className='flex items-center pr-40 pl-3 pt-4 pb-4'>
+          <Link href={`/${tripKey}`} className=' flex items-center'>
          
 
 
@@ -38,14 +39,14 @@ export default function TripCard(props) {
 
                   {children}
                 </div>
-                <div className='font-light text-xs w-[30ch]'>
+                <div className='font-light text-xs sm:w-[30ch]'>
                   {dayjs(tripData.arrDate).format('D MMM YYYY')}  →  {dayjs(tripData.depDate).format('D MMM YYYY')}
                 </div>
 
               </div>
-            
+              </Link>
           </div>
-          </Link>
+          
         </div>
         
 

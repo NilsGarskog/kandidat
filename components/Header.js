@@ -3,6 +3,8 @@ import Modal from "./Modal";
 import { useAuth } from "../context/authContext";
 import { useRouter } from "next/router";
 import useFetchProfileInfo from "@/hooks/FetchProfileInfo";
+import { db } from "@/firebase";
+import {doc, getDoc, setDoc, docSnap} from 'firebase/firestore'
 
 export default function Header() {
   const [openModal, setOpenModal] = useState(false);
@@ -10,6 +12,7 @@ export default function Header() {
   const { loadingPInfo, errorPInfo, profileData, setProfileData } = useFetchProfileInfo()
   const router = useRouter();
   console.log(profileData)
+
 
 
   function closeModalOnClickOutside(event) {
@@ -39,7 +42,7 @@ export default function Header() {
         <img className='h-12 pl-2' src='../img/logo.svg'/>
         </div>
 <div onClick={() => setOpenModal(true)}>
-       {profileData?.ProfileInfo?.ProfileImageURL ? <div> <div  className="sm:ml-4 ml-0 sm:mt-0 mt-2 sm:h-12 sm:w-12 h-12 w-12 rounded-full overflow-hidden cursor-pointer">
+       {profileData?.ProfileInfo?.ProfileImageURL ? <div> <div  className="sm:ml-4 ml-0 sm:mt-0 sm:mb-1 mt-0 sm:h-12 sm:w-12 h-10 w-10 rounded-full overflow-hidden cursor-pointer">
                         <img 
                        
                           className="w-full h-full object-cover"
