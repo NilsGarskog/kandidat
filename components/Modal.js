@@ -49,7 +49,7 @@ const contentStyleMobile = {
       getDownloadURL(imageRef).then(url =>
         setUploadedImageUrl(url))
       console.log(uploadedImageUrl)
-      alert('Image uploaded!')
+
     })
 
   };
@@ -77,7 +77,7 @@ const contentStyleMobile = {
           setDoc(userRef, { ProfileInfo: { ...profileInfo, ProfileImageURL: url } }, { merge: true })
           setProfileInfo({ ...profileInfo, ProfileImageURL: url })
           setUploadedImageUrl(null)
-          alert('Image uploaded!')
+    
         })
       })
     }
@@ -95,7 +95,7 @@ const contentStyleMobile = {
           await deleteObject(imageRef)
           await setDoc(userRef, { ProfileInfo: { ProfileImageURL: deleteField() } }, { merge: true })
           setProfileInfo({ ...profileInfo, ProfileImageURL: null })
-          alert('Profile image deleted!')
+         
         }
       }
     }
@@ -137,10 +137,10 @@ const contentStyleMobile = {
       style={{ width: "20vw", minWidth: "200px", height: "30vh", minHeight: "160px" }}
     >
       <div className="flex items-center justify-between border-slate-900 p-4">
-        <h1 className="font-extrabold text-2xl sm:text-5xl">MENU</h1>
+        <h1 className="font-extrabold text-2xl sm:text-5xl cursor-default select-none">MENU</h1>
         <i
           onClick={() => setOpenModal(false)}
-          className="fa-solid fa-xmark duration-300 hover:rotate-90 cursor-pointer text-lg sm_text-3xl"
+          className="fa-solid fa-xmark duration-300 hover:rotate-90 cursor-pointer mr-4 mt-1 text-lg sm:text-3xl"
         ></i>
       </div>
       <div className="p-4 flex flex-col gap-3">

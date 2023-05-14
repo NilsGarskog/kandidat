@@ -19,13 +19,13 @@ export default function Header() {
     }
   }
 
-  useEffect(() => {
+  /* useEffect(() => {
     document.addEventListener("click", closeModalOnClickOutside);
     return () => {
       document.removeEventListener("click", closeModalOnClickOutside);
     };
   }, []);
-
+ */
   if (!currentUser) {
     return null;
   }
@@ -39,8 +39,9 @@ export default function Header() {
         <img className='h-12 pl-2' src='../img/logo.svg'/>
         </div>
 <div onClick={() => setOpenModal(true)}>
-       {profileData?.ProfileInfo?.ProfileImageURL ? <div onClick={()=> {setOpenModal(true)}}> <div  className="sm:ml-4 ml-0 sm:mt-0 mt-2 sm:h-12 sm:w-12 h-12 w-12 rounded-full overflow-hidden cursor-pointer">
+       {profileData?.ProfileInfo?.ProfileImageURL ? <div> <div  className="sm:ml-4 ml-0 sm:mt-0 mt-2 sm:h-12 sm:w-12 h-12 w-12 rounded-full overflow-hidden cursor-pointer">
                         <img 
+                       
                           className="w-full h-full object-cover"
                           src={profileData.ProfileInfo.ProfileImageURL}
                           

@@ -119,7 +119,7 @@ export default function UserDashboard() {
           </div>
 
         )}
-        <div className="  w-full flex justify-center -mt-16 sm:-mt-28 z-10 bg-gradient-to-t from-white h-[10ch] items-start ">
+        <div className="  w-full flex justify-center -mt-16 sm:-mt-36 z-10 bg-gradient-to-t from-white h-[10ch] items-start ">
           <button onClick={() => handleButton()} className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
         </div>
         <Popup open={open}

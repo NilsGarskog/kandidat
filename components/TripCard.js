@@ -22,10 +22,11 @@ export default function TripCard(props) {
     const tripData = allData.tripData
     return (
       <div className="flex flex-row items-center">
-
+           
         <div className='sm:max-w-sm max-w-xs duration-300 hover:bg-gray-100 shadow-xl bg-white text-black rounded-xl items-center'>
+        <Link href={`/${tripKey}`} className=' flex items-center'>
           <div className='flex items-center pr-40 pl-3 pt-4 pb-4'>
-            <Link href={`/${tripKey}`} className=' flex items-center'>
+         
 
 
               <div className={`${uniqueClassName} ml-3 h-20 w-20  rounded-full overflow-hidden`} >
@@ -37,15 +38,16 @@ export default function TripCard(props) {
 
                   {children}
                 </div>
-                <div className='font-light text-xs'>
+                <div className='font-light text-xs w-[30ch]'>
                   {dayjs(tripData.arrDate).format('D MMM YYYY')}  →  {dayjs(tripData.depDate).format('D MMM YYYY')}
                 </div>
 
               </div>
-            </Link>
+            
           </div>
-
+          </Link>
         </div>
+        
 
         {allData.loading === false && allData.tripData && allData.tripData.tripImageUrl && allData.tripData.tripImageUrl[tripData.preferredImageIndex] && <Tooltip anchorSelect={`.${uniqueClassName}`} place='top' clickable>
           Photo by <Link href={allData.tripData.tripImageUrl[tripData.preferredImageIndex].portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{allData.tripData.tripImageUrl[tripData.preferredImageIndex].name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link>
