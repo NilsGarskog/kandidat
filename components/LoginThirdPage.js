@@ -27,13 +27,12 @@ export default function LoginThirdPage() {
           {smallScreen !== true && (
             <>
               <h2 className="text-black text-xl sm:text-2xl text-right mb-4 sm:mr-14 sm:pl-6 select-none">
-                TRAPLA let your friend group add activites,
-                restaurants, etc to a 
-                shared planning space where you can all see each
-                others suggestions.
+                TRAPLA lets your friend group add activites,
+                restaurants, etc. to a 
+                planning space where you can see all the suggestions and learn more about them.
               </h2>
               <h2 className="text-black text-xl sm:text-2xl text-center sm:text-right mb-4 sm:mr-14 sm:pl-6 sm:mb-0 select-none">
-                Upvote your friends suggestions to hightlight what you
+                Comming soon: Upvote your friends suggestions to hightlight what you
                 want to explore at 
                 the destination.
               </h2>
@@ -42,13 +41,14 @@ export default function LoginThirdPage() {
           {smallScreen === true && (
             <>
               <h2 className="text-black text-md lg:text-2xl text-center sm:text-left mb-2 sm:mr-0  px-8  select-none">
-                TRAPLA let your friend group add activites, restaurants,
-                etc to a shared planning space where you can all see each others
-                suggestions.
+              TRAPLA lets your friend group add activites,
+                restaurants, etc. to a 
+                planning space where you can see all the suggestions and learn more about them.
               </h2>
               <h2 className="text-black text-md lg:text-2xl text-center sm:p-5 sm:text-left mb-4 sm:mb-0 px-8  select-none">
-                Upvote your friends suggestions to hightlight what you want to
-                explore at the destination.
+              Comming soon: Upvote your friends suggestions to hightlight what you
+                want to explore at 
+                the destination.
               </h2>
             </>
           )}
