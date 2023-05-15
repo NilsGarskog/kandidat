@@ -56,7 +56,7 @@ export default function Trip() {
                 {(page === "calender" && ItCreated === false && openIt === false) &&
                     <div className='flex items-center flex-col p-3'>
                         <div className='flex flex-col items-center w-5/6 sm:w-2/3 select-none cursor-default'>
-                            <h1 className="text-center text-5xl sm:text-7xl text-bold p-2 font-bold uppercase mt-10 sm:mt-28">Your itineary</h1>
+                            <h1 className="text-center text-5xl sm:text-7xl text-bold p-2 font-bold uppercase mt-10 sm:mt-28">Your itinerary</h1>
                             <p className="text-md sm:text-lg text-center p-1 mt-4 sm:mt-0" > Here, you can generate your itinerary based on the activities you have planned so far.<br />  {isMobile && <br />}
                                 If you would like to add more activities, you can always come back to this page later {!isMobile && <br />}and regenerate the itinerary.</p>
                         </div>
