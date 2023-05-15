@@ -11,7 +11,7 @@ export default function LoginSecondPage() {
       <section className=" bg-white flex flex-wrap justify-center w-full">
         <div className="md:ml-[5%] flex-1 sm:p-6 sm:pl-0 p-4 z-999 m-auto">
           <h2 className="text-black text-4xl sm:text-7xl font-light text-center sm:text-left uppercase select-none pt-8 sm:pt-0">
-            Trip planning
+            Travel planning
           </h2>
           <p className="text-black text-xl font-extralight italic lg:text-4xl mb-6 text-center sm:text-left select-none">
             has never been easier

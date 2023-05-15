@@ -32,7 +32,7 @@ export default function LoginThirdPage() {
                 planning space where you can see all the suggestions and learn more about them.
               </h2>
               <h2 className="text-black text-xl sm:text-2xl text-center sm:text-right mb-4 sm:mr-14 sm:pl-6 sm:mb-0 select-none">
-                Comming soon: Upvote your friends suggestions to hightlight what you
+                Coming soon: Upvote your friends suggestions to hightlight what you
                 want to explore at 
                 the destination.
               </h2>
@@ -46,7 +46,7 @@ export default function LoginThirdPage() {
                 planning space where you can see all the suggestions and learn more about them.
               </h2>
               <h2 className="text-black text-md lg:text-2xl text-center sm:p-5 sm:text-left mb-4 sm:mb-0 px-8  select-none">
-              Comming soon: Upvote your friends suggestions to hightlight what you
+              Coming soon: Upvote your friends suggestions to hightlight what you
                 want to explore at 
                 the destination.
               </h2>
