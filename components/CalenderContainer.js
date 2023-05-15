@@ -2,9 +2,13 @@ import useFetchAct from '@/hooks/FetchActivities'
 import useFetchTripData from '../hooks/FetchTripData'
 import React, { useEffect, useState } from 'react'
 import Calendar from '@/components/Calendar';
+import toast from "react-hot-toast";
+
+
 
 async function regenerate(regen, setRegen) {
     setRegen(Math.random())
+    toast.success('Regenerated itinerary!')
 }
 
 
@@ -19,10 +23,13 @@ export default function ActivityContainer(props) {
         algoData.itineary = allData.tripData.itineary
         algoData.actArr = activities
         return (
+            
             <div className='flex items-center flex-col'>
+                
                 <Calendar data={algoData} regen={regen}></Calendar>
                 <i onClick={() => regenerate(regen, setRegen)} className="fa-solid duration-300 hover:rotate-90 fa-arrows-rotate text-6xl -mt-60 cursor-pointer"></i>
             </div>
+            
         )
     } else {
         return (

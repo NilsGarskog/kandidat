@@ -6,6 +6,7 @@ import { useAuth } from 'context/authContext.js'
 import Popup from 'reactjs-popup';
 import { doc, setDoc, deleteField, deleteDoc, collection, getDocs } from 'firebase/firestore'
 import { db } from 'firebase.js'
+import toast from "react-hot-toast";
 
 
 
@@ -104,7 +105,7 @@ export default function Settings(props) {
                 </div>
                 <div className="flex flex-row justify-evenly">
                     {saveLoading === false &&
-                        <button className='text-lg font-bold sm:font-semibold border w-1/3 bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' onClick={() => { handleUpdate() }}>SAVE</button>
+                        <button className='text-lg font-bold sm:font-semibold border w-1/3 bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' onClick={() => { toast.success('Changes saved!'),handleUpdate() }}>SAVE</button>
                     }
                     {saveLoading === true &&
                         <i className="fa-solid fa-spinner animate-spin text-6xl"></i>
