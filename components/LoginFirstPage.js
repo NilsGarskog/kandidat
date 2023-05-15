@@ -26,6 +26,36 @@ export default function LoginFirstPage() {
   const [passwordShow, setPasswordShow] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState("");
   const [isMediumScreen, setIsMediumScreen] = useState("");
+  const isMobile = window.innerWidth < 640;
+  const contentStyle1 = {
+    width: '400px',
+    height: "500px",
+    borderRadius: "0.7em",
+    boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+  }
+  const contentStyleMobile1 = {
+    
+      width: '350px',
+      height: "500px",
+      borderRadius: "0.7em",
+      boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+    
+  }
+
+  const contentStyle2 = {
+    width: "400px",
+    height: "440px",
+    borderRadius: "0.7em",
+    boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+  }
+  const contentStyleMobile2 = {
+    
+      width: '350px',
+      height: "420px",
+      borderRadius: "0.7em",
+      boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+    
+  }
 
 const buttonRef = useRef(null);
 
@@ -237,12 +267,7 @@ const buttonRef = useRef(null);
           )}
           <div className="Wrapper bg-white mt-8 sm:mt-10 mt-0 flex flex-1 space-between flex-row z-999 items-center md:justify-center">
             <Popup
-              contentStyle={{
-                width: "400px",
-                height: "500px",
-                borderRadius: "0.7em",
-                boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
-              }}
+              contentStyle={isMobile? contentStyleMobile1 : contentStyle1}
               trigger={
                 <button className="sm:-ml-10 border bg-buttonGreen text-black text-lg sm:text-2xl font-bold sm:font-medium uppercase  sm:mr-6 sm:hover:opacity-70 duration-300 mr-10 py-4 px-6 sm:ml-[30%] gap-2 rounded-full shadow-md hover:shadow-lg">
                   Register
@@ -263,10 +288,10 @@ const buttonRef = useRef(null);
                         close();
                         resetFields();
                       }}
-                      className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "
+                      className="text-3xl sm:text-4xl opacity:100 hover:opacity-50 duration-300 fa-solid fa-xmark cursor-pointer absolute top-2 right-4 "
                     ></i>
 
-                    <h1 className="text-3xl mt-6 text-center pb-10">Sign up</h1>
+                    <h1 className="text-4xl mt-6 text-center pb-10 uppercase sm:text-5xl sm:mt-8">Sign up</h1>
                     {error && (
                       <div className="w-full select-none mb-3 max-w-[40ch] border-rose-400 text-rose-400 py-2 border border-solid text-center">
                         {error}
@@ -275,7 +300,7 @@ const buttonRef = useRef(null);
 
                     <div className="mt-4">
                       
-                      <h2 className="text-2xl text-black">Email adress</h2>
+                      <h2 className="text-2xl text-black uppercase">Email adress</h2>
                       <input
                       onKeyDown={handleKeyPress}
                         type="text"
@@ -285,7 +310,7 @@ const buttonRef = useRef(null);
                         required
                         className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
                       ></input>
-                      <h2 className="text-2xl text-black">Password</h2>
+                      <h2 className="text-2xl text-black uppercase">Password</h2>
                       <div className="flex flex-row gap-4 items-center ">
                       <input
                       onKeyDown={handleKeyPress}
@@ -299,17 +324,17 @@ const buttonRef = useRef(null);
                       {!passwordShow && (
                         <i
                           onClick={togglePassword}
-                          className=" fa-solid fa-eye text-xl absolute  sm:right-16 right-14 sm:text-2xl"
+                          className=" fa-solid fa-eye text-xl absolute  sm:right-16 mr-2 right-12 sm:text-2xl"
                         ></i>
                       )}
                       {passwordShow && (
                         <i
                           onClick={togglePassword}
-                          className=" fa-solid fa-eye-slash text-xl absolute  sm:right-16 right-14 sm:text-2xl"
+                          className=" fa-solid fa-eye-slash text-xl absolute sm:right-16 mr-2 right-12 sm:text-2xl"
                         ></i>
                       )}
                       </div>
-                      <h2 className="text-2xl mt-4 text-black">Confirm password</h2>
+                      <h2 className="text-2xl mt-4 text-black uppercase">Confirm password</h2>
                       <input
                       onKeyDown={handleKeyPress}
                         type={passwordShow ? "text":"password"}
@@ -350,12 +375,7 @@ const buttonRef = useRef(null);
             </Popup>
 
             <Popup
-              contentStyle={{
-                width: "400px",
-                height: "420px",
-                borderRadius: "0.7em",
-                boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
-              }}
+              contentStyle={isMobile? contentStyleMobile2 : contentStyle2}
               trigger={
                 <button className="border bg-buttonGreen text-black mr-[20%]  md:mr-[20vh] text-lg sm:text-2xl font-bold sm:font-medium uppercase  py-4 px-6 rounded-full duration-300 sm:hover:opacity-70 shadow-md hover:shadow-lg mr-[5%]">
                   Login
@@ -376,10 +396,10 @@ const buttonRef = useRef(null);
                         close();
                         resetFields();
                       }}
-                      className="text-3xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 "
+                      className="text-3xl sm:text-4xl opacity:100 hover:opacity-50 duration-300 fa-solid fa-xmark cursor-pointer absolute top-2 right-4"
                     ></i>
 
-                    <h1 className="text-3xl mt-6 text-center pb-10">Sign in</h1>
+                    <h1 className="text-4xl mt-6 text-center pb-10 uppercase sm:text-5xl sm:mt-8">Sign in</h1>
                     {error && (
                       <div className="w-full select-none mb-3 max-w-[40ch] border-rose-400 text-rose-400 py-2 border border-solid text-center">
                         {error}
@@ -387,7 +407,7 @@ const buttonRef = useRef(null);
                     )}
 
                     <div className="mt-4">
-                      <h2 className="text-2xl text-black">Email adress</h2>
+                      <h2 className="text-2xl text-black uppercase">Email adress</h2>
                       <input
                       onKeyDown={handleKeyPress}
                         type="text"
@@ -397,7 +417,7 @@ const buttonRef = useRef(null);
                         required
                         className=" mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
                       ></input>
-                      <h2 className="text-2xl text-black">Password</h2>
+                      <h2 className="text-2xl text-black uppercase">Password</h2>
                       <div className="flex flex-row  items-center">
                         <input
                         onKeyDown={handleKeyPress}
@@ -405,18 +425,18 @@ const buttonRef = useRef(null);
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           placeholder="Enter password"
-                          className="outline-none   flex-wrap border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                          className="outline-none   flex-wrap border-solid  focus:border-cyan-300 text-slate-900 p-2 w-[25ch]"
                         ></input>
                           {!passwordShow && (
                       <i
                         onClick={togglePassword}
-                        className=" fa-solid fa-eye text-xl absolute  sm:end-24 end-20 sm:mr-0 mr-1 sm:text-2xl"
+                        className=" fa-solid fa-eye text-xl absolute  sm:end-20 end-14 sm:mr-0 mr-1 sm:text-2xl"
                       ></i>
                     )}
                     {passwordShow && (
                       <i
                         onClick={togglePassword}
-                        className=" fa-solid fa-eye-slash text-xl absolute  sm:end-24  end-20 sm:mr-0 mr-1 sm:text-2xl"
+                        className=" fa-solid fa-eye-slash text-xl absolute  sm:end-20  end-14 sm:mr-0 mr-1 sm:text-2xl"
                       ></i>
                     )} 
                       </div>
@@ -443,12 +463,7 @@ const buttonRef = useRef(null);
                     </div>
 
                     <Popup
-                      contentStyle={{
-                        width: "400px",
-                        height: "420px",
-                        borderRadius: "0.7em",
-                        boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
-                      }}
+                      contentStyle={isMobile? contentStyleMobile2 : contentStyle2}
                       overlayStyle={{ background: "rgba(0,0,0,0)" }}
                       trigger={
                         <h2 className="forgot-password duration-300 hover:scale-110 text-right cursor-pointer">
@@ -464,14 +479,14 @@ const buttonRef = useRef(null);
                           <div className="inline-block">
                             <i
                               onClick={close}
-                              className="text-3xl fa-solid fa-arrow-left cursor-pointer absolute top-1.5 left-3 "
+                              className="text-3xl fa-solid fa-arrow-left cursor-pointer absolute top-1.5 left-3 hover:opacity-50 duration-300"
                             ></i>
 
-                            <h1 className="text-3xl mt-6 text-center pb-10">
+                            <h1 className="sm:text-3xl  text-2xl mt-14 text-center pb-10 uppercase">
                               Forgot password?
                             </h1>
-                            <div className="mt-14 flex flex-col ">
-                              <h2 className="text-2xl text-black">
+                            <div className="mt-10 flex flex-col px-10 ">
+                              <h2 className="text-2xl text-black uppercase">
                                 Email adress
                               </h2>
                               <input
@@ -480,7 +495,7 @@ const buttonRef = useRef(null);
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter email"
                                 required
-                                className=" border border-black border-solid outline-none  border-solid items-start focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
+                                className=" border border-black border-solid outline-none  border-solid items-start focus:border-cyan-300 text-slate-900 p-2 w-full sm:max-w-[40ch]"
                               ></input>
                               <div className="items-center">
                               {!email && (
