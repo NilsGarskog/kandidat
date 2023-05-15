@@ -137,7 +137,7 @@ export default function LoginBottom() {
         <div className="Wrapper bg-white flex flex-col flex-row z-1000 items-center ">
           
           
-            <h2 className="text-black text-2xl sm:text-4xl mt-4 sm:mt-0 font-light mb-4 text-center pt-4 px-4 sm:px-8 select-none">
+            <h2 className="text-black text-2xl sm:text-4xl mt-4 sm:mt-0 font-light mb-4 text-center pt-4 px-4 sm:px-8 cursor-default select-none">
               Are you ready to go on a journey?
             </h2>
          
@@ -167,7 +167,7 @@ export default function LoginBottom() {
                       className="text-3xl sm:text-4xl opacity:100 hover:opacity-50 duration-300 fa-solid fa-xmark cursor-pointer absolute top-2 right-4 "
                     ></i>
 
-                    <h1 className="text-4xl mt-6 text-center pb-10 uppercase sm:text-5xl sm:mt-8">Sign up</h1>
+                    <h1 className="text-4xl mt-6 text-center pb-10 uppercase sm:text-5xl sm:mt-8 cursor-default select-none">Sign up</h1>
                     {error && (
                       <div className="w-full select-none mb-3 max-w-[40ch] border-rose-400 text-rose-400 py-2 border border-solid text-center">
                         {error}
@@ -176,7 +176,7 @@ export default function LoginBottom() {
 
                     <div className="mt-4">
                       
-                      <h2 className="text-2xl text-black uppercase">Email adress</h2>
+                      <h2 className="text-2xl text-black uppercase cursor-default select-none">Email adress</h2>
                       <input
                       onKeyDown={handleKeyPress}
                         type="text"
@@ -186,7 +186,7 @@ export default function LoginBottom() {
                         required
                         className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
                       ></input>
-                      <h2 className="text-2xl text-black uppercase">Password</h2>
+                      <h2 className="text-2xl text-black uppercase cursor-default select-none">Password</h2>
                       <div className="flex flex-row gap-4 items-center ">
                       <input
                       onKeyDown={handleKeyPress}
@@ -210,7 +210,7 @@ export default function LoginBottom() {
                         ></i>
                       )}
                       </div>
-                      <h2 className="text-2xl mt-4 text-black uppercase">Confirm password</h2>
+                      <h2 className="text-2xl mt-4 text-black uppercase cursor-default select-none">Confirm password</h2>
                       <input
                       onKeyDown={handleKeyPress}
                         type={passwordShow ? "text":"password"}
@@ -274,7 +274,7 @@ export default function LoginBottom() {
                       className="text-3xl sm:text-4xl opacity:100 hover:opacity-50 duration-300 fa-solid fa-xmark cursor-pointer absolute top-2 right-4"
                     ></i>
 
-                    <h1 className="text-4xl mt-6 text-center pb-10 uppercase sm:text-5xl sm:mt-8">Sign in</h1>
+                    <h1 className="text-4xl mt-6 text-center pb-10 uppercase sm:text-5xl sm:mt-8 cursor-default select-none">Sign in</h1>
                     {error && (
                       <div className="w-full select-none mb-3 max-w-[40ch] border-rose-400 text-rose-400 py-2 border border-solid text-center">
                         {error}
@@ -282,7 +282,7 @@ export default function LoginBottom() {
                     )}
 
                     <div className="mt-4">
-                      <h2 className="text-2xl text-black uppercase">Email adress</h2>
+                      <h2 className="text-2xl text-black uppercase cursor-default select-none">Email adress</h2>
                       <input
                       onKeyDown={handleKeyPress}
                         type="text"
@@ -292,7 +292,7 @@ export default function LoginBottom() {
                         required
                         className=" mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
                       ></input>
-                      <h2 className="text-2xl text-black uppercase">Password</h2>
+                      <h2 className="text-2xl text-black uppercase cursor-default select-none">Password</h2>
                       <div className="flex flex-row  items-center">
                         <input
                         onKeyDown={handleKeyPress}
@@ -357,11 +357,11 @@ export default function LoginBottom() {
                               className="text-3xl fa-solid fa-arrow-left cursor-pointer absolute top-1.5 left-3 hover:opacity-50 duration-300"
                             ></i>
 
-                            <h1 className="sm:text-3xl  text-2xl mt-14 text-center pb-10 uppercase">
+                            <h1 className="sm:text-3xl  text-2xl mt-14 text-center pb-10 uppercase cursor-default select-none">
                               Forgot password?
                             </h1>
                             <div className="mt-10 flex flex-col px-10 ">
-                              <h2 className="text-2xl text-black uppercase">
+                              <h2 className="text-2xl text-black uppercase cursor-default select-none">
                                 Email adress
                               </h2>
                               <input

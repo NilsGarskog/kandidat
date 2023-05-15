@@ -250,18 +250,18 @@ const buttonRef = useRef(null);
       <section className=" relative ">
         <div className="Wrapper bg-white flex flex-col lg:flex-row items-center ">
           {!isSmallScreen && !isMediumScreen ? (
-            <h2 className="text-black text-4xl sm:text-2xl font-light sm:pl-16 mt-10 sm:text-center text-left px-4 sm:px-8 select-none">
+            <h2 className="text-black text-4xl sm:text-2xl font-light sm:pl-16 mt-10 sm:text-center text-left px-4 sm:px-8 select-none cursor-default ">
               The social and interactive travel planner for
               you and your friends
             </h2>
           ) : null}
           {isMediumScreen && !isSmallScreen ? (
-            <h2 className="text-black text-4xl sm:text-xl md:mb-4 font-bold text-left px-4 sm:px-8 select-none">
+            <h2 className="text-black text-4xl sm:text-xl md:mb-4 font-bold text-left px-4 sm:px-8 select-none cursor-default">
               The social and interactive travel planner for you and your friends
             </h2>
           ) : null}
           {isSmallScreen === true && (
-            <h2 className="text-black text-xl sm:text-4xl mt-4 sm:mt-0 font-light  text-center pt-4 px-4 sm:px-8 select-none">
+            <h2 className="text-black text-xl sm:text-4xl mt-4 sm:mt-0 font-light  text-center pt-4 px-4 sm:px-8 select-none cursor-default">
               The social and interactive travel planner for you and your friends
             </h2>
           )}
@@ -291,7 +291,7 @@ const buttonRef = useRef(null);
                       className="text-3xl sm:text-4xl opacity:100 hover:opacity-50 duration-300 fa-solid fa-xmark cursor-pointer absolute top-2 right-4 "
                     ></i>
 
-                    <h1 className="text-4xl mt-6 text-center pb-10 uppercase sm:text-5xl sm:mt-8">Sign up</h1>
+                    <h1 className="text-4xl mt-6 text-center pb-10 uppercase sm:text-5xl sm:mt-8 cursor-default select-none">Sign up</h1>
                     {error && (
                       <div className="w-full select-none mb-3 max-w-[40ch] border-rose-400 text-rose-400 py-2 border border-solid text-center">
                         {error}
@@ -300,7 +300,7 @@ const buttonRef = useRef(null);
 
                     <div className="mt-4">
                       
-                      <h2 className="text-2xl text-black uppercase">Email adress</h2>
+                      <h2 className="text-2xl text-black uppercase cursor-default select-none">Email adress</h2>
                       <input
                       onKeyDown={handleKeyPress}
                         type="text"
@@ -310,7 +310,7 @@ const buttonRef = useRef(null);
                         required
                         className="mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
                       ></input>
-                      <h2 className="text-2xl text-black uppercase">Password</h2>
+                      <h2 className="text-2xl text-black uppercase cursor-default select-none">Password</h2>
                       <div className="flex flex-row gap-4 items-center ">
                       <input
                       onKeyDown={handleKeyPress}
@@ -334,7 +334,7 @@ const buttonRef = useRef(null);
                         ></i>
                       )}
                       </div>
-                      <h2 className="text-2xl mt-4 text-black uppercase">Confirm password</h2>
+                      <h2 className="text-2xl mt-4 text-black uppercase cursor-default select-none">Confirm password</h2>
                       <input
                       onKeyDown={handleKeyPress}
                         type={passwordShow ? "text":"password"}
@@ -399,7 +399,7 @@ const buttonRef = useRef(null);
                       className="text-3xl sm:text-4xl opacity:100 hover:opacity-50 duration-300 fa-solid fa-xmark cursor-pointer absolute top-2 right-4"
                     ></i>
 
-                    <h1 className="text-4xl mt-6 text-center pb-10 uppercase sm:text-5xl sm:mt-8">Sign in</h1>
+                    <h1 className="text-4xl mt-6 text-center pb-10 uppercase sm:text-5xl sm:mt-8 cursor-default select-none">Sign in</h1>
                     {error && (
                       <div className="w-full select-none mb-3 max-w-[40ch] border-rose-400 text-rose-400 py-2 border border-solid text-center">
                         {error}
@@ -407,7 +407,7 @@ const buttonRef = useRef(null);
                     )}
 
                     <div className="mt-4">
-                      <h2 className="text-2xl text-black uppercase">Email adress</h2>
+                      <h2 className="text-2xl text-black uppercase cursor-default select-none">Email adress</h2>
                       <input
                       onKeyDown={handleKeyPress}
                         type="text"
@@ -417,7 +417,7 @@ const buttonRef = useRef(null);
                         required
                         className=" mb-4 border border-black outline-none   border-solid  focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]"
                       ></input>
-                      <h2 className="text-2xl text-black uppercase">Password</h2>
+                      <h2 className="text-2xl text-black uppercase cursor-default select-none">Password</h2>
                       <div className="flex flex-row  items-center">
                         <input
                         onKeyDown={handleKeyPress}
@@ -482,11 +482,11 @@ const buttonRef = useRef(null);
                               className="text-3xl fa-solid fa-arrow-left cursor-pointer absolute top-1.5 left-3 hover:opacity-50 duration-300"
                             ></i>
 
-                            <h1 className="sm:text-3xl  text-2xl mt-14 text-center pb-10 uppercase">
+                            <h1 className="sm:text-3xl  text-2xl mt-14 text-center pb-10 uppercase cursor-default select-none">
                               Forgot password?
                             </h1>
                             <div className="mt-10 flex flex-col px-10 ">
-                              <h2 className="text-2xl text-black uppercase">
+                              <h2 className="text-2xl text-black uppercase cursor-default select-none">
                                 Email adress
                               </h2>
                               <input
