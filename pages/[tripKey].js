@@ -14,6 +14,7 @@ import TripNavBar from '../components/TripPageComponents/TripNavBar'
 import Settings from '../components/TripPageComponents/Settings'
 
 
+
 export default function Trip() {
     const router = useRouter()
     let [page, setPage] = useState("activities")

@@ -11,6 +11,7 @@ import { v4 } from 'uuid'
 import useFetchTrips from '../hooks/FetchTrips'
 import Map from './Map';
 import Link from 'next/link';
+import toast from "react-hot-toast";
 
 export default function Modal(props) {
   const router = useRouter()
@@ -37,7 +38,7 @@ export default function Modal(props) {
       getDownloadURL(imageRef).then(url =>
         setUploadedImageUrl(url))
       console.log(uploadedImageUrl)
-      alert('Image uploaded!')
+      
     })
 
   };
@@ -65,7 +66,7 @@ export default function Modal(props) {
           setDoc(userRef, { ProfileInfo: { ...profileInfo, ProfileImageURL: url } }, { merge: true })
           setProfileInfo({ ...profileInfo, ProfileImageURL: url })
           setUploadedImageUrl(null)
-          alert('Image uploaded!')
+          
         })
       })
     }
@@ -256,6 +257,7 @@ export default function Modal(props) {
                         close();
                         handleAddProfileImage();
                         handleDeleteProfileImage();
+                        toast.success('Changes saved!')
                       }}
                       className="duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md w-[90px]  h-[40px]  border uppercase text-xl font-semibold"
                     >
