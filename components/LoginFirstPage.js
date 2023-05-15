@@ -29,7 +29,7 @@ export default function LoginFirstPage() {
   const isMobile = window.innerWidth < 640;
   const contentStyle1 = {
     width: '400px',
-    height: "500px",
+    height: "520px",
     borderRadius: "0.7em",
     boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
   }
@@ -125,6 +125,16 @@ const buttonRef = useRef(null);
         setError(error.message);
       }
       return;
+    }
+  }
+  async function submitForgottenPassword() {
+    try {
+      await forgotPassword(email)
+      toast.success('Email was successfully sent, check your inbox!')
+    }
+    catch (error) {
+
+      toast.error("No existing account with that email address")
     }
   }
 

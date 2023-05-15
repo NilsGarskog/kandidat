@@ -125,7 +125,7 @@ export default function CreateActivity(props) {
                   <p className='flex flex-start text-2xl sm:text-3xl uppercase '>Add description </p>
                   <p className='sm:text-xl'>(optional)</p>
                 </div>
-                <textarea type='text' placeHolder='Enter description...' className='resize-none text-start rounded-lg bg-gray-200 pl-3 p-1 pt-3 ml-2 italic text-slate-500 sm:w-[38ch] w-[27ch] h-[10ch] ' value={actDescription} onChange={(e) => { setActDescription(e.target.value) }}></textarea>
+                <textarea type='text' placeholder='Enter description...' className='resize-none text-start rounded-lg bg-gray-200 pl-3 p-1 pt-3 ml-2 italic text-slate-500 sm:w-[38ch] w-[27ch] h-[10ch] ' value={actDescription} onChange={(e) => { setActDescription(e.target.value) }}></textarea>
               </div>
 
             </div>
