@@ -149,7 +149,7 @@ export default function UserDashboard() {
               <div className='justify-items-start w-full '>
               <div className="flex flex-col sm:mt-0 -mt-4 mb-4">
                 <h1 className="text-2xl sm:text-3xl pb-1">ARRIVAL</h1>
-                <DatePicker  value={arrDate} onChange={(newValue) => setArrDate(newValue)} format='DD-MM-YYYY' className=' w-[20ch]'/>
+                <DatePicker  value={arrDate} onChange={(newValue) => {setArrDate(newValue), setDepDate(newValue)}} format='DD-MM-YYYY' className=' w-[20ch]'/>
               </div>
               </div>
               <div className='justify-items-start w-full '>
