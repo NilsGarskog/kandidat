@@ -11,7 +11,7 @@ import { v4 } from 'uuid'
 import useFetchTrips from '../hooks/FetchTrips'
 import Map from './Map';
 import Link from 'next/link';
-import {Route, Routes, useLocation} from 'react-router-dom';
+
 
 
 export default function Modal(props) {
@@ -58,66 +58,54 @@ const contentStyleMobile = {
 
 
   async function handleAddProfileInfo() {
-    console.log(profileInfo)
-    if((firstName != profileInfo.FirstName || lastName != profileInfo.LastName) && profileImageUrl != profileInfo.ProfileImageURL){
-     
-          await handleAddProfileImage()
-        }
-        else if(firstName != profileInfo.FirstName || lastName != profileInfo.LastName){
-          const userRef = doc(db, 'users', currentUser.uid)
-          await setDoc(userRef, { ProfileInfo: { FirstName: firstName, LastName: lastName } }, { merge: true })
-        }
-        else if(profileImageUrl != profileInfo.ProfileImageURL){
-          await handleAddProfileImage()
-        }
-
-
+    
+    console.log(profileInfo);
+    if (firstName !== profileInfo.FirstName || lastName !== profileInfo.LastName) {
+      const userRef = doc(db, 'users', currentUser.uid);
+      await setDoc(userRef, { ProfileInfo: { FirstName: firstName, LastName: lastName } }, { merge: true });
+    }
+    
+    if (profileImageUrl !== profileInfo.ProfileImageURL) {
+      await handleAddProfileImage();
+    }
+/*     window.location.href='/' */
   }
+  
+  
 
 
   async function handleAddProfileImage() {
-    if (imageUpload && selectedImage != null && profileImageUrl != null) {
-      const imageRef = ref(storage, `profileImages/${imageUpload.name + v4()}`)
-      await uploadBytes(imageRef, imageUpload).then(() => {
-        getDownloadURL(imageRef).then(url => {
-          setUploadedImageUrl(url)
-          const userRef = doc(db, 'users', currentUser.uid)
-          setDoc(userRef, { ProfileInfo: { FirstName: firstName, LastName: lastName, ProfileImageURL: url } }, { merge: true })
-          setProfileInfo({ FirstName: firstName, LastName: lastName, ProfileImageURL: url })
-          setUploadedImageUrl(null)
-         
-        })
-      })
-    }
-    else if(profileImageUrl===null) {
-
-      await handleDeleteProfileImage()
+    if (imageUpload) {
+      const imageRef = ref(storage, `profileImages/${imageUpload.name + v4()}`);
+      await uploadBytes(imageRef, imageUpload);
+      const url = await getDownloadURL(imageRef);
+      setUploadedImageUrl(url);
+      const userRef = doc(db, 'users', currentUser.uid);
+      await setDoc(userRef, { ProfileInfo: { FirstName: firstName, LastName: lastName, ProfileImageURL: url } }, { merge: true });
+      setProfileInfo({ FirstName: firstName, LastName: lastName, ProfileImageURL: url });
+      window.location.href='/'
+    } else if (profileImageUrl === null) {
+      await handleDeleteProfileImage();
+      window.location.href='/'
     }
   }
+  
 
   async function handleDeleteProfileImage() {
-      const userRef = doc(db, 'users', currentUser.uid)
-      const docSnap = await getDoc(userRef)
-      if (docSnap.exists()) {
-        const data = docSnap.data()
-        const profileInfo = data.ProfileInfo || {}
-        console.log(profileInfo)
-        if (profileInfo.ProfileImageURL && profileImageUrl==null) {
-          const imageRef = ref(storage, profileInfo.ProfileImageURL);
-          await deleteObject(imageRef)
-          await setDoc(userRef, { ProfileInfo: { ProfileImageURL: deleteField() } }, { merge: true })
-          setProfileInfo({ ...profileInfo, ProfileImageURL: null })
-
-         
-        }
-      
+    const userRef = doc(db, 'users', currentUser.uid);
+    const docSnap = await getDoc(userRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      const profileInfo = data.ProfileInfo || {};
+      if (profileInfo.ProfileImageURL && profileImageUrl === null) {
+        const imageRef = ref(storage, profileInfo.ProfileImageURL);
+        await deleteObject(imageRef);
+        await setDoc(userRef, { ProfileInfo: { ProfileImageURL: deleteField() } }, { merge: true });
+        setProfileInfo({ FirstName: profileInfo.FirstName, LastName: profileInfo.LastName, ProfileImageURL: null });
+      }
     }
-
-
-
-
-
   }
+  
 
 
   useEffect(() => {
@@ -261,7 +249,7 @@ const contentStyleMobile = {
                             accept="image/*"
                             onChange={async (e) => {
                               const file = e.target.files[0];
-                              setImageUpload(e.target.files[0]);
+                              await setImageUpload(e.target.files[0]);
                               await setProfileImageUrl(URL.createObjectURL(e.target.files[0]));
                             }}
                             key={selectedImage?.name || "input"}

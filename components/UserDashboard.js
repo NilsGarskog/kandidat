@@ -13,6 +13,7 @@ import Map from './Map'
 import APItest from './APItest'
 import Autocomplete from './Autocomplete'
 import { getUrl } from '@/utils/urlUtil'
+import Header from './Header'
 
 
 export default function UserDashboard() {
@@ -25,6 +26,7 @@ export default function UserDashboard() {
   const [tripImageUrl, setTripImageUrl] = useState([]);
   const isMobile = window.innerWidth < 640;
   const unsplashKey = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
+
 
 
 
@@ -83,10 +85,10 @@ export default function UserDashboard() {
       setDepDate(null)
     }
   }
-  console.log(profileData);
-  console.log(loadingPInfo)
+ 
   return (
     <div className='overflow-hidden'>
+      <Header/>
       <div className='w-full text-black max-w-[90ch] mx-auto items-center flex flex-col flex-wrap sm:gap-5
     text-xs sm:text-sm overflow-hidden'>
         {(!loadingPInfo) && (
