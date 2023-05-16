@@ -39,7 +39,7 @@ export default function TripCard(props) {
 
                   {children}
                 </div>
-                <div className='font-light text-xs sm:w-[30ch]'>
+                <div className='font-light text-xs w-[25ch] sm:w-[30ch]'>
                   {dayjs(tripData.arrDate).format('D MMM YYYY')}  →  {dayjs(tripData.depDate).format('D MMM YYYY')}
                 </div>
 

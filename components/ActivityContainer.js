@@ -1,15 +1,14 @@
 import useFetchAct from '@/hooks/FetchActivities'
-import React from 'react'
+import React, {useEffect} from 'react'
 import ActivityCard from './ActivityCard'
 
 export default function ActivityContainer(props) {
 const child = props.children
-const activityData = useFetchAct(props.tripKey)
-const activities = activityData.actArr
+const activities = props.data
 
 
 
-        
+
              if (child==null) {
                 
                 return (

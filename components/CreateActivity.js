@@ -15,7 +15,8 @@ import { getUrl } from '@/utils/urlUtil'
 
 export default function CreateActivity(props) {
   const { tripKey } = props.tripKey
-  const [activityData] = props.actData
+  const [activityData, setActivityData] = useState(props.actData)
+  console.log(activityData)
   const [error, setError] = useState('')
   let [activity, setActivity] = useState('')
   let [activityLength, setActivityLength] = useState('')
@@ -51,6 +52,8 @@ export default function CreateActivity(props) {
 
   }
 
+  
+
   if (props.type === 'activity') {
 
     return (
@@ -58,25 +61,26 @@ export default function CreateActivity(props) {
       <div >
 
         <div  >
-        <div className='static flex sm:items-start flex-col sm:ml-0 ml-10 sm:mt-0 mt-0 mb-2'>
-            <div className=' flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4'>
+        <div className='static flex sm:items-start flex-col sm:ml-0 ml-10 sm:mt-0 mt-0 mb-2 '>
+            <div className=' flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4 '>
            <h1 className=' text-4xl sm:pl-4 pl-20 sm:mb-0 -mb-10'>ACTIVITIES</h1>
             {!isMobile && <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img>}
             </div>
             <div className='sm:mt-0 mt-10 flex sm:flex-col sm:h-[24ch]'>
-            <div className=' flex sm:flex-col-reverse '>
-            {isMobile && <div className='flex bg-gradient-to-l from-white z-10'><img className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-20 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img></div>}
-            <div className='sm:h-[24ch] flex sm:flex-col sm:overflow-y-scroll overflow-x-scroll'>
-            {Object.keys(actInfo).map((act, i) => {
+            <div className='flex sm:flex-col-reverse '>
+            {isMobile && <div className='flex  z-10'><img className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-20 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img></div>}
+            <div className='sm:h-[30ch] flex sm:flex-col sm:overflow-y-scroll overflow-x-scroll'>
+          {/*   {Object.keys(actInfo).map((act, i) => {
             return (
       
       <ActivityContainer  key={i} actInfo = {act} tripKey={props.tripKey}  >
-        {actInfo[act]}
+        {actInfo[act]} 
       </ActivityContainer>         
     )
-  })}
-  
-  <ActivityContainer tripKey={props.tripKey} showType = 'showAct' >{}</ActivityContainer>
+  })} */}
+ {isMobile && <div className='absolute left-0   h-36 bg-gradient-to-r via-white via-50% from-white w-44'></div>}
+  <ActivityContainer data={activityData} showType = 'showAct' >{}</ActivityContainer>
+  {isMobile && <div className='absolute right-0  h-32 bg-gradient-to-l from-white w-20'></div>}
   </div>
         </div>
           </div>
@@ -147,25 +151,26 @@ export default function CreateActivity(props) {
       <div>
 
         <div >
-        <div className='static flex sm:items-start flex-col sm:ml-0 ml-10 sm:mt-0 mt-0 mb-24 sm:mb-2'>
+        <div className='static flex sm:items-start flex-col sm:ml-0 ml-10 sm:mt-0  mb-24 sm:mb-2 -mt-5'>
             <div className='flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4'>
            <h1 className=' text-4xl pl-20 sm:pl-4 sm:mb-0 -mb-10'>FOOD</h1>
             {!isMobile && <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img>}
             </div>
             <div className='sm:mt-0 mt-10 flex sm:flex-col sm:h-[24ch]'>
             <div className=' flex sm:flex-col-reverse '>
-            {isMobile && <div className=' flex justify-items-center bg-white z-10'><img className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-20 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img></div>}
-            <div className='sm:h-[24ch] flex sm:flex-col sm:overflow-y-scroll overflow-x-scroll'>
-            {Object.keys(foodInfo).map((food, i) => {
+            {isMobile && <div className=' flex justify-items-center bg-white'><img className="z-10 rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-20 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img></div>}
+            <div className='sm:h-[30ch] flex sm:flex-col sm:overflow-y-scroll overflow-x-scroll'>
+            {/* {Object.keys(foodInfo).map((food, i) => {
             return (
       
       <ActivityContainer  key={i} foodInfo = {food} tripKey={props.tripKey}  >
         {foodInfo[food]}
       </ActivityContainer>         
     )
-  })}
-  
-  <ActivityContainer tripKey={props.tripKey} showType = 'showFood' >{}</ActivityContainer>
+  })} */}
+  {isMobile && <div className='absolute left-0   h-32 bg-gradient-to-r via-white via-50% from-white w-44'></div>}
+  <ActivityContainer data={activityData} showType = 'showFood' >{}</ActivityContainer>
+ {isMobile &&  <div className='absolute right-0  h-32 bg-gradient-to-l from-white w-20'></div>}
   </div>
         </div>
           </div>
@@ -346,7 +351,8 @@ async function handleAddFood() {
     .catch((error) => {
       console.error('Error adding document: ', error);
     });
-
+    const newArray = [data,...activityData]
+    await setActivityData(newArray)
 
 }
 
@@ -378,8 +384,8 @@ async function handleAddActivity() {
     .catch((error) => {
       console.error('Error adding document: ', error);
     });
-
-
+const newArray = [data,...activityData]
+await setActivityData(newArray)
 }
 
 }
