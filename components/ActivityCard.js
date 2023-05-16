@@ -69,17 +69,17 @@ export default function ActivityCard(props) {
 
         trigger={
 
-          <div className='sm:max-w-sm max-w-[10ch] sm:duration-300 sm:hover:bg-gray-100 sm:shadow-xl sm:bg-white text-black sm:rounded-xl sm:items-center cursor-pointer'>
-            <div className='flex items-center pr-40 pl-3 sm:pt-4 pb-4'>
-              <div className=' flex sm:flex-row flex-col items-center justify-center'>
+          <div className='sm:max-w-[15ch] sm:h-[17ch] max-w-[10ch] sm:duration-300 sm:hover:bg-gray-100 sm:shadow-xl sm:bg-white text-black sm:rounded-xl sm:items-center cursor-pointer'>
+            <div className='flex items-center justify-center sm:pr-0 pr-64 pl-3 sm:pl-0 sm:pt-4 pb-4'>
+              <div className=' flex flex-col items-center justify-center'>
 
 
-                <div className={`${uniqueClassName} ml-3 h-20 w-20  rounded-full overflow-hidden`} >
+                <div className={`${uniqueClassName} sm:ml-0 ml-3 h-20 w-20  rounded-full overflow-hidden`} >
                   <img className='w-full h-full object-cover' src={actData.img?.urlThumb || '../img/placeholder-image.png'} />
                 </div>
 
-                <div className='flex flex-wrap flex-col ml-4 sm:text-left text-center mt-2 sm:mt-0 ml-4'>
-                  <div className={`uppercase font-light sm:font-semibold text-base sm:text-2xl w-[10ch] select-none `}>
+                <div className='flex flex-wrap flex-col ml-4 text-center mt-2  sm:ml-0 ml-4'>
+                  <div className={`uppercase font-light text-base sm:text-xl sm:mx-2  w-[10ch] select-none `}>
 
                     {actData.name}
                   </div>

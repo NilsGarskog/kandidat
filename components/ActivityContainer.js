@@ -1,22 +1,21 @@
 import useFetchAct from '@/hooks/FetchActivities'
-import React from 'react'
+import React, {useEffect} from 'react'
 import ActivityCard from './ActivityCard'
 
 export default function ActivityContainer(props) {
 const child = props.children
-const activityData = useFetchAct(props.tripKey)
-const activities = activityData.actArr
+const activities = props.data
 
 
 
-        
+
              if (child==null) {
                 
                 return (
                     <>
                  
                     {(props.showType === 'showAct') && ( <>
-                    <div className='flex w-[40ch] flex-row sm:flex-nowrap sm:overflow-x-hidden sm:flex-col px-2 sm:p-2'>
+                    <div className='flex w-[50ch] flex-row  sm:overflow-x-hidden sm:flex-wrap pl-16 px-2 sm:p-2'>
                         {activities.map((x) => (
                         <div key={String(x)}>
                             {(x.type == 0) && (
@@ -31,7 +30,7 @@ const activities = activityData.actArr
                     </>)}
                  
                     {(props.showType === 'showFood') && ( <>
-                        <div className='flex w-[40ch] flex-row sm:flex-nowrap sm:overflow-x-hidden sm:flex-col px-2 sm:p-2'>
+                        <div className='flex w-[50ch] flex-row sm:overflow-x-hidden sm:flex-wrap pl-16 px-2 sm:p-2'>
                         {activities.map((x) => (
                         <div key={String(x)}>
                             {(!x.type == 0) && (

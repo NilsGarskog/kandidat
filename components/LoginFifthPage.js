@@ -5,6 +5,7 @@ export default function LoginFifthPage() {
   const { isSmallScreen, isMediumScreen } = useScreenSizes();
   const smallScreen = isSmallScreen;
   const MediumScreen = isMediumScreen;
+  
   return (
     <div className="wrapper flex flex-row z-999">
       <section className=" bg-white flex flex-wrap justify-center">
