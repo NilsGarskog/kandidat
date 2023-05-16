@@ -79,7 +79,7 @@ export default function ActivityCard(props) {
                 </div>
 
                 <div className='flex flex-wrap flex-col ml-4 text-center mt-2  sm:ml-0 ml-4'>
-                  <div className={`uppercase font-light text-base sm:text-xl sm:mx-2  w-[10ch] select-none `}>
+                <div className={`uppercase font-light text-base sm:text-xl sm:mx-2 text-wrap w-[10ch] select-none break-words hyphens-auto ` } lang='sv'>
 
                     {actData.name}
                   </div>
