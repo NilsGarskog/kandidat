@@ -11,6 +11,7 @@ import { v4 } from 'uuid'
 import useFetchTrips from '../hooks/FetchTrips'
 import Map from './Map';
 import Link from 'next/link';
+import toast from "react-hot-toast";
 
 
 
@@ -75,6 +76,7 @@ const contentStyleMobile = {
 
 
   async function handleAddProfileImage() {
+
     if (imageUpload) {
       const imageRef = ref(storage, `profileImages/${imageUpload.name + v4()}`);
       await uploadBytes(imageRef, imageUpload);
@@ -87,6 +89,7 @@ const contentStyleMobile = {
     } else if (profileImageUrl === null) {
       await handleDeleteProfileImage();
       window.location.href='/'
+
     }
   }
   
@@ -264,12 +267,11 @@ const contentStyleMobile = {
                       onClick={async () => {
                         await handleAddProfileInfo();
                         close();
+
                         setOpenModal(false)
-            
-                          router.push('/')
-                        
-                    
-                        
+
+                        toast.success('Changes saved!')
+
                       }}
                       className={`bg-buttonGreen duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md w-[90px]  h-[40px]  border uppercase text-xl font-semibold`}
                     >

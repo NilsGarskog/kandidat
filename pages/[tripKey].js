@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { doc, onSnapshot } from "firebase/firestore";
+import { useAuth } from '../context/authContext'
+import { db } from '../firebase'
 import { useRouter } from 'next/router';
 import useFetchTripData from '../hooks/FetchTripData'
 import useFetchAct from '../hooks/FetchActivities'
@@ -12,21 +15,31 @@ import Settings from '../components/TripPageComponents/Settings'
 import Header from '@/components/Header';
 
 
+
 export default function Trip() {
     const router = useRouter()
     let [page, setPage] = useState("activities")
     const { tripKey } = router.query
-    const allData = useFetchTripData(tripKey)
+    const { userInfo, currentUser } = useAuth()
+    let allData = useFetchTripData(tripKey)
     const actData = useFetchAct(tripKey)
     let [openIt, setOpenIt] = useState(false)
     const isMobile = window.innerWidth < 640;
+    let itineary = null;
+    // const unsubscribe = onSnapshot(doc(db, 'users', currentUser.uid, 'Trips', tripKey), (doc) => {
+    //     console.log("It fetched ", doc.data().itineary);
+    //     itineary = doc.data().itineary
+    //     console.log("It saved ", itineary);
+    // });
+    // unsubscribe();
 
     if (allData.loading === false && actData.loading === false) {
         const tripData = allData.tripData
+        itineary = tripData.itineary
         const actArr = actData.actArr
         let ItCreated = tripData.itCreated
 
-        const algoData = { arrDate: tripData.arrDate, depDate: tripData.depDate, actArr: actArr, itineary: tripData.itineary, ItCreated: ItCreated, tripKey: tripKey }
+        const algoData = { arrDate: tripData.arrDate, depDate: tripData.depDate, actArr: actArr, itineary: itineary, ItCreated: ItCreated, tripKey: tripKey }
         return (
             <div className='overflow-x-hidden'>
                 <Header/>
@@ -44,15 +57,15 @@ export default function Trip() {
                 {(page === "calender" && ItCreated === false && openIt === false) &&
                     <div className='flex items-center flex-col p-3'>
                         <div className='flex flex-col items-center w-5/6 sm:w-2/3 select-none cursor-default'>
-                            <h1 className="text-center text-5xl sm:text-7xl text-bold p-2 font-bold uppercase mt-10 sm:mt-28">Your itineary</h1>
-                            <p className="text-md sm:text-lg text-center p-1 mt-4 sm:mt-0" > Here, you can generate your itinerary based on the activities you have planned so far.<br/>  {isMobile && <br/>}                       
-                            If you would like to add more activities, you can always come back to this page later {!isMobile && <br/>}and regenerate the itinerary.</p>
+                            <h1 className="text-center text-5xl sm:text-7xl text-bold p-2 font-bold uppercase mt-10 sm:mt-28">Your itinerary</h1>
+                            <p className="text-md sm:text-lg text-center p-1 mt-4 sm:mt-0" > Here, you can generate your itinerary based on the activities you have planned so far.<br />  {isMobile && <br />}
+                                If you would like to add more activities, you can always come back to this page later {!isMobile && <br />}and regenerate the itinerary.</p>
                         </div>
                         <button className='mt-5 border w-auto bg-buttonGreen uppercase opacity-100 hover:opacity-80 duration-300 text-black text-2xl sm:text-2xl font-semibold rounded-xl px-10 py-3' onClick={() => setOpenIt(true)}>GENERATE!</button>
                     </div>
                 }
                 {(page === "calender" && (ItCreated === true || openIt === true)) &&
-                    <div> 
+                    <div>
                         <CalendarContainer data={algoData}></CalendarContainer>
                     </div>
                 }
@@ -60,7 +73,7 @@ export default function Trip() {
                     <div className='flex items-center flex-col'>
                         <div className='flex flex-col items-center w-4/5'>
                             <h1 className="sm:text-7xl text-5xl text-bold p-2 sm:pt-20 pt-10 font-bold uppercase">Settings</h1>
-                            <p className="text-base text-center sm:text-xl p-1 pt-5" > Here you can edit the <br/> specifications of your trip.{/* <br/><br></br>Do not forget to save when <br/>you are done! */}</p>
+                            <p className="text-base text-center sm:text-xl p-1 pt-5" > Here you can edit the <br /> specifications of your trip.{/* <br/><br></br>Do not forget to save when <br/>you are done! */}</p>
                         </div>
                         <Settings data={tripData}></Settings>
                     </div>

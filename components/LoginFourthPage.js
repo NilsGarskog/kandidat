@@ -6,7 +6,7 @@ export default function LoginFourthPage() {
   const smallScreen = isSmallScreen;
   const MediumScreen = isMediumScreen;
   return (
-    <div className="wrapper flex flex-row  z-999">
+    <div className="wrapper flex flex-row relative z-999">
       <section className=" bg-white flex flex-wrap justify-center">
         <div className="md:ml-[5%] flex-1 sm:p-6 p-4  z-999 m-auto">
           <h2 className="pt-8 sm:pt-0 text-black text-4xl sm:text-7xl font-light text-center sm:text-left uppercase select-none">
@@ -23,8 +23,7 @@ export default function LoginFourthPage() {
               </h2>
               <h2 className="text-black text-xl lg:text-2xl text-center sm:text-left mb-4 sm:mr-0 sm:pr-20 px-4 sm:pl-0 select-none">
                 Based on what your friend group wants 
-                to do the most, distance between activities, opening
-                hours and more, the application will generate and
+                to do, the application will generate and
                 optimized itinerary for the entire trip.
               </h2>
             </>
@@ -36,9 +35,9 @@ export default function LoginFourthPage() {
                 the actual planning.
               </h2>
               <h2 className="text-black text-md lg:text-2xl text-center sm:text-left mb-2x sm:mb-0 px-8 select-none">
-                Based on what your friend group wants to do the most, distance
-                between activities, opening hours and more, the application will
-                generate and optimize itinerary for the entire trip.
+              Based on what your friend group wants 
+                to do, the application will generate and
+                optimized itinerary for the entire trip.
               </h2>
             </>
           )}
