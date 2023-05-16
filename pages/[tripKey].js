@@ -12,6 +12,7 @@ import CreateActivity from '../components/CreateActivity'
 import TripHeader from '@/components/TripHeader';
 import TripNavBar from '../components/TripPageComponents/TripNavBar'
 import Settings from '../components/TripPageComponents/Settings'
+import Header from '@/components/Header';
 
 
 
@@ -41,7 +42,7 @@ export default function Trip() {
         const algoData = { arrDate: tripData.arrDate, depDate: tripData.depDate, actArr: actArr, itineary: itineary, ItCreated: ItCreated, tripKey: tripKey }
         return (
             <div className='overflow-x-hidden'>
-
+                <Header/>
                 {page === "activities" &&
                     <div>
                         <TripHeader tripData={tripData}>

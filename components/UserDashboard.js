@@ -13,6 +13,7 @@ import Map from './Map'
 import APItest from './APItest'
 import Autocomplete from './Autocomplete'
 import { getUrl } from '@/utils/urlUtil'
+import Header from './Header'
 
 
 export default function UserDashboard() {
@@ -25,6 +26,7 @@ export default function UserDashboard() {
   const [tripImageUrl, setTripImageUrl] = useState([]);
   const isMobile = window.innerWidth < 640;
   const unsplashKey = process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY;
+
 
 
 
@@ -83,10 +85,10 @@ export default function UserDashboard() {
       setDepDate(null)
     }
   }
-  console.log(profileData);
-  console.log(loadingPInfo)
+ 
   return (
     <div className='overflow-hidden'>
+      <Header/>
       <div className='w-full text-black max-w-[90ch] mx-auto items-center flex flex-col flex-wrap sm:gap-5
     text-xs sm:text-sm overflow-hidden'>
         {(!loadingPInfo) && (
@@ -119,7 +121,7 @@ export default function UserDashboard() {
           </div>
 
         )}
-        <div className="  w-full flex justify-center -mt-16 sm:-mt-28 z-10 bg-gradient-to-t from-white h-[10ch] items-start ">
+        <div className="  w-full flex justify-center -mt-16 sm:-mt-36 z-10 bg-gradient-to-t from-white via-white via-30% h-[10ch] items-start ">
           <button onClick={() => handleButton()} className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 cursor-pointer" ><img src='../icons/plus-sign.svg' /></button>
         </div>
         <Popup open={open}
