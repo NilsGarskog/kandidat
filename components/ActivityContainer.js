@@ -16,7 +16,7 @@ const activities = activityData.actArr
                     <>
                  
                     {(props.showType === 'showAct') && ( <>
-                    <div className='flex w-[40ch] flex-row sm:flex-nowrap sm:overflow-x-hidden sm:flex-col px-2 sm:p-2'>
+                    <div className='flex w-[50ch] flex-row  sm:overflow-x-hidden sm:flex-wrap pl-16 px-2 sm:p-2'>
                         {activities.map((x) => (
                         <div key={String(x)}>
                             {(x.type == 0) && (
@@ -31,7 +31,7 @@ const activities = activityData.actArr
                     </>)}
                  
                     {(props.showType === 'showFood') && ( <>
-                        <div className='flex w-[40ch] flex-row sm:flex-nowrap sm:overflow-x-hidden sm:flex-col px-2 sm:p-2'>
+                        <div className='flex w-[50ch] flex-row sm:overflow-x-hidden sm:flex-wrap pl-16 px-2 sm:p-2'>
                         {activities.map((x) => (
                         <div key={String(x)}>
                             {(!x.type == 0) && (

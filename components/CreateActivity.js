@@ -58,14 +58,14 @@ export default function CreateActivity(props) {
       <div >
 
         <div  >
-        <div className='static flex sm:items-start flex-col sm:mt-0 mt-0 mb-2'>
+        <div className='static flex sm:items-start flex-col sm:ml-0 ml-10 sm:mt-0 mt-0 mb-2'>
             <div className=' flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4'>
-           <h1 className=' text-4xl pl-4'>ACTIVITIES</h1>
+           <h1 className=' text-4xl sm:pl-4 pl-20 sm:mb-0 -mb-10'>ACTIVITIES</h1>
             {!isMobile && <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img>}
             </div>
             <div className='sm:mt-0 mt-10 flex sm:flex-col sm:h-[24ch]'>
             <div className=' flex sm:flex-col-reverse '>
-            {isMobile && <div className='flex bg-gradient-to-l from-white z-10'><img className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img></div>}
+            {isMobile && <div className='flex bg-gradient-to-l from-white z-10'><img className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-20 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img></div>}
             <div className='sm:h-[24ch] flex sm:flex-col sm:overflow-y-scroll overflow-x-scroll'>
             {Object.keys(actInfo).map((act, i) => {
             return (
@@ -147,14 +147,14 @@ export default function CreateActivity(props) {
       <div>
 
         <div >
-        <div className='static flex sm:items-start flex-col sm:mt-0 mt-0 mb-24 sm:mb-2'>
+        <div className='static flex sm:items-start flex-col sm:ml-0 ml-10 sm:mt-0 mt-0 mb-24 sm:mb-2'>
             <div className='flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4'>
-           <h1 className=' text-4xl pl-4'>FOOD</h1>
+           <h1 className=' text-4xl pl-20 sm:pl-4 sm:mb-0 -mb-10'>FOOD</h1>
             {!isMobile && <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img>}
             </div>
             <div className='sm:mt-0 mt-10 flex sm:flex-col sm:h-[24ch]'>
             <div className=' flex sm:flex-col-reverse '>
-            {isMobile && <div className=' flex justify-items-center bg-white'><img className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img></div>}
+            {isMobile && <div className=' flex justify-items-center bg-white z-10'><img className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-20 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img></div>}
             <div className='sm:h-[24ch] flex sm:flex-col sm:overflow-y-scroll overflow-x-scroll'>
             {Object.keys(foodInfo).map((food, i) => {
             return (
