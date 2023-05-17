@@ -142,7 +142,7 @@ export default function ActivityCard(props) {
                   </div>
 
                   <div className='sm:text-sm text-xs mt-2 max-w-[30ch] sm:max-w-[30ch] sm:text-center text-gray-700 italic cursor-default select-none'>
-                    {actData.img && <>Photo by <Link className='focus:outline-none' href={actData.img.portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{actData.img.name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link></>}
+                    {actData.img?.urlThumb && <>Photo by <Link className='focus:outline-none' href={actData.img.portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{actData.img.name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link></>}
 
                   </div>
                 </div>

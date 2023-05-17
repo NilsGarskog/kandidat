@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react'
 import { removeDuplicates, getActName } from 'utils/calUtils.js';
 import Popup from 'reactjs-popup';
@@ -62,7 +63,7 @@ export default function Day(props) {
         }`}
         key={index}
       >
-        <h1>{actName}</h1>
+        <h1 className='uppercase'>{actName}</h1>
       </div>
     );
 
@@ -91,7 +92,7 @@ export default function Day(props) {
               className="p-2 sm:pr-4 pr-2 sm:pt-4 pt-2 sm:text-5xl text-4xl fa-solid fa-xmark cursor-pointer absolute top-0 right-2 duration-300 opacity-50 hover:opacity-100 "
             ></i>
             <div className='flex flex-col sm:pl-10 pl-5 sm:pt-10 pt-5'>
-              <h1 className='uppercase font-light text-3xl sm:text-5xl sm:pb-10 pb-5 cursor-default select-none'>
+              <h1 className='uppercase font-light text-3xl sm:text-5xl sm:pb-10 pb-5 cursor-default select-none '>
                 {actName}
               </h1>
               <div className='flex flex-col sm:flex-row'>
@@ -146,3 +147,4 @@ export default function Day(props) {
     </div>
   );
 }
+
