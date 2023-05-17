@@ -61,9 +61,9 @@ export default function CreateActivity(props) {
       <div >
 
         <div  >
-        <div className='static flex sm:items-start flex-col sm:ml-0 ml-10 sm:mt-0 mt-0 mb-2 '>
+        <div className='static flex sm:items-center flex-col sm:ml-0 ml-10 sm:mt-0 mt-0 mb-2 '>
             <div className=' flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4 '>
-           <h1 className=' text-4xl sm:pl-4 pl-20 sm:mb-0 -mb-10'>ACTIVITIES</h1>
+           <h1 className=' text-4xl sm:pl-0 pl-20 sm:mb-0 -mb-10'>ACTIVITIES</h1>
             {!isMobile && <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img>}
             </div>
             <div className='sm:mt-0 mt-10 flex sm:flex-col sm:h-[24ch]'>
@@ -78,10 +78,13 @@ export default function CreateActivity(props) {
       </ActivityContainer>         
     )
   })} */}
- {isMobile && <div className='absolute left-0   h-36 bg-gradient-to-r via-white via-50% from-white w-44'></div>}
+ {isMobile && <div className='absolute left-0  h-36 bg-gradient-to-r via-white via-50% from-white w-44'></div>}
+ {!isMobile && <div className='absolute h-20 bg-gradient-to-b from-white w-[50ch]'></div>}
   <ActivityContainer data={activityData} showType = 'showAct' >{}</ActivityContainer>
+ 
   {isMobile && <div className='absolute right-0  h-32 bg-gradient-to-l from-white w-20'></div>}
   </div>
+  {!isMobile && <div className='absolute h-16 bg-gradient-to-t from-white w-[50ch]'></div>}
         </div>
           </div>
           </div>
@@ -151,9 +154,9 @@ export default function CreateActivity(props) {
       <div>
 
         <div >
-        <div className='static flex sm:items-start flex-col sm:ml-0 ml-10 sm:mt-0  mb-24 sm:mb-2 -mt-5'>
+        <div className='static flex sm:items-center flex-col sm:ml-0 ml-10 sm:mt-0  mb-24 sm:mb-2 -mt-5'>
             <div className='flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4'>
-           <h1 className=' text-4xl pl-20 sm:pl-4 sm:mb-0 -mb-10'>FOOD</h1>
+           <h1 className=' text-4xl pl-20 sm:pl-0 sm:mb-0 -mb-10'>FOOD</h1>
             {!isMobile && <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img>}
             </div>
             <div className='sm:mt-0 mt-10 flex sm:flex-col sm:h-[24ch]'>
@@ -169,9 +172,11 @@ export default function CreateActivity(props) {
     )
   })} */}
   {isMobile && <div className='absolute left-0   h-32 bg-gradient-to-r via-white via-50% from-white w-44'></div>}
+  {!isMobile && <div className='absolute h-20 bg-gradient-to-b from-white w-[50ch]'></div>}
   <ActivityContainer data={activityData} showType = 'showFood' >{}</ActivityContainer>
  {isMobile &&  <div className='absolute right-0  h-32 bg-gradient-to-l from-white w-20'></div>}
   </div>
+  {!isMobile && <div className='absolute h-16 bg-gradient-to-t from-white w-[50ch]'></div>}
         </div>
           </div>
           </div>
