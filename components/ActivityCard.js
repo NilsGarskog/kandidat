@@ -39,6 +39,7 @@ export default function ActivityCard(props) {
     }, { merge: true })
     setIsEditing(false)
 
+
   }
 
   async function handleDeleteActivity() {
@@ -124,6 +125,7 @@ export default function ActivityCard(props) {
                       resize='none'
                       className='resize-none rounded-lg bg-gray-100 font-extralight leading-normal sm:leading-relaxed italic text-lg sm:text-xl w-[25ch] sm:w-[35ch] h-[12ch]'
                       value={newDescription}
+                      autoFocus
                       onChange={(e) => setNewDescription(e.target.value)}
                     >
                     </textarea>
