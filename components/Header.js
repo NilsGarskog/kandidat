@@ -45,7 +45,7 @@ export default function Header() {
           {profileData?.ProfileInfo?.ProfileImageURL ? (
             <div>
               <div className="sm:ml-4 ml-0 sm:mt-0 sm:mb-1 mt-0 sm:h-12 sm:w-12 h-10 w-10 rounded-full overflow-hidden cursor-pointer">
-                <img className="w-full h-full object-cover" src={profileData.ProfileInfo.ProfileImageURL} alt="Profile Picture" />
+                <img className="duration-300 hover:opacity-60 w-full h-full object-cover" src={profileData.ProfileInfo.ProfileImageURL} alt="Profile Picture" />
               </div>
             </div>
           ) : (
