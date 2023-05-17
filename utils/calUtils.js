@@ -12,12 +12,16 @@ export function removeDuplicates(arr) {
     let name = ""
     let length = null;
     let type = null;
+    let img = null;
+    let description = null;
     actArr.forEach(act => {
       if (act.id === id) {
         name = act.activityName
         length = act.time
         type = act.type
+        img = act.actImage
+        description = act.description
       }
     })
-    return { name: name, length: length, type: type }
+    return { name: name, length: length, type: type, img: img, description: description }
   }

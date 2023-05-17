@@ -69,7 +69,7 @@ export default function CreateActivity(props) {
             <div className='sm:mt-0 mt-10 flex sm:flex-col sm:h-[24ch]'>
             <div className='flex sm:flex-col-reverse '>
             {isMobile && <div className='flex  z-10'><img className=" rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-20 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img></div>}
-            <div className='sm:h-[30ch] flex sm:flex-col sm:overflow-y-scroll overflow-x-scroll'>
+            <div className='sm:h-[30ch] flex sm:flex-col sm:overflow-x-hidden overflow-x-scroll'>
           {/*   {Object.keys(actInfo).map((act, i) => {
             return (
       
@@ -159,7 +159,7 @@ export default function CreateActivity(props) {
             <div className='sm:mt-0 mt-10 flex sm:flex-col sm:h-[24ch]'>
             <div className=' flex sm:flex-col-reverse '>
             {isMobile && <div className=' flex justify-items-center bg-white'><img className="z-10 rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-20 w-20 ml-20 cursor-pointer" onClick={() => handleFoodButton()} src="../icons/plus-sign.svg"></img></div>}
-            <div className='sm:h-[30ch] flex sm:flex-col sm:overflow-y-scroll overflow-x-scroll'>
+            <div className='sm:h-[30ch] flex sm:flex-col sm:overflow-x-hidden overflow-x-scroll'>
             {/* {Object.keys(foodInfo).map((food, i) => {
             return (
       
