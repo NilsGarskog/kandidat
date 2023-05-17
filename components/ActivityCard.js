@@ -76,7 +76,7 @@ export default function ActivityCard(props) {
 
 
                 <div className={`${uniqueClassName} sm:ml-0 ml-3 h-20 w-20  rounded-full overflow-hidden`} >
-                  <img className='w-full h-full object-cover' src={actData.img?.urlThumb || '../img/placeholder-image.png'} />
+                  <img className='w-full h-full object-cover' src={actData.img?.urlThumb || actData.img} />
                 </div>
 
                 <div className='flex flex-wrap flex-col ml-4 text-center mt-2  sm:ml-0 ml-4'>
@@ -138,11 +138,13 @@ export default function ActivityCard(props) {
                 <div className={`flex flex-col sm:-mt-4 mt-4 mr-10 sm:items-center ${isMobile ? 'absolute bottom-0 mb-8 ml-3' : 'absolute right-0'} `}>
                   <div className={`sm:h-52 sm:w-52 h-32 w-32 rounded-full overflow-hidden `} >
 
-                    <img className='w-full h-full object-cover  items-center' src={actData.img?.urlFull || '../img/placeholder-image.png'} />
+                    <img className='w-full h-full object-cover  items-center' src={actData.img?.urlFull || actData.img} />
                   </div>
 
                   <div className='sm:text-sm text-xs mt-2 max-w-[30ch] sm:max-w-[30ch] sm:text-center text-gray-700 italic cursor-default select-none'>
+
                     {actData.img?.urlThumb && <>Photo by <Link className='focus:outline-none' href={actData.img.portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{actData.img.name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link></>}
+
 
                   </div>
                 </div>
