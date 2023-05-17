@@ -110,13 +110,14 @@ export default function UserDashboard() {
           <div className=' flex pb-20 pt-5 h-[60ch] pr-3 sm:h-[65ch] overflow-y-auto pl-3 flex-wrap  gap-5 w-full items-start content-start sm:justify-between justify-center justify-self-center'>
 
             <>
-              {Object.keys(trips).map((trip, i) => {
-                return (
-                  <TripCard key={i} tripKey={trip}>
-                    {trips[trip]}
-                  </TripCard>
-                )
-              })}
+            {Object.keys(trips).reverse().map((tripKey) => {
+  return (
+    <TripCard key={tripKey} tripKey={tripKey}>
+      {trips[tripKey]}
+    </TripCard>
+  );
+})}
+
             </>
           </div>
 
@@ -137,7 +138,7 @@ export default function UserDashboard() {
             <i onClick={() => handleButton(true)} className="text-4xl sm:text-5xl  fa-solid fa-xmark cursor-pointer absolute top-2 right-4 duration-300 opacity-50 hover:opacity-100 "></i>
             {/* <button onClick={close} className='absolute top-0 right-0 p-2'>CLOSE</button> */}
             <div className="flex flex-col items-stretch p-3 sm:pl-8 pt-10 w-full justify-items-start items-center">
-              <h1 className="text-3xl sm:text-4xl pb-2">DESTINATION</h1>
+              <h1 className="text-3xl sm:text-4xl pb-2 select-none cursor-default">DESTINATION</h1>
               <input type="text" placeholder='Enter trip' value={trip}
                 onChange={(e) => setTrip(e.target.value)} className="outline-none p-3 
       text-base sm:text-lg text-slate-900 flex-1 w-[28ch] rounded-md"/>
@@ -148,13 +149,13 @@ export default function UserDashboard() {
             <div className='flex flex-col sm:flex-row w-full p-3 sm:pl-8'>
               <div className='justify-items-start w-full '>
               <div className="flex flex-col sm:mt-0 -mt-4 mb-4">
-                <h1 className="text-2xl sm:text-3xl pb-1">ARRIVAL</h1>
+                <h1 className="text-2xl sm:text-3xl pb-1 select-none cursor-default">ARRIVAL</h1>
                 <DatePicker  value={arrDate} onChange={(newValue) => {setArrDate(newValue), setDepDate(newValue)}} format='DD-MM-YYYY' className=' w-[20ch]'/>
               </div>
               </div>
               <div className='justify-items-start w-full '>
               <div className="flex flex-col ">
-                <h1 className="text-2xl sm:text-3xl pb-1">DEPARTURE</h1>
+                <h1 className="text-2xl sm:text-3xl pb-1 select-none cursor-default">DEPARTURE</h1>
 
                 <DatePicker value={depDate} onChange={(newValue) => setDepDate(newValue)} format='DD-MM-YYYY' className='w-[20ch]'/>
 
