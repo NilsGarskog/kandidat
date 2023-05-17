@@ -1,41 +1,37 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
-import { useAuth } from '../context/authContext'
+import { collection, doc, onSnapshot, query } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
 import { db } from '../firebase'
+import { useAuth } from '../context/authContext'
 
 export default function useFetchAct(tripKey) {
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-    const [actArr, setActArr] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [actArr, setActArr] = useState([])
 
-    const { currentUser } = useAuth()
+  const { currentUser } = useAuth()
 
-    useEffect(() => {
-        async function fetchAct() {
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      query(
+        collection(db, 'users', currentUser.uid, 'Trips', tripKey, 'Activities')
+      ),
+      (snapshot) => {
+        const tempArr = []
+        snapshot.forEach((doc) => {
+          tempArr.push(doc.data())
+        })
+        setActArr(tempArr)
+        setLoading(false)
+      },
+      (err) => {
+        setError('Failed to load activities')
+        console.log(err)
+        setLoading(false)
+      }
+    )
 
-            try {
-                const collectionRef = collection(db, 'users/' + currentUser.uid + '/Trips/' + tripKey + '/Activities');
-                const snapshot = await getDocs(collectionRef);
-                let tempArr = []
-                snapshot.forEach((doc) => {
-                    tempArr.push(doc.data())
-                });
-                setActArr(tempArr)
+    return () => unsubscribe()
+  }, [tripKey, currentUser.uid])
 
-            } catch (err) {
-                setError('Failed to load activities')
-                console.log(err)
-
-            } finally {
-                setLoading(false)
-            }
-        }
-        fetchAct()
-    }, [])
-
-
-
-    return { loading, error, setError, actArr, setActArr }
-
-
+  return { loading, error, actArr }
 }

@@ -20,6 +20,7 @@ export default function Trip() {
     const router = useRouter()
     let [page, setPage] = useState("activities")
     const { tripKey } = router.query
+    const [actArr, setActArr] = useState([])
     const { userInfo, currentUser } = useAuth()
     let allData = useFetchTripData(tripKey)
     const actData = useFetchAct(tripKey)
@@ -32,6 +33,27 @@ export default function Trip() {
     //     console.log("It saved ", itineary);
     // });
     // unsubscribe();
+
+    useEffect(() => {
+        const unsubscribe = onSnapshot(
+          doc(db, 'users', currentUser.uid, 'Trips', tripKey),
+          (doc) => {
+            const tripData = doc.data();
+            if (tripData) {
+              // Handle real-time updates based on the 'page' value
+              if (page === 'activities') {
+                // Update 'actArr' state based on the new data
+                const actArr = tripData.actArr || [];
+                setActArr(actArr);
+              }
+              // Handle other cases if needed
+              // ...
+            }
+          }
+        );
+    
+        return () => unsubscribe();
+      }, [currentUser.uid, tripKey, page]);
 
     if (allData.loading === false && actData.loading === false) {
         const tripData = allData.tripData
