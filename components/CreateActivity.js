@@ -16,7 +16,6 @@ import { getUrl } from '@/utils/urlUtil'
 export default function CreateActivity(props) {
   const { tripKey } = props.tripKey
   const [activityData, setActivityData] = useState(props.actData)
-  console.log(activityData)
   const [error, setError] = useState('')
   let [activity, setActivity] = useState('')
   let [activityLength, setActivityLength] = useState('')
@@ -27,7 +26,8 @@ export default function CreateActivity(props) {
   const [actOpen, setActOpen] = useState(false);
   const [foodOpen, setFoodOpen] = useState(false);
   const [err, setErr] = useState("");
-
+  const genericAct = ['../icons/Act_red.png', '../icons/Act_green.png', '../icons/Act_yellow.png']
+  const genericFood = ['../icons/Food_red.png', '../icons/Food_green.png','../icons/Food_yellow.png']
 
   const [checkedActShort, setCheckedActShort] = useState(null)
   const [checkedLunch, setCheckedLunch] = useState(null)
@@ -330,8 +330,12 @@ async function handleAddFood() {
   }
 
   const userRef = doc(db, 'users', currentUser.uid, 'Trips', props.tripKey, 'Activities', newKey.toString())
-  const actUrl = await getUrl(activity, process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY)
-  console.log(actUrl)
+  let actUrl = await getUrl(activity, process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY)
+  if (actUrl.length === 0){
+    const randomIndex = Math.floor(Math.random() * genericFood.length)
+    const randomElement = genericFood[randomIndex]
+    actUrl = [randomElement]
+  }
 
   const data = {
     id: newKey,
@@ -367,7 +371,12 @@ async function handleAddActivity() {
 
 
   const userRef = doc(db, 'users', currentUser.uid, 'Trips', props.tripKey, 'Activities', newKey.toString())
-  const actUrl = await getUrl(activity, process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY)
+  let actUrl = await getUrl(activity, process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY)
+  if (actUrl.length === 0){
+    const randomIndex = Math.floor(Math.random() * genericAct.length)
+    const randomElement = genericAct[randomIndex]
+    actUrl = [randomElement]
+  }
   const data = {
     id: newKey,
     activityName: activity,
@@ -376,6 +385,7 @@ async function handleAddActivity() {
     description: actDescription,
     actImage: actUrl
   }
+  console.log(data.actImage)
   setActInfo([...actInfo, data])
   await setDoc(userRef, data)
     .then((docRef) => {
