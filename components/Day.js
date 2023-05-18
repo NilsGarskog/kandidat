@@ -17,7 +17,7 @@ export default function Day(props) {
     const droppedActivity = activities[droppedIndex];
 
     // Swap the activities in the array
-    const updatedActivities = [activities];
+    const updatedActivities = [...activities];
     updatedActivities[draggedIndex] = droppedActivity;
     updatedActivities[droppedIndex] = draggedActivity;
 
