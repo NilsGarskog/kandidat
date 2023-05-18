@@ -13,6 +13,7 @@ import TripHeader from '@/components/TripHeader';
 import TripNavBar from '../components/TripPageComponents/TripNavBar'
 import Settings from '../components/TripPageComponents/Settings'
 import Header from '@/components/Header';
+import EasterEgg2 from '@/components/EasterEgg2';
 
 
 
@@ -27,13 +28,48 @@ export default function Trip() {
     let [openIt, setOpenIt] = useState(false)
     const isMobile = window.innerWidth < 640;
     let itineary = null;
+    const [enteredPassword, setEnteredPassword] = useState("");
+    const [showEasterEgg, setShowEasterEgg] = useState(false);
+    const predefinedPassword = "motherlode";
+
     // const unsubscribe = onSnapshot(doc(db, 'users', currentUser.uid, 'Trips', tripKey), (doc) => {
     //     console.log("It fetched ", doc.data().itineary);
     //     itineary = doc.data().itineary
     //     console.log("It saved ", itineary);
     // });
     // unsubscribe();
+    const checkPassword = () => {
+        if (enteredPassword.endsWith(predefinedPassword)) {
+          setShowEasterEgg(true);
+          setTimeout(() => {
+            setShowEasterEgg(false);
+          }, 8500); // Hide the component after 10 seconds
+          setEnteredPassword("");
+        }
+      };
+      
+      useEffect(() => {
+        checkPassword();
+      }, [enteredPassword]);
+      
+      const handleKeyDown = (event) => {
+        const keyPressed = event.key.toLowerCase();
+        setEnteredPassword((prevPassword) => prevPassword + keyPressed);
+      };
 
+      useEffect(() => {
+        const keyboardListener = (event) => {
+          handleKeyDown(event);
+        };
+      
+        window.addEventListener("keydown", keyboardListener);
+      
+        return () => {
+          window.removeEventListener("keydown", keyboardListener);
+        };
+      }, []);
+      
+      
     useEffect(() => {
         const unsubscribe = onSnapshot(
           doc(db, 'users', currentUser.uid, 'Trips', tripKey),
@@ -65,6 +101,7 @@ export default function Trip() {
         return (
             <div className='overflow-x-hidden'>
                 <Header/>
+                {showEasterEgg && <EasterEgg2 />}
                 {page === "activities" &&
                     <div>
                         <TripHeader tripData={tripData}>
