@@ -105,7 +105,7 @@ export default function Day(props) {
                 <div className={`flex flex-col sm:-mt-4 mt-4 mr-10 sm:items-center ${isMobile ? 'absolute bottom-0 mb-8 ml-3' : 'absolute right-0'} `}>
                   <div className={`sm:h-52 sm:w-52 h-32 w-32 rounded-full overflow-hidden `} >
 
-                    <img className='w-full h-full object-cover  items-center' src={actImg?.urlFull || '../img/placeholder-image.png'} />
+                    <img className='w-full h-full object-cover  items-center' src={actImg?.urlFull || actImg} />
                   </div>
 
                   <div className='sm:text-sm text-xs mt-2 max-w-[30ch] sm:max-w-[30ch] sm:text-center text-gray-700 italic cursor-default select-none'>
