@@ -30,7 +30,7 @@ export default function Trip() {
     let itineary = null;
     const [enteredPassword, setEnteredPassword] = useState("");
     const [showEasterEgg, setShowEasterEgg] = useState(false);
-    const predefinedPassword = "motherload";
+    const predefinedPassword = "motherlode";
 
     // const unsubscribe = onSnapshot(doc(db, 'users', currentUser.uid, 'Trips', tripKey), (doc) => {
     //     console.log("It fetched ", doc.data().itineary);
@@ -131,7 +131,7 @@ export default function Trip() {
                 {page === "settings" &&
                     <div className='flex items-center flex-col'>
                         <div className='flex flex-col items-center w-4/5'>
-                            <h1 className="sm:text-7xl text-5xl text-bold p-2 sm:pt-10 pt-10 font-bold uppercase">Settings</h1>
+                            <h1 className="sm:text-7xl text-5xl text-bold p-2 sm:pt-20 pt-10 font-bold uppercase">Settings</h1>
                             <p className="text-base text-center sm:text-xl p-1 pt-5" > Here you can edit the <br /> specifications of your trip.{/* <br/><br></br>Do not forget to save when <br/>you are done! */}</p>
                         </div>
                         <Settings data={tripData}></Settings>
