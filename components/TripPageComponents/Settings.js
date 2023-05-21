@@ -105,7 +105,7 @@ export default function Settings(props) {
                 </div>
                 <div className="flex flex-row justify-evenly">
                     {saveLoading === false &&
-                        <button className='text-lg shadow-lg font-bold sm:font-semibold border w-1/3 bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' onClick={() => { toast.success('Changes saved!'),handleUpdate() }}>SAVE</button>
+                        <button className='text-lg font-bold sm:font-semibold border w-1/3 bg-buttonGreen opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' onClick={() => { toast.success('Changes saved!'),handleUpdate() }}>SAVE</button>
                     }
                     {saveLoading === true &&
                         <i className="fa-solid fa-spinner animate-spin text-6xl"></i>
@@ -114,13 +114,13 @@ export default function Settings(props) {
                         modal
                         contentStyle={isMobile? mobileContentStyle : contentStyle}
                         overlayStyle={overlayStyle}
-                        trigger={<button className='text-lg shadow-lg font-bold sm:font-semibold border w-1/3 bg-buttonRed opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' >DELETE</button>} >
+                        trigger={<button className='text-lg font-bold sm:font-semibold border w-1/3 bg-buttonRed opacity-100 hover:opacity-80 duration-300 text-black rounded-xl p-3' >DELETE</button>} >
                         {close => (
 
                             
                             <div className='flex pt-5 flex-col items-center text-base  rounded-lg w-full'>
-                                <h1 className="select-none cursor-default text-center font-normal text-lg sm:px-5 p-2 mb-2 ">Are you sure you want to <b>delete</b> the trip to {NewName}?</h1>
-                                <button className='border hover:opacity-80 duration-300 font-bold w-1/2 bg-buttonRed text-black rounded-xl p-4' onClick={() => { handleDelete(tripKey); close() }}>CONFIRM</button>
+                                <h1 className="text-center font-normal text-lg sm:px-5 p-2 mb-2 ">Are you sure you want to <b>delete</b> the trip to {NewName}?</h1>
+                                <button className='border font-bold w-1/2 bg-buttonRed text-black rounded-xl p-4' onClick={() => { handleDelete(tripKey); close() }}>CONFIRM</button>
                             </div>
                         )}
                     </Popup>
