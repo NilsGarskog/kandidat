@@ -12,8 +12,10 @@ async function regenerate(regen, setRegen) {
 }
 
 
+
+
 export default function ActivityContainer(props) {
-    let [regen, setRegen] = useState(null)
+    const [regen, setRegen] = useState(null)
     let algoData = props.data
     const activityData = useFetchAct(algoData.tripKey)
     let allData = useFetchTripData(algoData.tripKey)
@@ -26,8 +28,15 @@ export default function ActivityContainer(props) {
             
             <div className='flex items-center flex-col'>
                 
-                <Calendar data={algoData} regen={regen}></Calendar>
-                <i onClick={() => regenerate(regen, setRegen)} className="fa-solid duration-300 hover:rotate-90 fa-arrows-rotate text-6xl -mt-60 cursor-pointer"></i>
+
+                {!isMobile && <div>
+          <h1 className='uppercase text-center text-7xl mt-0 font-bold cursor-default select-none'>
+            YOUR Itinerary
+          </h1>
+        </div>}
+              {!isMobile && <button onClick={() => {regenerate(regen, setRegen)}} className='rounded-lg p-1 px-3  sm:mt-3 bg-buttonGreen hover:opacity-70 duration-300 shadow-lg flex items-center gap-2 text-lg font-semibold uppercase'> <div>REGENERATE</div><i  className="fa-solid duration-300 hover:rotate-90 fa-arrows-rotate text-3xl  cursor-pointer"></i></button>}
+                <Calendar data={algoData} regen={regen} ></Calendar>
+
             </div>
             
         )

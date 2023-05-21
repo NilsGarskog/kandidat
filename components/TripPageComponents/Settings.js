@@ -80,7 +80,7 @@ export default function Settings(props) {
 
 
     return (
-        <div className="flex  w-full justify-center ">
+        <div className="flex  w-full select-none cursor-default justify-center ">
             <div className=' flex flex-col space-y-4'>
                 <div className='flex h-2 pb-4 text-red-600'>
                     <h1 >{err}</h1>
@@ -94,7 +94,7 @@ export default function Settings(props) {
                 <div className='flex flex-row'>
                     <div className="flex flex-col pb-3 pr-5 ">
                         <h1 className="text-xl sm:text-2xl pb-1">ARRIVAL</h1>
-                        <DatePicker className='w-[15ch]' value={NewArrDate} onChange={(newValue) => setNewArrDate(newValue)} format='DD-MM-YYYY' />
+                        <DatePicker className='w-[15ch]' value={NewArrDate} onChange={(newValue) => {setNewArrDate(newValue), setNewDepDate(newValue)}} format='DD-MM-YYYY' />
                     </div>
                     <div className="flex flex-col ">
                         <h1 className="text-xl sm:text-2xl pb-1">DEPARTURE</h1>
