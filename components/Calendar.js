@@ -7,7 +7,8 @@ import useFetchTripData from '../hooks/FetchTripData'
 export default function Calendar(props) {
   const data = props.data
   const itCreated = props.itCreated
-  const regen = props.regen
+  const regen= props.regen
+
   let itineary = []
   if (data.itineary === null || regen != null) {
     itineary = Algoritmen(data.arrDate, data.depDate, data.actArr)
@@ -41,7 +42,7 @@ export default function Calendar(props) {
 
           {itineary.length > daysPerView + 1 && <div className='flex  mt-0 justify-evenly'>
 
-            <button className='h-20 px-0' onClick={() => setCurrentView(currentView - 1)} disabled={!isPrevEnabled}>
+            <button className='h-20 px-0' onClick={() =>setCurrentView(currentView - 1)} disabled={!isPrevEnabled}>
               <img className={`absolute left-0 sm:mt-32 mt-40 ml-6 sm:ml-40 h-12 sm:h-20 ${!isPrevEnabled ? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`}
                 src='../icons/arrow-left.png'
                 style={{ backfaceVisibility: 'hidden' }}
@@ -64,7 +65,7 @@ export default function Calendar(props) {
 
             {itineary.length > daysPerView + 1 && <div className='flex  mt-0 justify-evenly'>
 
-              <button className='h-20  px-0' onClick={() => setCurrentView(currentView + 1)} disabled={!isNextEnabled}>
+              <button className='h-20  px-0' onClick={() => {setCurrentView(currentView + 1)} }disabled={!isNextEnabled}>
                 <img className={`absolute right-0 sm:mt-32 mt-40 mr-6 sm:mr-40 h-12 sm:h-20 px-0 ${!isNextEnabled ? 'opacity-50 ' : 'cursor-pointer opacity-80 hover:opacity-100'}`}
                   src='../icons/arrow-right.png'
                   style={{ backfaceVisibility: 'hidden' }}
