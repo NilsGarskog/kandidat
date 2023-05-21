@@ -36,12 +36,8 @@ export default function Calendar(props) {
     itineary = allData.tripData.itineary
     return (
       <div className='flex flex-col'>
-        {!isMobile && <div>
-          <h1 className='uppercase text-center text-7xl -mb-10 mt-4 font-bold cursor-default select-none'>
-            YOUR Itinerary
-          </h1>
-        </div>}
-        <div className={`flex w-full mt-8 sm:mt-20`}>
+      
+        <div className={`flex w-full mt-8 sm:mt-5`}>
 
           {itineary.length > daysPerView + 1 && <div className='flex  mt-0 justify-evenly'>
 
@@ -55,7 +51,7 @@ export default function Calendar(props) {
           }
 
 
-          <div className="w-full h-[70ch] flex justify-center select-none cursor-default">
+          <div className="w-full h-auto flex justify-center select-none cursor-default">
 
             {daysToRender.map((item, index) => (
               <Day
