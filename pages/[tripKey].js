@@ -43,7 +43,7 @@ export default function Trip() {
           setShowEasterEgg(true);
           setTimeout(() => {
             setShowEasterEgg(false);
-          }, 8500); // Hide the component after 10 seconds
+          }, 8600); // Hide the component after 10 seconds
           setEnteredPassword("");
         }
       };

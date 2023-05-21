@@ -48,8 +48,8 @@ export default function EasterEgg2() {
   return (
     <div className=' z-50 absolute w-screen h-screen flex items-center text-center pb-44 justify-center'>
     <div className=' p-10 relative font-semibold'>
-      <h1 className={`text-[130px] pt-10 px-10 bg-green-900 text-${color} ${isBlinking ? '' : 'hidden'}`}>YOUR BUDGET IS:</h1>
-      <h1 className={`text-[170px] pb-10 px-10 bg-green-900 text-${color} ${isBlinking ? '' : 'hidden'}`}>$100000000</h1>
+      <h1 className={`text-[130px] pt-10 px-10 bg-green-900 text-green-300 ${isBlinking ? '' : 'hidden'}`}>YOUR BUDGET IS:</h1>
+      <h1 className={`text-[170px] pb-10 px-10 bg-green-900 text-green-300 ${isBlinking ? '' : 'hidden'}`}>$100000000</h1>
     </div>
   </div>
   
