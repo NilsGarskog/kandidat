@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Tooltip } from 'react-tooltip';
 import Link from 'next/link';
 import Popup from 'reactjs-popup';
@@ -18,6 +18,11 @@ export default function ActivityCard(props) {
   const [newDescription, setNewDescription] = useState(actData.description)
   const [buttonText, setButtonText] = useState('EDIT')
   const isMobile = window.innerWidth < 640;
+
+  useEffect(() => {
+    setNewDescription(actData.description);
+  }, [actData.description]);
+
   const contentStyle = {
     width: "800px",
     height: "400px",
