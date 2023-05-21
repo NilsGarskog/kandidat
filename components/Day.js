@@ -7,7 +7,6 @@ import Link from 'next/link';
 
 export default function Day(props) {
   const { day, activities, actArr } = props;
-  console.log(actArr)
   let newActivityList = [];
   let newArray = removeDuplicates(activities);
   const isMobile = window.innerWidth < 640;
@@ -33,11 +32,9 @@ export default function Day(props) {
     let actImg = null
     if(getActName(activity,actArr).img){
     actImg = getActName(activity, actArr).img[0]
-    console.log(actImg)
+
     }
    
-    console.log(getActName(activity,actArr))
- 
 
     if (activity === 1) {
       actName = "LUNCH";
