@@ -54,7 +54,7 @@ const EasterEgg = () => {
   }, [easterEggVisible]);
 
   return (
-    <div className='flex justify-center items-center'>
+    <div className='flex justify-center mt-4 items-center'>
       {easterEggVisible && (
         <div id="youtubePlayer"></div>
       )}
