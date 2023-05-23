@@ -61,7 +61,7 @@ export default function CreateActivity(props) {
       <div >
 
         <div  >
-        <div className='static flex sm:items-center flex-col sm:ml-0 ml-10 sm:mt-0 mt-0 mb-2 '>
+        <div className='static flex sm:items-center flex-col sm:ml-0 ml-10 sm:mt-0 mt-0 mb-2 min-h-[20ch] sm:min-h-0'>
             <div className=' flex sm:flex-row flex-col sm:justify-start justify-between items-start sm:items-center mb-4 '>
            <h1 className=' text-4xl sm:pl-0 pl-20 sm:mb-0 -mb-10 cursor-default select-none'>ACTIVITIES</h1>
             {!isMobile && <img className="rounded-full bg-buttonGreen opacity-100 hover:opacity-80 duration-300 shadow-lg h-16 w-16 ml-6 cursor-pointer" onClick={() => handleActButton()} src="../icons/plus-sign.svg"></img>}
