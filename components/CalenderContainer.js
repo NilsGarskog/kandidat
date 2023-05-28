@@ -27,15 +27,15 @@ export default function ActivityContainer(props) {
         algoData.actArr = activities
         return (
             
-            <div className='flex items-center flex-col'>
+            <div className='flex items-center flex-col dark:bg-slate-800'>
                 
 
                 {!isMobile && <div>
-          <h1 className='uppercase text-center text-7xl mt-0 font-bold cursor-default select-none'>
+          <h1 className='uppercase text-center text-7xl mt-0 font-bold cursor-default select-none dark:text-white'>
             YOUR Itinerary
           </h1>
         </div>}
-              {!isMobile && <button onClick={() => {regenerate(regen, setRegen)}} className='rounded-lg p-1 px-3  sm:mt-5 bg-buttonGreen hover:opacity-70 duration-300 shadow-lg flex items-center gap-2 text-lg font-semibold uppercase'> <div>REGENERATE</div><i  className="fa-solid duration-300 hover:rotate-90 fa-arrows-rotate text-3xl  cursor-pointer"></i></button>}
+              {!isMobile && <button onClick={() => {regenerate(regen, setRegen)}} className='rounded-lg p-1 px-3  dark:text-white sm:mt-5 bg-buttonGreen hover:opacity-70 duration-300 shadow-lg flex items-center gap-2 text-lg font-semibold uppercase'> <div>REGENERATE</div><i  className="fa-solid duration-300 hover:rotate-90 fa-arrows-rotate text-3xl  cursor-pointer"></i></button>}
                 <Calendar data={algoData} regen={regen} ></Calendar>
 
             </div>

@@ -139,7 +139,7 @@ export default function Day(props) {
   }
   return (
     <div className="flex flex-col align-center px-6">
-      <h3 className="uppercase text-xl text-center font-light">{day}</h3>
+      <h3 className="uppercase text-xl text-center font-light dark:text-white">{day}</h3>
       {newActivityList}
     </div>
   );

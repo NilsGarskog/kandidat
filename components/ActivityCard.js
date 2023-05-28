@@ -47,6 +47,7 @@ export default function ActivityCard(props) {
 
   }
 
+
   async function handleDeleteActivity() {
     const userRef = doc(db, 'users', currentUser.uid, 'Trips', tripKey, 'Activities', actData.id)
     await deleteDoc(userRef)
@@ -75,7 +76,7 @@ export default function ActivityCard(props) {
 
         trigger={
 
-          <div className='sm:max-w-[15ch] sm:h-[17ch] max-w-[10ch] sm:duration-300 sm:hover:bg-gray-100 sm:shadow-xl sm:bg-white text-black sm:rounded-xl sm:items-center cursor-pointer'>
+          <div className='sm:max-w-[15ch] sm:h-[17ch] max-w-[10ch] sm:duration-300 sm:hover:bg-gray-100 sm:shadow-xl sm:dark:bg-slate-700 sm:dark:hover:bg-slate-600 sm:bg-white dark:text-white text-black sm:rounded-xl sm:items-center cursor-pointer'>
             <div className='flex items-center justify-center sm:pr-0 pr-64 pl-3 sm:pl-0 sm:pt-4 pb-4'>
               <div className=' flex flex-col items-center justify-center'>
 

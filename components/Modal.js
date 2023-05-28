@@ -12,6 +12,7 @@ import useFetchTrips from '../hooks/FetchTrips'
 import Map from './Map';
 import Link from 'next/link';
 import toast from "react-hot-toast";
+import { Background } from 'react-parallax';
 
 
 
@@ -31,18 +32,25 @@ export default function Modal(props) {
   const [selectedImage, setSelectedImage] = useState(null)
   const [uploadedImageUrl, setUploadedImageUrl] = useState('');
   const isMobile = window.innerWidth < 640
+  const isDark = document.getElementsByClassName('dark')
+  console.log(isDark)
   const contentStyle= {
     width: "600px",
     height: "450px",
     borderRadius: "0.7em",
-    boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)"
+    borderColor: isDark != null ? 'black' : 'white',
+    boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+    backgroundColor: isDark.length > 0  ? 'rgb(51 65 85)' : 'white'
   }
 const contentStyleMobile = {
   width: "320px",
   height: "470px",
   borderRadius: "0.7em",
-  boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)"
+  boxShadow: "0px 3px 7px rgba(0, 0, 0, 0.2)",
+  backgroundColor:  isDark.length > 0  ? 'rgb(30 41 59)' : 'white'
 }
+
+
 
   const uploadImage = () => {
     if (imageUpload == null) return;
@@ -56,6 +64,8 @@ const contentStyleMobile = {
     })
 
   };
+
+
 
 
   async function handleAddProfileInfo() {
@@ -141,7 +151,7 @@ const contentStyleMobile = {
   return ReactDom.createPortal(
 
     <div
-      className="fixed left-auto right-0 inset-0 bg-white text-slate-900 text-lg sm:text-xl flex flex-col"
+      className="fixed left-auto right-0 inset-0 bg-white text-slate-900 text-lg sm:text-xl flex flex-col dark:bg-slate-800 dark:text-white"
       style={{ width: "20vw", minWidth: "200px", height: "30vh", minHeight: "160px" }}
     >
       <div className="flex items-center justify-between border-slate-900 p-4">
@@ -170,7 +180,7 @@ const contentStyleMobile = {
         >
           {(close) => (
             <>
-              <div className="select-none">
+              <div className="select-none  dark:text-white">
                 <div className="flex flex-start sm:text-xl sm:justify-start sm:items-start  items-center text-sm">
                   <p className="p-2 pl-4 pt-4 sm:font-light font ">
                     Here is your profile information.
@@ -234,13 +244,13 @@ const contentStyleMobile = {
                       <div className=" font-normal  sm:pt-14 pt-0 sm:pl-6 pl-2 text-xs sm:text-sm sm:ml-3 ml-0 flex flex-col gap-y-2 ">
                         <button
                           onClick={async() => await setProfileImageUrl(null)}
-                          className="bg-buttonRed duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md flex place-content-between items-center px-3 sm:pr-4 pr-2 text-left w-[100px] h-[40px] sm:w-[150px] sm:h-[40px] border"
+                          className="bg-buttonRed duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md flex place-content-between dark:text-black items-center px-3 sm:pr-4 pr-2 text-left w-[100px] h-[40px] sm:w-[150px] sm:h-[40px] border"
                         >
                           <p>Remove</p>{" "}
                           <i className="fa-solid fa-trash-can scale-125"></i>
                         </button>
                         <label
-                          className="bg-white duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md text-center flex place-content-between items-center px-3 sm:pr-4 pr-2 text-left w-[100px] h-[40px] sm:w-[150px] sm:h-[40px] border cursor-pointer"
+                          className="bg-white duration-300 hover:bg-gray-100 dark:text-black rounded-lg drop-shadow-md text-center flex place-content-between items-center px-3 sm:pr-4 pr-2 text-left w-[100px] h-[40px] sm:w-[150px] sm:h-[40px] border cursor-pointer"
                           htmlFor="inputTag"
                         >
                           {isMobile? 'Upload' : 'Upload new'}
@@ -273,7 +283,7 @@ const contentStyleMobile = {
                         toast.success('Changes saved!')
 
                       }}
-                      className={`bg-buttonGreen duration-300 hover:bg-gray-100 rounded-lg drop-shadow-md w-[90px]  h-[40px]  border uppercase text-xl font-semibold`}
+                      className={`bg-buttonGreen duration-300 dark:text-black hover:bg-gray-100 rounded-lg drop-shadow-md w-[90px]  h-[40px]  border uppercase text-xl font-semibold`}
                     >
                       Save!
                     </button>

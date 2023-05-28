@@ -23,7 +23,7 @@ export default function TripCard(props) {
     return (
       <div className="flex flex-row items-center">
            
-        <div className='sm:max-w-sm max-w-xs duration-300 hover:bg-gray-100 shadow-xl bg-white text-black rounded-xl items-center'>
+        <div className='sm:max-w-sm max-w-xs duration-300 hover:bg-slate-800 shadow-xl bg-white dark:text-white text-black rounded-xl items-center dark:bg-slate-700'>
       
           <div className='flex items-center pr-40 pl-3 pt-4 pb-4'>
           <Link href={`/${tripKey}`} className=' flex items-center'>
@@ -50,7 +50,7 @@ export default function TripCard(props) {
         </div>
         
 
-        {allData.loading === false && allData.tripData && allData.tripData.tripImageUrl && allData.tripData.tripImageUrl[tripData.preferredImageIndex] && <Tooltip anchorSelect={`.${uniqueClassName}`} place='top' clickable>
+        {allData.loading === false && allData.tripData && allData.tripData.tripImageUrl && allData.tripData.tripImageUrl[tripData.preferredImageIndex] && <Tooltip className="dark:bg-white dark:text-slate-800" anchorSelect={`.${uniqueClassName}`} place='top' clickable>
           Photo by <Link href={allData.tripData.tripImageUrl[tripData.preferredImageIndex].portfolioUrl + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target="_blank"><u>{allData.tripData.tripImageUrl[tripData.preferredImageIndex].name}</u></Link> on <Link href={'https://unsplash.com/' + '?utm_source=travel_planner_kandidat&utm_medium=referral'} target='_blank'><u>Unsplash</u></Link>
         </Tooltip>}
 

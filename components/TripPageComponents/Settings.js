@@ -70,7 +70,7 @@ export default function Settings(props) {
         router.push('/')
 
     }
-    
+
 
 
     let Name = props.data.Name
@@ -83,28 +83,27 @@ export default function Settings(props) {
 
 
 
-
     return (
         <div className="flex  w-full select-none cursor-default justify-center ">
             <div className=' flex flex-col space-y-4'>
                 <div className='flex h-2 pb-4 text-red-600'>
                     <h1 >{err}</h1>
                 </div>
-                <div className='flex flex-col justify-center'>
+                <div className='flex flex-col justify-center dark:text-white'>
                     <h1 className="text-2xl sm:text-3xl pb-2 sm:pt-5">DESTINATION</h1>
                     <input type="text" placeholder='Enter trip' value={NewName}
                         onChange={(e) => setNewName(e.target.value)} className="outline-none p-3 
       text-base sm:text-lg text-slate-900 flex-1 rounded"/>
                 </div>
-                <div className='flex flex-row'>
+                <div className='flex flex-row dark:text-white'>
                     <div className="flex flex-col pb-3 pr-5 ">
                         <h1 className="text-xl sm:text-2xl pb-1">ARRIVAL</h1>
-                        <DatePicker className='w-[15ch]' value={NewArrDate} onChange={(newValue) => {setNewArrDate(newValue), setNewDepDate(newValue)}} format='DD-MM-YYYY' />
+                        <DatePicker className='w-[15ch] dark:bg-white' value={NewArrDate} onChange={(newValue) => {setNewArrDate(newValue), setNewDepDate(newValue)}} format='DD-MM-YYYY' />
                     </div>
                     <div className="flex flex-col ">
                         <h1 className="text-xl sm:text-2xl pb-1">DEPARTURE</h1>
 
-                        <DatePicker  className='w-[15ch]'  value={NewDepDate} onChange={(newValue) => setNewDepDate(newValue)} format='DD-MM-YYYY' />
+                        <DatePicker  className='w-[15ch] dark:bg-white'  value={NewDepDate} onChange={(newValue) => setNewDepDate(newValue)} format='DD-MM-YYYY' />
 
                     </div>
                 </div>
